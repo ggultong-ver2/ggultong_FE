@@ -23,15 +23,26 @@ const Detailtest = () => {
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : id랜덤노출 </div>
-            <StButton
-              borderColor="#ddd"
-              onClick={() => {
-                //navigate("/todolist");
-              }}
-            >
-              이전으로
-            </StButton>
+            <div>ID : id랜덤노출함 </div>
+            <div>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  //navigate("/todolist");
+                }}
+              >
+                수정하기
+              </StButton>
+              &nbsp;&nbsp;
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  //navigate("/todolist");
+                }}
+              >
+                이전으로
+              </StButton>
+            </div>
           </StDialogHeader>
           <StTitle>제목</StTitle>
           <StBody>
@@ -73,6 +84,7 @@ const StDialog = styled.div`
   width: 1000px;
   height: 760px;
   border: 5px solid grey;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -83,8 +95,10 @@ const StDialog = styled.div`
 `;
 
 const StDialogHeader = styled.div`
+  margin-top: 2px;
   display: flex;
-  height: 50px;
+  border-radius: 20px;
+  height: 60px;
   justify-content: space-between;
   background-color: blue;
   padding: 0 24px;
@@ -108,7 +122,9 @@ const StButton = styled.button`
   cursor: pointer;
 `;
 const StLeftBox = styled.div`
-  background: red;
+  background: #c0e9fc;
+  opacity: 0.7;
+  border-radius: 30px;
   float: left;
   height: 350px;
   width: 470px;
@@ -116,7 +132,9 @@ const StLeftBox = styled.div`
 `;
 
 const StRightBox = styled.div`
-  background: green;
+  background: #c0e9fc;
+  opacity: 0.7;
+  border-radius: 30px;
   float: right;
   height: 350px;
   width: 470px;
@@ -128,10 +146,12 @@ const StRightBox = styled.div`
 
 const StCommentBox = styled.div`
   margin-top: -50px;
-  padding-left: 25px;
-  background: blue;
+  padding-left: 24px;
+  opacity: 0.7;
+  background: #c0c0c0;
+  border-radius: 30px;
   /* padding: 0px; */
-  height: 270px;
+  height: 250px;
   /* @media screen and (max-width: 800px) {
     width: 200px;
   } */
@@ -184,7 +204,7 @@ const StCommentButton = styled.button`
 const CommentMarkBox = styled.div`
   overflow: scroll;
   width: 700px;
-  height: 120px;
+  height: 110px;
   font-size: 17px;
   border: 0;
   border-radius: 15px;
