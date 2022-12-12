@@ -12,7 +12,9 @@ const List = ({ title, imageUrl, body }) => {
         <Title>
           <h3>{title}</h3>
         </Title>
-        <p style={{ wordBreak: "break-all" }}>{body}</p>
+        <Body>
+          <p style={{ wordBreak: "break-all" }}>{body}</p>
+        </Body>
       </Cardcontent>
       <Btn>
         <Button>
@@ -37,17 +39,26 @@ const Cardcontainer = styled.div`
     transform: scale(1, 1);
     box-shadow: 0px 0px 15px 0px;
   }
+  margin-top: 70px;
+  margin-left: 10px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
 `;
 const Imagecontainer = styled.img`
   overflow: hidden;
   height: 200px;
   width: 250px;
+  border-top-left-radius: 30px;
 `;
 const Cardcontent = styled.div`
   margin: 1rem;
   margin-top: 0.3rem;
 `;
 const Title = styled.div`
+  color: #07254e;
+  text-align: center;
+`;
+const Body = styled.div`
   color: #003881;
 `;
 const Btn = styled.div`
@@ -55,21 +66,21 @@ const Btn = styled.div`
   justify-content: center;
 `;
 const Button = styled.div`
-  padding: 1rem;
+  padding: 10px;
   background-color: transparent;
   border: none;
   transition: 0.2s;
   margin-bottom: 0.5rem;
-  border-radius: 3px;
-  margin-top: -1rem;
+  border-radius: 30px;
+  margin-bottom: 15px;
   &:hover {
-    background: rgba(114, 194, 255, 0.1);
+    background: rgba(14, 15, 16, 0.1);
     transform: scale();
   }
 `;
 const Href = styled.a`
   text-transform: uppercase;
-  color: #95d3ff;
+  color: #3282bc;
   text-decoration: none;
   font-weight: bold;
 `;
