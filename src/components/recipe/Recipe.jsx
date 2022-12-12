@@ -23,7 +23,7 @@ const Detailtest = () => {
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : id랜덤노출 </div>
+            <div>ID : id랜덤노출함니다 </div>
             <div>
               <StButton
                 borderColor="#ddd"
