@@ -1,5 +1,7 @@
 //import React, { useEffect } from "react";
 import styled from "styled-components";
+import { GlobalStyleComponent } from "styled-components";
+//@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 // import { useSelector } from "react-redux";
 // import { useNavigate, useParams } from "react-router-dom";
 
@@ -39,7 +41,15 @@ const Detailtest = () => {
           </StBody>
         </div>
         <div>
-          <CommentBox>댓글</CommentBox>
+          <StCommentBox>
+            <br></br>
+            COMMENT
+            <div>
+              <br></br>
+              <StCommentFunction></StCommentFunction>
+              <StCommentButton>등록</StCommentButton>
+            </div>
+          </StCommentBox>
         </div>
       </StDialog>
     </StContainer>
@@ -64,6 +74,9 @@ const StDialog = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: #eee;
+  /* @media screen and (max-width: 768px) {
+    width: 95%;
+  } */
 `;
 
 const StDialogHeader = styled.div`
@@ -102,11 +115,45 @@ const StRightBox = styled.div`
   float: right;
   height: 400px;
   width: 475px;
+  /* @media screen and (max-width: 800px) {
+    width: 200px;
+  } */
 `;
 
-const CommentBox = styled.div`
+const StCommentBox = styled.div`
   background: blue;
   padding: 0 24px;
   height: 230px;
+  /* @media screen and (max-width: 800px) {
+    width: 200px;
+  } */
+`;
+
+const StCommentFunction = styled.input`
+  width: 700px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+`;
+
+const StCommentButton = styled.hover`
+  transform: scale(1.2);
+  &:hover {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00ffcb;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+  }
 `;
 export default Detailtest;
