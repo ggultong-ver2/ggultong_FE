@@ -13,8 +13,8 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* 주석 풀고 사용 */}
-          {/* <Route path="lists" element={<RecipeList />} />
-          <Route path="lists/:id" element={<Recipe />} /> */}
+          <Route path="lists" element={<RecipeList />} />
+          <Route path="lists/:id" element={<Recipe />} />
         </Routes>
       </Layout>
     </BrowserRouter>
