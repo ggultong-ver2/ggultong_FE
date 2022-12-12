@@ -1,5 +1,6 @@
 //import React, { useEffect } from "react";
 import styled from "styled-components";
+
 // import { useSelector } from "react-redux";
 // import { useNavigate, useParams } from "react-router-dom";
 
@@ -39,7 +40,15 @@ const Detailtest = () => {
           </StBody>
         </div>
         <div>
-          <CommentBox>댓글</CommentBox>
+          <StCommentBox>
+            <br></br>
+            COMMENT
+            <div>
+              <br></br>
+              <StCommentFunction></StCommentFunction>
+              <StCommentButton>등록</StCommentButton>
+            </div>
+          </StCommentBox>
         </div>
       </StDialog>
     </StContainer>
@@ -64,6 +73,9 @@ const StDialog = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: #eee;
+  /* @media screen and (max-width: 768px) {
+    width: 95%;
+  } */
 `;
 
 const StDialogHeader = styled.div`
@@ -102,11 +114,61 @@ const StRightBox = styled.div`
   float: right;
   height: 400px;
   width: 475px;
+  /* @media screen and (max-width: 800px) {
+    width: 200px;
+  } */
 `;
 
-const CommentBox = styled.div`
+const StCommentBox = styled.div`
   background: blue;
   padding: 0 24px;
   height: 230px;
+  /* @media screen and (max-width: 800px) {
+    width: 200px;
+  } */
+`;
+
+const StCommentFunction = styled.input`
+  width: 700px;
+  height: 50px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+`;
+
+const StCommentButton = styled.button`
+  position: relative;
+  border: none;
+  min-width: 200px;
+  min-height: 50px;
+  margin-left: 35px;
+  background: linear-gradient(90deg, #c0e9fc 0%, #6ccefc 100%);
+  border-radius: 1000px;
+  color: darkslategray;
+  cursor: pointer;
+  box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
+  font-weight: 700;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:hover::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #c0e9fc;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+  }
 `;
 export default Detailtest;
