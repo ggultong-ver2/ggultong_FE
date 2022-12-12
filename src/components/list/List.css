@@ -17,7 +17,6 @@
 .card-content {
   margin: 1rem;
   margin-top: 0.3rem;
-  /* width: 280px; */
 }
 /* .card-body {
   width: 280px;
@@ -59,7 +58,7 @@ h3 {
 
 a {
   text-transform: uppercase;
-  color: #1b9cfc;
+  color: #1d2b36;
   text-decoration: none;
   font-weight: bold;
 }
