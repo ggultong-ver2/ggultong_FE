@@ -23,7 +23,7 @@ const Detailtest = () => {
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : id랜덤노출 </div>
+            <div>ID : id랜덤노출함니다 </div>
             <div>
               <StButton
                 borderColor="#ddd"
@@ -61,7 +61,7 @@ const Detailtest = () => {
             <CommentMarkBox>
               dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
               dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>
+              dddd<br></br>dddd<br></br>dddd<br></br>dddd
             </CommentMarkBox>
           </div>
         </StCommentBox>
@@ -216,7 +216,7 @@ const CommentMarkBox = styled.div`
     display: none;
   }
 `;
-//
+
 const CommentSize = styled.h2`
   font-size: 20px;
 `;
