@@ -5,7 +5,7 @@ import Layout from "../components/layout/Layout";
 import Detailtest from "../components/recipe/Recipe";
 import Board from "../components/board/Board";
 // 주석 풀고 사용
-// import RecipeList from "../pages/RecipeList";
+import RecipeList from "../pages/RecipeList";
 // import Recipe from "../components/recipe/Recipe";
 
 const Router = () => {
