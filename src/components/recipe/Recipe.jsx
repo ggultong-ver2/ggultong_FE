@@ -39,17 +39,21 @@ const Detailtest = () => {
             <StRightBox>right</StRightBox>
           </StBody>
         </div>
-        <div>
-          <StCommentBox>
+        <StCommentBox>
+          <div>
+            <CommentSize>COMMENT</CommentSize>
+            <StCommentFunction></StCommentFunction>
+            <StCommentButton>등록</StCommentButton>
             <br></br>
-            COMMENT
-            <div>
-              <br></br>
-              <StCommentFunction></StCommentFunction>
-              <StCommentButton>등록</StCommentButton>
-            </div>
-          </StCommentBox>
-        </div>
+            <br></br>
+
+            <CommentMarkBox>
+              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
+              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
+              dddd<br></br>
+            </CommentMarkBox>
+          </div>
+        </StCommentBox>
       </StDialog>
     </StContainer>
   );
@@ -67,7 +71,7 @@ const StContainer = styled.div`
 
 const StDialog = styled.div`
   width: 1000px;
-  height: 800px;
+  height: 760px;
   border: 5px solid grey;
   display: flex;
   flex-direction: column;
@@ -80,8 +84,9 @@ const StDialog = styled.div`
 
 const StDialogHeader = styled.div`
   display: flex;
-  height: 80px;
+  height: 50px;
   justify-content: space-between;
+  background-color: blue;
   padding: 0 24px;
   align-items: center;
 `;
@@ -105,24 +110,28 @@ const StButton = styled.button`
 const StLeftBox = styled.div`
   background: red;
   float: left;
-  height: 400px;
-  width: 475px;
+  height: 350px;
+  width: 470px;
+  margin-bottom: 10px;
 `;
 
 const StRightBox = styled.div`
   background: green;
   float: right;
-  height: 400px;
-  width: 475px;
+  height: 350px;
+  width: 470px;
+  margin-bottom: 10px;
   /* @media screen and (max-width: 800px) {
     width: 200px;
   } */
 `;
 
 const StCommentBox = styled.div`
+  margin-top: -50px;
+  padding-left: 25px;
   background: blue;
-  padding: 0 24px;
-  height: 230px;
+  /* padding: 0px; */
+  height: 270px;
   /* @media screen and (max-width: 800px) {
     width: 200px;
   } */
@@ -131,7 +140,7 @@ const StCommentBox = styled.div`
 const StCommentFunction = styled.input`
   width: 700px;
   height: 50px;
-  font-size: 15px;
+  font-size: 17px;
   border: 0;
   border-radius: 15px;
   outline: none;
@@ -142,9 +151,9 @@ const StCommentFunction = styled.input`
 const StCommentButton = styled.button`
   position: relative;
   border: none;
-  min-width: 200px;
+  min-width: 150px;
   min-height: 50px;
-  margin-left: 35px;
+  margin-left: 55px;
   background: linear-gradient(90deg, #c0e9fc 0%, #6ccefc 100%);
   border-radius: 1000px;
   color: darkslategray;
@@ -162,7 +171,7 @@ const StCommentButton = styled.button`
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    border: 6px solid #c0e9fc;
+    border: 8px solid #c0e9fc;
     position: absolute;
     z-index: -1;
     top: 50%;
@@ -170,5 +179,25 @@ const StCommentButton = styled.button`
     transform: translate(-50%, -50%);
     animation: ring 1.5s infinite;
   }
+`;
+
+const CommentMarkBox = styled.div`
+  overflow: scroll;
+  width: 700px;
+  height: 120px;
+  font-size: 17px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const CommentSize = styled.h2`
+  font-size: 20px;
 `;
 export default Detailtest;

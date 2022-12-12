@@ -17,8 +17,8 @@ const GlobalStyle = styled.div`
       opacity: 1;
     }
     100% {
-      width: 300px;
-      height: 300px;
+      width: 150px;
+      height: 150px;
       opacity: 0;
     }
   }
