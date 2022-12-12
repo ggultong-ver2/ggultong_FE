@@ -35,8 +35,8 @@ const Detailtest = () => {
           </StDialogHeader>
           <StTitle>제목</StTitle>
           <StBody>
-            <StLeftBox>왼쪽</StLeftBox>
-            <StRightBox>오른쪽</StRightBox>
+            <StLeftBox>left</StLeftBox>
+            <StRightBox>right</StRightBox>
           </StBody>
         </div>
         <div>
