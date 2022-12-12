@@ -23,7 +23,7 @@ const Detailtest = () => {
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : id랜덤노출함니다 </div>
+            <div>ID : id랜덤노출 </div>
             <div>
               <StButton
                 borderColor="#ddd"
@@ -61,7 +61,7 @@ const Detailtest = () => {
             <CommentMarkBox>
               dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
               dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd
+              dddd<br></br>
             </CommentMarkBox>
           </div>
         </StCommentBox>
