@@ -1,7 +1,6 @@
 //import React, { useEffect } from "react";
 import styled from "styled-components";
-import { GlobalStyleComponent } from "styled-components";
-//@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
 // import { useSelector } from "react-redux";
 // import { useNavigate, useParams } from "react-router-dom";
 
@@ -131,7 +130,7 @@ const StCommentBox = styled.div`
 
 const StCommentFunction = styled.input`
   width: 700px;
-  height: 40px;
+  height: 50px;
   font-size: 15px;
   border: 0;
   border-radius: 15px;
@@ -140,14 +139,30 @@ const StCommentFunction = styled.input`
   background-color: rgb(233, 233, 233);
 `;
 
-const StCommentButton = styled.hover`
-  transform: scale(1.2);
+const StCommentButton = styled.button`
+  position: relative;
+  border: none;
+  min-width: 200px;
+  min-height: 50px;
+  margin-left: 35px;
+  background: linear-gradient(90deg, #c0e9fc 0%, #6ccefc 100%);
+  border-radius: 1000px;
+  color: darkslategray;
+  cursor: pointer;
+  box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
+  font-weight: 700;
+  transition: 0.3s;
+
   &:hover {
+    transform: scale(1.2);
+  }
+
+  &:hover::after {
     content: "";
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    border: 6px solid #00ffcb;
+    border: 6px solid #c0e9fc;
     position: absolute;
     z-index: -1;
     top: 50%;
