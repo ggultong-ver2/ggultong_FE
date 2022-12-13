@@ -43,77 +43,91 @@ const Recipe = () => {
   }, []);
 
   return (
-    <StContainer>
-      <StDialog>
-        <div>
-          <StDialogHeader>
-            <div>ID : id랜덤노출함니다 </div>
-            <div>
-              <StButton
-                borderColor="#ddd"
-                onClick={() => {
-                  //navigate("/todolist");
-                }}
-              >
-                수정하기
-              </StButton>
-              &nbsp;&nbsp;
-              <StButton
-                borderColor="#ddd"
-                onClick={() => {
-                  //navigate("/todolist");
-                }}
-              >
-                이전으로
-              </StButton>
-            </div>
-          </StDialogHeader>
-          <StTitle>제목</StTitle>
-          <StBody>
-            <StLeftBox>left</StLeftBox>
-            <StRightBox>right</StRightBox>
-          </StBody>
-        </div>
-
-        <StCommentBox>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSubmitHandler(review);
-            }}
-          >
-            <CommentSize>COMMENT</CommentSize>
-            <StCommentFunction
-              type="text"
-              placeholder="코멘트를 입력하세요."
-              onChange={(ev) => {
-                const { value } = ev.target;
-                setReview({
-                  ...review,
-                  title: value,
-                });
-              }}
-            />
-            <StCommentButton>등록</StCommentButton>
-          </form>
-
-          <CommentMarkBox>
-            {reviews?.map((review) => (
-              <div key={review.id}>
-                {review.id} :{review.title}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <button
-                  type="button"
-                  onClick={() => onClickDeleteButtonHandler(review.id)}
+    <StDiv background>
+      <StContainer>
+        <StDialog>
+          <div>
+            <StDialogHeader>
+              <div>ID : id랜덤노출함니다 </div>
+              <div>
+                <StButton
+                  borderColor="#ddd"
+                  onClick={() => {
+                    //navigate("/todolist");
+                  }}
                 >
-                  &nbsp;삭제하기&nbsp;
-                </button>
+                  수정하기
+                </StButton>
+                &nbsp;&nbsp;
+                <StButton
+                  borderColor="#ddd"
+                  onClick={() => {
+                    //navigate("/todolist");
+                  }}
+                >
+                  이전으로
+                </StButton>
               </div>
-            ))}
-          </CommentMarkBox>
-        </StCommentBox>
-      </StDialog>
-    </StContainer>
+            </StDialogHeader>
+            <StTitle>제목</StTitle>
+            <StBody>
+              <StLeftBox>left</StLeftBox>
+              <StRightBox>
+                right<br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>right
+                <br></br>right<br></br>right<br></br>right<br></br>
+              </StRightBox>
+            </StBody>
+          </div>
+
+          <StCommentBox>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSubmitHandler(review);
+              }}
+            >
+              <CommentSize>COMMENT</CommentSize>
+              <StCommentFunction
+                type="text"
+                placeholder="코멘트를 입력하세요."
+                onChange={(ev) => {
+                  const { value } = ev.target;
+                  setReview({
+                    ...review,
+                    title: value,
+                  });
+                }}
+              />
+              <StCommentButton>등록</StCommentButton>
+            </form>
+
+            <CommentMarkBox>
+              {reviews?.map((review) => (
+                <div key={review.id}>
+                  {review.id} :{review.title}
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <button
+                    type="button"
+                    onClick={() => onClickDeleteButtonHandler(review.id)}
+                  >
+                    &nbsp;삭제하기&nbsp;
+                  </button>
+                </div>
+              ))}
+            </CommentMarkBox>
+          </StCommentBox>
+        </StDialog>
+      </StContainer>
+    </StDiv>
   );
 };
 
@@ -180,12 +194,17 @@ const StLeftBox = styled.div`
 
 const StRightBox = styled.div`
   background: #c0e9fc;
+  overflow: scroll;
   opacity: 0.7;
   border-radius: 30px;
   float: right;
   height: 350px;
   width: 470px;
   margin-bottom: 10px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   /* @media screen and (max-width: 800px) {
     width: 200px;
   } */
@@ -267,5 +286,15 @@ const CommentMarkBox = styled.div`
 
 const CommentSize = styled.h2`
   font-size: 20px;
+`;
+
+const StDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://source.unsplash.com/random/1920x1080);
+  background-size: cover;
 `;
 export default Recipe;
