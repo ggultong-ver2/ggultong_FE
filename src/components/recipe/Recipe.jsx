@@ -1,4 +1,6 @@
 //import React, { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // import { useSelector } from "react-redux";
@@ -17,21 +19,54 @@ import styled from "styled-components";
 //   // useEffect(() => {
 //   //   dispatch(addButton(user));
 //   // }, [dispatch, user]);
-const Detailtest = () => {
+const Recipe = () => {
+  const [review, setReview] = useState({
+    title: "",
+  });
+  const [reviews, setReviews] = useState(null);
+
+  const fetchReviews = async () => {
+    const { data } = await axios.get("http://localhost:3005/reviews");
+    setReviews(data);
+  };
+  const onSubmitHandler = (review) => {
+    axios.post("http://localhost:3005/reviews", review);
+    setReviews([...reviews, review]);
+  };
+
+  const onClickDeleteButtonHandler = (reviewId) => {
+    axios.delete(`http://localhost:3005/reviews/${reviewId}`);
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
   return (
     <StContainer>
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : id랜덤노출 </div>
-            <StButton
-              borderColor="#ddd"
-              onClick={() => {
-                //navigate("/todolist");
-              }}
-            >
-              이전으로
-            </StButton>
+            <div>ID : id랜덤노출함니다 </div>
+            <div>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  //navigate("/todolist");
+                }}
+              >
+                수정하기
+              </StButton>
+              &nbsp;&nbsp;
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  //navigate("/todolist");
+                }}
+              >
+                이전으로
+              </StButton>
+            </div>
           </StDialogHeader>
           <StTitle>제목</StTitle>
           <StBody>
@@ -39,20 +74,43 @@ const Detailtest = () => {
             <StRightBox>right</StRightBox>
           </StBody>
         </div>
-        <StCommentBox>
-          <div>
-            <CommentSize>COMMENT</CommentSize>
-            <StCommentFunction></StCommentFunction>
-            <StCommentButton>등록</StCommentButton>
-            <br></br>
-            <br></br>
 
-            <CommentMarkBox>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>
-            </CommentMarkBox>
-          </div>
+        <StCommentBox>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onSubmitHandler(review);
+            }}
+          >
+            <CommentSize>COMMENT</CommentSize>
+            <StCommentFunction
+              type="text"
+              placeholder="코멘트를 입력하세요."
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setReview({
+                  ...review,
+                  title: value,
+                });
+              }}
+            />
+            <StCommentButton>등록</StCommentButton>
+          </form>
+
+          <CommentMarkBox>
+            {reviews?.map((review) => (
+              <div key={review.id}>
+                {review.id} :{review.title}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button
+                  type="button"
+                  onClick={() => onClickDeleteButtonHandler(review.id)}
+                >
+                  &nbsp;삭제하기&nbsp;
+                </button>
+              </div>
+            ))}
+          </CommentMarkBox>
         </StCommentBox>
       </StDialog>
     </StContainer>
@@ -73,6 +131,7 @@ const StDialog = styled.div`
   width: 1000px;
   height: 760px;
   border: 5px solid grey;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -83,8 +142,10 @@ const StDialog = styled.div`
 `;
 
 const StDialogHeader = styled.div`
+  margin-top: 2px;
   display: flex;
-  height: 50px;
+  border-radius: 20px;
+  height: 60px;
   justify-content: space-between;
   background-color: blue;
   padding: 0 24px;
@@ -108,7 +169,9 @@ const StButton = styled.button`
   cursor: pointer;
 `;
 const StLeftBox = styled.div`
-  background: red;
+  background: #c0e9fc;
+  opacity: 0.7;
+  border-radius: 30px;
   float: left;
   height: 350px;
   width: 470px;
@@ -116,7 +179,9 @@ const StLeftBox = styled.div`
 `;
 
 const StRightBox = styled.div`
-  background: green;
+  background: #c0e9fc;
+  opacity: 0.7;
+  border-radius: 30px;
   float: right;
   height: 350px;
   width: 470px;
@@ -127,11 +192,13 @@ const StRightBox = styled.div`
 `;
 
 const StCommentBox = styled.div`
-  margin-top: -50px;
-  padding-left: 25px;
-  background: blue;
+  margin-top: -40px;
+  padding-left: 24px;
+  opacity: 0.7;
+  background: #c0c0c0;
+  border-radius: 30px;
   /* padding: 0px; */
-  height: 270px;
+  height: 250px;
   /* @media screen and (max-width: 800px) {
     width: 200px;
   } */
@@ -182,6 +249,7 @@ const StCommentButton = styled.button`
 `;
 
 const CommentMarkBox = styled.div`
+  margin-top: 10px;
   overflow: scroll;
   width: 700px;
   height: 120px;
@@ -200,4 +268,4 @@ const CommentMarkBox = styled.div`
 const CommentSize = styled.h2`
   font-size: 20px;
 `;
-export default Detailtest;
+export default Recipe;
