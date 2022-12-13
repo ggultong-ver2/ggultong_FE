@@ -1,4 +1,6 @@
 //import React, { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // import { useSelector } from "react-redux";
@@ -17,7 +19,29 @@ import styled from "styled-components";
 //   // useEffect(() => {
 //   //   dispatch(addButton(user));
 //   // }, [dispatch, user]);
-const Detailtest = () => {
+const Recipe = () => {
+  const [review, setReview] = useState({
+    title: "",
+  });
+  const [reviews, setReviews] = useState(null);
+
+  const fetchReviews = async () => {
+    const { data } = await axios.get("http://localhost:3005/reviews");
+    setReviews(data);
+  };
+  const onSubmitHandler = (review) => {
+    axios.post("http://localhost:3005/reviews", review);
+    setReviews([...reviews, review]);
+  };
+
+  const onClickDeleteButtonHandler = (reviewId) => {
+    axios.delete(`http://localhost:3005/reviews/${reviewId}`);
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
   return (
     <StContainer>
       <StDialog>
@@ -50,20 +74,43 @@ const Detailtest = () => {
             <StRightBox>right</StRightBox>
           </StBody>
         </div>
-        <StCommentBox>
-          <div>
-            <CommentSize>COMMENT</CommentSize>
-            <StCommentFunction></StCommentFunction>
-            <StCommentButton>등록</StCommentButton>
-            <br></br>
-            <br></br>
 
-            <CommentMarkBox>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>
-            </CommentMarkBox>
-          </div>
+        <StCommentBox>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onSubmitHandler(review);
+            }}
+          >
+            <CommentSize>COMMENT</CommentSize>
+            <StCommentFunction
+              type="text"
+              placeholder="코멘트를 입력하세요."
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setReview({
+                  ...review,
+                  title: value,
+                });
+              }}
+            />
+            <StCommentButton>등록</StCommentButton>
+          </form>
+
+          <CommentMarkBox>
+            {reviews?.map((review) => (
+              <div key={review.id}>
+                {review.id} :{review.title}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button
+                  type="button"
+                  onClick={() => onClickDeleteButtonHandler(review.id)}
+                >
+                  &nbsp;삭제하기&nbsp;
+                </button>
+              </div>
+            ))}
+          </CommentMarkBox>
         </StCommentBox>
       </StDialog>
     </StContainer>
@@ -145,7 +192,7 @@ const StRightBox = styled.div`
 `;
 
 const StCommentBox = styled.div`
-  margin-top: -50px;
+  margin-top: -40px;
   padding-left: 24px;
   opacity: 0.7;
   background: #c0c0c0;
@@ -202,9 +249,10 @@ const StCommentButton = styled.button`
 `;
 
 const CommentMarkBox = styled.div`
+  margin-top: 10px;
   overflow: scroll;
   width: 700px;
-  height: 110px;
+  height: 120px;
   font-size: 17px;
   border: 0;
   border-radius: 15px;
@@ -220,4 +268,4 @@ const CommentMarkBox = styled.div`
 const CommentSize = styled.h2`
   font-size: 20px;
 `;
-export default Detailtest;
+export default Recipe;

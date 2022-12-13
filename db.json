@@ -11,7 +11,54 @@
       "imgurl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60",
       "recipe": "테서터",
       "id": 2100
+    },
+    {
+      "title": "test",
+      "imgurl": "test",
+      "recipe": "test",
+      "id": 328
     }
   ],
-  "reviews": []
+  "reviews": [
+    {
+      "title": "맛있겠다",
+      "id": 1
+    },
+    {
+      "title": "저렇게 만들면되나요",
+      "id": 2
+    },
+    {
+      "title": "잡내는 어떻게 없애나요",
+      "id": 3
+    },
+    {
+      "title": "아 만들기 너무 어려워 보이네요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠ",
+      "id": 4
+    },
+    {
+      "title": "저거 존맛탱구리임 ㄷㄷㄷㄷㄷㄷㄷ",
+      "id": 5
+    },
+    {
+      "title": "보관은 어떻게 하는게 좋나요?",
+      "id": 6
+    },
+    {
+      "title": "맛있겠네용!!!!!!!",
+      "id": 7
+    },
+    {
+      "title": "손질방법알려주세용",
+      "id": 8
+    },
+    {
+      "title": "저건 얼마에팔릴까",
+      "id": 9
+    },
+    {
+      "title": "냉동해도 상관없나요?",
+      "id": 10
+    }
+  ]
 }
