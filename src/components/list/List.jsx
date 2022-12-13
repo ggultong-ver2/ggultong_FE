@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./List.css";
+import { Link } from "react-router-dom";
 
 const List = ({ title, imageUrl, body }) => {
   return (
@@ -13,17 +14,13 @@ const List = ({ title, imageUrl, body }) => {
           <h3>{title}</h3>
         </Title>
         <Body>
-          <p style={{ wordBreak: "break-all" }}>{body}</p>
+          <Text style={{ wordBreak: "break-all" }}>{body}</Text>
         </Body>
       </Cardcontent>
       <Btn>
-        <Button>
-          <div>
-            <Href href="https://www.youtube.com/watch?v=Q3I_NwaCZI8">
-              View more
-            </Href>
-          </div>
-        </Button>
+        <Stbutton>
+          <Link to={`/listsx`}>View more</Link>
+        </Stbutton>
       </Btn>
     </Cardcontainer>
   );
@@ -43,6 +40,7 @@ const Cardcontainer = styled.div`
   margin-left: 10px;
   border-bottom-right-radius: 30px;
   border-top-left-radius: 30px;
+  background-color: #ffffffd0;
 `;
 const Imagecontainer = styled.img`
   overflow: hidden;
@@ -61,11 +59,20 @@ const Title = styled.div`
 const Body = styled.div`
   color: #003881;
 `;
+const Text = styled.p`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  height: 70px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;
 const Btn = styled.div`
   display: flex;
   justify-content: center;
 `;
-const Button = styled.div`
+const Stbutton = styled.div`
   padding: 10px;
   background-color: transparent;
   border: none;
@@ -78,11 +85,12 @@ const Button = styled.div`
     transform: scale();
   }
 `;
-const Href = styled.a`
-  text-transform: uppercase;
-  color: #3282bc;
-  text-decoration: none;
-  font-weight: bold;
-`;
+
+//const Href = styled.a`
+//text-transform: uppercase;
+//color: #3282bc;
+//text-decoration: none;
+//font-weight: bold;
+//`;
 
 export default List;
