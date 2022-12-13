@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import List from "../components/list/List";
+import { Link } from "react-router-dom";
 
 const RecipeList = () => {
   return (
@@ -8,6 +9,12 @@ const RecipeList = () => {
         <Title>
           <h1> Recipe Community</h1>
         </Title>
+        <Nbutton>
+          <Link to={`/board`}>
+            <Newbutton>new Post</Newbutton>
+          </Link>
+        </Nbutton>
+
         <Card>
           <List
             title="Card Title"
@@ -17,7 +24,7 @@ const RecipeList = () => {
           <List
             title="Card Title"
             imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ_G9U9095poYEIvtg8fnA2Ef3dcjLEebptQ&usqp=CAU"
-            body="helooooooooooooo1111111111111111111111111111111111111111111111111111111111111111111111"
+            body="helooooooooooooo11111111111111111111111111111111111111111111111111111111111111111111ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd11"
           />
           <List
             title="Card Title"
@@ -39,16 +46,39 @@ const Title = styled.div`
   color: #056683;
   text-align: center;
 `;
+const Nbutton = styled.div`
+  margin-bottom: -40px;
+  text-align: right;
+`;
+const Newbutton = styled.button`
+  width: 100px;
+  height: 30px;
+  background-color: #3282bc;
+  color: white;
+  border: 0px;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(42, 52, 75, 0.658);
+  font-weight: bold;
+  &:hover {
+    background: rgba(184, 217, 254, 0.366);
+    transform: scale();
+    cursor: pointer;
+    color: #364d8f;
+    font-weight: bold;
+  }
+`;
 const Card = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 `;
 const Wrapimg = styled.div`
-  background-image: linear-gradient(
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image:
+   /* linear-gradient(
       rgba(252, 254, 255, 0.8),
       rgba(234, 240, 254, 0.8)
-    ),
-    url("https://cdn.discordapp.com/attachments/1047386886269829182/1051905388976550018/pngegg.png");
+    ), */ url("https://cdn.discordapp.com/attachments/1047386886269829182/1051905388976550018/pngegg.png");
 `;
 export default RecipeList;
