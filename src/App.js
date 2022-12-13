@@ -14,7 +14,7 @@ const GlobalStyle = styled.div`
     0% {
       width: 30px;
       height: 30px;
-      opacity: 1;
+      opacity: 0.5;
     }
     100% {
       width: 150px;
