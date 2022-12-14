@@ -51,7 +51,7 @@ const Recipe = () => {
   useEffect(() => {
     fetchReviews();
   }, []);
-  /////////////////////////////////////
+  /////////////////리뷰 끝////////////////////
   return (
     <StDiv background>
       <StContainer>
