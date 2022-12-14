@@ -1,28 +1,38 @@
 //import React, { useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-// import { useSelector } from "react-redux";
-// import { useNavigate, useParams } from "react-router-dom";
-
-// //import { getTodoByID } from "../redux/modules/counter.js";
-
-// const Detail = () => {
-//   // const dispatch = useDispatch();
-//   const user = useSelector((state) => state.counter.users);
-//   const navigate = useNavigate();
-//   const param = useParams();
-//   // const { id } = useParams();
-
-//   const getid = user.find((user) => user.id === parseInt(param.id));
-//   // useEffect(() => {
-//   //   dispatch(addButton(user));
-//   // }, [dispatch, user]);
 const Recipe = () => {
+  //////////////레시피///////////////////
+  const navigate = useNavigate();
+  const param = useParams();
+  const recipes = useSelector((state) => state.recipes.recipes);
+  const getRecipeContent = recipes.filter(
+    (recipes) => recipes.id === parseInt(param.id)
+  );
+  console.log(recipes, param.id);
+  //////////////리뷰///////////////
   const [review, setReview] = useState({
     title: "",
   });
+  const [recipesx, setRecipes] = useState([]);
+
+  const fetchRecipes = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3005/recipes/${param.id}`
+    );
+    setRecipes(data);
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  console.log(recipesx);
   const [reviews, setReviews] = useState(null);
 
   const fetchReviews = async () => {
@@ -41,19 +51,19 @@ const Recipe = () => {
   useEffect(() => {
     fetchReviews();
   }, []);
-
+  /////////////////////////////////////
   return (
     <StDiv background>
       <StContainer>
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID : id랜덤노출함니다 </div>
+              <div>ID :{recipesx.id}</div>
               <div>
                 <StButton
                   borderColor="#ddd"
                   onClick={() => {
-                    //navigate("/todolist");
+                    //navigate("/lists");
                   }}
                 >
                   수정하기
@@ -62,28 +72,19 @@ const Recipe = () => {
                 <StButton
                   borderColor="#ddd"
                   onClick={() => {
-                    //navigate("/todolist");
+                    navigate("/lists");
                   }}
                 >
                   이전으로
                 </StButton>
               </div>
             </StDialogHeader>
-            <StTitle>제목</StTitle>
+            <StTitle>{recipesx.title}</StTitle>
+
             <StBody>
-              <StLeftBox>left</StLeftBox>
+              <StLeftBox src={recipesx.imgurl}></StLeftBox>
               <StRightBox>
-                right<br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>right
-                <br></br>right<br></br>right<br></br>right<br></br>
+                <StP>{recipesx.recipe}</StP>
               </StRightBox>
             </StBody>
           </div>
@@ -182,9 +183,8 @@ const StButton = styled.button`
   border-radius: 12px;
   cursor: pointer;
 `;
-const StLeftBox = styled.div`
+const StLeftBox = styled.img`
   background: #c0e9fc;
-  opacity: 0.7;
   border-radius: 30px;
   float: left;
   height: 350px;
@@ -195,13 +195,14 @@ const StLeftBox = styled.div`
 const StRightBox = styled.div`
   background: #c0e9fc;
   overflow: scroll;
-  opacity: 0.7;
+  opacity: 1;
   border-radius: 30px;
   float: right;
   height: 350px;
   width: 470px;
   margin-bottom: 10px;
 
+  //padding-top: 15px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -296,5 +297,9 @@ const StDiv = styled.div`
   height: 100%;
   background: url(https://source.unsplash.com/random/1920x1080);
   background-size: cover;
+`;
+
+const StP = styled.p`
+  padding: 8px;
 `;
 export default Recipe;

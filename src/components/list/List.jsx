@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "./List.css";
 import { Link } from "react-router-dom";
 
-const List = ({ title, imageUrl, body }) => {
+const List = ({ title, imageUrl, body, id }) => {
   return (
     <Cardcontainer>
       <div>
@@ -19,7 +19,8 @@ const List = ({ title, imageUrl, body }) => {
       </Cardcontent>
       <Btn>
         <Stbutton>
-          <Link to={`/listsx`}>View more</Link>
+          <Link to={`/lists/${id}`}>View more</Link>
+          {/* <Link to={`/listsx`}>View more</Link> */}
         </Stbutton>
       </Btn>
     </Cardcontainer>
