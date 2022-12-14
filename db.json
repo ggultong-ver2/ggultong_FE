@@ -17,6 +17,12 @@
       "imgurl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
       "recipe": "팔자피자",
       "id": 3554
+    },
+    {
+      "title": "김치찌개",
+      "imgurl": "https://ppss.kr/wp-content/uploads/2019/08/0-87.jpg",
+      "recipe": "1. 김치를 썬다\n2. 김치를 볶는다\n3. 스팸을 넣는다\n4. 물을 넣는다\n5. 찬에게 맡긴다",
+      "id": 2980
     }
   ],
   "reviews": [

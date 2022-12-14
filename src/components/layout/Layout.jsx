@@ -18,7 +18,7 @@ const layoutStyles = {
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
-  minHeight: "90vh",
+  minHeight: "82.5vh",
 };
 
 const Footer = () => {

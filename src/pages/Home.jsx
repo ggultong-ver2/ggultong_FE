@@ -19,7 +19,7 @@ const StDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  min-height: 82.5vh;
   ${(props) =>
     props.background &&
     css`
