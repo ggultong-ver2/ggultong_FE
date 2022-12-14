@@ -120,7 +120,7 @@ const Recipe = () => {
 const StContainer = styled.div`
   border: 5px solid #eee;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
