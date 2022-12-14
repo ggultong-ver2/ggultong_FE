@@ -17,18 +17,6 @@
       "imgurl": "test",
       "recipe": "test",
       "id": 328
-    },
-    {
-      "title": "test",
-      "imgurl": "test",
-      "recipe": "test",
-      "id": 4069
-    },
-    {
-      "title": "qwer",
-      "imgurl": "qwer",
-      "recipe": "qwerr",
-      "id": 3085
     }
   ],
   "reviews": [
@@ -79,10 +67,6 @@
     {
       "title": "병합충돌 뜨지말ㄹ라ㅏㅏ라라라라라라",
       "id": 12
-    },
-    {
-      "title": "ffff",
-      "id": 13
     }
   ]
 }
