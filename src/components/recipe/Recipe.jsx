@@ -54,93 +54,89 @@ const Recipe = () => {
   }, []);
   /////////////////리뷰 끝////////////////////
   return (
-    <StDiv background>
-      <StContainer>
-        <StDialog>
-          <div>
-            <StDialogHeader>
-              <div>ID :{recipesx.id}</div>
-              <div>
-                <StButton
-                  borderColor="#ddd"
-                  onClick={() => {
-                    //navigate("/lists");
-                  }}
-                >
-                  수정하기
-                </StButton>
-                &nbsp;&nbsp;
-                <StButton
-                  borderColor="#ddd"
-                  onClick={() => {
-                    navigate("/lists");
-                  }}
-                >
-                  이전으로
-                </StButton>
-              </div>
-            </StDialogHeader>
-            <StTitle>{recipesx.title}</StTitle>
-
-            <StBody>
-              <StLeftBox src={recipesx.imgurl}></StLeftBox>
-              <StRightBox>
-                <StP>{recipesx.recipe}</StP>
-              </StRightBox>
-            </StBody>
-          </div>
-
-          <StCommentBox>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                onSubmitHandler(review);
-              }}
-            >
-              <CommentSize>COMMENT</CommentSize>
-              <StCommentFunction
-                type="text"
-                placeholder="코멘트를 입력하세요."
-                onChange={(ev) => {
-                  const { value } = ev.target;
-                  setReview({
-                    ...review,
-                    title: value,
-                  });
+    <StContainer>
+      <StDialog>
+        <div>
+          <StDialogHeader>
+            <div>ID :{recipesx.id}</div>
+            <div>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  //navigate("/lists");
                 }}
-              />
-              <StCommentButton>등록</StCommentButton>
-            </form>
+              >
+                수정하기
+              </StButton>
+              &nbsp;&nbsp;
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  navigate("/lists");
+                }}
+              >
+                이전으로
+              </StButton>
+            </div>
+          </StDialogHeader>
+          <StTitle>{recipesx.title}</StTitle>
 
-            <CommentMarkBox>
-              {reviews?.map((review) => (
-                <div key={review.id}>
-                  {review.id} :{review.title}
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <button
-                    type="button"
-                    onClick={() => onClickDeleteButtonHandler(review.id)}
-                  >
-                    &nbsp;삭제하기&nbsp;
-                  </button>
-                </div>
-              ))}
-            </CommentMarkBox>
-          </StCommentBox>
-        </StDialog>
-      </StContainer>
-    </StDiv>
+          <StBody>
+            <StLeftBox src={recipesx.imgurl}></StLeftBox>
+            <StRightBox>
+              <StP>{recipesx.recipe}</StP>
+            </StRightBox>
+          </StBody>
+        </div>
+
+        <StCommentBox>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onSubmitHandler(review);
+            }}
+          >
+            <CommentSize>COMMENT</CommentSize>
+            <StCommentFunction
+              type="text"
+              placeholder="코멘트를 입력하세요."
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setReview({
+                  ...review,
+                  title: value,
+                });
+              }}
+            />
+            <StCommentButton>등록</StCommentButton>
+          </form>
+
+          <CommentMarkBox>
+            {reviews?.map((review) => (
+              <div key={review.id}>
+                {review.id} :{review.title}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button
+                  type="button"
+                  onClick={() => onClickDeleteButtonHandler(review.id)}
+                >
+                  &nbsp;삭제하기&nbsp;
+                </button>
+              </div>
+            ))}
+          </CommentMarkBox>
+        </StCommentBox>
+      </StDialog>
+    </StContainer>
   );
 };
 
 const StContainer = styled.div`
-  border: 5px solid #eee;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #c0e9fc;
 `;
 
 const StDialog = styled.div`
@@ -292,10 +288,10 @@ const CommentSize = styled.h2`
 
 const StDiv = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* top: 0;
+  left: 0; */
+  /* width: 100%; */
+  /* height: 100%; */
   background: url(https://source.unsplash.com/random/1920x1080);
   background-size: cover;
 `;

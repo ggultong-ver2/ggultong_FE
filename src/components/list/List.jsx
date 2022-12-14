@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 const List = ({ recipelist }) => {
   const navigate = useNavigate();
   const { title, imgurl, recipe, id } = recipelist;
-
+  // list id 넘겨오기
+  console.log(id);
   return (
     <Cardcontainer>
       <div>
@@ -23,7 +24,7 @@ const List = ({ recipelist }) => {
         <Stbutton
           borderColor="#ddd"
           onClick={() => {
-            navigate(`/lists/${[id]}`);
+            navigate(`/lists/${id}`); // [id].배열 보내기
           }}
         >
           View More
