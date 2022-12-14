@@ -2,6 +2,7 @@ import styled from "styled-components";
 import "./List.css";
 import { Link } from "react-router-dom";
 
+
 const List = ({ recipelist }) => {
   const { title, imgurl, recipe } = recipelist;
 
@@ -20,7 +21,8 @@ const List = ({ recipelist }) => {
       </Cardcontent>
       <Btn>
         <Stbutton>
-          <Link to={`/listsx`}>View more</Link>
+          <Link to={`/lists/${id}`}>View more</Link>
+          {/* <Link to={`/listsx`}>View more</Link> */}
         </Stbutton>
       </Btn>
     </Cardcontainer>
