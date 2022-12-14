@@ -11,11 +11,11 @@ const Recipe = () => {
   const navigate = useNavigate();
   const param = useParams();
   const recipes = useSelector((state) => state.recipes.recipes);
-  const getRecipeContent = recipes.filter(
-    (recipes) => recipes.id === parseInt(param.id)
-  );
+  // const getRecipeContent = recipes.filter(
+  //   (recipes) => recipes.id === parseInt(param.id)
+  // );
   console.log(recipes, param.id);
-  //////////////리뷰///////////////
+  //////////////리뷰///////////////////
   const [review, setReview] = useState({
     title: "",
   });
