@@ -1,20 +1,22 @@
-import React from "react";
 import styled from "styled-components";
 import "./List.css";
 import { Link } from "react-router-dom";
 
-const List = ({ title, imageUrl, body, id }) => {
+
+const List = ({ recipelist }) => {
+  const { title, imgurl, recipe } = recipelist;
+
   return (
     <Cardcontainer>
       <div>
-        <Imagecontainer src={imageUrl} alt="" />
+        <Imagecontainer src={imgurl} alt="" />
       </div>
       <Cardcontent>
         <Title>
           <h3>{title}</h3>
         </Title>
         <Body>
-          <Text style={{ wordBreak: "break-all" }}>{body}</Text>
+          <Text style={{ wordBreak: "break-all" }}>{recipe}</Text>
         </Body>
       </Cardcontent>
       <Btn>
@@ -54,11 +56,11 @@ const Cardcontent = styled.div`
   margin-top: 0.3rem;
 `;
 const Title = styled.div`
-  color: #07254e;
+  color: #022450;
   text-align: center;
 `;
 const Body = styled.div`
-  color: #003881;
+  color: #022450;
 `;
 const Text = styled.p`
   text-overflow: ellipsis;
