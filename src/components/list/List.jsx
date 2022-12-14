@@ -82,11 +82,11 @@ const Cardcontent = styled.div`
   margin-top: 0.3rem;
 `;
 const Title = styled.div`
-  color: #022450;
+  color: #056683;
   text-align: center;
 `;
 const Body = styled.div`
-  color: #022450;
+  color: #056683;
 `;
 const Text = styled.p`
   text-overflow: ellipsis;
@@ -114,6 +114,8 @@ const Stbutton = styled.div`
     background: rgba(14, 15, 16, 0.1);
     transform: scale();
   }
+  font-weight: bold;
+  color: #056683;
 `;
 
 const StDiv = styled.div`
