@@ -1,25 +1,32 @@
-import React from "react";
 import styled from "styled-components";
 import "./List.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+const List = ({ recipelist }) => {
+  const navigate = useNavigate();
+  const { title, imgurl, recipe, id } = recipelist;
 
-const List = ({ title, imageUrl, body }) => {
   return (
     <Cardcontainer>
       <div>
-        <Imagecontainer src={imageUrl} alt="" />
+        <Imagecontainer src={imgurl} alt="" />
       </div>
       <Cardcontent>
         <Title>
           <h3>{title}</h3>
         </Title>
         <Body>
-          <Text style={{ wordBreak: "break-all" }}>{body}</Text>
+          <Text style={{ wordBreak: "break-all" }}>{recipe}</Text>
         </Body>
       </Cardcontent>
       <Btn>
-        <Stbutton>
-          <Link to={`/listsx`}>View more</Link>
+        <Stbutton
+          borderColor="#ddd"
+          onClick={() => {
+            navigate(`/lists/${[id]}`);
+          }}
+        >
+          View More
         </Stbutton>
       </Btn>
     </Cardcontainer>
@@ -53,11 +60,11 @@ const Cardcontent = styled.div`
   margin-top: 0.3rem;
 `;
 const Title = styled.div`
-  color: #07254e;
+  color: #022450;
   text-align: center;
 `;
 const Body = styled.div`
-  color: #003881;
+  color: #022450;
 `;
 const Text = styled.p`
   text-overflow: ellipsis;
@@ -80,6 +87,7 @@ const Stbutton = styled.div`
   margin-bottom: 0.5rem;
   border-radius: 30px;
   margin-bottom: 15px;
+  cursor: pointer;
   &:hover {
     background: rgba(14, 15, 16, 0.1);
     transform: scale();

@@ -1,28 +1,39 @@
 //import React, { useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import styled from "styled-components";
-
-// import { useSelector } from "react-redux";
-// import { useNavigate, useParams } from "react-router-dom";
-
-// //import { getTodoByID } from "../redux/modules/counter.js";
-
-// const Detail = () => {
-//   // const dispatch = useDispatch();
-//   const user = useSelector((state) => state.counter.users);
-//   const navigate = useNavigate();
-//   const param = useParams();
-//   // const { id } = useParams();
-
-//   const getid = user.find((user) => user.id === parseInt(param.id));
-//   // useEffect(() => {
-//   //   dispatch(addButton(user));
-//   // }, [dispatch, user]);
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Recipe = () => {
+  //////////////레시피///////////////////
+  const navigate = useNavigate();
+  const param = useParams();
+  const recipes = useSelector((state) => state.recipes.recipes);
+  // const getRecipeContent = recipes.filter(
+  //   (recipes) => recipes.id === parseInt(param.id)
+  // );
+  //console.log(recipes, param.id);
+  //////////////리뷰///////////////////
+  const { state } = useLocation;
+  console.log(state, "state");
   const [review, setReview] = useState({
     title: "",
   });
+  const [recipesx, setRecipes] = useState([]);
+
+  const fetchRecipes = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3005/recipes/${param.id}`
+    );
+    setRecipes(data);
+  };
+  console.log(param.id, "param.id");
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  console.log(recipesx);
   const [reviews, setReviews] = useState(null);
 
   const fetchReviews = async () => {
@@ -41,80 +52,84 @@ const Recipe = () => {
   useEffect(() => {
     fetchReviews();
   }, []);
-
+  /////////////////리뷰 끝////////////////////
   return (
-    <StContainer>
-      <StDialog>
-        <div>
-          <StDialogHeader>
-            <div>ID : id랜덤노출함 </div>
-
-            <div>
-              <StButton
-                borderColor="#ddd"
-                onClick={() => {
-                  //navigate("/todolist");
-                }}
-              >
-                수정하기
-              </StButton>
-              &nbsp;&nbsp;
-              <StButton
-                borderColor="#ddd"
-                onClick={() => {
-                  //navigate("/todolist");
-                }}
-              >
-                이전으로
-              </StButton>
-            </div>
-          </StDialogHeader>
-          <StTitle>제목</StTitle>
-          <StBody>
-            <StLeftBox>left</StLeftBox>
-            <StRightBox>right</StRightBox>
-          </StBody>
-        </div>
-
-        <StCommentBox>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSubmitHandler(review);
-            }}
-          >
-            <CommentSize>COMMENT</CommentSize>
-            <StCommentFunction
-              type="text"
-              placeholder="코멘트를 입력하세요."
-              onChange={(ev) => {
-                const { value } = ev.target;
-                setReview({
-                  ...review,
-                  title: value,
-                });
-              }}
-            />
-            <StCommentButton>등록</StCommentButton>
-          </form>
-
-          <CommentMarkBox>
-            {reviews?.map((review) => (
-              <div key={review.id}>
-                {review.id} :{review.title}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <button
-                  type="button"
-                  onClick={() => onClickDeleteButtonHandler(review.id)}
+    <StDiv background>
+      <StContainer>
+        <StDialog>
+          <div>
+            <StDialogHeader>
+              <div>ID :{recipesx.id}</div>
+              <div>
+                <StButton
+                  borderColor="#ddd"
+                  onClick={() => {
+                    //navigate("/lists");
+                  }}
                 >
-                  &nbsp;삭제하기&nbsp;
-                </button>
+                  수정하기
+                </StButton>
+                &nbsp;&nbsp;
+                <StButton
+                  borderColor="#ddd"
+                  onClick={() => {
+                    navigate("/lists");
+                  }}
+                >
+                  이전으로
+                </StButton>
               </div>
-            ))}
-          </CommentMarkBox>
-        </StCommentBox>
-      </StDialog>
-    </StContainer>
+            </StDialogHeader>
+            <StTitle>{recipesx.title}</StTitle>
+
+            <StBody>
+              <StLeftBox src={recipesx.imgurl}></StLeftBox>
+              <StRightBox>
+                <StP>{recipesx.recipe}</StP>
+              </StRightBox>
+            </StBody>
+          </div>
+
+          <StCommentBox>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSubmitHandler(review);
+              }}
+            >
+              <CommentSize>COMMENT</CommentSize>
+              <StCommentFunction
+                type="text"
+                placeholder="코멘트를 입력하세요."
+                onChange={(ev) => {
+                  const { value } = ev.target;
+                  setReview({
+                    ...review,
+                    title: value,
+                  });
+                }}
+              />
+              <StCommentButton>등록</StCommentButton>
+            </form>
+
+            <CommentMarkBox>
+              {reviews?.map((review) => (
+                <div key={review.id}>
+                  {review.id} :{review.title}
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <button
+                    type="button"
+                    onClick={() => onClickDeleteButtonHandler(review.id)}
+                  >
+                    &nbsp;삭제하기&nbsp;
+                  </button>
+                </div>
+              ))}
+            </CommentMarkBox>
+          </StCommentBox>
+        </StDialog>
+      </StContainer>
+    </StDiv>
   );
 };
 
@@ -169,9 +184,8 @@ const StButton = styled.button`
   border-radius: 12px;
   cursor: pointer;
 `;
-const StLeftBox = styled.div`
+const StLeftBox = styled.img`
   background: #c0e9fc;
-  opacity: 0.7;
   border-radius: 30px;
   float: left;
   height: 350px;
@@ -181,12 +195,18 @@ const StLeftBox = styled.div`
 
 const StRightBox = styled.div`
   background: #c0e9fc;
-  opacity: 0.7;
+  overflow: scroll;
+  opacity: 1;
   border-radius: 30px;
   float: right;
   height: 350px;
   width: 470px;
   margin-bottom: 10px;
+
+  //padding-top: 15px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   /* @media screen and (max-width: 800px) {
     width: 200px;
   } */
@@ -268,5 +288,19 @@ const CommentMarkBox = styled.div`
 
 const CommentSize = styled.h2`
   font-size: 20px;
+`;
+
+const StDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://source.unsplash.com/random/1920x1080);
+  background-size: cover;
+`;
+
+const StP = styled.p`
+  padding: 8px;
 `;
 export default Recipe;
