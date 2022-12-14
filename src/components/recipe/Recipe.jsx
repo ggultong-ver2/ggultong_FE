@@ -3,7 +3,7 @@ import axios from "axios";
 import { Component, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Recipe = () => {
   //////////////레시피///////////////////
@@ -28,7 +28,7 @@ const Recipe = () => {
     );
     setRecipes(data);
   };
-  console.log(param.id, "param.id");
+  // console.log(param.id, "param.id");
   useEffect(() => {
     fetchRecipes();
   }, []);
