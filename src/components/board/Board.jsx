@@ -100,71 +100,72 @@ const Board = () => {
     //   recipe={recipe}
     //   setRecipe={setRecipe}
     // ></Form>
-    <StForm
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmitHandler(recipe);
-        navigate("/lists");
-      }}
-    >
-      <StH1>당신의 레시피를 추천해주세요!</StH1>
-      <StLabel htmlFor="title">Title</StLabel>
-      <StInput
-        type="text"
-        name="title"
-        id="title"
-        onChange={(ev) => {
-          const { value } = ev.target;
-          setRecipe({
-            ...recipe,
-            id: Math.floor(Math.random() * 10000),
-            title: value,
-          });
+    <StDiv>
+      <StForm
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmitHandler(recipe);
+          navigate("/lists");
         }}
-      />
-      <StLabel htmlFor="url">Image URL</StLabel>
-      <StInput
-        type="text"
-        name="url"
-        id="url"
-        onChange={(ev) => {
-          const { value } = ev.target;
-          setRecipe({
-            ...recipe,
-            id: Math.floor(Math.random() * 10000),
-            imgurl: value,
-          });
-        }}
-      />
-      <StLabel htmlFor="recipe">Recipe</StLabel>
-      <StTextarea
-        name="recipe"
-        id="recipe"
-        cols="40"
-        rows="10"
-        onChange={(ev) => {
-          const { value } = ev.target;
-          setRecipe({
-            ...recipe,
-            id: Math.floor(Math.random() * 10000),
-            recipe: value,
-          });
-        }}
-      ></StTextarea>
-      <div>
-        <StButton add>Add Recipe</StButton>
-        {/* <Link to={`/lists`}> */}
-        <StButton
-          back
-          onClick={() => {
-            navigate("/lists");
+      >
+        <StH1>당신의 레시피를 추천해주세요!</StH1>
+        <StLabel htmlFor="title">Title</StLabel>
+        <StInput
+          type="text"
+          name="title"
+          id="title"
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setRecipe({
+              ...recipe,
+              id: Math.floor(Math.random() * 10000),
+              title: value,
+            });
           }}
-        >
-          Back
-        </StButton>
-        {/* </Link> */}
-      </div>
-      {/* <div>
+        />
+        <StLabel htmlFor="url">Image URL</StLabel>
+        <StInput
+          type="text"
+          name="url"
+          id="url"
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setRecipe({
+              ...recipe,
+              id: Math.floor(Math.random() * 10000),
+              imgurl: value,
+            });
+          }}
+        />
+        <StLabel htmlFor="recipe">Recipe</StLabel>
+        <StTextarea
+          name="recipe"
+          id="recipe"
+          cols="40"
+          rows="10"
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setRecipe({
+              ...recipe,
+              id: Math.floor(Math.random() * 10000),
+              recipe: value,
+            });
+          }}
+        ></StTextarea>
+        <div>
+          <StButton add>Add Recipe</StButton>
+          {/* <Link to={`/lists`}> */}
+          <StButton
+            back
+            onClick={() => {
+              navigate("/lists");
+            }}
+          >
+            Back
+          </StButton>
+          {/* </Link> */}
+        </div>
+        {/* <div>
         {recipes.map((recipe) => (
           <div key={recipe.id}>
             <p>{recipe.id}</p>
@@ -174,9 +175,26 @@ const Board = () => {
           </div>
         ))}
       </div> */}
-    </StForm>
+      </StForm>
+    </StDiv>
   );
 };
+
+const StDiv = styled.div`
+  max-width: 700px;
+  width: 95%;
+  min-height: 82.5vh;
+  /* filter: brightness(1); */
+  background-image: url("https://media.discordapp.net/attachments/1037267111585792020/1052637612629823518/image0.jpg");
+  /* background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.096),
+      rgba(0, 0, 0, 0.105)
+    ),
+    url("https://media.discordapp.net/attachments/1037267111585792020/1052637612629823518/image0.jpg"); */
+  background-size: cover;
+  opacity: 0.8;
+`;
 
 const StForm = styled.form`
   /* background-color: aqua; */
@@ -187,40 +205,56 @@ const StForm = styled.form`
   justify-content: center;
   align-items: center;
   min-height: 90vh;
-  margin-top: -100px;
+  margin: -100px auto 0 auto;
+  /* margin-top: -100px; */
 `;
 
 const StH1 = styled.h1`
-  color: #02415c;
+  color: black;
   font-size: 50px;
   margin-bottom: 70px;
   /* background-color: #b0c4cc;
   border-radius: 20px; */
 `;
 const StLabel = styled.label`
-  color: #02415c;
+  color: black;
   font-size: 20px;
   margin: 10px;
   font-weight: bold;
 `;
 
 const StInput = styled.input`
+  font-weight: bold;
+  color: black;
+  text-align: center;
   width: 500px;
   height: 30px;
   border-radius: 10px;
   border: 0;
-  background-color: #d6edf8;
+  border-bottom: 3px solid #4ea1ba;
+  background-color: transparent;
+  /* background-color: #d6edf8; */
   font-size: 20px;
   padding: 10px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const StTextarea = styled.textarea`
   width: 500px;
   border-radius: 10px;
   border: 0;
+  border-bottom: 3px solid #4ea1ba;
   background-color: #d6edf8;
   font-size: 20px;
   padding: 10px;
+  opacity: 0.9;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const StButton = styled.button`
@@ -235,7 +269,7 @@ const StButton = styled.button`
   ${(props) =>
     props.add &&
     css`
-      background-color: #35b2e8;
+      background-color: #4ea1ba;
     `}
   ${(props) =>
     props.back &&
