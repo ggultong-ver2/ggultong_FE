@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import "./List.css";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const List = ({ recipelist }) => {
-  const { title, imgurl, recipe } = recipelist;
-
+  const navigate = useNavigate();
+  const { title, imgurl, recipe, id } = recipelist;
+  // list id 넘겨오기
+  console.log(id);
   return (
     <Cardcontainer>
       <div>
@@ -19,8 +21,13 @@ const List = ({ recipelist }) => {
         </Body>
       </Cardcontent>
       <Btn>
-        <Stbutton>
-          <Link to={`/listsx`}>View more</Link>
+        <Stbutton
+          borderColor="#ddd"
+          onClick={() => {
+            navigate(`/lists/${id}`); // [id].배열 보내기
+          }}
+        >
+          View More
         </Stbutton>
       </Btn>
     </Cardcontainer>
@@ -81,6 +88,7 @@ const Stbutton = styled.div`
   margin-bottom: 0.5rem;
   border-radius: 30px;
   margin-bottom: 15px;
+  cursor: pointer;
   &:hover {
     background: rgba(14, 15, 16, 0.1);
     transform: scale();
