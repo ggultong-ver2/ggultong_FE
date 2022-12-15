@@ -2,11 +2,25 @@ import styled from "styled-components";
 import "./List.css";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { HiHeart } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { addNumber } from "../../redux/modules/counterSlice";
+import { useState } from "react";
+
 const List = ({ recipelist }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { title, imgurl, recipe, id } = recipelist;
   // list id 넘겨오기
   console.log(id);
+
+  const count = useSelector((state) => state.counter.number);
+  console.log("count: ", count);
+
+  const onClickHeartHandler = () => {
+    dispatch(addNumber(1));
+  };
+
   return (
     <Cardcontainer>
       <div>
@@ -15,6 +29,13 @@ const List = ({ recipelist }) => {
       <Cardcontent>
         <Title>
           <h3>{title}</h3>
+          <StDiv>
+            <HiHeart
+              onClick={onClickHeartHandler}
+              style={{ color: "#5c94b6", cursor: "pointer" }}
+            ></HiHeart>
+            <SP>{count}</SP>
+          </StDiv>
         </Title>
         <Body>
           <Text style={{ wordBreak: "break-all" }}>{recipe}</Text>
@@ -61,15 +82,15 @@ const Cardcontent = styled.div`
   margin-top: 0.3rem;
 `;
 const Title = styled.div`
-  color: #022450;
+  color: #056683;
   text-align: center;
 `;
 const Body = styled.div`
-  color: #022450;
+  color: #056683;
 `;
 const Text = styled.p`
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow: scroll;
   word-break: break-word;
   height: 70px;
   display: -webkit-box;
@@ -93,8 +114,20 @@ const Stbutton = styled.div`
     background: rgba(14, 15, 16, 0.1);
     transform: scale();
   }
+  font-weight: bold;
+  color: #056683;
 `;
 
+const StDiv = styled.div`
+  display: flex;
+  align-items: center;
+  height: 20px;
+`;
+
+const SP = styled.p`
+  margin: 0;
+  margin-left: 3px;
+`;
 //const Href = styled.a`
 //text-transform: uppercase;
 //color: #3282bc;

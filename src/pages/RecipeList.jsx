@@ -19,22 +19,24 @@ const RecipeList = () => {
 
   return (
     <div>
-      <Wrapimg>
-        <Title>
-          <h1> Recipe Community</h1>
-        </Title>
-        <Nbutton>
-          <Link to={`/board`}>
-            <Newbutton>new Post</Newbutton>
-          </Link>
-        </Nbutton>
+      <Stimg>
+        <Wrapimg>
+          <Title>
+            <h1> Recipe Community</h1>
+          </Title>
+          <Nbutton>
+            <Link to={`/board`}>
+              <Newbutton>new Post</Newbutton>
+            </Link>
+          </Nbutton>
 
-        <Card>
-          {recipes.map((recipe) => (
-            <List recipelist={recipe} />
-          ))}
-        </Card>
-      </Wrapimg>
+          <Card>
+            {recipes.map((recipe) => (
+              <List recipelist={recipe} />
+            ))}
+          </Card>
+        </Wrapimg>
+      </Stimg>
     </div>
   );
 };
@@ -42,6 +44,7 @@ const RecipeList = () => {
 const Title = styled.div`
   color: #056683;
   text-align: center;
+  font-family: "Kalam", cursive;
 `;
 const Nbutton = styled.div`
   margin-bottom: -40px;
@@ -63,21 +66,22 @@ const Newbutton = styled.button`
     color: #364d8f;
     font-weight: bold;
   }
+  font-family: "Nanum Gothic", sans-serif;
 `;
 const Card = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  font-family: "Nanum Gothic", sans-serif;
 `;
 const Wrapimg = styled.div`
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 1105px;
   min-height: 400px;
-  background-image:
-   /* linear-gradient(
-      rgba(252, 254, 255, 0.8),
-      rgba(234, 240, 254, 0.8)
-    ), */ url("https://cdn.discordapp.com/attachments/1047386886269829182/1051905388976550018/pngegg.png");
+`;
+const Stimg = styled.div`
+  background-image: url("https://cdn.discordapp.com/attachments/1047386886269829182/1051905388976550018/pngegg.png");
+  background-repeat: no-repeat;
+  background-size: fill;
+  background-position: center;
 `;
 export default RecipeList;

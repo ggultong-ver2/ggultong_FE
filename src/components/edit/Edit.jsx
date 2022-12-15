@@ -1,37 +1,49 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { apis } from "../../lib/axios";
-// import Form from "../form/Form";
-// import axios from "axios";
-// import { useDispatch, useSelector } from "react-redux";
-// import { apis, __getRecipes } from "../../redux/modules/recipeSlice";
-// import { addRecipe } from "../../redux/modules/recipeSlice";
-// import { postCreators } from "../../redux/modules/recipeSlice";
 
-const Board = () => {
-  // const dispatch = useDispatch();
-  // const list = useSelector((state) => state);
-  // console.log("list: ", list);
+const Edit = () => {
+  const param = useParams();
   const navigate = useNavigate();
+  const [editRecipe, setEditRecipe] = useState({});
 
-  const [recipe, setRecipe] = useState({
-    title: "",
-    imgurl: "",
-    recipe: "",
-  });
   const [recipes, setRecipes] = useState([]);
   console.log("recipes: ", recipes);
 
-  // const { data } = dispatch(__getRecipes());
-  // console.log("BoardData: ", data);
-  // const recipes = useSelector((state) => state);
-  // console.log("recipes: ".recipes);
+  /*
+  // 코드복사 12~15까지 기본 axios 버전
+  const fetchRecipes = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3000/recipes/${param.id}`
+    );
+    setRecipes(data);
+  };
+  */
 
-  // 데이터 처음 한번만 가져오기
+  /*
+  // id값에 따라 불러오기
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      await axios
+        .get(`http://localhost:3000/recipes/${param.id}`)
+        .then(function (res) {
+          console.log("res: ", res.data);
+          setRecipes(res.data);
+        })
+        .catch(function (error) {
+          console.log("error: ", error);
+        });
+    };
+    fetchRecipes();
+  }, [param.id]);
+  */
+
+  // id값에 따라 불러오기
   useEffect(() => {
     apis
-      .getRecipes()
+      .getIdRecipes(param.id)
       .then((res) => {
         const get = res.data;
         setRecipes(get);
@@ -39,86 +51,63 @@ const Board = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [param.id]);
 
-  const onSubmitHandler = (recipe) => {
+  // 수정하기 핸들러 apis instance 버전
+  const onEditRecipe = (id, recipe) => {
     apis
-      .createRecipes(recipe)
+      .editRecipes(id, recipe)
       .then((res) => {
-        // window.location.href = "/lists";
-        // console.log("test res: ", res);
-        // console.log("test recipe: ", recipe);
-        // dispatch(addRecipe([...recipe, res]));
-        // setRecipes([...recipes, recipe]);
+        //   window.location.href = "/lists";
       })
       .catch((err) => {
         console.log(err);
       });
+  };
 
-    // axios.post("http://localhost:3000/recipes", recipe);
+  /*
+  // axios 수정하기 버전
+  const onSubmitHandler = (edit) => {
+    axios
+      .patch(`http://localhost:3000/recipes/${param.id}`, edit)
+      .then((res) => {
+        console.log("res: ", res);
+        console.log("editRecipe: ", editRecipe);
+        window.location.href = "/lists";
+        // fetchRecipes()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  */
+
+  /*
     // setRecipes([...recipes, recipe]);
-    // try {
-    //   // 새로고침 되었을 때 경로 이동
-    //   window.location.href = "/lists";
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
-
-  /*
-  useEffect(() => {
-    dispatch(__getRecipes());
-  }, [dispatch]);
-*/
-  /*
-  // 코드복사 12~15까지
-  const fetchRecipes = async () => {
-    const { data } = await axios.get("http://localhost:3000/recipes");
-    setRecipes(data);
-  };
-
-  const onSubmitHandler = (recipe) => {
-    axios.post("http://localhost:3000/recipes", recipe);
-    setRecipes([...recipes, recipe]);
     try {
       // 새로고침 되었을 때 경로 이동
-      window.location.href = "/lists";
+      window.location.href = "/lists"; // 수정된 페이지로 이동
     } catch (error) {
       console.log(error);
     }
   };
-
-  // 코드복사 26~27까지
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
 */
 
   return (
-    // <Form
-    //   onSubmitHandler={onSubmitHandler}
-    //   recipe={recipe}
-    //   setRecipe={setRecipe}
-    // ></Form>
     <StDiv>
-      <StForm
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmitHandler(recipe);
-          navigate("/lists");
-        }}
-      >
-        <StH1>당신의 레시피를 추천해주세요!</StH1>
+      <StForm>
+        <StH1>레시피를 수정할 수 있습니다!</StH1>
         <StLabel htmlFor="title">Title</StLabel>
         <StInput
           type="text"
           name="title"
           id="title"
+          defaultValue={recipes.title ? recipes.title : ""}
+          // value={recipes.title || ""}
           onChange={(ev) => {
             const { value } = ev.target;
-            setRecipe({
-              ...recipe,
-              id: Math.floor(Math.random() * 10000),
+            setEditRecipe({
+              ...editRecipe,
               title: value,
             });
           }}
@@ -128,11 +117,12 @@ const Board = () => {
           type="text"
           name="url"
           id="url"
+          // defalutvalue={recipes.imgurl || ""}
+          defaultValue={recipes.imgurl ? recipes.imgurl : ""}
           onChange={(ev) => {
             const { value } = ev.target;
-            setRecipe({
-              ...recipe,
-              id: Math.floor(Math.random() * 10000),
+            setEditRecipe({
+              ...editRecipe,
               imgurl: value,
             });
           }}
@@ -141,19 +131,30 @@ const Board = () => {
         <StTextarea
           name="recipe"
           id="recipe"
+          // value={recipes.recipe}
+          defaultValue={recipes.recipe ? recipes.recipe : ""}
           cols="40"
           rows="10"
           onChange={(ev) => {
             const { value } = ev.target;
-            setRecipe({
-              ...recipe,
-              id: Math.floor(Math.random() * 10000),
+            setEditRecipe({
+              ...editRecipe,
               recipe: value,
             });
           }}
         ></StTextarea>
         <div>
-          <StButton add>Add Recipe</StButton>
+          <StButton
+            add
+            onClick={(e) => {
+              e.preventDefault();
+              // onSubmitHandler(editRecipe);
+              onEditRecipe(param.id, editRecipe);
+              navigate("/lists");
+            }}
+          >
+            Edit Recipe
+          </StButton>
           {/* <Link to={`/lists`}> */}
           <StButton
             back
@@ -166,14 +167,21 @@ const Board = () => {
           {/* </Link> */}
         </div>
         {/* <div>
-        {recipes.map((recipe) => (
-          <div key={recipe.id}>
-            <p>{recipe.id}</p>
-            <h1>{recipe.title}</h1>
-            <h3>{recipe.recipe}</h3>
-            <img src={recipe.imgurl} alt="이미지" />
-          </div>
-        ))}
+        <div>
+          <p>
+            ID: <br />
+            {recipes.id}
+          </p>
+          <h1>
+            Title: <br />
+            {recipes.title}
+          </h1>
+          <h3>
+            Recipe: <br />
+            {recipes.recipe}
+          </h3>
+          <img src={recipes.imgurl} alt="이미지" />
+        </div>
       </div> */}
       </StForm>
     </StDiv>
@@ -184,16 +192,9 @@ const StDiv = styled.div`
   max-width: 700px;
   width: 95%;
   min-height: 82.5vh;
-  /* filter: brightness(1); */
-  background-image: url("https://media.discordapp.net/attachments/1037267111585792020/1052637612629823518/image0.jpg");
-  /* background-image: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.096),
-      rgba(0, 0, 0, 0.105)
-    ),
-    url("https://media.discordapp.net/attachments/1037267111585792020/1052637612629823518/image0.jpg"); */
+  background-image: url("https://media.discordapp.net/attachments/1037267111585792020/1052641868619456522/image0.jpg");
   background-size: cover;
-  opacity: 0.8;
+  opacity: 0.7;
 `;
 
 const StForm = styled.form`
@@ -226,7 +227,6 @@ const StLabel = styled.label`
 const StInput = styled.input`
   font-weight: bold;
   color: black;
-  text-align: center;
   width: 500px;
   height: 30px;
   border-radius: 10px;
@@ -277,5 +277,4 @@ const StButton = styled.button`
       background-color: #b9c6cb;
     `}
 `;
-
-export default Board;
+export default Edit;

@@ -1,34 +1,35 @@
 {
   "recipes": [
     {
-      "title": "zsdf",
-      "imgurl": "sdfsd",
-      "recipe": "setest",
-      "id": 1969
-    },
-    {
-      "title": "테서터",
+      "title": "테서터???",
       "imgurl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60",
       "recipe": "테서터",
       "id": 2100
     },
     {
-      "title": "test",
-      "imgurl": "test",
-      "recipe": "test",
-      "id": 328
-    },
-    {
       "title": "테스트해봅니다",
       "imgurl": "https://t1.daumcdn.net/cfile/tistory/24457C4F58663DD011",
-      "recipe": "테스트해봅니다",
+      "recipe": "테스트해봅니다??????",
       "id": 8507
     },
     {
+<<<<<<< HEAD
       "title": "오채운",
       "imgurl": "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMTNfMTUz/MDAxNTg0MDc0OTI5MTMz.uJm-kdKZTOlxJZis7Uf6APQ1gEv9a8YmgSPMXXjy63Ig.SiCOkm1obZ0VUhvTqVKvFsXlGJum8F5AizK6_iFVeEEg.JPEG.julyhoho/SE-5d32444c-a0ec-4dd8-81ea-9d983f2b3628.jpg?type=w800",
       "recipe": "바보",
       "id": 5122
+=======
+      "title": "피자pizza",
+      "imgurl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+      "recipe": "팔자피자",
+      "id": 3554
+    },
+    {
+      "title": "김치찌개",
+      "imgurl": "https://ppss.kr/wp-content/uploads/2019/08/0-87.jpg",
+      "recipe": "1. 김치를 썬다\n2. 김치를 볶는다\n3. 스팸을 넣는다\n4. 물을 넣는다\n5. 찬에게 맡긴다",
+      "id": 2980
+>>>>>>> d70e5e5e05f5ee5e2fd3143794c5f0aa32a3e595
     }
   ],
   "reviews": [
@@ -61,8 +62,44 @@
       "id": 12
     },
     {
+<<<<<<< HEAD
       "title": "",
       "id": 13
+=======
+      "title": "인풋초기화테스트",
+      "id": 91695,
+      "postId": "8507"
+    },
+    {
+      "title": "제발 되어 주겠니?",
+      "id": 11408,
+      "postId": "8507"
+    },
+    {
+      "title": "제발 되어 주겠니?,....",
+      "id": 19730,
+      "postId": "8507"
+    },
+    {
+      "title": "테스트",
+      "id": 14022,
+      "postId": "3554"
+    },
+    {
+      "title": "다시",
+      "id": 40549,
+      "postId": "3554"
+    },
+    {
+      "title": "새로고침좀되라",
+      "id": 19431,
+      "postId": "3554"
+    },
+    {
+      "title": "새로고침 ㅠㅠ",
+      "id": 29600,
+      "postId": "3554"
+>>>>>>> d70e5e5e05f5ee5e2fd3143794c5f0aa32a3e595
     }
   ]
 }

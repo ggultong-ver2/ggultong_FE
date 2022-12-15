@@ -1,15 +1,16 @@
 //import React, { useEffect } from "react";
-import axios from "axios";
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 // import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { apis } from "../../lib/axios";
+
 const Recipe = () => {
   //////////////레시피///////////////////
   const navigate = useNavigate();
   const param = useParams();
-  const recipes = useSelector((state) => state.recipes.recipes);
+  // const recipes = useSelector((state) => state.recipes.recipes);
   // const getRecipeContent = recipes.filter(
   //   (recipes) => recipes.id === parseInt(param.id)
   // );
@@ -20,8 +21,20 @@ const Recipe = () => {
   const [review, setReview] = useState({
     title: "",
   });
-  const [recipesx, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
+  useEffect(() => {
+    apis
+      .getIdRecipes(param.id)
+      .then((res) => {
+        const get = res.data;
+        setRecipes(get);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [param.id]);
+  /*
   const fetchRecipes = async () => {
     const { data } = await axios.get(
       `http://localhost:3005/recipes/${param.id}`
@@ -32,38 +45,108 @@ const Recipe = () => {
   useEffect(() => {
     fetchRecipes();
   }, []);
+  */
 
-  console.log(recipesx);
+  console.log(recipes);
+
+  // recipe 전체 삭제 핸들러 apis instance 버전
+  const onDeleteRecipe = (recipeId) => {
+    apis
+      .deleteRecipes(recipeId)
+      .then((res) => {
+        // window.location.href = "/lists";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const [reviews, setReviews] = useState(null);
+  console.log("reviews: ", reviews);
 
+  useEffect(() => {
+    apis
+      .getReviews(param.id)
+      .then((res) => {
+        const get = res.data;
+        setReviews(get);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [param.id]);
+
+  /*
   const fetchReviews = async () => {
-    const { data } = await axios.get("http://localhost:3005/reviews");
+    const { data } = await axios.get(
+      `http://localhost:3005/reviews?postId=${param.id}`
+    );
     setReviews(data);
   };
+  */
+
   const onSubmitHandler = (review) => {
-    axios.post("http://localhost:3005/reviews", review);
-    setReviews([...reviews, review]);
+    apis
+      .createReiews(review)
+      .then((res) => {
+        setReviews([...reviews, review]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // axios.post("http://localhost:3005/reviews/", review);
+    // setReviews([...reviews, review]);
   };
 
   const onClickDeleteButtonHandler = (reviewId) => {
-    axios.delete(`http://localhost:3005/reviews/${reviewId}`);
+    apis
+      .deleteReviews(reviewId)
+      .then((res) => {
+        const newReview = reviews?.filter((review) => review.id !== reviewId);
+        setReviews(newReview);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // axios.delete(`http://localhost:3005/reviews/${reviewId}`);
+    // const newReview = reviews?.filter((review) => review.id !== reviewId);
+    // setReviews(newReview);
   };
 
+  /*
   useEffect(() => {
     fetchReviews();
   }, []);
+  */
   /////////////////리뷰 끝////////////////////
   return (
     <StContainer>
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID :{recipesx.id}</div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <div>ID : {recipes.id}</div>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  // onDeleteRecipeHandler(param.id);
+                  onDeleteRecipe(param.id);
+                  navigate("/lists");
+                }}
+              >
+                삭제하기
+              </StButton>
+            </div>
             <div>
               <StButton
                 borderColor="#ddd"
                 onClick={() => {
-                  //navigate("/lists");
+                  navigate(`/board/${param.id}`);
                 }}
               >
                 수정하기
@@ -79,12 +162,12 @@ const Recipe = () => {
               </StButton>
             </div>
           </StDialogHeader>
-          <StTitle>{recipesx.title}</StTitle>
+          <StTitle>{recipes.title}</StTitle>
 
           <StBody>
-            <StLeftBox src={recipesx.imgurl}></StLeftBox>
+            <StLeftBox src={recipes.imgurl}></StLeftBox>
             <StRightBox>
-              <StP>{recipesx.recipe}</StP>
+              <StP>{recipes.recipe}</StP>
             </StRightBox>
           </StBody>
         </div>
@@ -104,7 +187,9 @@ const Recipe = () => {
                 const { value } = ev.target;
                 setReview({
                   ...review,
+                  id: Math.floor(Math.random() * 100000),
                   title: value,
+                  postId: param.id,
                 });
               }}
             />
@@ -133,7 +218,7 @@ const Recipe = () => {
 
 const StContainer = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 82.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,6 +371,19 @@ const CommentSize = styled.h2`
   font-size: 20px;
 `;
 
+<<<<<<< HEAD
+=======
+// const StDiv = styled.div`
+//   position: absolute;
+//   /* top: 0;
+//   left: 0; */
+//   /* width: 100%; */
+//   /* height: 100%; */
+//   background: url(https://source.unsplash.com/random/1920x1080);
+//   background-size: cover;
+// `;
+
+>>>>>>> d70e5e5e05f5ee5e2fd3143794c5f0aa32a3e595
 const StP = styled.p`
   padding: 8px;
 `;
