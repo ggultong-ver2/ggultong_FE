@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { HiHeart } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { addNumber } from "../../redux/modules/counterSlice";
-import { useState } from "react";
+//import { useState } from "react";
 
 const List = ({ recipelist }) => {
   const navigate = useNavigate();
