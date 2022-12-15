@@ -159,7 +159,7 @@ const StDialogHeader = styled.div`
   border-radius: 20px;
   height: 60px;
   justify-content: space-between;
-  background-color: blue;
+  background-color: #c0e9fc;
   padding: 0 24px;
   align-items: center;
 `;
@@ -284,16 +284,6 @@ const CommentMarkBox = styled.div`
 
 const CommentSize = styled.h2`
   font-size: 20px;
-`;
-
-const StDiv = styled.div`
-  position: absolute;
-  /* top: 0;
-  left: 0; */
-  /* width: 100%; */
-  /* height: 100%; */
-  background: url(https://source.unsplash.com/random/1920x1080);
-  background-size: cover;
 `;
 
 const StP = styled.p`
