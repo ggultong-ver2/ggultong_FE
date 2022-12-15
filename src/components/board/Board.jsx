@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { apis } from "../../lib/axios";
+import Button from "../button/Button";
 // import Form from "../form/Form";
 // import axios from "axios";
 // import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +20,7 @@ const Board = () => {
     title: "",
     imgurl: "",
     recipe: "",
-    like: false,
+    count: 0,
   });
   const [recipes, setRecipes] = useState([]);
   console.log("recipes: ", recipes);
@@ -115,6 +116,10 @@ const Board = () => {
           type="text"
           name="title"
           id="title"
+          required
+          maxLength={10}
+          minLength={3}
+          placeholder="추천하고 싶은 레시피가 있나요?"
           onChange={(ev) => {
             const { value } = ev.target;
             setRecipe({
@@ -126,6 +131,8 @@ const Board = () => {
         />
         <StLabel htmlFor="url">Image URL</StLabel>
         <StInput
+          required
+          placeholder="이미지 주소를 붙여넣어 주세요!"
           type="text"
           name="url"
           id="url"
@@ -140,6 +147,9 @@ const Board = () => {
         />
         <StLabel htmlFor="recipe">Recipe</StLabel>
         <StTextarea
+          required
+          maxLength={200}
+          placeholder="레시피를 자세히 소개해주세요!"
           name="recipe"
           id="recipe"
           cols="40"
@@ -154,16 +164,16 @@ const Board = () => {
           }}
         ></StTextarea>
         <div>
-          <StButton add>Add Recipe</StButton>
+          <Button add>Add Recipe</Button>
           {/* <Link to={`/lists`}> */}
-          <StButton
+          <Button
             back
             onClick={() => {
               navigate("/lists");
             }}
           >
             Back
-          </StButton>
+          </Button>
           {/* </Link> */}
         </div>
         {/* <div>
@@ -256,27 +266,6 @@ const StTextarea = styled.textarea`
   &:focus {
     outline: none;
   }
-`;
-
-const StButton = styled.button`
-  width: 180px;
-  height: 40px;
-  border-radius: 10px;
-  border: 0;
-  font-size: 20px;
-  margin: 20px;
-  margin-top: 30px;
-  cursor: pointer;
-  ${(props) =>
-    props.add &&
-    css`
-      background-color: #4ea1ba;
-    `}
-  ${(props) =>
-    props.back &&
-    css`
-      background-color: #b9c6cb;
-    `}
 `;
 
 export default Board;

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { HiHeart } from "react-icons/hi";
 import { apis } from "../../lib/axios";
 import { useState } from "react";
+import Button from "../button/Button";
 
 const List = ({ recipelist }) => {
   const navigate = useNavigate();
@@ -54,14 +55,15 @@ const List = ({ recipelist }) => {
         </Body>
       </Cardcontent>
       <Btn>
-        <Stbutton
+        <Button
+          view
           borderColor="#ddd"
           onClick={() => {
             navigate(`/lists/${id}`); // [id].배열 보내기
           }}
         >
           View More
-        </Stbutton>
+        </Button>
       </Btn>
     </Cardcontainer>
   );
@@ -112,22 +114,6 @@ const Text = styled.p`
 const Btn = styled.div`
   display: flex;
   justify-content: center;
-`;
-const Stbutton = styled.div`
-  padding: 10px;
-  background-color: transparent;
-  border: none;
-  transition: 0.2s;
-  margin-bottom: 0.5rem;
-  border-radius: 30px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  &:hover {
-    background: rgba(14, 15, 16, 0.1);
-    transform: scale();
-  }
-  font-weight: bold;
-  color: #056683;
 `;
 
 const StDiv = styled.div`
