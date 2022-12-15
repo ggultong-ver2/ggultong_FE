@@ -109,34 +109,17 @@ const Body = styled.div`
   color: #056683;
 `;
 const Text = styled.p`
+  &::-webkit-scrollbar {
+    display: none;
+  }
   text-overflow: ellipsis;
   overflow: scroll;
   word-break: break-word;
-  height: 70px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  height: 90px;
 `;
 const Btn = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-const StDiv = styled.div`
-  display: flex;
-  align-items: center;
-  height: 20px;
-`;
-
-const SP = styled.p`
-  margin: 0;
-  margin-left: 3px;
-`;
-//const Href = styled.a`
-//text-transform: uppercase;
-//color: #3282bc;
-//text-decoration: none;
-//font-weight: bold;
-//`;
 
 export default List;

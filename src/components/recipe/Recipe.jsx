@@ -6,6 +6,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 // import { useSelector } from "react-redux";
 import { apis } from "../../lib/axios";
 import { HiHeart } from "react-icons/hi";
+import Button from "../button/Button";
 
 const Recipe = () => {
   //////////////레시피///////////////////
@@ -132,8 +133,9 @@ const Recipe = () => {
               }}
             >
               <div>ID : {recipes.id}</div>
-              <StButton
-                borderColor="#ddd"
+              <Button
+                recipedel
+                borderColor="#1195bd"
                 onClick={() => {
                   // onDeleteRecipeHandler(param.id);
                   onDeleteRecipe(param.id);
@@ -141,26 +143,28 @@ const Recipe = () => {
                 }}
               >
                 삭제하기
-              </StButton>
+              </Button>
             </div>
             <div>
-              <StButton
+              <Button
+                recipefix
                 borderColor="#ddd"
                 onClick={() => {
                   navigate(`/board/${param.id}`);
                 }}
               >
                 수정하기
-              </StButton>
+              </Button>
               &nbsp;&nbsp;
-              <StButton
+              <Button
+                recipeback
                 borderColor="#ddd"
                 onClick={() => {
                   navigate("/lists");
                 }}
               >
                 이전으로
-              </StButton>
+              </Button>
             </div>
           </StDialogHeader>
           <StDiv>
@@ -197,7 +201,7 @@ const Recipe = () => {
                 });
               }}
             />
-            <StCommentButton>등록</StCommentButton>
+            <Button addComment>등록</Button>
           </form>
 
           <CommentMarkBox>
@@ -205,12 +209,13 @@ const Recipe = () => {
               <div key={review.id}>
                 {review.id} :{review.title}
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button
+                <Button
+                  commentdel
                   type="button"
                   onClick={() => onClickDeleteButtonHandler(review.id)}
                 >
                   &nbsp;삭제하기&nbsp;
-                </button>
+                </Button>
               </div>
             ))}
           </CommentMarkBox>
@@ -221,22 +226,24 @@ const Recipe = () => {
 };
 
 const StContainer = styled.div`
-  width: 100%;
+  width: 1000px;
   height: 82.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("https://media.discordapp.net/attachments/1037267111585792020/1052831190404562944/image0.jpg");
+  background-size: cover;
+  /* opacity: 0.8; */
 `;
 
 const StDialog = styled.div`
   width: 1000px;
   height: 760px;
-  border: 5px solid grey;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #eee;
+  /* background-color: #eee; */
   /* @media screen and (max-width: 768px) {
     width: 95%;
   } */
@@ -248,45 +255,44 @@ const StDialogHeader = styled.div`
   border-radius: 20px;
   height: 60px;
   justify-content: space-between;
+<<<<<<< HEAD
   background-color: #c0e9fc;
+=======
+>>>>>>> 958c67dc2aa037b068872b6815b335fc16c11d98
   padding: 0 24px;
   align-items: center;
 `;
 
 const StTitle = styled.h1`
   padding: 0 24px;
+  color: #022835;
 `;
 
 const StBody = styled.main`
-  padding: 0 24px;
+  display: flex;
+  gap: 10px;
 `;
 
-const StButton = styled.button`
-  border: 1px solid ${({ borderColor }) => borderColor};
-  height: 40px;
-  width: 120px;
-  background-color: #c0e9fc;
-  border-radius: 12px;
-  cursor: pointer;
-`;
 const StLeftBox = styled.img`
-  background: #c0e9fc;
+  /* background: #c0e9fc; */
   border-radius: 30px;
-  float: left;
+  /* float: left; */
   height: 350px;
-  width: 470px;
+  width: 495px;
   margin-bottom: 10px;
 `;
 
 const StRightBox = styled.div`
-  background: #c0e9fc;
+  background-color: #1195bd;
+  color: white;
+  /* font-weight: bold; */
   overflow: scroll;
-  opacity: 1;
   border-radius: 30px;
-  float: right;
+  /* float: right; */
   height: 350px;
-  width: 470px;
+  width: 495px;
   margin-bottom: 10px;
+  font-size: 30px;
 
   //padding-top: 15px;
   &::-webkit-scrollbar {
@@ -300,8 +306,8 @@ const StRightBox = styled.div`
 const StCommentBox = styled.div`
   margin-top: -40px;
   padding-left: 24px;
-  opacity: 0.7;
-  background: #c0c0c0;
+
+  background: #1195bd;
   border-radius: 30px;
   /* padding: 0px; */
   height: 250px;
@@ -321,49 +327,16 @@ const StCommentFunction = styled.input`
   background-color: rgb(233, 233, 233);
 `;
 
-const StCommentButton = styled.button`
-  position: relative;
-  border: none;
-  min-width: 150px;
-  min-height: 50px;
-  margin-left: 55px;
-  background: linear-gradient(90deg, #c0e9fc 0%, #6ccefc 100%);
-  border-radius: 1000px;
-  color: darkslategray;
-  cursor: pointer;
-  box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
-  font-weight: 700;
-  transition: 0.3s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  &:hover::after {
-    content: "";
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    border: 8px solid #c0e9fc;
-    position: absolute;
-    z-index: -1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: ring 1.5s infinite;
-  }
-`;
-
 const CommentMarkBox = styled.div`
   margin-top: 10px;
   overflow: scroll;
   width: 700px;
-  height: 110px;
+  height: 100px;
   font-size: 17px;
   border: 0;
   border-radius: 15px;
   outline: none;
-  padding-left: 10px;
+  padding: 10px 2px 0 10px;
   background-color: rgb(233, 233, 233);
 
   &::-webkit-scrollbar {
@@ -373,6 +346,7 @@ const CommentMarkBox = styled.div`
 
 const CommentSize = styled.h2`
   font-size: 20px;
+  color: white;
 `;
 
 // const StDiv = styled.div`
@@ -386,7 +360,7 @@ const CommentSize = styled.h2`
 // `;
 
 const StP = styled.p`
-  padding: 8px;
+  padding-left: 25px;
 `;
 
 const StDiv = styled.div`
