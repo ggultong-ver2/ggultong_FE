@@ -9,7 +9,7 @@ function App() {
 }
 
 const GlobalStyle = styled.div`
-  @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+  @importurl ("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
   @keyframes ring {
     0% {
       width: 30px;
