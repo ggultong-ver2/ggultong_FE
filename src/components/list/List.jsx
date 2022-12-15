@@ -2,11 +2,37 @@ import styled from "styled-components";
 import "./List.css";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { HiHeart } from "react-icons/hi";
+import { apis } from "../../lib/axios";
+import { useState } from "react";
+import Button from "../button/Button";
+
 const List = ({ recipelist }) => {
   const navigate = useNavigate();
-  const { title, imgurl, recipe, id } = recipelist;
+  const { title, imgurl, recipe, id, count } = recipelist;
   // list id 넘겨오기
   console.log(id);
+  const [like, setLike] = useState(count);
+
+  // const count = useSelector((state) => state.counter.number);
+  console.log("count: ", count);
+  // console.log("like: ", like);
+
+  const onClickHeartHandler = (id) => {
+    // setLike(like + 1);
+    console.log("like:", like);
+    const recipeLike = { title, imgurl, recipe, count: like };
+    apis
+      .editRecipes(id, recipeLike)
+      .then((res) => {
+        console.log(res);
+        setLike(like + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Cardcontainer>
       <div>
@@ -15,6 +41,15 @@ const List = ({ recipelist }) => {
       <Cardcontent>
         <Title>
           <h3>{title}</h3>
+          <StDiv>
+            <HiHeart
+              onClick={() => {
+                onClickHeartHandler(id);
+              }}
+              style={{ color: "#5c94b6", cursor: "pointer" }}
+            ></HiHeart>
+            <SP>{like}</SP>
+          </StDiv>
         </Title>
         <Body>
           <Text style={{ wordBreak: "break-all" }}>{recipe}</Text>
