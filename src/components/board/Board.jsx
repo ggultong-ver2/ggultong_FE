@@ -19,6 +19,7 @@ const Board = () => {
     title: "",
     imgurl: "",
     recipe: "",
+    like: false,
   });
   const [recipes, setRecipes] = useState([]);
   console.log("recipes: ", recipes);

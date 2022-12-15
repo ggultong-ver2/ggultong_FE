@@ -4,25 +4,29 @@
       "title": "테서터???",
       "imgurl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60",
       "recipe": "테서터",
-      "id": 2100
+      "id": 2100,
+      "count": 7
     },
     {
       "title": "테스트해봅니다",
       "imgurl": "https://t1.daumcdn.net/cfile/tistory/24457C4F58663DD011",
       "recipe": "테스트해봅니다??????",
-      "id": 8507
+      "id": 8507,
+      "count": 2
     },
     {
       "title": "피자pizza",
       "imgurl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
       "recipe": "팔자피자",
-      "id": 3554
+      "id": 3554,
+      "count": 8
     },
     {
       "title": "김치찌개",
       "imgurl": "https://ppss.kr/wp-content/uploads/2019/08/0-87.jpg",
       "recipe": "1. 김치를 썬다\n2. 김치를 볶는다\n3. 스팸을 넣는다\n4. 물을 넣는다\n5. 찬에게 맡긴다",
-      "id": 2980
+      "id": 2980,
+      "count": 9
     }
   ],
   "reviews": [
