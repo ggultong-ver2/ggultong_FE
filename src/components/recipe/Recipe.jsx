@@ -371,8 +371,6 @@ const CommentSize = styled.h2`
   font-size: 20px;
 `;
 
-<<<<<<< HEAD
-=======
 // const StDiv = styled.div`
 //   position: absolute;
 //   /* top: 0;
@@ -383,7 +381,6 @@ const CommentSize = styled.h2`
 //   background-size: cover;
 // `;
 
->>>>>>> d70e5e5e05f5ee5e2fd3143794c5f0aa32a3e595
 const StP = styled.p`
   padding: 8px;
 `;
