@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 // import { Link } from "react-router-dom";
 import { apis } from "../../lib/axios";
+import Button from "../button/Button";
 
 const Edit = () => {
   const param = useParams();
@@ -144,7 +145,7 @@ const Edit = () => {
           }}
         ></StTextarea>
         <div>
-          <StButton
+          <Button
             add
             onClick={(e) => {
               e.preventDefault();
@@ -154,16 +155,16 @@ const Edit = () => {
             }}
           >
             Edit Recipe
-          </StButton>
+          </Button>
           {/* <Link to={`/lists`}> */}
-          <StButton
+          <Button
             back
             onClick={() => {
               navigate("/lists");
             }}
           >
             Back
-          </StButton>
+          </Button>
           {/* </Link> */}
         </div>
         {/* <div>
@@ -257,24 +258,4 @@ const StTextarea = styled.textarea`
   }
 `;
 
-const StButton = styled.button`
-  width: 180px;
-  height: 40px;
-  border-radius: 10px;
-  border: 0;
-  font-size: 20px;
-  margin: 20px;
-  margin-top: 30px;
-  cursor: pointer;
-  ${(props) =>
-    props.add &&
-    css`
-      background-color: #4ea1ba;
-    `}
-  ${(props) =>
-    props.back &&
-    css`
-      background-color: #b9c6cb;
-    `}
-`;
 export default Edit;

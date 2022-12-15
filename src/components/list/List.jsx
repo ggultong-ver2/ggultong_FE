@@ -1,24 +1,41 @@
 import styled from "styled-components";
 import "./List.css";
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { HiHeart } from "react-icons/hi";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { addNumber } from "../../redux/modules/counterSlice";
 //import { useState } from "react";
+=======
+import { apis } from "../../lib/axios";
+import { useState } from "react";
+import Button from "../button/Button";
+>>>>>>> 03ef0d0afd197416c2c270996245daec8df818b1
 
 const List = ({ recipelist }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { title, imgurl, recipe, id } = recipelist;
+  const { title, imgurl, recipe, id, count } = recipelist;
   // list id 넘겨오기
   console.log(id);
+  const [like, setLike] = useState(count);
 
-  const count = useSelector((state) => state.counter.number);
+  // const count = useSelector((state) => state.counter.number);
   console.log("count: ", count);
+  // console.log("like: ", like);
 
-  const onClickHeartHandler = () => {
-    dispatch(addNumber(1));
+  const onClickHeartHandler = (id) => {
+    // setLike(like + 1);
+    console.log("like:", like);
+    const recipeLike = { title, imgurl, recipe, count: like };
+    apis
+      .editRecipes(id, recipeLike)
+      .then((res) => {
+        console.log(res);
+        setLike(like + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -31,10 +48,12 @@ const List = ({ recipelist }) => {
           <h3>{title}</h3>
           <StDiv>
             <HiHeart
-              onClick={onClickHeartHandler}
+              onClick={() => {
+                onClickHeartHandler(id);
+              }}
               style={{ color: "#5c94b6", cursor: "pointer" }}
             ></HiHeart>
-            <SP>{count}</SP>
+            <SP>{like}</SP>
           </StDiv>
         </Title>
         <Body>
@@ -42,14 +61,15 @@ const List = ({ recipelist }) => {
         </Body>
       </Cardcontent>
       <Btn>
-        <Stbutton
+        <Button
+          view
           borderColor="#ddd"
           onClick={() => {
             navigate(`/lists/${id}`); // [id].배열 보내기
           }}
         >
           View More
-        </Stbutton>
+        </Button>
       </Btn>
     </Cardcontainer>
   );
@@ -100,22 +120,6 @@ const Text = styled.p`
 const Btn = styled.div`
   display: flex;
   justify-content: center;
-`;
-const Stbutton = styled.div`
-  padding: 10px;
-  background-color: transparent;
-  border: none;
-  transition: 0.2s;
-  margin-bottom: 0.5rem;
-  border-radius: 30px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  &:hover {
-    background: rgba(14, 15, 16, 0.1);
-    transform: scale();
-  }
-  font-weight: bold;
-  color: #056683;
 `;
 
 const StDiv = styled.div`

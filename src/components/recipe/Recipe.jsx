@@ -5,6 +5,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import { useSelector } from "react-redux";
 import { apis } from "../../lib/axios";
+import { HiHeart } from "react-icons/hi";
 
 const Recipe = () => {
   //////////////레시피///////////////////
@@ -162,8 +163,11 @@ const Recipe = () => {
               </StButton>
             </div>
           </StDialogHeader>
-          <StTitle>{recipes.title}</StTitle>
-
+          <StDiv>
+            <StTitle>{recipes.title}</StTitle>
+            <HiHeart style={{ color: "#5c94b6", cursor: "pointer" }}></HiHeart>
+            <p>{recipes.count}</p>
+          </StDiv>
           <StBody>
             <StLeftBox src={recipes.imgurl}></StLeftBox>
             <StRightBox>
@@ -384,4 +388,10 @@ const CommentSize = styled.h2`
 const StP = styled.p`
   padding: 8px;
 `;
+
+const StDiv = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export default Recipe;
