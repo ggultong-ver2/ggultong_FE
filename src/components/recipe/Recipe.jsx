@@ -231,12 +231,11 @@ const StContainer = styled.div`
 const StDialog = styled.div`
   width: 1000px;
   height: 760px;
-  border: 5px solid grey;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #eee;
+  /* background-color: #eee; */
   /* @media screen and (max-width: 768px) {
     width: 95%;
   } */
@@ -248,7 +247,6 @@ const StDialogHeader = styled.div`
   border-radius: 20px;
   height: 60px;
   justify-content: space-between;
-  background-color: blue;
   padding: 0 24px;
   align-items: center;
 `;
@@ -258,7 +256,8 @@ const StTitle = styled.h1`
 `;
 
 const StBody = styled.main`
-  padding: 0 24px;
+  display: flex;
+  gap: 10px;
 `;
 
 const StButton = styled.button`
@@ -272,9 +271,9 @@ const StButton = styled.button`
 const StLeftBox = styled.img`
   background: #c0e9fc;
   border-radius: 30px;
-  float: left;
+  /* float: left; */
   height: 350px;
-  width: 470px;
+  width: 495px;
   margin-bottom: 10px;
 `;
 
@@ -283,9 +282,9 @@ const StRightBox = styled.div`
   overflow: scroll;
   opacity: 1;
   border-radius: 30px;
-  float: right;
+  /* float: right; */
   height: 350px;
-  width: 470px;
+  width: 495px;
   margin-bottom: 10px;
 
   //padding-top: 15px;
@@ -301,7 +300,7 @@ const StCommentBox = styled.div`
   margin-top: -40px;
   padding-left: 24px;
   opacity: 0.7;
-  background: #c0c0c0;
+  background: #056683;
   border-radius: 30px;
   /* padding: 0px; */
   height: 250px;
