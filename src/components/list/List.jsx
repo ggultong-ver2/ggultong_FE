@@ -92,7 +92,7 @@ const Imagecontainer = styled.img`
   border-top-left-radius: 30px;
 `;
 const Cardcontent = styled.div`
-  margin: 1rem;
+  margin: 1rem 1rem 0 1rem;
   margin-top: 0.3rem;
 `;
 const Title = styled.div`
@@ -110,10 +110,22 @@ const Text = styled.p`
   overflow: scroll;
   word-break: break-word;
   height: 90px;
+  margin-bottom: 0;
 `;
 const Btn = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const StDiv = styled.div`
+  display: flex;
+  align-items: center;
+  height: 20px;
+`;
+
+const SP = styled.p`
+  margin: 0;
+  margin-left: 3px;
 `;
 
 export default List;
