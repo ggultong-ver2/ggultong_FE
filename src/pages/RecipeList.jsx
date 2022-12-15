@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import List from "../components/list/List";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../components/button/Button";
 
 const RecipeList = () => {
+  const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   console.log(recipes);
 
@@ -25,14 +27,19 @@ const RecipeList = () => {
             <h1> Recipe Community</h1>
           </Title>
           <Nbutton>
-            <Link to={`/board`}>
-              <Newbutton>new Post</Newbutton>
-            </Link>
+            <Button
+              post
+              onClick={() => {
+                navigate("/board");
+              }}
+            >
+              new Post
+            </Button>
           </Nbutton>
 
           <Card>
             {recipes.map((recipe) => (
-              <List recipelist={recipe} />
+              <List key={recipe.id} recipelist={recipe} />
             ))}
           </Card>
         </Wrapimg>
@@ -50,24 +57,7 @@ const Nbutton = styled.div`
   margin-bottom: -40px;
   text-align: right;
 `;
-const Newbutton = styled.button`
-  width: 100px;
-  height: 30px;
-  background-color: #3282bc;
-  color: white;
-  border: 0px;
-  border-radius: 30px;
-  box-shadow: 0 2px 5px rgba(42, 52, 75, 0.658);
-  font-weight: bold;
-  &:hover {
-    background: rgba(184, 217, 254, 0.366);
-    transform: scale();
-    cursor: pointer;
-    color: #364d8f;
-    font-weight: bold;
-  }
-  font-family: "Nanum Gothic", sans-serif;
-`;
+
 const Card = styled.div`
   display: flex;
   flex-wrap: wrap;
