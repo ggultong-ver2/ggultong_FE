@@ -18,7 +18,7 @@ db.json 사용시 로컬서버테스트는 3005로 통일합니다
 
 - 예진
 
-vr이 노드 버전 문제 때문에 실행이 되지 않는 경우가 있습니다
+vr이 노드 버전 문제 때문에 실행이 되지 않는 경우가 있습니다ㅠㅠ
 start 전에 터미널에
 
 export NODE_OPTIONS=--openssl-legacy-provider
