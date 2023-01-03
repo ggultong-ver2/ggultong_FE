@@ -1,20 +1,44 @@
 import axios from "axios";
 
+// 기본 URL
 const instance = axios.create({
-  baseURL: "",
+  baseURL: "http://13.125.150.83/api",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 });
 
+// baseURL
+export const baseURL = axios.create({
+  baseURL: "http://13.125.150.83/api",
+  headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+});
+
+//인스턴스 request header
+baseURL.interceptors.request.use((config) => {
+  if (config.headers === undefined) return;
+  const token = localStorage.getItem("id");
+  config.headers["Authorization"] = `${token}`;
+  return config;
+});
+
+// apis
 export const apis = {
-  getRecipes: () => instance.get("/recipes"),
-  getReviews: (postId) => instance.get(`/reviews?postId=${postId}`),
-  getIdRecipes: (id) => instance.get(`/recipes/${id}`),
-  createRecipes: (recipe) => instance.post("/recipes", recipe),
-  createReiews: (review) => instance.post("/reviews", review),
-  editRecipes: (id, recipe) => instance.patch(`/recipes/${id}`, recipe),
-  deleteRecipes: (id) => instance.delete(`/recipes/${id}`),
-  deleteReviews: (id) => instance.delete(`/reviews/${id}`),
+  // 로그인 관련
+  postLogin: (login) => instance.post("/user/login", login),
+  postSignup: (signup) => instance.post("/user/signup", signup),
+  checkUserName: (username) => instance.get(`/user/idCheck/${username}`),
+  postLogout: () => instance.get("/user/logout"),
+
+  // 게시글 관련
+
+  // 리뷰 관련
+
+  // 좋아요 관련
 };

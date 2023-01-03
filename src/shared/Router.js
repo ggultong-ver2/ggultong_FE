@@ -1,26 +1,28 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Layout from "../components/layout/Layout";
+// import Home from "../pages/Home";
+// import Layout from "../components/layout/Layout";
 // import Detailtest from "../components/recipe/Recipe";
-import Board from "../components/board/Board";
-import Edit from "../components/edit/Edit";
+// import Board from "../components/board/Board";
+// import Edit from "../components/edit/Edit";
+// import RecipeList from "../pages/RecipeList";
 // 주석 풀고 사용
-import RecipeList from "../pages/RecipeList";
-import Recipe from "../components/recipe/Recipe";
-
+import LoginPage from "../pages/LoginPage";
+import SignUpPage from "../pages/SignUpPage";
+// import SignUpAgree from "../pages/SignUpAgree";
 const Router = () => {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="board" element={<Board />} />
-          <Route path="board/:id" element={<Edit />} />
-          <Route path="lists" element={<RecipeList />} />
-          <Route path="lists/:id" element={<Recipe />} />
-        </Routes>
-      </Layout>
+      {/* <Layout> */}
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        {/* <Route path="board" element={<Board />} /> */}
+        {/* <Route path="board/:id" element={<Edit />} /> */}
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="/agree" element={<SignUpAgree />} /> */}
+      </Routes>
+      {/* </Layout> */}
     </BrowserRouter>
   );
 };
