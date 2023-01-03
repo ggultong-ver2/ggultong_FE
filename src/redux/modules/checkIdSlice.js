@@ -1,7 +1,7 @@
 import { apis } from "../../lib/axios";
 
 // id 중복체크
-const __checkEmail = async (email) => {
+const __idcheck = async (email) => {
   try {
     const data = await apis.checkUserName(email);
     console.log("email: ", email);
@@ -17,4 +17,4 @@ const __checkEmail = async (email) => {
   }
 };
 
-export default __checkEmail;
+export default __idcheck;
