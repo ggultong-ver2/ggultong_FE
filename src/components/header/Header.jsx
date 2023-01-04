@@ -10,7 +10,7 @@ function Header() {
       <div className="headerwrap">
         <div className="logowrap">
           <span className="logo">
-            <a href="">꿀통</a>
+            <a href="">LOGO</a>
           </span>
           <span className="logo_text">자취하는 우리를 위한 커뮤니티</span>
         </div>
