@@ -103,7 +103,7 @@ function SignAgree() {
             onChange={allBtnEvent}
           />
           &nbsp;
-          <label for="all-check">모두 동의</label>
+          <label htmlfor="all-check">모두 동의</label>
         </AllAgree>
         <StSmaillBox>
           <StCheckBox>
@@ -113,7 +113,7 @@ function SignAgree() {
               checked={ageCheck}
               onChange={ageBtnEvent}
             />
-            <StChecklabel for="check1">
+            <StChecklabel htmlfor="check1">
               <span>(필수)</span>&nbsp;만 14세 이상
             </StChecklabel>
           </StCheckBox>
@@ -124,7 +124,7 @@ function SignAgree() {
               checked={privacyCheck}
               onChange={usePrivacyEvent}
             />
-            <StChecklabel for="check2">
+            <StChecklabel htmlfor="check2">
               <span>(필수)</span>&nbsp;개인정보 취급 방침
             </StChecklabel>
           </StCheckBox>
@@ -135,7 +135,7 @@ function SignAgree() {
               checked={useCheck}
               onChange={useBtnEvent}
             />
-            <StChecklabel for="check3">
+            <StChecklabel htmlfor="check3">
               <span>(필수)</span>&nbsp;이용약관
             </StChecklabel>
           </StCheckBox>
@@ -146,14 +146,14 @@ function SignAgree() {
               checked={marketingCheck}
               onChange={marketingBtnEvent}
             />
-            <StChecklabel for="check4">
+            <StChecklabel htmlfor="check4">
               <span>(선택)</span>&nbsp;광고성 정보 수신 및 마케팅 활용동의
             </StChecklabel>
           </StCheckBox>
-          <StButton type="button" name="checkbutton" value="다음" disabled>
-            다음
-          </StButton>
         </StSmaillBox>
+        <StButton type="button" name="checkbutton" value="다음" disabled>
+          다음
+        </StButton>
       </StCenterBox>
     </StContainer>
   );
@@ -191,18 +191,20 @@ const AllAgree = styled.div`
 const StSignBox = styled.div`
   letter-spacing: -0.1em;
   width: 400px;
-  height: 50px;
+  height: 80px;
   font-size: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+  margin-top: 50px;
+
   display: flex;
-  padding-bottom: 30px;
+  padding-top: 0px;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
 `;
 const StSmaillBox = styled.div`
   width: 400px;
-  height: 400px;
-  padding-left: 30px;
+  height: 200px;
+  padding-left: 10px;
   margin-top: 20px;
 `;
 const Stlabel = styled.label`
@@ -237,6 +239,7 @@ const AgreeBigCheckBox = styled.input`
 const StButton = styled.button`
   margin-top: 40px;
   margin-bottom: 10px;
+
   width: 380px;
   height: 48px;
   border: 0;

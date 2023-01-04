@@ -5,13 +5,15 @@ import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
 import __postSignup from "../redux/modules/signupSlice";
 import __idcheck from "../redux/modules/checkIdSlice";
-
+import __sendemail from "../redux/modules/sendemailSlice";
+import __emailcode from "../redux/modules/sendemailSlice";
 const PostLoginPage = () => {
   // const url1 =
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   // const url2 =
   //   "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
   const [email, setEmail] = useInput();
+  const [emailcode, setEmailCode] = useInput();
   const [loginId, setloginId] = useInput();
   const [password, setPassword] = useState();
   const [nickname, setNickname] = useInput();
@@ -72,6 +74,37 @@ const PostLoginPage = () => {
   const onCheckUserName = (loginId) => {
     console.log("loginID---->", loginId);
     __idcheck(loginId).then((res) => {
+      console.log(res);
+      if (res.data.statusCode === 200) {
+        Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+      } else {
+        Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+      }
+    });
+  };
+  // 버튼 비활성화
+  const onDisabled = (e) => {
+    e.preventDefault();
+    e.currentTarget.disabled = true;
+    e.currentTarget.style.background = "#e5e5e5";
+    e.currentTarget.style.color = "#4b5563";
+  };
+
+  // 이메일 인증번호 전송하기
+  const onCheckEmail = (email) => {
+    console.log("email---->", email);
+    __sendemail(email).then((res) => {
+      if (res.data.statusCode === 200) {
+        Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+      } else {
+        Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+      }
+    });
+  };
+  // 이메일 인증번호 확인
+  const onEmailCode = (emailcode) => {
+    console.log("emailcode---->", emailcode);
+    __emailcode(emailcode).then((res) => {
       console.log(res);
       if (res.data.statusCode === 200) {
         Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
@@ -173,7 +206,38 @@ const PostLoginPage = () => {
               minLength={5}
               maxLength={30}
             />
-            <StEmailBtn>인증번호 전송</StEmailBtn>
+            <StEmailBtn
+              checkbtn
+              onClick={(e) => {
+                onCheckEmail(email);
+                onDisabled(e);
+              }}
+              type="button"
+            >
+              인증번호 전송
+            </StEmailBtn>
+          </StBox>
+          <StBox>
+            <StEmailInput
+              type="text"
+              id="emailcode"
+              value={emailcode}
+              onChange={setEmailCode}
+              placeholder="인증번호를 입력해주세요!"
+              required
+              minLength={7}
+              maxLength={7}
+            />
+            <StEmailBtn
+              checkbtn
+              onClick={(e) => {
+                onEmailCode(emailcode);
+                onDisabled(e);
+              }}
+              type="button"
+            >
+              확인
+            </StEmailBtn>
           </StBox>
           <StButton log>본인인증 확인</StButton>
         </StCenterBox>
@@ -225,11 +289,11 @@ const StContainer = styled.form`
 const StLoginBox = styled.div`
   letter-spacing: -0.1em;
   width: 400px;
-  height: 50px;
+  height: 80px;
   font-size: 45px;
   margin-bottom: 15px;
   display: flex;
-  padding-bottom: 30px;
+  margin-top: 50px;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
 `;
@@ -244,6 +308,7 @@ const Stdiv = styled.h2`
   font-size: 20px;
   font-weight: bold;
   margin-top: 5px;
+  margin-bottom: 20px;
   letter-spacing: -0.1em;
 `;
 const StBox = styled.div`

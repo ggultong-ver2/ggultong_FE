@@ -7,7 +7,6 @@ const instance = axios.create({
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     "Access-Control-Allow-Origin": "*",
-
   },
 });
 
@@ -26,7 +25,6 @@ baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("id");
 
-
   config.headers["Authorization"] = `${token}`;
   return config;
 });
@@ -38,7 +36,8 @@ export const apis = {
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
   postLogout: () => instance.get("/user/logout"),
-
+  checkEmail: (email) => instance.post(`/user/emailCheck/${email}`),
+  checkemailCode: (emailCode) => instance.post(`user/emailCode/${emailCode}`),
   // 게시글 관련
 
   // 리뷰 관련

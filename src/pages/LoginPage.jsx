@@ -183,7 +183,7 @@ const StContainer = styled.form`
 
 const StLoginBox = styled.div`
   width: 400px;
-  height: 50px;
+  height: 80px;
   font-size: 40px;
   margin-bottom: 10px;
   display: flex;
