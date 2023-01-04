@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
 import __postSignup from "../redux/modules/signupSlice";
+import __idcheck from "../redux/modules/checkIdSlice";
 
 const PostLoginPage = () => {
   // const url1 =
@@ -12,9 +13,34 @@ const PostLoginPage = () => {
   //   "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
   const [email, setEmail] = useInput();
   const [loginId, setloginId] = useInput();
-  const [password, setPassword] = useInput();
+  const [password, setPassword] = useState();
   const [nickname, setNickname] = useInput();
-  const [checkpassword, setCheckPassword] = useInput();
+
+  const [PWPtag, setPWPtag] = useState();
+  const [PWConfirm, setPWConfirm] = useState("");
+  const [PWConfirmP, setPWConfirmP] = useState(false);
+
+  function isPassword(asValue) {
+    const regExp =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return regExp.test(asValue);
+  }
+
+  const PWChk = () => {
+    if (!isPassword(password)) {
+      setPWPtag("사용 불가능합니다. 숫자/영문/특수문자를 모두포함한, 8자~15자");
+    } else {
+      setPWPtag("사용가능한 비밀번호 입니다");
+    }
+  };
+
+  const PWConfirmChk = () => {
+    if (password !== PWConfirm) {
+      setPWConfirmP("비밀번호가 일치하지않습니다");
+    } else {
+      setPWConfirmP("비밀번호 확인되었습니다.");
+    }
+  };
 
   const navigate = useNavigate();
   // 회원가입 관련
@@ -33,20 +59,26 @@ const PostLoginPage = () => {
       navigate("/login");
     });
   };
-  //비밀번호 유효성 검사
-  const checkPassword = (e) => {
-    //  8 ~ 10자 영문, 숫자 조합
-    var regExp =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    // 형식에 맞는 경우 true 리턴
-    console.log("비밀번호 유효성 검사 :: ", regExp.test(e.target.value));
-  };
+
   // 이메일 유효성 검사
   const checkEmail = (e) => {
     var regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     // 형식에 맞는 경우 true 리턴
     console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
+  };
+
+  // id 중복 체크 확인
+  const onCheckUserName = (loginId) => {
+    console.log("loginID---->", loginId);
+    __idcheck(loginId).then((res) => {
+      console.log(res);
+      if (res.data.statusCode === 200) {
+        Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+      } else {
+        Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+      }
+    });
   };
 
   return (
@@ -57,7 +89,7 @@ const PostLoginPage = () => {
           <Stdiv>상세 정보를 기입해주세요.</Stdiv>
           <StLabel htmlFor="loginId">아이디*</StLabel>
           <StBox>
-            <StInput
+            <StId
               type="text"
               id="loginId"
               value={loginId}
@@ -67,35 +99,52 @@ const PostLoginPage = () => {
               minLength={6}
               maxLength={10}
             />
+            <StButton
+              checkbtn
+              onClick={() => {
+                onCheckUserName(loginId);
+              }}
+              type="button"
+            >
+              ID 중복확인
+            </StButton>
           </StBox>
 
           <br></br>
           <StLabel htmlFor="password">비밀번호*</StLabel>
           <StBox>
             <StInput
-              onBlur={checkPassword}
               type="password"
               id="password"
               value={password}
-              onChange={setPassword}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                console.log(e);
+              }}
+              onBlur={PWChk}
               placeholder="숫자, 영문, 특수문자 조합 최소 8자"
               required
               minLength={8}
               maxLength={15}
             />
           </StBox>
+          {<p className="ptag">{PWPtag}</p>}
           <StBox>
             <StInput
               type="password"
-              id="checkpassword"
-              value={checkpassword}
-              onChange={setCheckPassword}
+              id="PWConfirm"
+              value={PWConfirm}
+              onChange={(e) => {
+                setPWConfirm(e.target.value);
+              }}
+              onBlur={PWConfirmChk}
               placeholder="비밀번호 재입력"
               required
               minLength={8}
               maxLength={15}
             />
           </StBox>
+          {<p className="ptag">{PWConfirmP}</p>}
           <br></br>
           <StLabel htmlFor="nickname">닉네임*</StLabel>
           <StBox>
@@ -203,8 +252,8 @@ const StBox = styled.div`
   align-items: center;
 `;
 const StCenterBox = styled.div`
-  width: 450px;
-  height: 700px;
+  width: 400px;
+  height: 850px;
   align-items: center;
   border: 0;
   border-radius: 1px;
@@ -223,84 +272,21 @@ const StInput = styled.input`
   border: 1px solid #d9d9d9;
   padding-left: 10px;
   border-radius: 4px;
+  margin-top: 5px;
+  letter-spacing: -0.1em;
+  font-size: 16px;
+`;
+
+const StId = styled.input`
+  width: 250px;
+  height: 44px;
+  border: 1px solid #d9d9d9;
+  padding-left: 10px;
+  border-radius: 4px;
   margin-top: 10px;
   letter-spacing: -0.1em;
-  /* background-color: orange; */
   font-size: 16px;
-  /* &:hover {
-    border: 0.5px solid black;
-  } */
 `;
-
-const IconBox = styled.img`
-  /* width: 20px;
-  height: 20px; */
-  /* float: right; */
-  margin-left: -40px;
-`;
-
-const SocialDiv = styled.img`
-  /* width: 40px;
-  height: 45px; */
-  background-color: transparent;
-`;
-
-const SignDiv = styled.div`
-  width: 1px;
-  height: 16px;
-  background-color: #c2c2c2;
-`;
-
-const SignBox = styled.div`
-  width: 380px;
-  height: 50px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-`;
-
-const SocialBtn = styled.a`
-  ${(props) =>
-    props.kakao &&
-    css`
-      float: right;
-      display: flex;
-      align-items: center;
-      margin-top: 20px;
-      width: 175px;
-      height: 60px;
-      border: 0;
-      font-size: 14px;
-      letter-spacing: -0.1em;
-      border-radius: 10px;
-      background-color: #fee000;
-      text-decoration: none;
-      color: black;
-      cursor: pointer;
-    `}
-  ${(props) =>
-    props.naver &&
-    css`
-      float: left;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 175px;
-      height: 60px;
-      border: 0;
-      margin-right: 20px;
-      margin-top: 20px;
-      font-size: 14px;
-      letter-spacing: -0.1em;
-      border-radius: 10px;
-      background-color: #00bf18;
-      text-decoration: none;
-      color: white;
-      cursor: pointer;
-    `}
-`;
-
 const StEmailInput = styled.input`
   width: 250px;
   height: 44px;
@@ -319,7 +305,7 @@ const StEmailInput = styled.input`
 const StEmailBtn = styled.button`
   width: 110px;
   height: 44px;
-  margin-top: 10px;
+  margin-top: 8px;
   margin-left: 10px;
   border: 1px solid black;
   border-radius: 4px;
@@ -381,6 +367,21 @@ const StButton = styled.button`
       font-size: 15px;
       margin-left: 20px;
       cursor: pointer;
+    `}
+    ${(props) =>
+    props.checkbtn &&
+    css`
+      width: 110px;
+      height: 45px;
+      margin-top: 8px;
+      margin-left: 10px;
+      border: 1px solid black;
+      border-radius: 4px;
+      background-color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: #dcdcdc;
+      }
     `}
 `;
 export default PostLoginPage;

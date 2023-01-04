@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "http://13.125.150.83/api",
+  baseURL: "https://sparta-sjl.shop/api",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -12,7 +12,7 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "http://13.125.150.83/api",
+  baseURL: "https://sparta-sjl.shop/api",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -33,7 +33,7 @@ export const apis = {
   // 로그인 관련
   postLogin: (login) => instance.post("/user/login", login),
   postSignup: (signup) => instance.post("/user/signup", signup),
-  checkUserName: (username) => instance.get(`/user/idCheck/${username}`),
+  checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
   postLogout: () => instance.get("/user/logout"),
 
   // 게시글 관련

@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // 주석 풀고 사용
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
-// import SignUpAgree from "../pages/SignUpAgree";
+import SignAgree from "../pages/SignAgree";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -20,7 +20,7 @@ const Router = () => {
         {/* <Route path="board/:id" element={<Edit />} /> */}
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/agree" element={<SignUpAgree />} /> */}
+        <Route path="/agree/" element={<SignAgree />} />
       </Routes>
       {/* </Layout> */}
     </BrowserRouter>
