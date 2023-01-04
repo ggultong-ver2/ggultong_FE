@@ -20,14 +20,14 @@ function Header() {
             <li>좋아요</li>
             <li>스크랩</li>
             {!localStorage.getItem("id") ? (
-              <li onClick={() => navigate("/LoginPage")} className="login">
+              <li onClick={() => navigate("/login")} className="login">
                 로그인
               </li>
             ) : (
               <li
                 onClick={() => {
                   localStorage.removeItem("id");
-                  navigate("/LoginPage");
+                  navigate("/login");
                 }}
                 className="login"
               >
