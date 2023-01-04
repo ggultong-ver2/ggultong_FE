@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Edit from "../components/edit/Edit";
 // import RecipeList from "../pages/RecipeList";
 // 주석 풀고 사용
+import Main from "../pages/Main";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 // import SignUpAgree from "../pages/SignUpAgree";
@@ -15,7 +16,7 @@ const Router = () => {
     <BrowserRouter>
       {/* <Layout> */}
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Main />} />
         {/* <Route path="board" element={<Board />} /> */}
         {/* <Route path="board/:id" element={<Edit />} /> */}
         <Route path="/signup" element={<SignUpPage />} />

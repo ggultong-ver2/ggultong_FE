@@ -1,0 +1,26 @@
+.headerwrap{
+    width: 1200px;
+    height: 100px;
+    background: slategrey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.logo{
+    font-size: 32px;
+    margin-right: 22px;
+}
+
+.logo_text{
+    font-size: 14px;
+}
+
+.gnb li{
+    float: left;
+    margin-left: 40px;
+    cursor: pointer;
+    font-size: 14px;
+}
