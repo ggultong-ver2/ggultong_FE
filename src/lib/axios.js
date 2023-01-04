@@ -7,6 +7,7 @@ const instance = axios.create({
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     "Access-Control-Allow-Origin": "*",
+
   },
 });
 
@@ -24,6 +25,8 @@ export const baseURL = axios.create({
 baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("id");
+
+
   config.headers["Authorization"] = `${token}`;
   return config;
 });

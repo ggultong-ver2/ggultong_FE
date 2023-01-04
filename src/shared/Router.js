@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+
 // import Home from "../pages/Home";
 // import Layout from "../components/layout/Layout";
 // import Detailtest from "../components/recipe/Recipe";
@@ -16,6 +18,7 @@ const Router = () => {
     <BrowserRouter>
       {/* <Layout> */}
       <Routes>
+
         <Route path="/" element={<Main />} />
         {/* <Route path="board" element={<Board />} /> */}
         {/* <Route path="board/:id" element={<Edit />} /> */}

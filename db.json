@@ -1,7 +1,10 @@
 {
-  "post": [
+  "postss": [
     {
-      "content": "test"
+      "id": 1,
+      "title": "title",
+      "image": "image",
+      "content": "content"
     }
   ]
 }
