@@ -1,7 +1,7 @@
 .headerwrap{
     width: 1200px;
     height: 100px;
-    background: slategrey;
+    /* background: slategrey; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,4 +23,13 @@
     margin-left: 40px;
     cursor: pointer;
     font-size: 14px;
+}
+
+.header_container::after{
+    display: block;
+    content: "";
+    width: 90%;
+    height: 1px;
+    background: #000;
+    margin: 0 auto;
 }

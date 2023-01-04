@@ -6,7 +6,7 @@ function Header() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="header_container">
       <div className="headerwrap">
         <div className="logowrap">
           <span className="logo">
