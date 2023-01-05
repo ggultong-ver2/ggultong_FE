@@ -9,6 +9,7 @@ import loginprofile from "../assets/images/loginprofile.png";
 import lock from "../assets/images/lock.png";
 import naver from "../assets/images/navericon.png";
 import kakao from "../assets/images/kakaoicon.png";
+import Header from "../components/header/Header";
 
 const PostLoginPage = () => {
   // const url1 =
@@ -73,6 +74,7 @@ const PostLoginPage = () => {
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
+        <Header />
         <StCenterBox>
           <StLoginBox>로그인</StLoginBox>
           {/* <StRightBox2> */}
