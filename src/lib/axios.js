@@ -2,18 +2,17 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: "",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     "Access-Control-Allow-Origin": "*",
-
   },
 });
 
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: "",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -25,7 +24,6 @@ export const baseURL = axios.create({
 baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("id");
-
 
   config.headers["Authorization"] = `${token}`;
   return config;
@@ -40,7 +38,23 @@ export const apis = {
   postLogout: () => instance.get("/user/logout"),
 
   // 게시글 관련
+  getPost: () => baseURL.get("/posts"),
+  getIdPost: (id) => {
+    return baseURL.get(`/post/${id}`);
+  },
 
+  createPost: (post) => {
+    console.log("payload::", post);
+    baseURL.post("/post", post, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+  deletePost: (id) => baseURL.delete(`/post/${id}`),
+  editPost: (id, post) =>
+    // console.log("string", id, post);
+    baseURL.put(`/post/${id}`, post, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
   // 리뷰 관련
 
   // 좋아요 관련

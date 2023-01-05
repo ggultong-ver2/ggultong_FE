@@ -3,8 +3,21 @@
     {
       "id": 1,
       "title": "title",
-      "image": "image",
+      "file": "image",
       "content": "content"
+    },
+    {
+      "id": 2,
+      "title": "title2",
+      "file": "image2",
+      "content": "content2"
+    },
+    {
+      "title": "ㅇㅇ",
+      "file": "C:\\fakepath\\ZEP - 항해99 10기 C반 - Chrome 2022-11-22 11-53-46.mp4",
+      "content": "ㅇㅇ",
+      "category": "tip",
+      "id": 3
     }
   ]
 }
