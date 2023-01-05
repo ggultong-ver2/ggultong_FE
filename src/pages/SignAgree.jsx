@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function SignAgree() {
@@ -8,7 +8,9 @@ function SignAgree() {
   const [useCheck, setUseCheck] = useState(false);
   const [marketingCheck, setMarketingCheck] = useState(false);
   const [privacyCheck, setPrivacyCheck] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+
+  const navigate = useNavigate();
 
   const allBtnEvent = () => {
     if (allCheck === false) {
@@ -71,6 +73,14 @@ function SignAgree() {
     }
   }, [ageCheck, privacyCheck, useCheck, marketingCheck]);
 
+  useEffect(() => {
+    if (ageCheck === true && privacyCheck === true && useCheck === true) {
+      setDisabled(!disabled);
+    } else {
+      setDisabled(true);
+    }
+  }, [ageCheck, privacyCheck, useCheck]);
+
   //   useEffect(
   //     (checkbutton) => {
   //       if (ageCheck == true && privacyCheck == true && useCheck == true) {
@@ -82,13 +92,13 @@ function SignAgree() {
   //     [ageCheck, privacyCheck, useCheck]
   //   );
 
-  function agreeCheck(frm) {
-    if (ageCheck === true && privacyCheck === true && useCheck === true) {
-      frm.checkButton.disabled = false;
-    } else {
-      frm.checkButton.disabled = true;
-    }
-  }
+  // function agreeCheck(e) {
+  //   if (ageCheck === true && privacyCheck === true && useCheck === true) {
+  //     e.checkButton.disabled = true;
+  //   } else {
+  //     e.checkButton.disabled = false;
+  //   }
+  // }
 
   return (
     <StContainer>
@@ -103,7 +113,7 @@ function SignAgree() {
             onChange={allBtnEvent}
           />
           &nbsp;
-          <label htmlfor="all-check">모두 동의</label>
+          <label htmlFor="all-check">모두 동의</label>
         </AllAgree>
         <StSmaillBox>
           <StCheckBox>
@@ -113,7 +123,7 @@ function SignAgree() {
               checked={ageCheck}
               onChange={ageBtnEvent}
             />
-            <StChecklabel htmlfor="check1">
+            <StChecklabel htmlFor="check1">
               <span>(필수)</span>&nbsp;만 14세 이상
             </StChecklabel>
           </StCheckBox>
@@ -124,7 +134,7 @@ function SignAgree() {
               checked={privacyCheck}
               onChange={usePrivacyEvent}
             />
-            <StChecklabel htmlfor="check2">
+            <StChecklabel htmlFor="check2">
               <span>(필수)</span>&nbsp;개인정보 취급 방침
             </StChecklabel>
           </StCheckBox>
@@ -135,7 +145,7 @@ function SignAgree() {
               checked={useCheck}
               onChange={useBtnEvent}
             />
-            <StChecklabel htmlfor="check3">
+            <StChecklabel htmlFor="check3">
               <span>(필수)</span>&nbsp;이용약관
             </StChecklabel>
           </StCheckBox>
@@ -146,12 +156,18 @@ function SignAgree() {
               checked={marketingCheck}
               onChange={marketingBtnEvent}
             />
-            <StChecklabel htmlfor="check4">
+            <StChecklabel htmlFor="check4">
               <span>(선택)</span>&nbsp;광고성 정보 수신 및 마케팅 활용동의
             </StChecklabel>
           </StCheckBox>
         </StSmaillBox>
-        <StButton type="button" name="checkbutton" value="다음" disabled>
+        <StButton
+          onClick={() => navigate("/signup")}
+          disabled={disabled}
+          type="button"
+          name="checkbutton"
+          value=""
+        >
           다음
         </StButton>
       </StCenterBox>
@@ -245,13 +261,14 @@ const StButton = styled.button`
   border: 0;
   font-size: 18px;
   border-radius: 4px;
-  background-color: #dddbdb;
+  background-color: #b5b5b5;
   font-family: georgia;
   color: white;
   cursor: pointer;
-  /* &:hover {
-    background-color: #797777;
-  } */
+
+  &:disabled {
+    background-color: #ddd8d8;
+  }
 `;
 
 export default SignAgree;

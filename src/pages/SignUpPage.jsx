@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import __postSignup from "../redux/modules/signupSlice";
 import __idcheck from "../redux/modules/checkIdSlice";
 import __sendemail from "../redux/modules/sendemailSlice";
-import __emailcode from "../redux/modules/sendemailSlice";
+import __emailcode from "../redux/modules/emailcodeSlice";
 const PostLoginPage = () => {
   // const url1 =
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
@@ -17,7 +17,7 @@ const PostLoginPage = () => {
   const [loginId, setloginId] = useInput();
   const [password, setPassword] = useState();
   const [nickname, setNickname] = useInput();
-
+  const [disable, setDisable] = useState(false);
   const [PWPtag, setPWPtag] = useState();
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
@@ -56,11 +56,23 @@ const PostLoginPage = () => {
     }).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire("Good job!", "You clicked the button!", "success");
+        Swal.fire(res.data.msg, "", "success");
       }
-      navigate("/login");
+      navigate("/signcomplete");
     });
   };
+
+  // 바디형식 전송
+  // const emailsend = (e) => {
+  //   e. preventDefault();
+  //   __emailsend({
+  //     email,
+  //   }).then((res)=> {
+  //     if(res.data.statusCode === 200) {
+  //       alert(res.data.msg)
+  //     }
+  //   })
+  // }
 
   // 이메일 유효성 검사
   const checkEmail = (e) => {
@@ -76,12 +88,12 @@ const PostLoginPage = () => {
     __idcheck(loginId).then((res) => {
       console.log(res);
       if (res.data.statusCode === 200) {
-        Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+        Swal.fire(res.data.msg, "다음으로 넘어가주세요!", "success");
       } else {
-        Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
       }
     });
   };
+
   // 버튼 비활성화
   const onDisabled = (e) => {
     e.preventDefault();
@@ -90,14 +102,22 @@ const PostLoginPage = () => {
     e.currentTarget.style.color = "#4b5563";
   };
 
+  const handleClick = () => {
+    setDisable(!disable);
+  };
+
   // 이메일 인증번호 전송하기
   const onCheckEmail = (email) => {
     console.log("email---->", email);
     __sendemail(email).then((res) => {
       if (res.data.statusCode === 200) {
-        Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+        Swal.fire(
+          "인증번호가 발송되었습니다!",
+          "인증번호칸에 인증번호를 입력해주세요.",
+          "success"
+        );
       } else {
-        Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+        // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
       }
     });
   };
@@ -107,9 +127,9 @@ const PostLoginPage = () => {
     __emailcode(emailcode).then((res) => {
       console.log(res);
       if (res.data.statusCode === 200) {
-        Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+        Swal.fire("인증 확인완료!", "가입하기를 눌러주세요!", "success");
       } else {
-        Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+        // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
       }
     });
   };
@@ -196,21 +216,24 @@ const PostLoginPage = () => {
           <StLabel htmlFor="email">이메일*</StLabel>
           <StBox>
             <StEmailInput
-              onBlur={checkEmail}
               type="email"
               id="email"
               value={email}
               onChange={setEmail}
               placeholder="유효한 이메일을 입력해주세요."
               required
+              disabled={disable}
               minLength={5}
               maxLength={30}
             />
             <StEmailBtn
               checkbtn
-              onClick={(e) => {
+              onClick={(e, res) => {
                 onCheckEmail(email);
-                onDisabled(e);
+                handleClick();
+                // if (res.data.statusCode === 200) {
+                //   Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
+                // }
               }}
               type="button"
             >
@@ -229,6 +252,7 @@ const PostLoginPage = () => {
               maxLength={7}
             />
             <StEmailBtn
+              id="emailcode"
               checkbtn
               onClick={(e) => {
                 onEmailCode(emailcode);
@@ -239,7 +263,7 @@ const PostLoginPage = () => {
               확인
             </StEmailBtn>
           </StBox>
-          <StButton log>본인인증 확인</StButton>
+          <StButton log>가입하기</StButton>
         </StCenterBox>
       </div>
       {/* <div>
@@ -360,6 +384,9 @@ const StEmailInput = styled.input`
   border-radius: 4px;
   margin-top: 10px;
   letter-spacing: -0.1em;
+  &:disabled {
+    background-color: #c2c2c2;
+  }
   /* background-color: orange; */
   font-size: 16px;
   /* &:hover {

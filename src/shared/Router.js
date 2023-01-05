@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-
 // import Home from "../pages/Home";
 // import Layout from "../components/layout/Layout";
 // import Detailtest from "../components/recipe/Recipe";
@@ -13,16 +12,17 @@ import Main from "../pages/Main";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignAgree from "../pages/SignAgree";
+import SignComplete from "../pages/SignComplete";
 const Router = () => {
   return (
     <BrowserRouter>
       {/* <Layout> */}
       <Routes>
-
         <Route path="/" element={<Main />} />
         {/* <Route path="board" element={<Board />} /> */}
         {/* <Route path="board/:id" element={<Edit />} /> */}
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signcomplete" element={<SignComplete />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/agree/" element={<SignAgree />} />
       </Routes>

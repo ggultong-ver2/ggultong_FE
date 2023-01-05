@@ -1,19 +1,19 @@
 import { apis } from "../../lib/axios";
-
-const __emailcode = async (emailcode) => {
+import Swal from "sweetalert2";
+const __sendemail = async (email) => {
   try {
-    const data = await apis.checkEmail(emailcode);
-    console.log("emailcode:::", emailcode);
+    const data = await apis.checkEmail(email);
+    console.log("email:::", email);
     console.log("data: ", data);
     if (data.data.statusCode === 200) {
-      alert(data.data.msg);
+      // alert(data.data.msg);
     }
     // useSweet(1000, "success", "회원가입 성공");
     return data;
   } catch (error) {
-    alert(error.response.data.msg);
+    Swal.fire("유효하지 않은 Email 입니다", "", "error");
     // useSweet(1000, "error", error.response.data.msg);
   }
 };
 
-export default __emailcode;
+export default __sendemail;
