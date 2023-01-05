@@ -12,9 +12,13 @@ import Main from "../pages/Main";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignAgree from "../pages/SignAgree";
+
 import Detail from "../pages/detail";
 import Post from "../pages/post";
 import EditPost from "../pages/editPost";
+
+
+import SignComplete from "../pages/SignComplete";
 
 const Router = () => {
   return (
@@ -25,6 +29,7 @@ const Router = () => {
         {/* <Route path="board" element={<Board />} /> */}
         {/* <Route path="board/:id" element={<Edit />} /> */}
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signcomplete" element={<SignComplete />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/agree/" element={<SignAgree />} />
         <Route path="detail/:id" element={<Detail />} />

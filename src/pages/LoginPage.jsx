@@ -9,6 +9,7 @@ import loginprofile from "../assets/images/loginprofile.png";
 import lock from "../assets/images/lock.png";
 import naver from "../assets/images/navericon.png";
 import kakao from "../assets/images/kakaoicon.png";
+import Header from "../components/header/Header";
 
 const PostLoginPage = () => {
   // const url1 =
@@ -29,50 +30,19 @@ const PostLoginPage = () => {
     }).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire("Good job!", "You clicked the button!", "success");
+        Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
+        navigate("/");
       }
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
       localStorage.setItem("profileUrl", res.data.data.profileUrl);
-      window.location.assign("/home");
     });
   };
-
-  // const onKakaoLogin = (e) => {
-  //   e.preventDefault();
-  //   __postLogin({}).then((res) => {
-  //     console.log("res:::::", res);
-  //     if (res.data.statusCode === 200) {
-  //       alert(res.data.statusMsg);
-  //     }
-  //     localStorage.setItem("id", res.headers.authorization);
-  //     localStorage.setItem("username", res.data.data.username);
-  //     // localStorage.setItem("profileUrl", res.data.data.profileUrl);
-  //     navigate("/home");
-  //   });
-  // };
-  // function KakaoLogin() {
-  //   const location = useLocation();
-  //   const navigate = useNavigate();
-  //   const KAKAO_CODE = location.search.split("=")[1];
-
-  //   const IP = `localhost:3000`;
-
-  //   useEffect(() => {
-  //     fetch(`http://${IP}/api/users/kakao/redirect?code=${KAKAO_CODE}`, {
-  //       metghod: "GET",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         localStorage.setItem("token", data.token);
-  //         navigate("/home");
-  //       });
-  //   }, []);
-  // }
 
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
+        <Header />
         <StCenterBox>
           <StLoginBox>로그인</StLoginBox>
           {/* <StRightBox2> */}
@@ -108,7 +78,7 @@ const PostLoginPage = () => {
           <StLine />
           <StButton log>로그인</StButton>
           <SignBox>
-            <StButton reg onClick={() => navigate("/signup")}>
+            <StButton reg onClick={() => navigate("/agree")}>
               회원가입
             </StButton>
             <SignDiv />
@@ -130,44 +100,8 @@ const PostLoginPage = () => {
               카카오톡으로 로그인
             </SocialBtn>
           </div>
-          {/* <button
-            onClick={() => {
-              Swal.fire("로그인 성공!", "정보를 즐기러가볼까요!", "error");
-            }}
-          ></button> */}
         </StCenterBox>
       </div>
-      {/* <div>
-        <h1>로그인</h1>
-        <StDiv inputbox>
-          <StLabel htmlFor="username">ID</StLabel>
-          <StInput
-            type="text"
-            id="username"
-            value={username}
-            onChange={setUserName}
-            required
-            minLength={5}
-            maxLength={10}
-          />
-          <StLabel htmlFor="password">PW</StLabel>
-          <StInput
-            type="password"
-            id="password"
-            value={password}
-            onChange={setPassword}
-            required
-            minLength={8}
-            maxLength={15}
-          />
-        </StDiv>
-      </div>
-      <StDiv btns>
-        <Stbutton log>로그인</Stbutton>
-        <Stbutton reg onClick={() => navigate("/signup")}>
-          회원가입
-        </Stbutton>
-      </StDiv> */}
     </StContainer>
   );
 };
@@ -183,7 +117,7 @@ const StContainer = styled.form`
 
 const StLoginBox = styled.div`
   width: 400px;
-  height: 50px;
+  height: 80px;
   font-size: 40px;
   margin-bottom: 10px;
   display: flex;
