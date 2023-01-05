@@ -12,7 +12,9 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
+
   baseURL: "http://3.38.247.14:8080/api",
+
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -39,7 +41,23 @@ export const apis = {
   checkEmail: (email) => instance.post(`/user/emailCheck/${email}`),
   checkemailCode: (emailCode) => instance.post(`user/emailCode/${emailCode}`),
   // 게시글 관련
+  getPost: () => baseURL.get("/posts"),
+  getIdPost: (id) => {
+    return baseURL.get(`/post/${id}`);
+  },
 
+  createPost: (post) => {
+    console.log("payload::", post);
+    baseURL.post("/post", post, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+  deletePost: (id) => baseURL.delete(`/post/${id}`),
+  editPost: (id, post) =>
+    // console.log("string", id, post);
+    baseURL.put(`/post/${id}`, post, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
   // 리뷰 관련
 
   // 좋아요 관련

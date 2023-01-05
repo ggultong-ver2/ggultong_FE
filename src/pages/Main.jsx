@@ -1,6 +1,6 @@
 import Header from "../components/header/Header";
-import "./reset.css"
-import "./style.css"
+import "./reset.css";
+import "./style.css";
 
 function Main() {
   return (

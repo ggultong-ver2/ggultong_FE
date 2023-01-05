@@ -1,59 +1,77 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __addPost } from "../redux/modules/postSlice";
+import styled from "styled-components";
 
 const Post = () => {
-  const imgRef = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [addPost, setAddPost] = useState({
+    title: "",
+    file: "",
+    content: "",
+    category: "",
+  });
 
-  const onChangeImage = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-    const reader = new FileReader();
-    //console.log(reader);
-    // const file = imgRef.current.files[0];
-    //console.log(file);
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImageUrl(reader.result);
-      // const image = reader.result;
-      setPost({
-        ...post,
-        imageUrl: reader.result,
-      });
-    };
+  const onClickAddPostHandler = () => {
+    dispatch(__addPost(addPost));
+    console.log(addPost);
   };
-
-  const [imagefile, setImageFile] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [post, setPost] = useState([]);
 
   return (
     <div>
-      <p>게시글 작성</p>
-      제목:<input type="text"></input>
-      카테고리:
-      <select type="select" name="category" id="category">
-        <option value="choole">선택해주세요</option>
-        <option value="tip">꿀팁</option>
-        <option value="item">꿀템</option>
-        <option value="room">꿀방</option>
-        <option value="meal">꿀밥</option>
-      </select>
-      이미지:
-      <image>
+      <p># 게시글 작성</p>
+      <p>
+        제목:
+        <input
+          type="text"
+          onChange={(e) => {
+            setAddPost({ ...addPost, title: e.target.value });
+          }}
+        ></input>
+      </p>
+      <p>
+        카테고리:
+        <select
+          type="select"
+          name="category"
+          id="category"
+          onChange={(e) => {
+            setAddPost({ ...addPost, category: e.target.value });
+          }}
+        >
+          <option value="choose">선택해주세요</option>
+          <option value="tip">꿀팁</option>
+          <option value="item">꿀템</option>
+          <option value="room">꿀방</option>
+          <option value="meal">꿀밥</option>
+        </select>
+      </p>
+      <p>
+        파일:
         <input
           type="file"
-          ref={imgRef}
-          onChange={onChangeImage}
+          id="fileUpload"
+          multiple={true}
           width="500px"
-        ></input>
-      </image>
-      {/* 추가하기 누르면 파일선택 늘어나게.. */}
-      내용:
-      <textarea></textarea>
-      <button>등록</button>
-      <button>취소</button>
+          onChange={(e) => {
+            setAddPost({ ...addPost, file: e.target.value });
+          }}
+        />
+        <button>추가하기</button>
+      </p>
+      <p>
+        내용:
+        <textarea
+          type="text"
+          onChange={(e) => {
+            setAddPost({ ...addPost, content: e.target.value });
+          }}
+        ></textarea>
+        <button onClick={onClickAddPostHandler}>등록</button>
+        <button>취소</button>
+      </p>
     </div>
   );
 };

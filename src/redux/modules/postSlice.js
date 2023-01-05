@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apis } from "../../lib/axios";
-// import axios from "axios";
+import axios from "axios";
 
 const initialState = {
   login: [],
@@ -13,7 +13,7 @@ const initialState = {
   detail: {
     id: 0,
     title: "",
-    image: "",
+    file: "",
     content: "",
   },
 };
@@ -62,7 +62,7 @@ export const __getIdPost = createAsyncThunk(
       console.log("payload: ", payload);
       console.log("getIddata:: ", data);
       // const getId = data.data.filter((recipe) => recipe.id === payload)[0];
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
     }
@@ -75,14 +75,14 @@ export const __addPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload:::", payload);
-      const data = await apis.createPost(payload);
-      // const data = await axios.post("http://localhost:3002/recipes", payload);
+      //const data = await apis.createPost(payload);
+      const data = await axios.post("http://localhost:3001/postss", payload);
       // console.log("payload: ", payload);
       console.log("addpostdata::: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
@@ -93,10 +93,10 @@ export const __deletePost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload: ", payload);
-      const data = await apis.deletePost(payload);
-      // const data = await axios.delete(
-      //   `http://localhost:3002/recipes/${payload}`
-      // );
+      //const data = await apis.deletePost(payload);
+      const data = await axios.delete(
+        `http://localhost:3001/postss/${payload}`
+      );
       console.log("data: ", data.data.msg);
       alert(data.data.msg);
       // if (data.data.statusCode === 400) {
