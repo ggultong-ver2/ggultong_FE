@@ -42,8 +42,8 @@ const PostLoginPage = () => {
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
-        <Header />
         <StCenterBox>
+          <Header />
           <StLoginBox>로그인</StLoginBox>
           {/* <StRightBox2> */}
           <img src={null} alt="" />
@@ -121,7 +121,7 @@ const StLoginBox = styled.div`
   font-size: 40px;
   margin-bottom: 10px;
   display: flex;
-  padding-bottom: 30px;
+  padding: 30px 0;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
 `;
