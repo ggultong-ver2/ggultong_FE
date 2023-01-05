@@ -1,12 +1,18 @@
 import { apis } from "../../lib/axios";
 // import axios from "axios";
+import Swal from "sweetalert2";
 
 const __postLogin = async (post) => {
   try {
     const data = await apis.postLogin(post);
     return data;
+    console.log(data);
   } catch (error) {
-    alert(error.response.data.statusMsg);
+    Swal.fire(
+      "아이디 및 비밀번호가 일치하지 않습니다.",
+      "다시 확인해주세요!",
+      "error"
+    );
   }
 };
 
