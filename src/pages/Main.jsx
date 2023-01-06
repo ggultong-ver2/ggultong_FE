@@ -5,7 +5,7 @@ import "./style.css";
 function Main() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="main_container">메인페이지</div>
     </>
   );
