@@ -7,6 +7,7 @@ import __postSignup from "../redux/modules/signupSlice";
 import __idcheck from "../redux/modules/checkIdSlice";
 import __sendemail from "../redux/modules/sendemailSlice";
 import __emailcode from "../redux/modules/emailcodeSlice";
+import __emailsend from "../redux/modules/sendemailSlice";
 const PostLoginPage = () => {
   // const url1 =
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
@@ -21,7 +22,7 @@ const PostLoginPage = () => {
   const [PWPtag, setPWPtag] = useState();
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
-
+  const [isemail, setIsemail] = useState();
   function isPassword(asValue) {
     const regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -62,17 +63,22 @@ const PostLoginPage = () => {
     });
   };
 
-  // 바디형식 전송
-  // const emailsend = (e) => {
-  //   e. preventDefault();
-  //   __emailsend({
-  //     email,
-  //   }).then((res)=> {
-  //     if(res.data.statusCode === 200) {
-  //       alert(res.data.msg)
-  //     }
-  //   })
-  // }
+  //바디형식 이메일코드 전송
+  const onCheckEmail = (e) => {
+    __emailsend({
+      email,
+    }).then((res) => {
+      setIsemail(res.data);
+      console.log(res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(
+          "인증번호 전송이 완료되었습니다!",
+          "해당 메일함에서 인증번호를 확인해주세요.",
+          "success"
+        );
+      }
+    });
+  };
 
   // 이메일 유효성 검사
   const checkEmail = (e) => {
@@ -95,44 +101,48 @@ const PostLoginPage = () => {
   };
 
   // 버튼 비활성화
-  const onDisabled = (e) => {
-    e.preventDefault();
-    e.currentTarget.disabled = true;
-    e.currentTarget.style.background = "#e5e5e5";
-    e.currentTarget.style.color = "#4b5563";
-  };
+  // const onDisabled = (e) => {
+  //   e.preventDefault();
+  //   e.currentTarget.disabled = true;
+  //   e.currentTarget.style.background = "#e5e5e5";
+  //   e.currentTarget.style.color = "#4b5563";
+  // };
 
   const handleClick = () => {
     setDisable(!disable);
   };
 
-  // 이메일 인증번호 전송하기
-  const onCheckEmail = (email) => {
-    console.log("email---->", email);
-    __sendemail(email).then((res) => {
-      if (res.data.statusCode === 200) {
+  //바디형식 인증번호확인
+  const onEmailCode = (e) => {
+    __emailcode({
+      emailcode,
+    }).then((res) => {
+      console.log(isemail);
+      if (isemail === Number(emailcode)) {
+        console.log(isemail, emailcode);
         Swal.fire(
-          "인증번호가 발송되었습니다!",
-          "인증번호칸에 인증번호를 입력해주세요.",
+          "인증번호 확인되었습니다.",
+          "가입을 완료해주세요!",
           "success"
         );
       } else {
-        // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+        Swal.fire("인증번호가 불일치합니다!", "다시 확인해주세요", "error");
       }
     });
   };
+
   // 이메일 인증번호 확인
-  const onEmailCode = (emailcode) => {
-    console.log("emailcode---->", emailcode);
-    __emailcode(emailcode).then((res) => {
-      console.log(res);
-      if (res.data.statusCode === 200) {
-        Swal.fire("인증 확인완료!", "가입하기를 눌러주세요!", "success");
-      } else {
-        // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
-      }
-    });
-  };
+  // const onEmailCode = (emailcode) => {
+  //   console.log("emailcode---->", emailcode);
+  //   __emailcode(emailcode).then((res) => {
+  //     console.log(res);
+  //     if (res.data.statusCode === 200) {
+  //       Swal.fire("인증 확인완료!", "가입하기를 눌러주세요!", "success");
+  //     } else {
+  //       // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
+  //     }
+  //   });
+  // };
 
   return (
     <StContainer onSubmit={onSubmitSignup}>
@@ -248,15 +258,15 @@ const PostLoginPage = () => {
               onChange={setEmailCode}
               placeholder="인증번호를 입력해주세요!"
               required
-              minLength={7}
-              maxLength={7}
+              minLength={6}
+              maxLength={6}
             />
             <StEmailBtn
               id="emailcode"
               checkbtn
               onClick={(e) => {
                 onEmailCode(emailcode);
-                onDisabled(e);
+                // onDisabled(e);
               }}
               type="button"
             >
