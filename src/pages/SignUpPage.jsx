@@ -100,14 +100,6 @@ const PostLoginPage = () => {
     });
   };
 
-  // 버튼 비활성화
-  // const onDisabled = (e) => {
-  //   e.preventDefault();
-  //   e.currentTarget.disabled = true;
-  //   e.currentTarget.style.background = "#e5e5e5";
-  //   e.currentTarget.style.color = "#4b5563";
-  // };
-
   const handleClick = () => {
     setDisable(!disable);
   };
@@ -276,37 +268,6 @@ const PostLoginPage = () => {
           <StButton log>가입하기</StButton>
         </StCenterBox>
       </div>
-      {/* <div>
-        <h1>로그인</h1>
-        <StDiv inputbox>
-          <StLabel htmlFor="username">ID</StLabel>
-          <StInput
-            type="text"
-            id="username"
-            value={username}
-            onChange={setUserName}
-            required
-            minLength={5}
-            maxLength={10}
-          />
-          <StLabel htmlFor="password">PW</StLabel>
-          <StInput
-            type="password"
-            id="password"
-            value={password}
-            onChange={setPassword}
-            required
-            minLength={8}
-            maxLength={15}
-          />
-        </StDiv>
-      </div>
-      <StDiv btns>
-        <Stbutton log>로그인</Stbutton>
-        <Stbutton reg onClick={() => navigate("/signup")}>
-          회원가입
-        </Stbutton>
-      </StDiv> */}
     </StContainer>
   );
 };
