@@ -42,7 +42,6 @@ const PostLoginPage = () => {
     <StContainer onSubmit={onSubmitLogin}>
       <div>
         <StCenterBox>
-          <Header />
           <StLoginBox>로그인</StLoginBox>
           {/* <StRightBox2> */}
           <img src={null} alt="" />
