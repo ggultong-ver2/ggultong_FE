@@ -8,7 +8,7 @@ import { __deletePost } from "./../redux/modules/postSlice";
 const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const details = useSelector((state) => state.posts.detail);
+  const details = useSelector((state) => state.posts);
   console.log("details:", details);
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
@@ -28,9 +28,9 @@ const Detail = () => {
   return (
     <div>
       <StDetail>
-        <StTitle>title</StTitle>
-        <StFile>file</StFile>
-        <StContent>content</StContent>
+        <StTitle>{details.title}</StTitle>
+        <StFile>{details.file}</StFile>
+        <StContent>{details.content}</StContent>
         <Btns>
           <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
           <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>

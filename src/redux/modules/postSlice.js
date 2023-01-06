@@ -10,12 +10,6 @@ const initialState = {
   like: [],
   isLoading: true,
   error: null,
-  detail: {
-    id: 0,
-    title: "",
-    file: "",
-    content: "",
-  },
 };
 
 // 데이터 불러오기
@@ -57,8 +51,8 @@ export const __getIdPost = createAsyncThunk(
   "getIdPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await apis.getIdPost(payload);
-      // const data = await axios.get(`http://localhost:3002/recipes/${payload}`);
+      //const data = await apis.getIdPost(payload);
+      const data = await axios.get(`http://localhost:3001/postss/${payload}`);
       console.log("payload: ", payload);
       console.log("getIddata:: ", data);
       // const getId = data.data.filter((recipe) => recipe.id === payload)[0];
@@ -98,7 +92,7 @@ export const __deletePost = createAsyncThunk(
         `http://localhost:3001/postss/${payload}`
       );
       console.log("data: ", data.data.msg);
-      alert(data.data.msg);
+      //alert(data.data.msg);
       // if (data.data.statusCode === 400) {
       //   alert(data.data.msg);
       //   return;
@@ -106,7 +100,7 @@ export const __deletePost = createAsyncThunk(
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
@@ -118,17 +112,14 @@ export const __editPost = createAsyncThunk(
     try {
       const { id, formdata } = payload;
       console.log("payload:::::: ", payload);
-      const data = await apis.editPost(id, formdata);
-      // const data = await axios.patch(
-      //   `http://localhost:3002/recipes/${recipeId}`,
-      //   recipe
-      // );
+      //const data = await apis.editPost(id, formdata);
+      const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
 
       console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
@@ -229,7 +220,7 @@ export const postSlice = createSlice({
       // 액션으로 받은 값 = payload 추가해준다.
       console.log("action: ", action.payload);
       state.isLoading = false;
-      state.posts.postList = [...state.posts.postList, action.payload];
+      state.posts.push(action.payload);
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;
