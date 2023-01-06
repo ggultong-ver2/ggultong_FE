@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import Home from "../pages/Home";
-// import Layout from "../components/layout/Layout";
+import Layout from "../components/layout/Layout";
 // import Detailtest from "../components/recipe/Recipe";
 // import Board from "../components/board/Board";
 // import Edit from "../components/edit/Edit";
@@ -23,7 +23,7 @@ import SignComplete from "../pages/SignComplete";
 const Router = () => {
   return (
     <BrowserRouter>
-      {/* <Layout> */}
+      <Layout>
       <Routes>
         <Route path="/" element={<Main />} />
         {/* <Route path="board" element={<Board />} /> */}
@@ -36,7 +36,7 @@ const Router = () => {
         <Route path="/post" element={<Post />} />
         <Route path="/editpost/:id" element={<EditPost />} />
       </Routes>
-      {/* </Layout> */}
+      </Layout>
     </BrowserRouter>
   );
 };
