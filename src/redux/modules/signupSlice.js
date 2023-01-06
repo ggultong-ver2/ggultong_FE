@@ -4,8 +4,6 @@ import { apis } from "../../lib/axios";
 const __postSignup = async (post) => {
   try {
     const data = await apis.postSignup(post);
-
-    // alert("회원가입 성공!");
     return data;
   } catch (error) {
     console.log("err :::", error);
