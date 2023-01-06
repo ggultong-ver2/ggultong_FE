@@ -26,7 +26,7 @@ function Header() {
             ) : (
               <li
                 onClick={() => {
-                  localStorage.removeItem("id");=
+                  localStorage.removeItem("id");
                   localStorage.removeItem("nickname");
                   localStorage.removeItem("profileImg");
                   navigate("/login");

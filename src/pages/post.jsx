@@ -19,8 +19,31 @@ const Post = () => {
     console.log(addPost);
   };
 
+  const [title, setTitle] = useState("");
+  const [imagefile, setImageFile] = useState("");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
+  const [post, setPost] = useState([]);
+
+  const onSubmitHandler = () => {
+    console.log(title, content, category);
+    const formdata = new FormData();
+    formdata.append("title", title.title);
+    formdata.append("file", imagefile);
+    formdata.append("content", content.content);
+    formdata.append("category", category.category);
+    console.log(formdata);
+
+    dispatch(__addPost(formdata));
+  };
+
   return (
-    <div>
+    <div
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmitHandler(post);
+      }}
+    >
       <p># 게시글 작성</p>
       <p>
         제목:
