@@ -36,6 +36,7 @@ export const apis = {
   postLogin: (login) => instance.post("/user/login", login),
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
+  checkPw: (password) => instance.post(`/user/pwCheck/${password}`),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (emailCode) => instance.post("/user/emailCode/", emailCode),

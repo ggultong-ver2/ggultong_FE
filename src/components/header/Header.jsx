@@ -17,7 +17,9 @@ function Header() {
         <nav className="gnb">
           <ul className="clearfix">
             <li>알림</li>
-            <li>마이페이지</li>
+            <li onClick={() => navigate("/myconfirm")} className="myconfirm">
+              마이페이지
+            </li>
             {!localStorage.getItem("id") ? (
               <li onClick={() => navigate("/login")} className="login">
                 로그인

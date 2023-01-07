@@ -2,10 +2,10 @@ import { apis } from "../../lib/axios";
 import Swal from "sweetalert2";
 
 // id 중복체크
-const __idcheck = async (loginId) => {
+const __pwcheck = async (password) => {
   try {
-    const data = await apis.checkUserName(loginId);
-    console.log("loginId:::", loginId);
+    const data = await apis.checkUserName(password);
+    console.log("password:::", password);
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
@@ -14,10 +14,10 @@ const __idcheck = async (loginId) => {
     // useSweet(1000, "success", "회원가입 성공");
     return data;
   } catch (error) {
-    Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
+    // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
     // alert(error.response.data.msg);
     // useSweet(1000, "error", error.response.data.msg);
   }
 };
 
-export default __idcheck;
+export default __pwcheck;
