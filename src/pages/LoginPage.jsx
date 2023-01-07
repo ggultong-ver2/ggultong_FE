@@ -9,6 +9,7 @@ import loginprofile from "../assets/images/loginprofile.png";
 import lock from "../assets/images/lock.png";
 import naver from "../assets/images/navericon.png";
 import kakao from "../assets/images/kakaoicon.png";
+import "../pages/reset.css";
 
 const PostLoginPage = () => {
   // const url1 =
@@ -31,6 +32,12 @@ const PostLoginPage = () => {
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
         navigate("/");
+      } else {
+        Swal.fire(
+          res.data.msg,
+          "아이디 및 비밀번호를 다시 확인해주세요!",
+          "error"
+        );
       }
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
@@ -92,7 +99,7 @@ const PostLoginPage = () => {
             </SocialBtn>
             <SocialBtn
               kakao
-              href="https://kauth.kakao.com/oauth/authorize?client_id=ced49bfdb65f5f152e2e43f12e88bd86&redirect_uri=http://localhost:3000/api/user/kakao/callback&response_type=code"
+              href="https://kauth.kakao.com/oauth/authorize?client_id=0a5a9b8a46f9a0836b9ff04d61ffc21c&redirect_uri=http://localhost:3000/api/user/kakao/callback&response_type=code"
             >
               <SocialDiv src={kakao} width="45px" height="45px" />
               카카오톡으로 로그인
@@ -119,7 +126,6 @@ const StLoginBox = styled.div`
   font-size: 40px;
   margin-bottom: 10px;
   display: flex;
-  padding: 30px 0;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
 `;
