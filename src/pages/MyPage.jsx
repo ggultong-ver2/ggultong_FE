@@ -30,22 +30,41 @@ function MyPage() {
         <Stlabel>회원정보 수정</Stlabel>
         <br></br>
         <br></br>
-        <br></br>
+
         <Stdiv>
-          <div>
-            <p>아이디</p>
-            <StInput
-              placeholder="비밀번호를 입력 해 주세요"
-              type="password"
-              id="password"
-              onChange={setPassword}
-              value={password}
-              required
-              minLength={8}
-              maxLength={15}
-            ></StInput>
-          </div>
+          <p>아이디</p>
+          <StInput disabled />
           <br></br>
+          <p>비밀번호</p>
+          <StInput
+            placeholder="비밀번호를 입력 해 주세요"
+            type="password"
+            id="password"
+            onChange={setPassword}
+            value={password}
+            required
+            minLength={8}
+            maxLength={15}
+          ></StInput>
+          <br></br>
+          <p>비밀번호 확인</p>
+          <StInput
+            placeholder="비밀번호를 입력 해 주세요"
+            type="password"
+            id="password"
+            onChange={setPassword}
+            value={password}
+            required
+            minLength={8}
+            maxLength={15}
+          ></StInput>
+          <br></br>
+          <p>이메일</p>
+          <StInput disabled />
+
+          <br></br>
+          <p>프로필 변경</p>
+          <StInput type="file" />
           <br></br>
           <StButton
             onClick={() => {
@@ -79,7 +98,11 @@ const StCenterBox = styled.div`
   flex-direction: column;
 `;
 const Stdiv = styled.div`
-  width: 100px;
+  border-radius: 10px;
+  border: 2px solid #c2c2c2;
+  margin-left: 200px;
+  width: 80%;
+  height: 800px;
   padding-left: 30px;
 `;
 const StSignBox = styled.div`
@@ -107,8 +130,6 @@ const StInput = styled.input`
 `;
 
 const StButton = styled.button`
-  margin-top: 40px;
-  margin-bottom: 10px;
   width: 380px;
   height: 48px;
   border: 0;
