@@ -17,15 +17,16 @@ import Post from "../pages/post";
 import EditPost from "../pages/editPost";
 import SignComplete from "../pages/SignComplete";
 import KakaoLogin from "../pages/KakaoLogin";
-
+import MyConfirm from "../pages/MyConfirm";
+import MyPage from "../pages/MyPage";
 const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Main />} />
-          {/* <Route path="board" element={<Board />} /> */}
-          {/* <Route path="board/:id" element={<Edit />} /> */}
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/myconfirm" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signcomplete" element={<SignComplete />} />
           <Route path="/login" element={<LoginPage />} />

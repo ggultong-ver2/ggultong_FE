@@ -340,7 +340,7 @@ const StLabel = styled.label`
   font-weight: bold;
 `;
 const Stdiv = styled.h2`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 20px;

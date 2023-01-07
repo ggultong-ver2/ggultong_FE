@@ -15,7 +15,6 @@ function KakaoLogin() {
           `http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`
         );
         console.log("data::", data.data.data);
-
         localStorage.setItem("id", data.data.data.jwtToken);
         localStorage.setItem("nickname", data.data.data.nickname);
         localStorage.setItem("profileImg", data.data.data.profileImg);
