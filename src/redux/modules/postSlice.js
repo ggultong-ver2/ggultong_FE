@@ -70,7 +70,9 @@ export const __addPost = createAsyncThunk(
     try {
       console.log("payload:::", payload);
       //const data = await apis.createPost(payload);
-      const data = await axios.post("http://localhost:3001/postss", payload);
+      const data = await axios.post("http://localhost:3001/postss", payload, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       // console.log("payload: ", payload);
       console.log("addpostdata::: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -203,9 +205,10 @@ export const postSlice = createSlice({
     },
     [__getIdPost.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      state.post = action.payload.data; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-      // console.log("action.payload: ", action.payload);
-      // console.log("state.posts: ", state.posts);
+      state.details = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+      console.log("action.payload: ", action.payload);
+      console.log("state.details:", state.details);
+      //console.log("state.posts: ", state.posts);
     },
     [__getIdPost.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
@@ -218,7 +221,7 @@ export const postSlice = createSlice({
     },
     [__addPost.fulfilled]: (state, action) => {
       // 액션으로 받은 값 = payload 추가해준다.
-      console.log("action: ", action.payload);
+      console.log("action.payload: ", action);
       state.isLoading = false;
       state.posts.push(action.payload);
     },
@@ -251,13 +254,14 @@ export const postSlice = createSlice({
       // console.log('state-store값',state.diary)
       console.log("action-서버값", action);
       state.isLoading = false;
+      console.log(action.payload);
       state.posts = state.posts.map((post) =>
         post.id === action.payload.id
           ? {
               ...post,
               title: action.payload.data.title,
               content: action.payload.data.content,
-              imageurl: action.payload.data.imageurl,
+              file: action.payload.data.file,
               category: action.payload.data.category,
             }
           : post

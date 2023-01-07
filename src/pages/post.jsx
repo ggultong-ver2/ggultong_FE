@@ -7,29 +7,23 @@ import styled from "styled-components";
 const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [addPost, setAddPost] = useState({
-    title: "",
-    file: "",
-    content: "",
-    category: "",
-  });
 
-  const onClickAddPostHandler = () => {
-    dispatch(__addPost(addPost));
-    console.log(addPost);
-  };
+  //const onClickAddPostHandler = () => {
+  //dispatch(__addPost(addPost));
+  //console.log(addPost);
+  //};
 
   const [title, setTitle] = useState("");
-  const [imagefile, setImageFile] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
+  const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
 
   const onSubmitHandler = () => {
-    console.log(title, content, category);
+    console.log("addpost::", title, content, category, file);
     const formdata = new FormData();
     formdata.append("title", title.title);
-    formdata.append("file", imagefile);
+    formdata.append("file", file);
     formdata.append("content", content.content);
     formdata.append("category", category.category);
     console.log(formdata);
@@ -38,7 +32,7 @@ const Post = () => {
   };
 
   return (
-    <div
+    <form
       onSubmit={(e) => {
         e.preventDefault();
         onSubmitHandler(post);
@@ -49,9 +43,13 @@ const Post = () => {
         제목:
         <input
           type="text"
-          onChange={(e) => {
-            setAddPost({ ...addPost, title: e.target.value });
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setTitle({ ...title, title: value });
           }}
+          //onChange={(e) => {
+          //setAddPost({ ...addPost, title: e.target.value });
+          //}}
         ></input>
       </p>
       <p>
@@ -60,8 +58,9 @@ const Post = () => {
           type="select"
           name="category"
           id="category"
-          onChange={(e) => {
-            setAddPost({ ...addPost, category: e.target.value });
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setCategory({ ...category, category: value });
           }}
         >
           <option value="choose">선택해주세요</option>
@@ -69,6 +68,8 @@ const Post = () => {
           <option value="item">꿀템</option>
           <option value="room">꿀방</option>
           <option value="meal">꿀밥</option>
+          <option value="free">자유게시판</option>
+          <option value="question">Q&A</option>
         </select>
       </p>
       <p>
@@ -78,8 +79,9 @@ const Post = () => {
           id="fileUpload"
           multiple={true}
           width="500px"
-          onChange={(e) => {
-            setAddPost({ ...addPost, file: e.target.value });
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setFile({ ...file, file: value });
           }}
         />
         <button>추가하기</button>
@@ -88,14 +90,15 @@ const Post = () => {
         내용:
         <textarea
           type="text"
-          onChange={(e) => {
-            setAddPost({ ...addPost, content: e.target.value });
+          onChange={(ev) => {
+            const { value } = ev.target;
+            setContent({ ...content, content: value });
           }}
         ></textarea>
-        <button onClick={onClickAddPostHandler}>등록</button>
+        <button>등록</button>
         <button>취소</button>
       </p>
-    </div>
+    </form>
   );
 };
 
