@@ -1,13 +1,14 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
 import __postSignup from "../redux/modules/signupSlice";
 import __idcheck from "../redux/modules/checkIdSlice";
-import __sendemail from "../redux/modules/sendemailSlice";
 import __emailcode from "../redux/modules/emailcodeSlice";
 import __emailsend from "../redux/modules/sendemailSlice";
+import "../pages/reset.css";
+
 const PostLoginPage = () => {
   // const url1 =
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
@@ -70,13 +71,12 @@ const PostLoginPage = () => {
     }).then((res) => {
       setIsemail(res.data);
       console.log(res);
-      if (res.data.statusCode === 200) {
-        Swal.fire(
-          "인증번호 전송이 완료되었습니다!",
-          "해당 메일함에서 인증번호를 확인해주세요.",
-          "success"
-        );
-      }
+
+      Swal.fire(
+        "인증번호 전송이 완료되었습니다!",
+        "해당 메일함에서 인증번호를 확인해주세요.",
+        "success"
+      );
     });
   };
 
@@ -96,6 +96,7 @@ const PostLoginPage = () => {
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "다음으로 넘어가주세요!", "success");
       } else {
+        Swal.fire(res.data.msg, "다른 아이디를 써주세요", "error");
       }
     });
   };
@@ -208,7 +209,7 @@ const PostLoginPage = () => {
               id="nickname"
               value={nickname}
               onChange={setNickname}
-              placeholder="닉네임을 입력해주세요."
+              placeholder="닉네임을 입력해주세요. (최소 2 - 8자)"
               required
               minLength={2}
               maxLength={8}
@@ -300,7 +301,7 @@ const StLabel = styled.label`
   font-weight: bold;
 `;
 const Stdiv = styled.h2`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 20px;

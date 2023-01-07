@@ -1,6 +1,203 @@
+li:first-child{
+    margin-left: 0;
+}
+
+
+.hero_side{
+    background: #f2f2f2;
+    height: 400px;
+    text-align: center;
+}
+.hero_side h1{
+    font-size: 56px;
+    font-weight: normal;
+    padding-top: 100px;
+    line-height: 72px;
+}
+.hero_side button{
+    width: 150px;
+    height: 50px;
+    border: 0 none;
+    background: #a5a5a5;
+    cursor: pointer;
+    margin-top: 35px;
+}
+.hero_side button:hover{
+    background: #000;
+    color: white;
+}
+
 .main_container{
     width: 1200px;
     margin: 0 auto;
     padding: 20px 0;
 }
 
+.main_category li{
+    float: left;
+    margin-left: 15px;
+    background: #f2f2f2;
+    width: 220px;
+    height: 80px;
+    padding: 20px 20px;
+    cursor: pointer;
+}
+.main_category li:hover{
+    background: #a5a5a5;
+}
+
+.category_text h3{
+    font-size: 16px;
+    display: block;
+}
+.category_text p{
+    font-size: 14px;
+    display: block;
+}
+
+.main_magazine{
+    margin-top: 80px;
+}
+.main_magazine h3{
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+.main_magazine li{
+    float: left;
+    width: 380px;
+    height: 320px;
+    margin-left: 18px;
+    cursor: pointer;
+}
+.magazine_image{
+    width: 380px;
+    height: 230px;
+    background-image: url(../../public/images/default_image.jpeg);
+    background-size: contain;
+    background-position: center;
+}
+.main_magazine p{
+    height: 90px;
+    background: rgba(0,0,0,0.2);
+    padding: 18px 27px;
+    font-size: 18px;
+}
+.main_room{
+    margin-top: 65px;
+}
+.main_room li{
+    float: left;
+    margin-left: 20px;
+    width: 280px;height: 320px;
+    cursor: pointer;
+}
+.main_room li:first-child{
+    cursor: default;
+}
+.main_room h3{
+    font-size: 28px;
+    line-height: 42px;
+    margin-top: 26px;
+    margin-bottom: 80px;
+}
+.main_room button{
+    border: 0 none;
+    width: 150px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 16px;
+    background: #a5a5a5;
+}
+.main_room button:hover{
+    background: #000;
+    color: white;
+}
+.room_image{
+    height: 230px;
+    background-image: url(../../public/images/default_image.jpeg);
+    background-size: contain;
+    background-position: center;
+}
+
+.main_room p{
+    height: 90px;
+    background: rgba(0,0,0,0.2);
+    padding: 13px 20px;
+    font-size: 18px;
+
+}
+.main_recipe{
+    margin-top: 50px;
+}
+.main_recipe li{
+    float: left;
+    margin-left: 20px;
+    width: 280px;height: 320px;
+    cursor: pointer;
+}
+.main_recipe li:first-child{
+    cursor: default;
+}
+.main_recipe h3{
+    font-size: 28px;
+    line-height: 42px;
+    margin-top: 26px;
+    margin-bottom: 80px;
+}
+.main_recipe button{
+    border: 0 none;
+    width: 150px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 16px;
+    background: #a5a5a5;
+}
+.main_recipe button:hover{
+    background: #000;
+    color: white;
+}
+.recipe_image{
+    height: 230px;
+    background-image: url(../../public/images/default_image.jpeg);
+    background-size: contain;
+    background-position: center;
+}
+
+.main_recipe p{
+    height: 90px;
+    background: rgba(0,0,0,0.2);
+    padding: 13px 20px;
+    font-size: 18px;
+
+}
+
+.main_qna{
+    margin-top: 115px;
+    margin-bottom: 480px;
+    
+}
+.main_qna h3{
+    font-size: 22px;
+    line-height: 36px;
+    margin-bottom: 30px;
+}
+.qna_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.qna{
+    width: 585px;
+    height: 115px;
+    background: #f2f2f2;
+    padding: 20px 25px;
+    cursor: pointer;
+}
+.qna h4{
+    font-size: 16px;
+    line-height: 42px;
+}
+.qna p{
+    font-size: 14px;
+    line-height: 20px;
+}
