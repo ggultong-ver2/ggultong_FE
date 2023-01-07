@@ -1,3 +1,4 @@
+import { Action } from "@remix-run/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -8,13 +9,13 @@ import { __deletePost } from "./../redux/modules/postSlice";
 const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const details = useSelector((state) => state.posts);
+  const details = useSelector((state) => state.details.details);
   console.log("details:", details);
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    dispatch(__getIdPost(Number(id)));
+    dispatch(__getIdPost(id));
   }, [dispatch, id]);
 
   const onClickDeletePostHandler = () => {
@@ -28,9 +29,10 @@ const Detail = () => {
   return (
     <div>
       <StDetail>
-        <StTitle>{details.title}</StTitle>
-        <StFile>{details.file}</StFile>
-        <StContent>{details.content}</StContent>
+        <StTitle>제목:{details?.title}</StTitle>
+        <StCategory>카테고리:{details?.category}</StCategory>
+        <StFile>파일:{details?.file}</StFile>
+        <StContent>내용:{details?.content}</StContent>
         <Btns>
           <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
           <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
@@ -49,6 +51,10 @@ const StTitle = styled.p`
   border: 1px solid blue;
   height: 80px;
   font-size: 50px;
+  text-align: center;
+`;
+const StCategory = styled.div`
+  font-size: 30px;
   text-align: center;
 `;
 const StFile = styled.div`

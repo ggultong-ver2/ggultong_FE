@@ -17,6 +17,9 @@ const EditPost = () => {
     file: "",
     content: "",
   });
+
+  const selected = useSelector((state) => state.posts.detail);
+
   const onClickEditPostHandler = () => {
     const newPost = {
       title: "",
@@ -29,7 +32,7 @@ const EditPost = () => {
   useEffect(() => {
     dispatch(__getIdPost(Number(id)));
   }, [dispatch, id]);
-  const selected = useSelector((state) => state.posts.detail);
+
   console.log("selected:", selected);
 
   useEffect(() => {
