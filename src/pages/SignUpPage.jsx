@@ -7,6 +7,7 @@ import __postSignup from "../redux/modules/signupSlice";
 import __idcheck from "../redux/modules/checkIdSlice";
 import __emailcode from "../redux/modules/emailcodeSlice";
 import __emailsend from "../redux/modules/sendemailSlice";
+import __nickCheck from "../redux/modules/checkNickSlice";
 import "../pages/reset.css";
 
 const PostLoginPage = () => {
@@ -100,14 +101,18 @@ const PostLoginPage = () => {
       }
     });
   };
-
-  // 버튼 비활성화
-  // const onDisabled = (e) => {
-  //   e.preventDefault();
-  //   e.currentTarget.disabled = true;
-  //   e.currentTarget.style.background = "#e5e5e5";
-  //   e.currentTarget.style.color = "#4b5563";
-  // };
+  // 닉네임 중복 체크 확인
+  const onCheckNickName = (nickname) => {
+    console.log("nickname---->", nickname);
+    __nickCheck(loginId).then((res) => {
+      console.log(res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(res.data.msg, "좋은 닉네임이군요!", "success");
+      } else {
+        Swal.fire(res.data.msg, "중복된 닉네임입니다", "error");
+      }
+    });
+  };
 
   const handleClick = () => {
     setDisable(!disable);
@@ -212,7 +217,7 @@ const PostLoginPage = () => {
           <br></br>
           <StLabel htmlFor="nickname">닉네임*</StLabel>
           <StBox>
-            <StInput
+            <NickInput
               type="text"
               id="nickname"
               value={nickname}
@@ -222,6 +227,15 @@ const PostLoginPage = () => {
               minLength={2}
               maxLength={8}
             />
+            <StButton
+              checkbtn
+              onClick={() => {
+                onCheckNickName(nickname);
+              }}
+              type="button"
+            >
+              중복확인
+            </StButton>
           </StBox>
           <br></br>
           <StLabel htmlFor="email">이메일*</StLabel>
@@ -277,37 +291,6 @@ const PostLoginPage = () => {
           <StButton log>가입하기</StButton>
         </StCenterBox>
       </div>
-      {/* <div>
-        <h1>로그인</h1>
-        <StDiv inputbox>
-          <StLabel htmlFor="username">ID</StLabel>
-          <StInput
-            type="text"
-            id="username"
-            value={username}
-            onChange={setUserName}
-            required
-            minLength={5}
-            maxLength={10}
-          />
-          <StLabel htmlFor="password">PW</StLabel>
-          <StInput
-            type="password"
-            id="password"
-            value={password}
-            onChange={setPassword}
-            required
-            minLength={8}
-            maxLength={15}
-          />
-        </StDiv>
-      </div>
-      <StDiv btns>
-        <Stbutton log>로그인</Stbutton>
-        <Stbutton reg onClick={() => navigate("/signup")}>
-          회원가입
-        </Stbutton>
-      </StDiv> */}
     </StContainer>
   );
 };
@@ -368,6 +351,16 @@ const StCenterBox = styled.div`
 
 const StInput = styled.input`
   width: 360px;
+  height: 44px;
+  border: 1px solid #d9d9d9;
+  padding-left: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  letter-spacing: -0.1em;
+  font-size: 16px;
+`;
+const NickInput = styled.input`
+  width: 250px;
   height: 44px;
   border: 1px solid #d9d9d9;
   padding-left: 10px;

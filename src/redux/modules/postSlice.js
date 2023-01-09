@@ -6,6 +6,7 @@ const initialState = {
   login: [],
   signup: [],
   posts: [],
+  // patch:[],
   comments: [],
   like: [],
   isLoading: true,
@@ -28,6 +29,24 @@ export const __getPost = createAsyncThunk(
     }
   }
 );
+
+// 마이페이지 수정
+// export const __patchPost = createAsyncThunk(
+//   "patchPost",
+//   async (payload, thunkAPI) => {
+//     try {
+//       console.log("payload:::", payload);
+//       const data = await apis.createPost(payload);
+//       // const data = await axios.post("http://localhost:3002/recipes", payload);
+//       // console.log("payload: ", payload);
+//       console.log("addpostdata::: ", data);
+//       return thunkAPI.fulfillWithValue(data.data);
+//     } catch (err) {
+//       console.log(err);
+//       return thunkAPI.rejectWithValue(err);
+//     }
+//   }
+// );
 // top5 데이터 불러오기
 
 // export const __topPost = createAsyncThunk(
@@ -138,6 +157,30 @@ export const __likeToggle = createAsyncThunk(
     } catch (err) {
       console.log(err);
       return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+//마이페이지 수정
+export const __patchPost = createAsyncThunk(
+  "patchPost",
+  async (payload, thunkAPI) => {
+    try {
+      console.log("payload", payload);
+      const { nickname, password, imagefile } = payload;
+      const postData = new FormData();
+      postData.append("file", imagefile);
+      postData.append("password", password);
+      postData.append("nickname", nickname); //entries
+      // appen 키값 file 중요! 백엔드와 맞춰야함!
+      // postData.append("title",payload.title);
+      // postData.append("files", images);
+      const data = await apis.patchPost(payload);
+      if (data.request.status === 200) {
+      }
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

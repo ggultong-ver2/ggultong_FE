@@ -2,7 +2,9 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
+
   baseURL: " https://sparta-sjl.shop/api/user/login",
+
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -12,6 +14,7 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
+
   baseURL: " https://sparta-sjl.shop/api/user/login",
 
   headers: {
@@ -36,6 +39,7 @@ export const apis = {
   postLogin: (login) => instance.post("/user/login", login),
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
+  checkNickName: (nickname) => instance.post(`/user/nickCheck/${nickname}`),
   checkPw: (password) => instance.post(`/user/pwCheck/${password}`),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
@@ -58,6 +62,13 @@ export const apis = {
     baseURL.put(`/post/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
+  //마이페이지수정
+  patchPost: (patch) => {
+    console.log("patch::", patch);
+    baseURL.patch("/posts", patch, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
   // 리뷰 관련
 
   // 좋아요 관련
