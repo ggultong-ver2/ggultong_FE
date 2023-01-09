@@ -16,10 +16,15 @@ function Header() {
         </div>
         <nav className="gnb">
           <ul className="clearfix">
+            <li>
+              <input type="text" id="keyword" placeholder="궁금한 자취 정보를 입력하세요" className="searchinp"/>
+              <input type="submit" value="Search" class="search_button" onclick="search()" />
+            </li>
             <li>알림</li>
             <li onClick={() => navigate("/myconfirm")} className="myconfirm">
               마이페이지
             </li>
+
             {!localStorage.getItem("id") ? (
               <li onClick={() => navigate("/login")} className="login">
                 로그인
