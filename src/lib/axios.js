@@ -9,7 +9,7 @@ const instance = axios.create({
     "Access-Control-Allow-Origin": "*",
   },
 });
-
+//39.117.151.189 - 승섭님 아이피 / 마이페이지 전용
 // baseURL
 export const baseURL = axios.create({
   baseURL: "http://39.117.151.189/api",
@@ -62,7 +62,7 @@ export const apis = {
   //마이페이지수정
   patchPost: (patch) => {
     console.log("patch::", patch);
-    baseURL.patch("/posts", patch, {
+    baseURL.patch("/user/mypage/update", patch, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
