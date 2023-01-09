@@ -2,7 +2,7 @@ import { apis } from "../../lib/axios";
 import Swal from "sweetalert2";
 
 // 닉네임 중복체크
-const __nickcheck = async (nickname) => {
+const __nickCheck = async (nickname) => {
   try {
     const data = await apis.checkUserName(nickname);
     console.log("nickname:::", nickname);
@@ -20,4 +20,4 @@ const __nickcheck = async (nickname) => {
   }
 };
 
-export default __nickcheck;
+export default __nickCheck;
