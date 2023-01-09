@@ -1,146 +1,444 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import __pwcheck from "../redux/modules/checkPwSlice copy";
+import { useDispatch } from "react-redux";
 import { useInput } from "../lib/utils/useInput";
 
-function MyPage() {
-  const [password, setPassword] = useInput();
-  const navigate = useNavigate();
+import __pwcheck from "../redux/modules/checkPwSlice copy";
+import __nickCheck from "../redux/modules/checkNickSlice";
+import addimage from "../assets/images/addimage.png";
 
-  const onCheckPassword = (password) => {
-    console.log("password--->", password);
-    __pwcheck(password).then((res) => {
-      console.log(password);
+function MyPage() {
+  const imgRef = useRef();
+  const dispatch = useDispatch();
+  const [imagefile, setImageFile] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [patch, setPosts] = useState([]);
+
+  const onChangeImage = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+    const reader = new FileReader();
+    // const file = imgRef.current.files[0];
+    console.log(file);
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgUrl(reader.result);
+      // const image = reader.result;
+      setPosts({
+        ...patch,
+
+        imageUrl: reader.result,
+      });
+    };
+  };
+  const [nickname, setNickname] = useInput();
+  const [password, setPassword] = useInput();
+  // 닉네임 중복 체크 확인
+  const onCheckNickName = (nickname) => {
+    console.log("nickname---->", nickname);
+    __nickCheck(nickname).then((res) => {
+      console.log(res);
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "확인되었습니다.", "success");
-        // navigate("/mypage");
+        Swal.fire(res.data.msg, "좋은 닉네임이군요!", "success");
       } else {
-        Swal.fire(res.data.msg, "비밀번호가 틀렸습니다.", "error");
-        // navigate("/myconfirm");
+        Swal.fire(res.data.msg, "중복된 닉네임입니다", "error");
       }
     });
   };
 
+  const onSubmitHandler = () => {
+    // console.log(content);
+    const formdata = new FormData();
+    formdata.append("file", imagefile);
+    formdata.append("password", password.password);
+    formdata.append("nickname", nickname.nickname);
+    console.log(formdata);
+    console.log(typeof formdata);
+
+    dispatch(formdata);
+
+    for (const pair of formdata) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+  };
+
   return (
-    <StContainer>
-      <StCenterBox>
-        <StSignBox>마이페이지</StSignBox>
-        <Stlabel>회원정보 수정</Stlabel>
-        <br></br>
-        <br></br>
+    <StContainer
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmitHandler(patch);
+        // window.location.assign("/home");
+      }}
+    >
+      <div>
+        <StCenterBox>
+          <div>
+            <MyBox>내 정보</MyBox>
+            <MypageBox>
+              프로필 사진
+              <AppStyle>
+                <label htmlFor="ex_file">
+                  <div className="addImage">
+                    <img src={addimage} alt="addimage" />
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  accept="image/jpg, image/png, image/jpeg"
+                  id="ex_file"
+                  ref={imgRef}
+                  // onChange={onChangeImage}
+                  onChange={onChangeImage}
+                  width="140px"
+                  height="140px"
+                />
+              </AppStyle>
+              <Myprofile
+                alt=""
+                src={imgUrl ? imgUrl : localStorage.getItem("profileImg")}
+              />
+            </MypageBox>
 
-        <Stdiv>
-          <p>아이디</p>
-          <StInput disabled />
-          <br></br>
-          <p>비밀번호</p>
-          <StInput
-            placeholder="비밀번호를 입력 해 주세요"
-            type="password"
-            id="password"
-            onChange={setPassword}
-            value={password}
-            required
-            minLength={8}
-            maxLength={15}
-          ></StInput>
-          <br></br>
-          <p>비밀번호 확인</p>
-          <StInput
-            placeholder="비밀번호를 입력 해 주세요"
-            type="password"
-            id="password"
-            onChange={setPassword}
-            value={password}
-            required
-            minLength={8}
-            maxLength={15}
-          ></StInput>
-          <br></br>
-          <p>이메일</p>
-          <StInput disabled />
-
-          <br></br>
-          <p>프로필 변경</p>
-          <StInput type="file" />
-          <br></br>
-          <StButton
-            onClick={() => {
-              onCheckPassword(password);
-            }}
-          >
-            확인
-          </StButton>
-        </Stdiv>
-        <br></br>
-        <br></br>
-      </StCenterBox>
+            <MyNickBox>
+              닉네임
+              <StInput required />
+              <StNickButton
+                onClick={() => {
+                  onCheckNickName(nickname);
+                }}
+                type="button"
+              >
+                중복확인
+              </StNickButton>
+            </MyNickBox>
+            <MyPwBox>
+              <MyPW>비밀번호 변경</MyPW>
+              <StPwInput placeholder="숫자, 영문, 특수문자 조합 최소 8자" />
+              <StPwInput placeholder="비밀번호 재입력" />
+            </MyPwBox>
+            <MyNickBox>
+              가입한 이메일
+              <StEmailInput disabled />
+            </MyNickBox>
+          </div>
+        </StCenterBox>
+        <StCenterBox2>
+          <div>
+            <SettingBox>설정</SettingBox>
+            <SettingItm>&nbsp;알림</SettingItm>
+            <SettingItm>
+              <StButton>로그아웃</StButton>
+            </SettingItm>
+            <SettingItm>
+              <StButton>회원탈퇴</StButton>
+            </SettingItm>
+          </div>
+        </StCenterBox2>
+        <div>
+          <StLeftBox>
+            <Icon />
+            <div>
+              <LikeBox>
+                <p>좋아요 한 게시글</p>
+              </LikeBox>
+              <StCount>23</StCount>
+            </div>
+          </StLeftBox>
+          <StRightBox>
+            <Icon />
+            <div>
+              <LikeBox>
+                <p>좋아요 한 게시글</p>
+              </LikeBox>
+              <StCount>32</StCount>
+            </div>
+          </StRightBox>
+        </div>
+        <div>
+          <StCenterBox3></StCenterBox3>
+        </div>
+        <StFoot></StFoot>
+      </div>
     </StContainer>
   );
 }
 const StContainer = styled.form`
+  background-color: gray;
   width: 100%;
   height: 100vh;
+  display: flex;
   background-color: white;
-  align-items: center;
-  background-size: cover;
+  justify-content: center;
 `;
 const StCenterBox = styled.div`
-  width: 100%;
-  background-color: pink;
-  height: 900px;
-
+  padding-top: 40px;
+  padding-left: 40px;
+  margin-top: 30px;
+  max-width: 1000px;
+  height: 650px;
   border: 0;
   border-radius: 1px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-`;
-const Stdiv = styled.div`
-  border-radius: 10px;
-  border: 2px solid #c2c2c2;
-  margin-left: 200px;
-  width: 80%;
-  height: 800px;
-  padding-left: 30px;
-`;
-const StSignBox = styled.div`
-  letter-spacing: -0.1em;
-  width: 100%;
-  height: 80px;
-  font-size: 45px;
-  margin-bottom: 25px;
-  margin-top: 20px;
-  display: flex;
-  border-bottom: 6px solid black;
-  justify-content: center;
-`;
-const Stlabel = styled.label`
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: -0.1em;
-  display: flex;
-  justify-content: center;
+  font-size: 100%;
+  background-color: pink;
 `;
 
-const StInput = styled.input`
-  width: 300px;
-  height: 40px;
-`;
-
-const StButton = styled.button`
-  width: 380px;
-  height: 48px;
+const StCenterBox2 = styled.div`
+  padding-top: 20px;
+  padding-left: 40px;
+  margin-top: 30px;
+  width: 1000px;
+  height: 320px;
   border: 0;
-  font-size: 18px;
+  border-radius: 1px;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 100%;
+  background-color: orange;
+`;
+
+const StCenterBox3 = styled.div`
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 1000px;
+  height: 910px;
+  border: 0;
+  border-radius: 1px;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 100%;
+  background-color: orange;
+`;
+
+const StLeftBox = styled.div`
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 490px;
+  height: 225px;
+  float: left;
+  background-color: gray;
+`;
+
+const StRightBox = styled.div`
+  margin-top: 30px;
+  width: 490px;
+  height: 225px;
+  float: right;
+  background-color: gray;
+`;
+
+const StFoot = styled.div`
+  width: 100%;
+  height: 100px;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const MyBox = styled.div`
+  letter-spacing: -0.1em;
+  width: 920px;
+  height: 50px;
+  background-color: gray;
+  font-size: 24px;
+`;
+const SettingBox = styled.div`
+  letter-spacing: -0.1em;
+  width: 920px;
+  height: 50px;
+  margin-top: 20px;
+  border-bottom: 1px solid #ebebeb;
+  font-size: 24px;
+`;
+
+const SettingItm = styled.div`
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.1em;
+  width: 920px;
+  height: 50px;
+  margin-top: 10px;
+  font-weight: bold;
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid #ebebeb;
+  font-size: 16px;
+`;
+
+const SettingAlm = styled.div`
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.1em;
+  width: 920px;
+  height: 50px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ebebeb;
+  font-size: 16px;
+`;
+
+const MypageBox = styled.div`
+  padding-left: 15px;
+  width: 450px;
+  height: 220px;
+  background-color: orange;
+  font-size: 14px;
+  color: #9d9d9d;
+  font-weight: 600;
+`;
+const MyNickBox = styled.div`
+  padding-left: 15px;
+  width: 920px;
+  height: 100px;
+  background-color: orange;
+  font-size: 14px;
+  color: #9d9d9d;
+  font-weight: 600;
+`;
+const MyPW = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 50px;
+  float: left;
+  width: 100px;
+  height: 170px;
+`;
+
+const MyPwBox = styled.div`
+  float: right;
+  padding-left: 15px;
+  width: 920px;
+  height: 150px;
+  background-color: orange;
+  font-size: 14px;
+  color: #9d9d9d;
+  font-weight: 600;
+`;
+
+const LikeBox = styled.div`
+  letter-spacing: -0.1em;
+  font-weight: bold;
+  float: left;
+  margin-top: 30px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 200px;
+  height: 80px;
+`;
+
+const Myprofile = styled.img`
+  margin-left: 150px;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: 2px solid black;
+`;
+const StInput = styled.input`
+  padding-left: 10px;
   border-radius: 4px;
-  background-color: #b5b5b5;
-  font-family: georgia;
-  color: white;
+  margin-top: 20px;
+  border: 1px solid #000000;
+  background-color: #f5f6f9;
+  margin-left: 110px;
+  width: 470px;
+  height: 48px;
+`;
+const StEmailInput = styled.input`
+  padding-left: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  border: 1px solid #000000;
+  background-color: #f5f6f9;
+  margin-left: 65px;
+  width: 590px;
+  height: 48px;
+`;
+const StPwInput = styled.input`
+  border-radius: 4px;
+  margin-top: 10px;
+  padding-left: 10px;
+  border: 1px solid #000000;
+  background-color: #f5f6f9;
+  margin-left: 52px;
+  width: 590px;
+  height: 48px;
+`;
+const StButton = styled.button`
+  font-weight: bold;
+  width: 70px;
+  font-size: 16px;
+  height: 50px;
+  border: 0;
+  background-color: pink;
+  cursor: pointer;
+`;
+const StNickButton = styled.button`
+  width: 110px;
+  height: 46px;
+  margin-top: 8px;
+  margin-left: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: white;
   cursor: pointer;
   &:hover {
-    background-color: #797777;
+    background-color: #dcdcdc;
   }
+`;
+
+const Icon = styled.img`
+  margin-left: 20px;
+  margin-top: 30px;
+  background-color: white;
+  width: 65px;
+  height: 65px;
+`;
+
+const AppStyle = styled.div`
+  float: right;
+  margin: 0 8px 0 8px;
+  img {
+    max-width: 50px;
+  }
+  label {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+`;
+
+const ChgImg = styled.input``;
+
+const StCount = styled.div`
+  margin-top: 35px;
+  margin-right: 30px;
+  font-size: 38px;
+  background-color: white;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
 `;
 export default MyPage;

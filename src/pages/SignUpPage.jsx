@@ -7,6 +7,7 @@ import __postSignup from "../redux/modules/signupSlice";
 import __idcheck from "../redux/modules/checkIdSlice";
 import __emailcode from "../redux/modules/emailcodeSlice";
 import __emailsend from "../redux/modules/sendemailSlice";
+import __nickCheck from "../redux/modules/checkNickSlice";
 import "../pages/reset.css";
 
 const PostLoginPage = () => {
@@ -97,6 +98,18 @@ const PostLoginPage = () => {
         Swal.fire(res.data.msg, "다음으로 넘어가주세요!", "success");
       } else {
         Swal.fire(res.data.msg, "다른 아이디를 써주세요", "error");
+      }
+    });
+  };
+  // 닉네임 중복 체크 확인
+  const onCheckNickName = (nickname) => {
+    console.log("nickname---->", nickname);
+    __nickCheck(loginId).then((res) => {
+      console.log(res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(res.data.msg, "좋은 닉네임이군요!", "success");
+      } else {
+        Swal.fire(res.data.msg, "중복된 닉네임입니다", "error");
       }
     });
   };
@@ -204,7 +217,7 @@ const PostLoginPage = () => {
           <br></br>
           <StLabel htmlFor="nickname">닉네임*</StLabel>
           <StBox>
-            <StInput
+            <NickInput
               type="text"
               id="nickname"
               value={nickname}
@@ -214,6 +227,15 @@ const PostLoginPage = () => {
               minLength={2}
               maxLength={8}
             />
+            <StButton
+              checkbtn
+              onClick={() => {
+                onCheckNickName(nickname);
+              }}
+              type="button"
+            >
+              중복확인
+            </StButton>
           </StBox>
           <br></br>
           <StLabel htmlFor="email">이메일*</StLabel>
@@ -329,6 +351,16 @@ const StCenterBox = styled.div`
 
 const StInput = styled.input`
   width: 360px;
+  height: 44px;
+  border: 1px solid #d9d9d9;
+  padding-left: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  letter-spacing: -0.1em;
+  font-size: 16px;
+`;
+const NickInput = styled.input`
+  width: 250px;
   height: 44px;
   border: 1px solid #d9d9d9;
   padding-left: 10px;
