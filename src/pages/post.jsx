@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
+import "./reset.css";
 
 const Post = () => {
   const dispatch = useDispatch();

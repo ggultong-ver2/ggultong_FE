@@ -1,10 +1,9 @@
-import { Action } from "@remix-run/router";
+import "./reset.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { __getIdPost } from "../redux/modules/postSlice";
-import { __deletePost } from "./../redux/modules/postSlice";
+import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useParams, useNavigate } from "react-router";
+import "./reset.css";
 
 const EditPost = () => {
   const dispatch = useDispatch();
