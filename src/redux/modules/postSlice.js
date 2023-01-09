@@ -51,8 +51,8 @@ export const __getIdPost = createAsyncThunk(
   "getIdPost",
   async (payload, thunkAPI) => {
     try {
-      //const data = await apis.getIdPost(payload);
-      const data = await axios.get(`http://localhost:3001/postss/${payload}`);
+      const data = await apis.getIdPost(payload);
+      //const data = await axios.get(`http://localhost:3001/postss/${payload}`);
       console.log("payload: ", payload);
       console.log("getIddata:: ", data);
       // const getId = data.data.filter((recipe) => recipe.id === payload)[0];
@@ -69,10 +69,10 @@ export const __addPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload:::", payload);
-      //const data = await apis.createPost(payload);
-      const data = await axios.post("http://localhost:3001/postss", payload, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const data = await apis.createPost(payload);
+      //const data = await axios.post("http://localhost:3001/postss", payload, {
+      //headers: { "Content-Type": "multipart/form-data" },
+      // });
       // console.log("payload: ", payload);
       console.log("addpostdata::: ", data);
       return thunkAPI.fulfillWithValue(data.data);
