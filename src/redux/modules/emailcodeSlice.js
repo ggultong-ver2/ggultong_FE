@@ -3,13 +3,8 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 
 const __emailcode = async (emailcode) => {
-  // const [disabled, setDisabled] = useState(true);
-  // const handleClick = () => {
-  //   setDisabled(!disabled);
-  // };
-
   try {
-    const data = await apis.checkEmail(emailcode);
+    const data = await apis.checkemailCode(emailcode);
     console.log("emailcode:::", emailcode);
     console.log("data: ", data);
     if (data.data.statusCode === 400) {

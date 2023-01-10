@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 // 닉네임 중복체크
 const __nickCheck = async (nickname) => {
   try {
-    const data = await apis.checkUserName(nickname);
+    const data = await apis.checkNickName(nickname);
     console.log("nickname:::", nickname);
     console.log("data: ", data);
     if (data.data.status === 200) {

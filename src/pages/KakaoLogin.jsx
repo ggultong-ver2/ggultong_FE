@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 function KakaoLogin() {
   const location = useLocation();
-  const navigate = useNavigate();
   const KAKAO_CODE = location.search.split("=")[1];
 
   const IP = "52.79.64.171";
@@ -22,7 +21,7 @@ function KakaoLogin() {
       };
 
       ////토큰수정////
-      getToken().then(() => window.location.assign("/home"));
+      getToken().then(() => window.location.assign("/"));
     } catch (err) {
       console.log(err);
     }

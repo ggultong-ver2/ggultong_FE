@@ -2,8 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-
-  baseURL: " https://sparta-sjl.shop/api/user/login",
+  baseURL: " http://13.209.15.249/api",
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -12,10 +11,11 @@ const instance = axios.create({
   },
 });
 //39.117.151.189 - 승섭님 아이피 / 마이페이지 전용
+//13.209.15.249 - 재용님 아이피
+//43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-
-  baseURL: " https://sparta-sjl.shop/api/user/login",
+  baseURL: " http://13.209.15.249/api",
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -43,7 +43,7 @@ export const apis = {
   checkPw: (password) => instance.post(`/user/pwCheck/${password}`),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
-  checkemailCode: (emailCode) => instance.post("/user/emailCode/", emailCode),
+  checkemailCode: (post) => instance.post("/user/emailCode/", post),
   // 게시글 관련
   getPost: () => baseURL.get("/posts"),
   getIdPost: (id) => {
@@ -63,9 +63,9 @@ export const apis = {
       headers: { "Content-Type": "multipart/form-data" },
     }),
   //마이페이지수정
-  patchPost: (patch) => {
-    console.log("patch::", patch);
-    baseURL.patch("/user/mypage/update", patch, {
+  patchPost: (post) => {
+    console.log("patch::", post);
+    baseURL.patch("/user/mypage/update", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
