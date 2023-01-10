@@ -28,7 +28,7 @@ const PostLoginPage = () => {
       loginId,
       password,
     }).then((res) => {
-      console.log("res:::::", res);
+      console.log("res:::::", res.headers);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
         navigate("/");
@@ -40,8 +40,8 @@ const PostLoginPage = () => {
         );
       }
       localStorage.setItem("id", res.headers.authorization);
-      localStorage.setItem("username", res.data.data.username);
-      localStorage.setItem("profileUrl", res.data.data.profileUrl);
+      localStorage.setItem("nickname", res.data.data.nickname);
+      localStorage.setItem("profileImg", res.data.data.profileImg);
     });
   };
 

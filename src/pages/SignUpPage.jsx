@@ -16,7 +16,7 @@ const PostLoginPage = () => {
   // const url2 =
   //   "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
   const [email, setEmail] = useInput();
-  const [emailcode, setEmailCode] = useInput();
+  const [emailCode, setEmailCode] = useInput();
   const [loginId, setloginId] = useInput();
   const [password, setPassword] = useState();
   const [nickname, setNickname] = useInput();
@@ -65,6 +65,33 @@ const PostLoginPage = () => {
     });
   };
 
+  //바디형식 인증번호확인
+  const onEmailCode = (e) => {
+    // e.preventDefault();
+    __emailcode({
+      email,
+      emailCode,
+    }).then((res) => {
+      console.log(isemail);
+      if (res.data.statusCode === 200) {
+        console.log(isemail, emailCode);
+        Swal.fire(res.data.msg, "가입을 완료해주세요!", "success");
+      } else {
+        Swal.fire(res.data.msg, "다시 확인해주세요", "error");
+      }
+      // if (isemail === Number(emailcode)) {
+      //   console.log(isemail, emailcode);
+      //   Swal.fire(
+      //     "인증번호 확인되었습니다.",
+      //     "가입을 완료해주세요!",
+      //     "success"
+      //   );
+      // } else {
+      //   Swal.fire("인증번호가 불일치합니다!", "다시 확인해주세요", "error");
+      // }
+    });
+  };
+
   //바디형식 이메일코드 전송
   const onCheckEmail = (e) => {
     __emailsend({
@@ -104,7 +131,7 @@ const PostLoginPage = () => {
   // 닉네임 중복 체크 확인
   const onCheckNickName = (nickname) => {
     console.log("nickname---->", nickname);
-    __nickCheck(loginId).then((res) => {
+    __nickCheck(nickname).then((res) => {
       console.log(res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "좋은 닉네임이군요!", "success");
@@ -116,25 +143,6 @@ const PostLoginPage = () => {
 
   const handleClick = () => {
     setDisable(!disable);
-  };
-
-  //바디형식 인증번호확인
-  const onEmailCode = (e) => {
-    __emailcode({
-      emailcode,
-    }).then((res) => {
-      console.log(isemail);
-      if (isemail === Number(emailcode)) {
-        console.log(isemail, emailcode);
-        Swal.fire(
-          "인증번호 확인되었습니다.",
-          "가입을 완료해주세요!",
-          "success"
-        );
-      } else {
-        Swal.fire("인증번호가 불일치합니다!", "다시 확인해주세요", "error");
-      }
-    });
   };
 
   // 이메일 인증번호 확인
@@ -269,7 +277,7 @@ const PostLoginPage = () => {
             <StEmailInput
               type="text"
               id="emailcode"
-              value={emailcode}
+              value={emailCode}
               onChange={setEmailCode}
               placeholder="인증번호를 입력해주세요!"
               required
@@ -280,7 +288,7 @@ const PostLoginPage = () => {
               id="emailcode"
               checkbtn
               onClick={(e) => {
-                onEmailCode(emailcode);
+                onEmailCode(emailCode);
                 // onDisabled(e);
               }}
               type="button"

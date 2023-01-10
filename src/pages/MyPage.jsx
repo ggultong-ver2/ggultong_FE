@@ -1,24 +1,52 @@
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useInput } from "../lib/utils/useInput";
-
 import __pwcheck from "../redux/modules/checkPwSlice copy";
 import __nickCheck from "../redux/modules/checkNickSlice";
 import addimage from "../assets/images/addimage.png";
+import { __patchPost } from "../redux/modules/postSlice";
+import { apis } from "../lib/axios";
 
 function MyPage() {
   const imgRef = useRef();
   const dispatch = useDispatch();
-  const [imagefile, setImageFile] = useState("");
+  const [profileImg, setProfileImg] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [patch, setPosts] = useState([]);
+  const [post, setPost] = useState([]);
+  const [nickname, setNickname] = useInput();
+  const [password, setPassword] = useState("");
+  const [PWPtag, setPWPtag] = useState();
+  const [PWConfirm, setPWConfirm] = useState("");
+  const [PWConfirmP, setPWConfirmP] = useState(false);
+
+  function isPassword(asValue) {
+    const regExp =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return regExp.test(asValue);
+  }
+
+  const PWChk = () => {
+    if (!isPassword(password)) {
+      setPWPtag("사용 불가능합니다. 숫자/영문/특수문자를 모두포함한, 8자~15자");
+    } else {
+      setPWPtag("사용가능한 비밀번호 입니다");
+    }
+  };
+
+  const PWConfirmChk = () => {
+    if (password !== PWConfirm) {
+      setPWConfirmP("비밀번호가 일치하지않습니다");
+    } else {
+      setPWConfirmP("비밀번호 확인되었습니다.");
+    }
+  };
 
   const onChangeImage = (event) => {
     const file = event.target.files[0];
-    setImageFile(file);
+    setProfileImg(file);
     const reader = new FileReader();
     // const file = imgRef.current.files[0];
     console.log(file);
@@ -26,15 +54,14 @@ function MyPage() {
     reader.onloadend = () => {
       setImgUrl(reader.result);
       // const image = reader.result;
-      setPosts({
-        ...patch,
+      setPost({
+        ...post,
 
         imageUrl: reader.result,
       });
     };
   };
-  const [nickname, setNickname] = useInput();
-  const [password, setPassword] = useInput();
+
   // 닉네임 중복 체크 확인
   const onCheckNickName = (nickname) => {
     console.log("nickname---->", nickname);
@@ -48,30 +75,43 @@ function MyPage() {
     });
   };
 
-  const onSubmitHandler = () => {
-    // console.log(content);
-    const formdata = new FormData();
-    formdata.append("file", imagefile);
-    formdata.append("password", password.password);
-    formdata.append("nickname", nickname.nickname);
-    console.log(formdata);
-    console.log(typeof formdata);
+  // const onSubmitHandler = () => {
+  //   // console.log(content);
+  //   const formdata = new FormData();
+  //   formdata.append("file", imagefile);
+  //   formdata.append("password", password.password);
+  //   formdata.append("nickname", nickname.nickname);
+  //   console.log(formdata);
+  //   console.log(typeof formdata);
 
-    dispatch(formdata);
+  //   dispatch(formdata);
 
-    for (const pair of formdata) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+  //   for (const pair of formdata) {
+  //     console.log(pair[0] + ", " + pair[1]);
+  //   }
+  // };
+
+  const onSubmitPostHandler = (e) => {
+    e.preventDefault();
+    console.log("버튼눌러짐");
+    dispatch(
+      __patchPost({
+        password,
+        profileImg,
+        nickname,
+      })
+    );
+  };
+
+  const handleClickLogout = () => {
+    window.location.assign("/");
+    localStorage.removeItem("id");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("profileImg");
   };
 
   return (
-    <StContainer
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmitHandler(patch);
-        // window.location.assign("/home");
-      }}
-    >
+    <StContainer onSubmit={onSubmitPostHandler}>
       <div>
         <StCenterBox>
           <div>
@@ -103,7 +143,13 @@ function MyPage() {
 
             <MyNickBox>
               닉네임
-              <StInput required />
+              <StInput
+                required
+                type="text"
+                id="nickname"
+                value={nickname}
+                onChange={setNickname}
+              />
               <StNickButton
                 onClick={() => {
                   onCheckNickName(nickname);
@@ -114,9 +160,35 @@ function MyPage() {
               </StNickButton>
             </MyNickBox>
             <MyPwBox>
-              <MyPW>비밀번호 변경</MyPW>
-              <StPwInput placeholder="숫자, 영문, 특수문자 조합 최소 8자" />
-              <StPwInput placeholder="비밀번호 재입력" />
+              <MyPW htmlFor="password">비밀번호 변경</MyPW>
+              <StPwInput
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                onBlur={PWChk}
+                placeholder="숫자, 영문, 특수문자 조합 최소 8자"
+                required
+                minLength={8}
+                maxLength={15}
+              />
+              {<StP>{PWPtag}</StP>}
+              <StPwInput
+                type="password"
+                id="PWConfirm"
+                value={PWConfirm}
+                onChange={(e) => {
+                  setPWConfirm(e.target.value);
+                }}
+                onBlur={PWConfirmChk}
+                placeholder="비밀번호 재입력"
+                required
+                minLength={8}
+                maxLength={15}
+              />
+              {<StP>{PWConfirmP}</StP>}
             </MyPwBox>
             <MyNickBox>
               가입한 이메일
@@ -129,7 +201,7 @@ function MyPage() {
             <SettingBox>설정</SettingBox>
             <SettingItm>&nbsp;알림</SettingItm>
             <SettingItm>
-              <StButton>로그아웃</StButton>
+              <StButton onClick={() => handleClickLogout()}>로그아웃</StButton>
             </SettingItm>
             <SettingItm>
               <StButton>회원탈퇴</StButton>
@@ -159,11 +231,57 @@ function MyPage() {
         <div>
           <StCenterBox3></StCenterBox3>
         </div>
-        <StFoot></StFoot>
+        <StFoot>
+          <StButton
+          // onClick={() =>
+          //   Swal.fire(
+          //     "회원정보 수정완료!",
+          //     "정보 수정이 완료되었습니다.",
+          //     "success"
+          //   )
+          // }
+          >
+            프로필 수정
+          </StButton>
+        </StFoot>
       </div>
     </StContainer>
   );
 }
+
+//회원탈퇴
+
+// const handleDeleteProfile = (e) => {
+//   e.preventDefault();
+//   if (
+//     Swal.fire({
+//       title: "정말 탈퇴 하시겠습니까??",
+//       text: "조금만 더 생각해보세요 ㅠ.ㅠ",
+//       icon: "warning",
+//       showCancelButton: true,
+//       confirmButtonColor: "#3085d6",
+//       cancelButtonColor: "#d33",
+//       confirmButtonText: "Yes, delete it!",
+//     })
+//   ) {
+//     apis
+//       .delete(`${process.env.REACT_APP_PROXY_URL}/members/${parsed.memberId}`, {
+//         headers: {
+//           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+//         },
+//       })
+//       .then((result) => {
+//         if (result.isConfirmed) {
+//           localStorage.clear();
+//           Swal.fire("탈퇴 완료!", "그동안 이용해주셔서 감사합니다.", "success");
+//           Navigate("/");
+//         }
+//       });
+//   } else {
+//     return;
+//   }
+// };
+
 const StContainer = styled.form`
   background-color: gray;
   width: 100%;
@@ -300,7 +418,7 @@ const MyNickBox = styled.div`
   color: #9d9d9d;
   font-weight: 600;
 `;
-const MyPW = styled.div`
+const MyPW = styled.label`
   display: flex;
   align-items: center;
   padding-bottom: 50px;
@@ -427,7 +545,10 @@ const AppStyle = styled.div`
   }
 `;
 
-const ChgImg = styled.input``;
+const StP = styled.div`
+  width: 800px;
+  margin-left: 155px;
+`;
 
 const StCount = styled.div`
   margin-top: 35px;
