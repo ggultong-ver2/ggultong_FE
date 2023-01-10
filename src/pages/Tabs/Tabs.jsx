@@ -1,6 +1,7 @@
 import "./Tabs.css";
 import { useState } from "react";
 import Lists from "../../components/boards/lists/Lists";
+import Pagination from "../../components/pagination/pagination";
 
 const Tabs = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -8,6 +9,10 @@ const Tabs = () => {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const offset = (page - 1) * limit;
 
   return (
     <div className="container">
@@ -23,80 +28,60 @@ const Tabs = () => {
           className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(2)}
         >
-          인기
+          자취꿀방
         </button>
         <button
           className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(3)}
         >
-          꿀매거진
+          자취꿀팁
         </button>
         <button
           className={toggleState === 4 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(4)}
         >
-          자취꿀방
-        </button>
-        <button
-          className={toggleState === 5 ? "tabs active-tabs" : "tabs"}
-          onClick={() => toggleTab(5)}
-        >
-          자취꿀팁
-        </button>
-        <button
-          className={toggleState === 6 ? "tabs active-tabs" : "tabs"}
-          onClick={() => toggleTab(6)}
-        >
           자취꿀밥
-        </button>
-        <button
-          className={toggleState === 7 ? "tabs active-tabs" : "tabs"}
-          onClick={() => toggleTab(7)}
-        >
-          자취꿀템
         </button>
       </div>
       <div className="content-tabs">
         <div
           className={toggleState === 1 ? "content active-content" : "content"}
         >
-          <p>content1</p>
-          <hr />
-          <p>content1's content</p>
+          <div className="banners">
+            <div className="banner" />
+            <div className="banner" />
+          </div>
+          <div className="lists">
+            <Lists />
+            <Lists />
+          </div>
         </div>
+
         <div
           className={toggleState === 2 ? "content active-content" : "content"}
         >
           <Lists />
+          <Lists />
+          <Lists />
+          <Lists />
+          <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>
         <div
           className={toggleState === 3 ? "content active-content" : "content"}
         >
-          <p>content3</p>
-          <hr />
-          <p>content3's content</p>
+          <Lists />
+          <Lists />
+          <Lists />
+          <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>
         <div
           className={toggleState === 4 ? "content active-content" : "content"}
         >
           <Lists />
-        </div>
-        <div
-          className={toggleState === 5 ? "content active-content" : "content"}
-        >
           <Lists />
-        </div>
-        <div
-          className={toggleState === 6 ? "content active-content" : "content"}
-        >
           <Lists />
-        </div>
-        <div
-          className={toggleState === 7 ? "content active-content" : "content"}
-        >
-          <p>content7</p>
-          <hr />
-          <p>content's content</p>
+          <Lists />
+          <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>
       </div>
     </div>
