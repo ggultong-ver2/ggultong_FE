@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apis } from "../../lib/axios";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const initialState = {
   login: [],
@@ -170,17 +171,23 @@ export const __patchPost = createAsyncThunk(
       console.log("payload", payload);
       const { nickname, password, imagefile } = payload;
       const postData = new FormData();
-      postData.append("file", imagefile);
+      postData.append("profileImg", imagefile);
       postData.append("password", password);
       postData.append("nickname", nickname); //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
       // postData.append("title",payload.title);
       // postData.append("files", images);
       const data = await apis.patchPost(payload);
-      if (data.request.status === 200) {
+      if (data.request.statusCode === 200) {
+        Swal.fire(
+          "회원정보 수정완료!",
+          "정보 수정이 완료되었습니다.",
+          "success"
+        );
       }
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
+      Swal.fire("회원정보 수정 실패!", "다시 확인해주세요.", "error");
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -219,6 +226,22 @@ export const postSlice = createSlice({
       state.posts = action.payload;
     },
     [__getPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      // 에러 발생-> 네트워크 요청은 끝,false
+      // catch 된 error 객체를 state.error에 넣습니다.
+    },
+
+    [__patchPost.pending]: (state) => {
+      state.isLoading = true;
+      // 네트워크 요청 시작-> 로딩 true 변경합니다.
+    },
+    [__patchPost.fulfilled]: (state, action) => {
+      // action으로 받아온 객체를 store에 있는 값에 넣어준다
+      state.isLoading = false;
+      state.post = action.payload;
+    },
+    [__patchPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
       // 에러 발생-> 네트워크 요청은 끝,false

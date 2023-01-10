@@ -28,7 +28,7 @@ const PostLoginPage = () => {
       loginId,
       password,
     }).then((res) => {
-      console.log("res:::::", res);
+      console.log("res:::::", res.headers);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
         navigate("/");
@@ -39,12 +39,14 @@ const PostLoginPage = () => {
           "error"
         );
       }
+
       localStorage.setItem(
         "id",
         `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiYXV0aCI6IkFjY2VzcyIsImV4cCI6MTY3MzM2NjM1OCwiaWF0IjoxNjczMjc5OTU4fQ.ipbD8kIenD8p5FI9aw8ONG04xvmttKF-F_ywsxMfWQE`
       );
       localStorage.setItem("username", res.data.data.username);
       localStorage.setItem("profileUrl", res.data.data.profileUrl);
+
     });
   };
 
