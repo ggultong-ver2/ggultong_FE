@@ -1,7 +1,24 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { __getPost } from "../redux/modules/postSlice";
+import Magazine from "./Magazine";
+import QNA from "./QNA";
+import Recipe from "./Recipe";
 import "./reset.css";
+import Room from "./Room";
 import "./style.css";
 
-function Main() {
+function Main(props) {
+  const selectedCategory = props.category;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const post = useSelector((state) => state.post.posts.list);
+  // useEffect(() => {
+  //   dispatch(__getPost(selectedCategory));
+  // }, [selectedCategory, dispatch]);
+  console.log(selectedCategory);
+
   return (
     <>
       <div className="hero_side">
@@ -45,99 +62,10 @@ function Main() {
             </li>
           </ul>
         </div>
-        <div className="main_magazine">
-          <h3>에디터가 엄선한 자취 꿀매거진</h3>
-          <ul className="clearfix">
-            <li>
-              {/* <img src={post.imageUrl} alt="image" /> */}
-              <div>
-                <div className="magazine_image"></div>
-                <p>자취방에서 위잉거리는 소리가 나요</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div className="magazine_image"></div>
-                <p>자취방에서 위잉거리는 소리가 나요</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div className="magazine_image"></div>
-                <p>자취방에서 위잉거리는 소리가 나요</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div className="main_room">
-          <ul className="clearfix">
-            <li>
-              <h3>지금 자취방을 <br />구하고 있다면?</h3>
-              <button>글 구경하기</button>
-            </li>
-            <li>
-              <div className="room_image"></div>
-              <p>벌레가 나왔을 때 퇴치법 A to Z</p>
-            </li>
-            <li>
-              <div className="room_image"></div>
-              <p>벌레가 나왔을 때 퇴치법 A to Z</p>
-            </li>
-            <li>
-              <div className="room_image"></div>
-              <p>벌레가 나왔을 때 퇴치법 A to Z</p>
-            </li>
-          </ul>
-        </div>
-        <div className="main_recipe">
-          <ul className="clearfix">
-            <li>
-              <h3>간단하게 할 수 있는 <br />요리 레시피 추천!</h3>
-              <button>글 구경하기</button>
-            </li>
-            <li>
-              <div className="recipe_image"></div>
-              <p>벌레가 나왔을 때 퇴치법 A to Z</p>
-            </li>
-            <li>
-              <div className="recipe_image"></div>
-              <p>벌레가 나왔을 때 퇴치법 A to Z</p>
-            </li>
-            <li>
-              <div className="recipe_image"></div>
-              <p>벌레가 나왔을 때 퇴치법 A to Z</p>
-            </li>
-          </ul>
-        </div>
-        <div className="main_qna">
-          <h3>실시간 Q&A</h3>
-          <div className="qna_wrap">
-            <div className="qna">
-              <h4>복층 힘든 점이 뭔가요? 궁금해여</h4>
-              <p>자취하는 어린이</p>
-            </div>
-            <div className="qna">
-              <h4>복층 힘든 점이 뭔가요? 궁금해여</h4>
-              <p>자취하는 어린이</p>
-            </div>
-            <div className="qna">
-              <h4>복층 힘든 점이 뭔가요? 궁금해여</h4>
-              <p>자취하는 어린이</p>
-            </div>
-            <div className="qna">
-              <h4>복층 힘든 점이 뭔가요? 궁금해여</h4>
-              <p>자취하는 어린이</p>
-            </div>
-            <div className="qna">
-              <h4>복층 힘든 점이 뭔가요? 궁금해여</h4>
-              <p>자취하는 어린이</p>
-            </div>
-            <div className="qna">
-              <h4>복층 힘든 점이 뭔가요? 궁금해여</h4>
-              <p>자취하는 어린이</p>
-            </div>
-          </div>
-        </div>
+        <Magazine />
+        <Room />
+        <Recipe />
+        <QNA />
       </div>
     </>
   );

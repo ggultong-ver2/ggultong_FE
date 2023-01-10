@@ -1,5 +1,6 @@
 // import React from "react";
 import Header from "../header/Header";
+import Category from "../category/Category";
 // // import "./style.css";
 
 // const FooterStyles = {
@@ -36,6 +37,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Header />
+      <Category />
       <div>{children}</div>
       {/* <Footer /> */}
     </div>

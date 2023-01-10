@@ -1,12 +1,21 @@
 .headerwrap{
     width: 1200px;
-    height: 100px;
+    height: 72px;
     /* background: slategrey; */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
     padding: 0 40px;
+}
+.category_wrap{
+    width: 1200px;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 40px;
+    font-size: 14px;
 }
 
 .logo{
@@ -34,7 +43,7 @@
 }
 .search_button{
     position: absolute;
-    top: 7.2%;
+    top: 5.2%;
     right: 28.2%;
     transform: translateY(-50%);
     width: 25px;
@@ -46,11 +55,38 @@
     cursor: pointer;
 }
 
-.header_container::after{
+.category_wrap li{
+    float: left;
+    margin-left: 20px;
+}
+
+
+.category_wrap .post_button {
+    background: #000;
+    border: 0 none;
+    width: 65px;height: 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+.category_wrap .post_button a{
+    color: white;
+    line-height: 24px;
+}
+
+.category_wrap .post_button:hover{
+    background: #a5a5a5;
+}
+.category_wrap .post_button:hover a{
+    color: #000;
+}
+
+
+/* .header_container::after{
     display: block;
     content: "";
     width: 90%;
     height: 1px;
     background: #000;
     margin: 0 auto;
-}
+} */
