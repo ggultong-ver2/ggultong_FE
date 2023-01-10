@@ -2,7 +2,9 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: " http://13.209.15.249/api",
+
+  baseURL: " https://sparta-sjl.shop/api", //상정님
+
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -15,7 +17,9 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-  baseURL: " http://13.209.15.249/api",
+
+  baseURL: " https://sparta-sjl.shop/api",
+
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -45,14 +49,14 @@ export const apis = {
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
   // 게시글 관련
-  getPost: () => baseURL.get("/posts"),
+  getPost: () => baseURL.get("/post/postlist"),
   getIdPost: (id) => {
     return baseURL.get(`/post/${id}`);
   },
 
   createPost: (post) => {
     console.log("payload::", post);
-    baseURL.post("/post", post, {
+    baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },

@@ -12,6 +12,7 @@ const initialState = {
   like: [],
   isLoading: true,
   error: null,
+  post: {},
 };
 
 // 데이터 불러오기
@@ -93,7 +94,7 @@ export const __addPost = createAsyncThunk(
       //const data = await axios.post("http://localhost:3001/postss", payload, {
       //headers: { "Content-Type": "multipart/form-data" },
       // });
-      // console.log("payload: ", payload);
+      console.log("payload: ", payload);
       console.log("addpostdata::: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {

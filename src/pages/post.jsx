@@ -20,16 +20,24 @@ const Post = () => {
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
 
-  const onSubmitHandler = () => {
-    console.log("addpost::", title, content, category, file);
+  const onSubmitHandler = (e) => {
     const formdata = new FormData();
+    //console.log("addpost::", title, content, category, file);
+
     formdata.append("title", title.title);
     formdata.append("file", file);
     formdata.append("content", content.content);
     formdata.append("category", category.category);
-    console.log(formdata);
-
+    console.log(file);
+    //for (let value of formdata.values()) {
+    //console.log(key);
+    //}
+    // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
     dispatch(__addPost(formdata));
+
+    for (const pair of formdata) {
+      console.log(pair[0] + "," + pair[1]);
+    }
   };
 
   return (
@@ -82,6 +90,7 @@ const Post = () => {
           width="500px"
           onChange={(ev) => {
             const { value } = ev.target;
+            console.log(value);
             setFile({ ...file, file: value });
           }}
         />

@@ -39,9 +39,14 @@ const PostLoginPage = () => {
           "error"
         );
       }
-      localStorage.setItem("id", res.headers.authorization);
-      localStorage.setItem("nickname", res.data.data.nickname);
-      localStorage.setItem("profileImg", res.data.data.profileImg);
+
+      localStorage.setItem(
+        "id",
+        `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTIzIiwiYXV0aCI6IkFjY2VzcyIsImV4cCI6MTY3MzM2NjM1OCwiaWF0IjoxNjczMjc5OTU4fQ.ipbD8kIenD8p5FI9aw8ONG04xvmttKF-F_ywsxMfWQE`
+      );
+      localStorage.setItem("username", res.data.data.username);
+      localStorage.setItem("profileUrl", res.data.data.profileUrl);
+
     });
   };
 
