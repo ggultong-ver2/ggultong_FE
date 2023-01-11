@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: " https://sparta-sjl.shop/api", //상정님
+  baseURL: "https://sparta-sjl.shop/api", //상정님
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -15,7 +15,7 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-  baseURL: " https://sparta-sjl.shop/api",
+  baseURL: "https://sparta-sjl.shop/api",
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -27,9 +27,9 @@ export const baseURL = axios.create({
 //인스턴스 request header
 baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
-  const token = localStorage.getItem("id");
+  const token = localStorage.getItem("Access_Token");
 
-  config.headers["Access_Token"] = `${token}`;
+  config.headers["Authorization"] = `${token}`;
   return config;
 });
 
@@ -52,10 +52,9 @@ export const apis = {
 
   createPost: (post) => {
     console.log("payload::", post);
-    const data = baseURL.post("/post/create", post, {
+    baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    return data;
   },
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
@@ -73,7 +72,4 @@ export const apis = {
   // 리뷰 관련
 
   // 좋아요 관련
-  likeToggle: () => {
-    baseURL.post(`/api/like/post/1`, {});
-  },
 };
