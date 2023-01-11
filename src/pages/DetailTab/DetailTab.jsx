@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { __getPost } from "./../../redux/modules/postSlice";
 import Lists from "../../components/boards/lists/Lists";
 import Pagination from "../../components/pagination/pagination";
-import Category from "./../../components/category/Category";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 
