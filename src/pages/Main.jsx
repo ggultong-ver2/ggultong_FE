@@ -17,7 +17,7 @@ function Main(props) {
   // useEffect(() => {
   //   dispatch(__getPost(selectedCategory));
   // }, [selectedCategory, dispatch]);
-  console.log(selectedCategory);
+  //console.log(selectedCategory);
 
   return (
     <>

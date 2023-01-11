@@ -20,6 +20,7 @@ const Detail = (props) => {
   useEffect(() => {
     dispatch(__getIdPost(+param.id));
   }, [dispatch, param.id]);
+
   const onClickDeletePostHandler = (id) => {
     dispatch(__deletePost(id));
   };
@@ -34,9 +35,9 @@ const Detail = (props) => {
         <StTitle>{details?.title}</StTitle>
         <StCategory>카테고리:{details?.category}</StCategory>
         <StNickname>{details?.nickname} 님</StNickname>
-        <StFile>{details?.imageFiles[0]}</StFile>
+        <StFile src={details?.imageFiles[0]} />
         <StContent>{details?.content}</StContent>
-        <StFiles>{details?.imageFiles[1]}</StFiles>
+        <StFiles src={details?.imageFiles[1]} />
         <Date>{details?.createdAt}</Date>
         <Btns>
           <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
@@ -82,7 +83,7 @@ const StContent = styled.div`
   margin-top: 30px;
   font-size: 18px; ;
 `;
-const StFiles = styled.div`
+const StFiles = styled.img`
   height: 350px;
   width: 800px;
   background-color: #d9d9d9;

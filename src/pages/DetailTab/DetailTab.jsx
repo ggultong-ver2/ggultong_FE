@@ -9,6 +9,11 @@ import { useParams } from "react-router";
 const DetailTab = () => {
   const [toggleState, setToggleState] = useState(1);
   const dispatch = useDispatch();
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(__getPost(Number(id)));
+  }, [id, dispatch]);
 
   const toggleTab = (index) => {
     setToggleState(index);
