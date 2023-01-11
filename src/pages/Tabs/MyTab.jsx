@@ -1,64 +1,63 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import "./MyTab.css";
+import MyPage from "../MyPage";
 import styled from "styled-components";
+import PostLoginPage from "../SignUpPage";
 
-const MyTab = () => {
-  const [currentTab, setCurrentTab] = useState(0);
-
-  const menuArr = [
-    { name: "Tab1", content: "Tab menu ONE" },
-    { name: "Tab2", content: "Tab menu TWO" },
-    { name: "Tab3", content: "Tab menu THREE" },
-  ];
-
-  const selectMenuHandler = (index) => {
-    setCurrentTab(index);
-  };
-
-  return (
-    <>
-      <div>
-        <TabMenu>
-          {menuArr.map((ele, index) => {
-            return (
-              <li
-                key={index}
-                className={currentTab === index ? "submenu focused" : "submenu"}
-                onClick={() => selectMenuHandler(index)}
-              >
-                {ele.name}
-              </li>
-            );
-          })}
-        </TabMenu>
-        <Desc>
-          <h1>{menuArr[currentTab].content}</h1>
-          <p>바뀌는거 맞습니다..</p>
-        </Desc>
-      </div>
-    </>
-  );
+export const menuList = {
+  0: <MyPage />,
+  1: <PostLoginPage />,
 };
 
-const TabMenu = styled.div`
-  background-color: #dcdcdc;
-  font-weight: bold;
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  align-items: center;
-  list-style: none;
+class MyTab extends React.Component {
+  constructor(props) {
+    super();
 
-  .submenu {
-    width: 100% auto;
-    padding: 15px 10px;
-    cursor: pointer;
+    this.state = {
+      menu: 0,
+    };
   }
+
+  changeMenu = (menuIndex) => {
+    this.setState({ menu: menuIndex });
+  };
+
+  render() {
+    return (
+      <Wrap>
+        <div className="menubar">
+          <Tap>
+            <ul className="mytabs">
+              <li
+                className={`${this.state.menu === 0 ? "active" : ""}`}
+                onClick={() => this.changeMenu(0)}
+              >
+                프로필
+              </li>
+              <br></br>
+              <li
+                className={`${this.state.menu === 1 ? "active" : ""}`}
+                onClick={() => this.changeMenu(1)}
+              >
+                내 채팅
+              </li>
+            </ul>
+          </Tap>
+        </div>
+
+        <div className="contentArea">{menuList[this.state.menu]}</div>
+      </Wrap>
+    );
+  }
+}
+
+const Wrap = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
-const Desc = styled.div`
-  background-color: black;
-  width: 500px;
-  height: 100%;
+const Tap = styled.div`
+  margin-left: 150px;
+  margin-top: 30px;
 `;
-
 export default MyTab;

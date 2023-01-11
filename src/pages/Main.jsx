@@ -25,7 +25,7 @@ function Main(props) {
         <h1>
           자취하면서 궁금했던 점을 <br /> 공유해봐요!
         </h1>
-        <button onClick={()=>("/post")}>글쓰기</button>
+        <button onClick={() => "/post"}>글쓰기</button>
       </div>
       <div className="main_container">
         <div className="main_category">
