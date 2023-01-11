@@ -32,10 +32,6 @@ const PostLoginPage = () => {
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
         //console.log(res.header.access_token);
-        localStorage.setItem(
-          "id",
-          `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZHRlc3QxIiwiYXV0aCI6IkFjY2VzcyIsImV4cCI6MTY3MzUxMDE0MywiaWF0IjoxNjczNDIzNzQzfQ.bGJXJuWntHYq0xZJ-zRkyrOSna78o8hG27g5TQ0IzKk`
-        );
         navigate("/");
       } else {
         Swal.fire(
@@ -44,9 +40,10 @@ const PostLoginPage = () => {
           "error"
         );
       }
-
-      localStorage.setItem("username", res.data.data.username);
-      localStorage.setItem("profileUrl", res.data.data.profileUrl);
+      localStorage.setItem("Access_Token", res.headers.authorization);
+      localStorage.setItem("nickname", res.data.nickname);
+      localStorage.setItem("profileImg", res.data.profileImg);
+      localStorage.setItem("email", res.data.email);
     });
   };
 

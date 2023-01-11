@@ -94,7 +94,6 @@ function MyPage() {
 
   const onSubmitPostHandler = (e) => {
     e.preventDefault();
-    console.log("버튼눌러짐");
     dispatch(
       __patchPost({
         password,
@@ -106,9 +105,10 @@ function MyPage() {
 
   const handleClickLogout = () => {
     window.location.assign("/");
-    localStorage.removeItem("id");
+    localStorage.removeItem("Access_Token");
     localStorage.removeItem("nickname");
     localStorage.removeItem("profileImg");
+    localStorage.removeItem("email");
   };
 
   return (
@@ -159,6 +159,7 @@ function MyPage() {
               >
                 중복확인
               </StNickButton>
+              <StP>현재 닉네임 : {localStorage.getItem("nickname")}</StP>
             </MyNickBox>
             <MyPwBox>
               <MyPW htmlFor="password">비밀번호 변경</MyPW>
@@ -193,7 +194,7 @@ function MyPage() {
             </MyPwBox>
             <MyNickBox>
               가입한 이메일
-              <StEmailInput disabled />
+              <StEmailInput disabled value={localStorage.getItem("email")} />
             </MyNickBox>
           </div>
         </StCenterBox>
