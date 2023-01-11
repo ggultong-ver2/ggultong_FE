@@ -3,7 +3,7 @@ import axios from "axios";
 // 기본 URL
 const instance = axios.create({
 
-  baseURL: " https://sparta-sjl.shop/api", //상정님
+  baseURL: "http://43.201.7.130:8080/api", //상정님
 
 
   header: {
@@ -18,7 +18,7 @@ const instance = axios.create({
 // baseURL
 export const baseURL = axios.create({
 
-  baseURL: " https://sparta-sjl.shop/api",
+  baseURL: "http://43.201.7.130:8080/api",
 
 
   headers: {
@@ -76,4 +76,7 @@ export const apis = {
   // 리뷰 관련
 
   // 좋아요 관련
+  likeToggle: () =>{
+    baseURL.post(`/api/like/post/1`, {})
+  }
 };
