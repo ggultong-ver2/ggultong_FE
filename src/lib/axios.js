@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "https://sparta-sjl.shop/api", //상정님
+  baseURL: process.env.REACT_APP_URL, //상정님
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -15,7 +15,7 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: process.env.REACT_APP_URL,
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -29,7 +29,7 @@ baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("Access_Token");
 
-  config.headers["Authorization"] = `${token}`;
+  config.headers["Access_Token"] = `${token}`;
   return config;
 });
 
@@ -44,6 +44,7 @@ export const apis = {
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
+
   // 게시글 관련
   getPost: () => baseURL.get("/post/postlist"),
   getIdPost: (id) => {

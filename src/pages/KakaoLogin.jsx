@@ -5,7 +5,7 @@ function KakaoLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
 
-  const IP = "13.209.15.249";
+  const IP = "sparta-sjl.shop";
 
   useEffect(() => {
     try {
@@ -17,6 +17,7 @@ function KakaoLogin() {
         localStorage.setItem("id", data.data.data.jwtToken);
         localStorage.setItem("nickname", data.data.data.nickname);
         localStorage.setItem("profileImg", data.data.data.profileImg);
+        localStorage.setItem("email", data.data.data.email);
         return data;
       };
 
