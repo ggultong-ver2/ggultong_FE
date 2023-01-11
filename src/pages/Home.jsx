@@ -107,38 +107,38 @@ function Home(props) {
     </div>
   );
 }
-  const STTab = styled.ul`
-    display: flex;
-    align-items: center;
-    width: 1200px;
-    height: 45px;
-    margin: 0 auto;
-    padding: 0 40px;
+const STTab = styled.ul`
+  display: flex;
+  align-items: center;
+  width: 1200px;
+  height: 45px;
+  margin: 0 auto;
+  padding: 0 40px;
+  font-size: 14px;
+
+  li {
+    float: left;
+    text-align: center;
     font-size: 14px;
+    margin-left: 10px;
+    color: #828282;
+    border: 1px solid transparent;
+    padding: 10px;
+    cursor: pointer;
+  }
 
-    li {
-      float: left;
-      text-align: center;
-      font-size: 14px;
-      margin-left: 10px;
-      color: #828282;
-      border: 1px solid transparent;
-      padding: 10px;
-      cursor: pointer;
-    }
+  li:first-child {
+    margin-left: 0;
+  }
 
-    li:first-child {
-      margin-left: 0;
-    }
+  li:hover {
+    border-bottom: 2px solid black;
+    color: #000;
+  }
 
-    li:hover {
-      border-bottom: 2px solid black;
-      color: #000;
-    }
-
-    .is-active {
-      border-bottom: 2px solid black;
-      color: #000;
-    }
-  `;
+  .is-active {
+    border-bottom: 2px solid black;
+    color: #000;
+  }
+`;
 export default Home;

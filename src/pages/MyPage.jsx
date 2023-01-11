@@ -9,6 +9,7 @@ import __nickCheck from "../redux/modules/checkNickSlice";
 import addimage from "../assets/images/addimage.png";
 import { __patchPost } from "../redux/modules/postSlice";
 import { apis } from "../lib/axios";
+import MySmallTab from "./Tabs/MySmallTab";
 
 function MyPage() {
   const imgRef = useRef();
@@ -112,7 +113,7 @@ function MyPage() {
 
   return (
     <StContainer onSubmit={onSubmitPostHandler}>
-      <div>
+      <StSubCon>
         <StCenterBox>
           <div>
             <MyBox>내 정보</MyBox>
@@ -229,7 +230,9 @@ function MyPage() {
           </StRightBox>
         </div>
         <div>
-          <StCenterBox3></StCenterBox3>
+          <StCenterBox3>
+            <MySmallTab />
+          </StCenterBox3>
         </div>
         <StFoot>
           <StButton
@@ -244,7 +247,7 @@ function MyPage() {
             프로필 수정
           </StButton>
         </StFoot>
-      </div>
+      </StSubCon>
     </StContainer>
   );
 }
@@ -290,6 +293,22 @@ const StContainer = styled.form`
   background-color: white;
   justify-content: center;
 `;
+
+const StSubCon = styled.form`
+  background-color: gray;
+  width: 1200px;
+  height: 100vh;
+
+  background-color: white;
+`;
+const StTapBox = styled.div`
+  margin-top: 30px;
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+`;
+
 const StCenterBox = styled.div`
   padding-top: 40px;
   padding-left: 40px;
@@ -308,6 +327,7 @@ const StCenterBox2 = styled.div`
   padding-top: 20px;
   padding-left: 40px;
   margin-top: 30px;
+
   width: 1000px;
   height: 320px;
   border: 0;
@@ -347,11 +367,12 @@ const StRightBox = styled.div`
   width: 490px;
   height: 225px;
   float: right;
+  margin-right: 200px;
   background-color: gray;
 `;
 
 const StFoot = styled.div`
-  width: 100%;
+  width: 1000px;
   height: 100px;
   background-color: blue;
   display: flex;

@@ -5,7 +5,7 @@ function KakaoLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
 
-  const IP = "52.79.64.171";
+  const IP = "13.209.15.249";
 
   useEffect(() => {
     try {
