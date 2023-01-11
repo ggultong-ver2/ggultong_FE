@@ -151,8 +151,8 @@ export const __likeToggle = createAsyncThunk(
   "likeToggle",
   async (payload, thunkAPI) => {
     try {
-      const data = await apis.likeToggle(payload);
-      // const data = await axios.post("http://localhost:3002/recipes", payload);
+      const data = await apis.likeToggle();
+      // const data = await axios.post("http://localhost:3002/post", payload);
       console.log("payload: ", payload);
       console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);

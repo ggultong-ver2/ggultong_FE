@@ -2,7 +2,9 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
+
   baseURL: "http://43.201.7.130:8080/api", //상정님
+
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -15,7 +17,10 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-  baseURL: " http://43.201.7.130/api",
+
+
+  baseURL: "http://43.201.7.130:8080/api",
+
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -72,4 +77,7 @@ export const apis = {
   // 리뷰 관련
 
   // 좋아요 관련
+  likeToggle: () =>{
+    baseURL.post(`/api/like/post/1`, {})
+  }
 };
