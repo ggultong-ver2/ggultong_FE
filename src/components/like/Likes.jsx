@@ -11,14 +11,14 @@ function Likes() {
   const dispatch = useDispatch();
   
 
-  // const toggleButton = () => {
-  //   if (!localStorage.getItem("id")) {
-  //     alert("로그인 후 이용 가능합니다");
-  //     navigate("/login");
-  //     return;
-  //   } else {
-  //     likes.current += 1;
-  //   }
+  const toggleButton = () => {
+    // if (!localStorage.getItem("id")) {
+    //   alert("로그인 후 이용 가능합니다");
+    //   navigate("/login");
+    //   return;
+    // } else {
+    //   likes.current += 1;
+    // }
 
     // dispatch(__likeToggle(props.posts.id));
 
