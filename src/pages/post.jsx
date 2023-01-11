@@ -41,29 +41,15 @@ const Post = () => {
   };
 
   return (
-    <form
+    <Form
       onSubmit={(e) => {
         e.preventDefault();
         onSubmitHandler(post);
       }}
     >
-      <p># 게시글 작성</p>
-      <p>
-        제목:
-        <input
-          type="text"
-          onChange={(ev) => {
-            const { value } = ev.target;
-            setTitle({ ...title, title: value });
-          }}
-          //onChange={(e) => {
-          //setAddPost({ ...addPost, title: e.target.value });
-          //}}
-        ></input>
-      </p>
-      <p>
-        카테고리:
-        <select
+      <Category>
+        카테고리
+        <CategorySelect
           type="select"
           name="category"
           id="category"
@@ -79,37 +65,129 @@ const Post = () => {
           <option value="meal">꿀밥</option>
           <option value="free">자유게시판</option>
           <option value="question">Q&A</option>
-        </select>
-      </p>
-      <p>
-        파일:
-        <input
-          type="file"
-          id="fileUpload"
-          multiple={true}
-          width="500px"
-          onChange={(ev) => {
-            const { value } = ev.target;
-            console.log(value);
-            setFile({ ...file, file: value });
-          }}
-        />
-        <button>추가하기</button>
-      </p>
-      <p>
-        내용:
-        <textarea
+        </CategorySelect>
+      </Category>
+      <Wrap>
+        <Title>
+          제목
+          <TitleInput
+            type="text"
+            onChange={(ev) => {
+              const { value } = ev.target;
+              setTitle({ ...title, title: value });
+            }}
+            //onChange={(e) => {
+            //setAddPost({ ...addPost, title: e.target.value });
+            //}}
+          ></TitleInput>
+        </Title>
+
+        <Content
           type="text"
+          placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
           onChange={(ev) => {
             const { value } = ev.target;
             setContent({ ...content, content: value });
           }}
-        ></textarea>
-        <button>등록</button>
-        <button>취소</button>
-      </p>
-    </form>
+        ></Content>
+
+        <File>
+          첨부파일
+          <FileInput
+            type="file"
+            id="fileUpload"
+            multiple={true}
+            width="500px"
+            onChange={(ev) => {
+              const { value } = ev.target;
+              console.log(value);
+              setFile({ ...file, file: value });
+            }}
+          />
+        </File>
+        <Btns>
+          <BackButton>취소</BackButton>
+          <EnterButton>확인</EnterButton>
+        </Btns>
+      </Wrap>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  border: 1px solid black;
+  width: 900px;
+  height: 1250px;
+  margin: auto;
+  margin-top: 50px;
+  padding: 10px;
+`;
+const Category = styled.p`
+  margin-bottom: 50px;
+  font-size: 20px;
+`;
+const CategorySelect = styled.select`
+  margin-left: 10px;
+`;
+const Wrap = styled.div`
+  //border: 1px solid red;
+  height: 1200px;
+`;
+const Title = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
+const TitleInput = styled.input`
+  border-bottom: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 800px;
+  height: 30px;
+  margin-left: 10px;
+  font-size: 30px;
+  outline: none;
+`;
+const Content = styled.textarea`
+  width: 850px;
+  height: 900px;
+  margin-left: 25px;
+  resize: none;
+  outline: none;
+  border: none;
+  font-size: 25px;
+`;
+const File = styled.div`
+  font-size: 20px;
+`;
+const FileInput = styled.input`
+  //border: 1px solid green;
+  margin-left: 10px;
+`;
+const Btns = styled.div`
+  margin-left: 350px;
+  margin-top: 50px;
+`;
+const BackButton = styled.button`
+  width: 90px;
+  height: 35px;
+  background-color: white;
+  border-radius: 30px;
+  margin-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const EnterButton = styled.button`
+  width: 90px;
+  height: 35px;
+  background-color: #474747;
+  color: white;
+  border-radius: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export default Post;
