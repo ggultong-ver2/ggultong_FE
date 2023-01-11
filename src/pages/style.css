@@ -27,7 +27,7 @@ li:first-child{
     color: white;
 }
 
-.main_container{
+.main_container, .main_qna, .main_recipe, .main_room, .main_magazine{
     width: 1200px;
     margin: 0 auto;
     padding: 20px 0;

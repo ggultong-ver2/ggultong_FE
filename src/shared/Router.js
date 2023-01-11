@@ -24,13 +24,13 @@ import SignComplete from "../pages/SignComplete";
 import KakaoLogin from "../pages/KakaoLogin";
 import MyConfirm from "../pages/MyConfirm";
 import MyPage from "../pages/MyPage";
+import Category from "../components/category/Category";
+import Magazine from "../pages/Magazine";
 const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<Main />} />
-
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/myconfirm" element={<MyConfirm />} />
 
