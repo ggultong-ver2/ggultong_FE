@@ -15,7 +15,6 @@ const Lists = () => {
           경우가 있는데, 애완동물을 키우는 것은 애초에 힘들고 비용도 꽤 들어갈
           뿐 아니라, 자취생이 일이 있어서 주말을 끼고, 2-3일씩 집을 비워야
           한다면 애완동물은 그 기간 동안 자취방에 홀로 방치된다.
-          또한이러이런등등
         </StContent>
         <Etcwrap>댓글12 좋아요100 스크랩400 2023.01.10</Etcwrap>
       </Textwrap>
@@ -26,9 +25,10 @@ const Lists = () => {
 
 const Card = styled.div`
   //border: 1px solid red;
-  width: 1700px;
+  width: 1100px;
   height: 250px;
   margin-bottom: 40px;
+  margin-left: -20px;
 `;
 const Textwrap = styled.div`
   float: left;
@@ -36,15 +36,15 @@ const Textwrap = styled.div`
 const StTitle = styled.div`
   //border: 1px solid green;
   height: 50px;
-  width: 1400px;
+  width: 850px;
   font-size: 25px;
   font-weight: bold;
   margin-top: 20px;
 `;
 const StFile = styled.div`
   //border: 1px solid yellow;
-  height: 240px;
-  width: 240px;
+  height: 200px;
+  width: 200px;
   float: left;
   position: relative;
   top: 50%;
@@ -55,8 +55,8 @@ const StFile = styled.div`
 const StContent = styled.div`
   //border: 1px solid blue;
   height: 120px;
-  width: 1400px;
-  font-size: 22px;
+  width: 830px;
+  font-size: 20px;
   margin-top: 20px;
 `;
 const Etcwrap = styled.div`
