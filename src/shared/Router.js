@@ -17,8 +17,7 @@ import SignAgree from "../pages/SignAgree";
 import Detail from "../pages/detail";
 import Post from "../pages/post";
 import EditPost from "../pages/editPost";
-import MyTab from "../pages/Tabs/MyTab";
-import Tabs from "../pages/Tabs/Tabs";
+import DetailTab from "../pages/DetailTab/DetailTab";
 
 import SignComplete from "../pages/SignComplete";
 import KakaoLogin from "../pages/KakaoLogin";
@@ -41,9 +40,6 @@ const Router = () => {
           <Route path="detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
           <Route path="/editpost/:id" element={<EditPost />} />
-          <Route path="/mytab" element={<MyTab />} />
-          <Route path="/tabs" element={<Tabs />} />
-
           <Route path="/api/user/kakao/callback" element={<KakaoLogin />} />
         </Routes>
       </Layout>

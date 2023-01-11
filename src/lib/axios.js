@@ -2,9 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-
   baseURL: " https://sparta-sjl.shop/api", //상정님
-
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -17,9 +15,7 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-
   baseURL: " https://sparta-sjl.shop/api",
-
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -33,7 +29,7 @@ baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("id");
 
-  config.headers["Authorization"] = `${token}`;
+  config.headers["Access_Token"] = `${token}`;
   return config;
 });
 
@@ -56,9 +52,10 @@ export const apis = {
 
   createPost: (post) => {
     console.log("payload::", post);
-    baseURL.post("/post/create", post, {
+    const data = baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    return data;
   },
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
