@@ -13,7 +13,7 @@ const MySmallTab = () => {
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
   };
-
+  // 머지Test 머지Test 머지Test 머지Test 머지Test
   return (
     <>
       <div>
