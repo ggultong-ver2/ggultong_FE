@@ -351,7 +351,7 @@ const StCenterBox3 = styled.div`
   display: flex;
   flex-shrink: 0;
   font-size: 100%;
-  background-color: orange;
+  background-color: red;
 `;
 
 const StLeftBox = styled.div`
