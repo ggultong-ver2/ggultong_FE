@@ -25,6 +25,7 @@ const PostLoginPage = () => {
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
   const [isemail, setIsemail] = useState();
+
   function isPassword(asValue) {
     const regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
