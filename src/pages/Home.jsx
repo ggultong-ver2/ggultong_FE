@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import Magazine from "../../pages/Magazine";
-import Main from "../../pages/Home";
-import QNA from "../../pages/QNA";
-import Recipe from "../../pages/Recipe";
-import Room from "../../pages/Room";
-import "../../pages/reset.css";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { __getPost } from "../redux/modules/postSlice";
+import Main from "./Main";
+import Magazine from "./Magazine";
+import QNA from "./QNA";
+import Recipe from "./Recipe";
+// import "./reset.css";
+import Room from "./Room";
+import "./style.css";
 import styled from "styled-components";
 
-export default function Category() {
+function Home(props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const tabClickHandler = (index) => {
@@ -103,37 +107,38 @@ export default function Category() {
     </div>
   );
 }
-const STTab = styled.ul`
-  display: flex;
-  align-items: center;
-  width: 1200px;
-  height: 45px;
-  margin: 0 auto;
-  padding: 0 40px;
-  font-size: 14px;
-
-  li {
-    float: left;
-    text-align: center;
+  const STTab = styled.ul`
+    display: flex;
+    align-items: center;
+    width: 1200px;
+    height: 45px;
+    margin: 0 auto;
+    padding: 0 40px;
     font-size: 14px;
-    margin-left: 10px;
-    color: #828282;
-    border: 1px solid transparent;
-    padding: 10px;
-    cursor: pointer;
-  }
 
-  li:first-child {
-    margin-left: 0;
-  }
+    li {
+      float: left;
+      text-align: center;
+      font-size: 14px;
+      margin-left: 10px;
+      color: #828282;
+      border: 1px solid transparent;
+      padding: 10px;
+      cursor: pointer;
+    }
 
-  li:hover {
-    border-bottom: 2px solid black;
-    color: #000;
-  }
+    li:first-child {
+      margin-left: 0;
+    }
 
-  .is-active {
-    border-bottom: 2px solid black;
-    color: #000;
-  }
-`;
+    li:hover {
+      border-bottom: 2px solid black;
+      color: #000;
+    }
+
+    .is-active {
+      border-bottom: 2px solid black;
+      color: #000;
+    }
+  `;
+export default Home;

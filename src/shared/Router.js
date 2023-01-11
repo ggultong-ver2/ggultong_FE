@@ -10,7 +10,7 @@ import Layout from "../components/layout/Layout";
 import Lists from "../components/boards/lists/Lists";
 //import Magazine from "../components/boards/magazine/magazine";
 // 주석 풀고 사용
-import Main from "../pages/Main";
+import Main from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignAgree from "../pages/SignAgree";
@@ -25,12 +25,13 @@ import KakaoLogin from "../pages/KakaoLogin";
 import MyConfirm from "../pages/MyConfirm";
 import MyPage from "../pages/MyPage";
 import Category from "../components/category/Category";
-import Magazine from "../pages/Magazine";
+import Home from "../pages/Home";
 const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/myconfirm" element={<MyConfirm />} />
 

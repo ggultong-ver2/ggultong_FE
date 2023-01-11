@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
+import Likes from "../components/like/Likes";
 
 const Detail = () => {
   const dispatch = useDispatch();
