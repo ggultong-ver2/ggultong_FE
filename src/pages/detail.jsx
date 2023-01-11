@@ -5,20 +5,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
 import Likes from "../components/like/Likes";
+import axios from "axios";
 
-const Detail = () => {
+const Detail = (props) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const details = useSelector((state) => state.details.details);
   console.log("details:", details);
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
+  const [likeToggle, setLikeToggle] = useState(false);
   const param = useParams();
 
   useEffect(() => {
     dispatch(__getIdPost(+param.id));
   }, [dispatch, param.id]);
-
   const onClickDeletePostHandler = (id) => {
     dispatch(__deletePost(id));
   };
@@ -41,6 +42,7 @@ const Detail = () => {
           <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
           <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
         </Btns>
+        <Likes />
       </StDetail>
     </div>
   );

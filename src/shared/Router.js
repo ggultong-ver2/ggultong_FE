@@ -22,16 +22,16 @@ import DetailTab from "../pages/DetailTab/DetailTab";
 import SignComplete from "../pages/SignComplete";
 import KakaoLogin from "../pages/KakaoLogin";
 import MyConfirm from "../pages/MyConfirm";
-import MyPage from "../pages/MyPage";
-import Category from "../components/category/Category";
+// import MyPage from "../pages/MyPage";
 import Home from "../pages/Home";
+import MyTab from "../pages/Tabs/MyTab";
 const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/mypage" element={<MyPage />} />
+          {/* <Route path="/mypage" element={<MyPage />} /> */}
           <Route path="/myconfirm" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signcomplete" element={<SignComplete />} />
@@ -41,6 +41,7 @@ const Router = () => {
           <Route path="/post" element={<Post />} />
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/api/user/kakao/callback" element={<KakaoLogin />} />
+          <Route path="/mypage" element={<MyTab />} />
         </Routes>
       </Layout>
     </BrowserRouter>
