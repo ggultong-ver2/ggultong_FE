@@ -345,6 +345,7 @@ const StBox = styled.div`
 const StCenterBox = styled.div`
   width: 400px;
   height: 850px;
+  justify-content: center;
   align-items: center;
   border: 0;
   border-radius: 1px;

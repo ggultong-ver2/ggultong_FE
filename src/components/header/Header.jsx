@@ -17,8 +17,18 @@ function Header() {
         <nav className="gnb">
           <ul className="clearfix">
             <li>
-              <input type="text" id="keyword" placeholder="궁금한 자취 정보를 입력하세요" className="searchinp"/>
-              <input type="submit" value="Search" class="search_button" onclick="search()" />
+              <input
+                type="text"
+                id="keyword"
+                placeholder="궁금한 자취 정보를 입력하세요"
+                className="searchinp"
+              />
+              <input
+                type="submit"
+                value="Search"
+                class="search_button"
+                onClick="search()"
+              />
             </li>
             <li>알림</li>
             <li onClick={() => navigate("/myconfirm")} className="myconfirm">
