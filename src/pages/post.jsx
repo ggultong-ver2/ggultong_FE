@@ -24,8 +24,11 @@ const Post = () => {
     const formdata = new FormData();
     //console.log("addpost::", title, content, category, file);
 
+    // formdata.append("file", file);
+    for (const f of Array.from(file)) {
+      formdata.append("file", f);
+    }
     formdata.append("title", title.title);
-    formdata.append("file", file);
     formdata.append("content", content.content);
     formdata.append("category", category.category);
     console.log(file);
@@ -99,9 +102,9 @@ const Post = () => {
             multiple={true}
             width="500px"
             onChange={(ev) => {
-              const { value } = ev.target;
-              console.log(value);
-              setFile({ ...file, file: value });
+              const { files } = ev.target;
+
+              setFile(files);
             }}
           />
         </File>
