@@ -101,7 +101,7 @@ const PostLoginPage = () => {
             </SocialBtn>
             <SocialBtn
               kakao
-              href="https://kauth.kakao.com/oauth/authorize?client_id=0a5a9b8a46f9a0836b9ff04d61ffc21c&redirect_uri=http://localhost:3000/api/user/kakao/callback&response_type=code"
+              href="https://kauth.kakao.com/oauth/authorize?client_id=984b3a885f96f9996efd98ed1a00deab&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code"
             >
               <SocialDiv src={kakao} width="45px" height="45px" />
               카카오톡으로 로그인
