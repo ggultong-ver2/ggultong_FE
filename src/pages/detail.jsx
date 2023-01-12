@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
 import Likes from "../components/like/Likes";
-import axios from "axios";
+import Swal from "sweetalert2";
 
 const Detail = (props) => {
   const dispatch = useDispatch();
@@ -21,19 +21,32 @@ const Detail = (props) => {
     dispatch(__getIdPost(+param.id));
   }, [dispatch, param.id]);
 
-  const onClickDeletePostHandler = (id) => {
-    dispatch(__deletePost(id));
+  const onClickDeletePostHandler = () => {
+    if (localStorage.getItem("nickname") === details.nickname) {
+      dispatch(__deletePost(id));
+      Swal.fire("삭제 완료", "삭제 완료되었습니다", "success");
+    } else {
+      Swal.fire("Warning", "로그인 후 이용 가능합니다!", "warning");
+    }
   };
 
   const onClickEditPostHandler = () => {
-    navigate(`/editpost/${id}`);
+    if (details.nickname === localStorage.getItem("nickname")) {
+      //localStorage.getItem = key(nickname)로부터 data 읽기
+      navigate(`/editpost/${id}`);
+    } else {
+      Swal.fire(
+        "로그인 후 이용 가능합니다",
+        "타인의 게시물을 수정할 수 없습니다",
+        "warning"
+      );
+    }
   };
 
   return (
     <div>
       <StDetail>
         <StTitle>{details?.title}</StTitle>
-        <StCategory>카테고리:{details?.category}</StCategory>
         <StNickname>{details?.nickname} 님</StNickname>
         <StFile src={details?.imageFiles[0]} />
         <StContent>{details?.content}</StContent>
@@ -43,6 +56,7 @@ const Detail = (props) => {
           <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
           <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
         </Btns>
+
         <Likes />
       </StDetail>
     </div>
@@ -63,15 +77,12 @@ const StTitle = styled.p`
   font-weight: bold;
   text-align: center;
 `;
-const StCategory = styled.div`
-  font-size: 30px;
-  text-align: center;
-`;
+
 const StNickname = styled.p`
   margin-bottom: 10px;
   font-weight: bold;
 `;
-const StFile = styled.div`
+const StFile = styled.img`
   //border: 1px solid green;
   height: 500px;
   width: 800px;

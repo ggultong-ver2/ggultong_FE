@@ -2,7 +2,9 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_URL, //상정님
+  baseURL: "https://sparta-sjl.shop/api", //상정님
+
+  //process.env.REACT_APP_URL
 
   header: {
     "content-type": "application/json;charset=UTF-8",
@@ -15,7 +17,7 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-  baseURL: process.env.REACT_APP_URL,
+  baseURL: "https://sparta-sjl.shop/api",
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
