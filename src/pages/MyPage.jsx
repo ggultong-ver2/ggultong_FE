@@ -269,7 +269,7 @@ function MyPage() {
 //     })
 //   ) {
 //     apis
-//       .delete(`${process.env.REACT_APP_PROXY_URL}/members/${parsed.memberId}`, {
+//       .delete(`${process.env.REACT_APP_PROXY_URL}/users/${loginId}`, {
 //         headers: {
 //           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
 //         },

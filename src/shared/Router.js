@@ -20,11 +20,12 @@ import EditPost from "../pages/editPost";
 import DetailTab from "../pages/DetailTab/DetailTab";
 
 import SignComplete from "../pages/SignComplete";
-import KakaoLogin from "../pages/KakaoLogin";
+
 import MyConfirm from "../pages/MyConfirm";
 // import MyPage from "../pages/MyPage";
 import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
+import SocialLogin from "../pages/SocialLogin";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -40,7 +41,7 @@ const Router = () => {
           <Route path="detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
           <Route path="/editpost/:id" element={<EditPost />} />
-          <Route path="/api/user/kakao/callback" element={<KakaoLogin />} />
+          <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
         </Routes>
       </Layout>
