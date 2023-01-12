@@ -110,10 +110,10 @@ export const __deletePost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload: ", payload);
-      //const data = await apis.deletePost(payload);
-      const data = await axios.delete(
-        `http://localhost:3001/postss/${payload}`
-      );
+      const data = await apis.deletePost(payload);
+      //const data = await axios.delete(
+      // `http://localhost:3001/postss/${payload}`
+      //);
       console.log("data: ", data.data.msg);
       //alert(data.data.msg);
       // if (data.data.statusCode === 400) {
@@ -134,9 +134,9 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { id, formdata } = payload;
-      console.log("payload:::::: ", payload);
-      //const data = await apis.editPost(id, formdata);
-      const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
+      console.log("payload: ", payload);
+      const data = await apis.editPost(id, formdata);
+      //const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
 
       console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(payload);
@@ -328,7 +328,7 @@ export const postSlice = createSlice({
               ...post,
               title: action.payload.data.title,
               content: action.payload.data.content,
-              file: action.payload.data.file,
+              file: action.payload.data.imagefile,
               category: action.payload.data.category,
             }
           : post

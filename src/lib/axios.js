@@ -3,7 +3,9 @@ import axios from "axios";
 // 기본 URL
 const instance = axios.create({
   baseURL: "https://sparta-sjl.shop/api", //상정님
+
   //process.env.REACT_APP_URL
+
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
