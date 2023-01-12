@@ -16,7 +16,7 @@ function Header() {
         </div>
         <nav className="gnb">
           <ul className="clearfix">
-            <li>
+            <li className="search">
               <input
                 type="text"
                 id="keyword"
@@ -35,14 +35,14 @@ function Header() {
               마이페이지
             </li>
 
-            {!localStorage.getItem("id") ? (
+            {!localStorage.getItem("Access_Token") ? (
               <li onClick={() => navigate("/login")} className="login">
                 로그인
               </li>
             ) : (
               <li
                 onClick={() => {
-                  localStorage.removeItem("id");
+                  localStorage.removeItem("Access_Token");
                   localStorage.removeItem("nickname");
                   localStorage.removeItem("profileImg");
                   navigate("/login");

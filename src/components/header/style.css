@@ -35,6 +35,9 @@
     line-height: 32px;
 }
 
+.search{
+    position: relative;
+}
 .searchinp{
     width: 235px;
     height: 35px;
@@ -43,8 +46,8 @@
 }
 .search_button{
     position: absolute;
-    top: 5.2%;
-    right: 28.2%;
+    bottom: -7.5px;
+    right: 5px;
     transform: translateY(-50%);
     width: 25px;
     height: 25px;
