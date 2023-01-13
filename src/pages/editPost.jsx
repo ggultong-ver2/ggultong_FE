@@ -21,6 +21,7 @@ const EditPost = () => {
   }, [dispatch, id]);
 
   const post = useSelector((state) => state.details.details);
+  console.log("post:", post);
 
   const onEditPostHandler = (id, post) => {
     const formdata = new FormData();
@@ -41,9 +42,6 @@ const EditPost = () => {
       console.log(pair[0] + "," + pair[1]);
     }
   };
-
-  const selected = useSelector((state) => state.posts.detail);
-  console.log(selected);
 
   return (
     <div>
@@ -96,6 +94,7 @@ const EditPost = () => {
             placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
             defaultValue={post.content}
             onChange={(ev) => {
+              console.log(ev.target.value);
               const { value } = ev.target;
               setContent({ ...content, content: value });
             }}

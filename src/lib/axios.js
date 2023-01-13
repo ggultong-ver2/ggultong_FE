@@ -62,7 +62,7 @@ export const apis = {
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
     // console.log("string", id, post);
-    baseURL.put(`/post/${id}`, post, {
+    baseURL.patch(`/post/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
   //마이페이지수정
