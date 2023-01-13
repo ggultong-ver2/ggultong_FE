@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
@@ -9,6 +9,7 @@ import __emailcode from "../redux/modules/emailcodeSlice";
 import __emailsend from "../redux/modules/sendemailSlice";
 import __nickCheck from "../redux/modules/checkNickSlice";
 import "../pages/reset.css";
+import Timer from "../components/Timer/Timer";
 
 const PostLoginPage = () => {
   // const url1 =
@@ -25,7 +26,7 @@ const PostLoginPage = () => {
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
   const [isemail, setIsemail] = useState();
-
+  const [visible, setVisible] = useState(false);
   function isPassword(asValue) {
     const regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -146,19 +147,6 @@ const PostLoginPage = () => {
     setDisable(!disable);
   };
 
-  // 이메일 인증번호 확인
-  // const onEmailCode = (emailcode) => {
-  //   console.log("emailcode---->", emailcode);
-  //   __emailcode(emailcode).then((res) => {
-  //     console.log(res);
-  //     if (res.data.statusCode === 200) {
-  //       Swal.fire("인증 확인완료!", "가입하기를 눌러주세요!", "success");
-  //     } else {
-  //       // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
-  //     }
-  //   });
-  // };
-
   return (
     <StContainer onSubmit={onSubmitSignup}>
       <div>
@@ -187,7 +175,6 @@ const PostLoginPage = () => {
               ID 중복확인
             </StButton>
           </StBox>
-
           <br></br>
           <StLabel htmlFor="password">비밀번호*</StLabel>
           <StBox>
@@ -205,6 +192,7 @@ const PostLoginPage = () => {
               minLength={8}
               maxLength={15}
             />
+            .
           </StBox>
           {<p className="ptag">{PWPtag}</p>}
           <StBox>
@@ -254,7 +242,8 @@ const PostLoginPage = () => {
               id="email"
               value={email}
               onChange={setEmail}
-              placeholder="유효한 이메일을 입력해주세요."
+              onClick={checkEmail}
+              placeholder="ex ) abc@naver.com"
               required
               disabled={disable}
               minLength={5}
@@ -265,13 +254,11 @@ const PostLoginPage = () => {
               onClick={(e, res) => {
                 onCheckEmail(email);
                 handleClick();
-                // if (res.data.statusCode === 200) {
-                //   Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
-                // }
+                setVisible(!visible);
               }}
               type="button"
             >
-              인증번호 전송
+              {visible ? "다시 보내기" : "인증번호 전송"}
             </StEmailBtn>
           </StBox>
           <StBox>
@@ -289,6 +276,7 @@ const PostLoginPage = () => {
               id="emailcode"
               checkbtn
               onClick={(e) => {
+                e.preventDefault();
                 onEmailCode(emailCode);
                 // onDisabled(e);
               }}
@@ -297,6 +285,7 @@ const PostLoginPage = () => {
               확인
             </StEmailBtn>
           </StBox>
+          {visible && <Timer />}
           <StButton log>가입하기</StButton>
         </StCenterBox>
       </div>
@@ -305,7 +294,7 @@ const PostLoginPage = () => {
 };
 const StContainer = styled.form`
   width: 100%;
-  height: 100vh;
+  height: 96.6vh;
   display: flex;
   background-color: white;
   align-items: center;
@@ -320,7 +309,6 @@ const StLoginBox = styled.div`
   font-size: 45px;
   margin-bottom: 15px;
   display: flex;
-  margin-top: 50px;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
 `;
@@ -426,8 +414,9 @@ const StButton = styled.button`
   ${(props) =>
     props.log &&
     css`
-      margin-top: 40px;
+      margin-top: 30px;
       margin-bottom: 10px;
+      margin-right: 15px;
       width: 380px;
       height: 48px;
       border: 0;

@@ -42,7 +42,7 @@ export const apis = {
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
   checkNickName: (nickname) => instance.post(`/user/nickCheck/${nickname}`),
-  checkPw: (password) => instance.post(`/user/pwCheck/${password}`),
+  checkPw: (password) => instance.post("/user/pwCheck", password),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
@@ -68,7 +68,7 @@ export const apis = {
   //마이페이지수정
   patchPost: (post) => {
     console.log("patch::", post);
-    baseURL.patch("/user/mypage/update", post, {
+    baseURL.patch("/mypage/update", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },

@@ -1,45 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../modules";
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+import Swal from "sweetalert2";
 
-const AuthTimer = () => {
-  const [time, setTime] = useState(179);
-  const { verification } = useSelector((state: rootState) => state.auth);
-  const { expireAt } = verification.OTP;
+function Timer() {
+  const [min, setMin] = useState(2);
+  const [sec, setSec] = useState(59);
+  const time = useRef(179);
+  const timerId = useRef(null);
+
   useEffect(() => {
-    if (time > 0) {
-      const Counter = setInterval(() => {
-        const gap = Math.floor(
-          (new Date(expireAt).getTime() - new Date().getTime()) / 1000
-        );
-        setTime(gap);
-      }, 1000);
-      return () => clearInterval(Counter);
-    }
-  }, [expireAt, time]);
-  const timeFormat = (time: number) => {
-    const m = Math.floor(time / 60).toString();
-    let s = (time % 60).toString();
-    if (s.length === 1) s = `0${s}`;
-    return `${m}:${s}`;
-  };
-  return (
-    <>
-      <p
-        style={{
-          textAlign: "right",
-          fontSize: "14px",
-          color: "#ff5252",
-          position: "absolute",
-          right: "92px",
-          bottom: "14px",
-          letterSpacing: "-0.4px",
-        }}
-      >
-        {timeFormat(time)}
-      </p>
-    </>
-  );
-};
+    timerId.current = setInterval(() => {
+      setMin(parseInt(time.current / 60));
+      setSec(time.current % 60);
+      time.current -= 1;
+    }, 1000);
 
-export default AuthTimer;
+    return () => clearInterval(timerId.current);
+  }, []);
+
+  useEffect(() => {
+    if (time.current <= 0) {
+      Swal.fire({
+        icon: "error",
+        title: "인증번호 만료",
+        text: "인증번호를 다시 보내주세요!",
+      });
+      clearInterval(timerId.current);
+    }
+  }, [sec]);
+
+  return (
+    <StDiv>
+      <StP>
+        {min} 분 {sec} 초
+      </StP>
+    </StDiv>
+  );
+}
+
+const StP = styled.p`
+  color: gray;
+  font-size: 15px;
+`;
+
+const StDiv = styled.div`
+  display: flex;
+  margin-left: 115px;
+  justify-content: right;
+  align-items: center;
+  color: orange;
+  width: 200px;
+  height: 40px;
+`;
+export default Timer;

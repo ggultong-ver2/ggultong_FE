@@ -26,6 +26,7 @@ import MyConfirm from "../pages/MyConfirm";
 import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import SocialLogin from "../pages/SocialLogin";
+
 const Router = () => {
   return (
     <BrowserRouter>

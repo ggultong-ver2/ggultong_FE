@@ -94,6 +94,7 @@ function MyPage() {
 
   const onSubmitPostHandler = (e) => {
     e.preventDefault();
+    console.log("password", password);
     dispatch(
       __patchPost({
         password,
@@ -103,7 +104,8 @@ function MyPage() {
     );
   };
 
-  const handleClickLogout = () => {
+  const handleClickLogout = (e) => {
+    e.preventDefault();
     window.location.assign("/");
     localStorage.removeItem("Access_Token");
     localStorage.removeItem("nickname");
@@ -152,7 +154,8 @@ function MyPage() {
                 onChange={setNickname}
               />
               <StNickButton
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   onCheckNickName(nickname);
                 }}
                 type="button"
@@ -203,7 +206,14 @@ function MyPage() {
             <SettingBox>설정</SettingBox>
             <SettingItm>&nbsp;알림</SettingItm>
             <SettingItm>
-              <StButton onClick={() => handleClickLogout()}>로그아웃</StButton>
+              <StButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClickLogout();
+                }}
+              >
+                로그아웃
+              </StButton>
             </SettingItm>
             <SettingItm>
               <StButton>회원탈퇴</StButton>
@@ -236,17 +246,7 @@ function MyPage() {
           </StCenterBox3>
         </div>
         <StFoot>
-          <StButton
-          // onClick={() =>
-          //   Swal.fire(
-          //     "회원정보 수정완료!",
-          //     "정보 수정이 완료되었습니다.",
-          //     "success"
-          //   )
-          // }
-          >
-            프로필 수정
-          </StButton>
+          <StButton>프로필 수정</StButton>
         </StFoot>
       </StSubCon>
     </StContainer>
@@ -295,7 +295,7 @@ const StContainer = styled.form`
   justify-content: center;
 `;
 
-const StSubCon = styled.form`
+const StSubCon = styled.div`
   background-color: gray;
   width: 1200px;
   height: 100vh;

@@ -168,10 +168,10 @@ export const __patchPost = createAsyncThunk(
   "patchPost",
   async (payload, thunkAPI) => {
     try {
+      const { nickname, password, profileImg } = payload;
       console.log("payload", payload);
-      const { nickname, password, imagefile } = payload;
       const postData = new FormData();
-      postData.append("profileImg", imagefile);
+      postData.append("profileImg", profileImg);
       postData.append("password", password);
       postData.append("nickname", nickname); //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
