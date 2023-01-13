@@ -26,7 +26,6 @@ import MyConfirm from "../pages/MyConfirm";
 import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import SocialLogin from "../pages/SocialLogin";
-import Timer from "../pages/Timer";
 
 const Router = () => {
   return (
@@ -45,7 +44,6 @@ const Router = () => {
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
-          <Route path="/timer" element={<Timer />} />
         </Routes>
       </Layout>
     </BrowserRouter>

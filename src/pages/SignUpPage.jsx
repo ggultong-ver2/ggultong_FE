@@ -9,7 +9,8 @@ import __emailcode from "../redux/modules/emailcodeSlice";
 import __emailsend from "../redux/modules/sendemailSlice";
 import __nickCheck from "../redux/modules/checkNickSlice";
 import "../pages/reset.css";
-import Timer from "./Timer";
+import Timer from "../components/Timer/Timer";
+
 const PostLoginPage = () => {
   // const url1 =
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
@@ -25,29 +26,7 @@ const PostLoginPage = () => {
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
   const [isemail, setIsemail] = useState();
-  const [minutes, setMinutes] = useState(3);
-  const [seconds, setSeconds] = useState(0);
-
-  //이메일인증시간
-  function Timer() {
-    useEffect(() => {
-      const countdown = setInterval(() => {
-        if (parseInt(seconds) > 0) {
-          setSeconds(parseInt(seconds) - 1);
-        }
-        if (parseInt(seconds) === 0) {
-          if (parseInt(minutes) === 0) {
-            clearInterval(countdown);
-          } else {
-            setMinutes(parseInt(minutes) - 1);
-            setSeconds(59);
-          }
-        }
-      }, 1000);
-      return () => clearInterval(countdown);
-    });
-  }
-
+  const [visible, setVisible] = useState(false);
   function isPassword(asValue) {
     const regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -168,19 +147,6 @@ const PostLoginPage = () => {
     setDisable(!disable);
   };
 
-  // 이메일 인증번호 확인
-  // const onEmailCode = (emailcode) => {
-  //   console.log("emailcode---->", emailcode);
-  //   __emailcode(emailcode).then((res) => {
-  //     console.log(res);
-  //     if (res.data.statusCode === 200) {
-  //       Swal.fire("인증 확인완료!", "가입하기를 눌러주세요!", "success");
-  //     } else {
-  //       // Swal.fire("사용불가능한 ID", "다른 아이디를 사용해주세요!", "error");
-  //     }
-  //   });
-  // };
-
   return (
     <StContainer onSubmit={onSubmitSignup}>
       <div>
@@ -226,6 +192,7 @@ const PostLoginPage = () => {
               minLength={8}
               maxLength={15}
             />
+            .
           </StBox>
           {<p className="ptag">{PWPtag}</p>}
           <StBox>
@@ -287,14 +254,11 @@ const PostLoginPage = () => {
               onClick={(e, res) => {
                 onCheckEmail(email);
                 handleClick();
-                Timer();
-                // if (res.data.statusCode === 200) {
-                //   Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
-                // }
+                setVisible(!visible);
               }}
               type="button"
             >
-              인증번호 전송
+              {visible ? "다시 보내기" : "인증번호 전송"}
             </StEmailBtn>
           </StBox>
           <StBox>
@@ -321,11 +285,7 @@ const PostLoginPage = () => {
               확인
             </StEmailBtn>
           </StBox>
-          {
-            <p>
-              남은 시간 : {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-            </p>
-          }
+          {visible && <Timer />}
           <StButton log>가입하기</StButton>
         </StCenterBox>
       </div>
@@ -454,8 +414,9 @@ const StButton = styled.button`
   ${(props) =>
     props.log &&
     css`
-      margin-top: 40px;
+      margin-top: 30px;
       margin-bottom: 10px;
+      margin-right: 15px;
       width: 380px;
       height: 48px;
       border: 0;
