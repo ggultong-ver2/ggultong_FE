@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 // id 중복체크
 const __pwcheck = async (password) => {
   try {
-    const data = await apis.checkUserName(password);
+    const data = await apis.checkPw(password);
     console.log("password:::", password);
     console.log("data: ", data);
     if (data.data.status === 200) {

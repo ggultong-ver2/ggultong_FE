@@ -4,22 +4,28 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import __pwcheck from "../redux/modules/checkPwSlice copy";
 import { useInput } from "../lib/utils/useInput";
+import { useDispatch } from "react-redux";
 function MyConfirm() {
   const [password, setPassword] = useInput();
   const navigate = useNavigate();
 
   const onCheckPassword = (password) => {
     console.log("password--->", password);
-    __pwcheck(password).then((res) => {
-      console.log(password);
-
-      //   if (res.data.statusCode === 200) {
-      //     Swal.fire(res.data.msg, "확인되었습니다.", "success");
-      //     // navigate("/mypage");
-      //   } else {
-      //     Swal.fire(res.data.msg, "비밀번호가 틀렸습니다.", "error");
-      //     // navigate("/myconfirm");
-      //   }
+    __pwcheck({
+      password,
+    }).then((res) => {
+      console.log("res:::::", res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
+        //console.log(res.header.access_token);
+        navigate("/");
+      } else {
+        Swal.fire(
+          res.data.msg,
+          "아이디 및 비밀번호를 다시 확인해주세요!",
+          "error"
+        );
+      }
     });
   };
 
@@ -46,7 +52,6 @@ function MyConfirm() {
         <StButton
           onClick={() => {
             onCheckPassword(password);
-
             navigate("/mypage");
           }}
         >
