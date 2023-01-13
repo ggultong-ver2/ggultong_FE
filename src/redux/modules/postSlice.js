@@ -288,7 +288,7 @@ export const postSlice = createSlice({
     },
     [__addPost.fulfilled]: (state, action) => {
       // 액션으로 받은 값 = payload 추가해준다.
-      console.log("action.payload: ", action);
+      console.log("action.payload: ", action.payload);
       state.isLoading = false;
       state.posts.push(action.payload);
     },

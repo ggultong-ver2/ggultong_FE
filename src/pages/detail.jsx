@@ -47,7 +47,7 @@ const Detail = (props) => {
     <div>
       <StDetail>
         <StTitle>{details?.title}</StTitle>
-        <StNickname>{details?.nickname} 님</StNickname>
+        <StNickname>{details?.nickname} 님님</StNickname>
         <StFile src={details?.imageFiles[0]} />
         <StContent>{details?.content}</StContent>
         <StFiles src={details?.imageFiles[1]} />
