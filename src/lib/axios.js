@@ -68,7 +68,7 @@ export const apis = {
   //마이페이지수정
   patchPost: (post) => {
     console.log("patch::", post);
-    baseURL.patch("/user/mypage/update", post, {
+    baseURL.patch("/mypage/update", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },

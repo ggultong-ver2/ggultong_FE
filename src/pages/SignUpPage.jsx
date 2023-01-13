@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
@@ -9,7 +9,7 @@ import __emailcode from "../redux/modules/emailcodeSlice";
 import __emailsend from "../redux/modules/sendemailSlice";
 import __nickCheck from "../redux/modules/checkNickSlice";
 import "../pages/reset.css";
-
+import Timer from "./Timer";
 const PostLoginPage = () => {
   // const url1 =
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
@@ -25,6 +25,28 @@ const PostLoginPage = () => {
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
   const [isemail, setIsemail] = useState();
+  const [minutes, setMinutes] = useState(3);
+  const [seconds, setSeconds] = useState(0);
+
+  //이메일인증시간
+  function Timer() {
+    useEffect(() => {
+      const countdown = setInterval(() => {
+        if (parseInt(seconds) > 0) {
+          setSeconds(parseInt(seconds) - 1);
+        }
+        if (parseInt(seconds) === 0) {
+          if (parseInt(minutes) === 0) {
+            clearInterval(countdown);
+          } else {
+            setMinutes(parseInt(minutes) - 1);
+            setSeconds(59);
+          }
+        }
+      }, 1000);
+      return () => clearInterval(countdown);
+    });
+  }
 
   function isPassword(asValue) {
     const regExp =
@@ -187,7 +209,6 @@ const PostLoginPage = () => {
               ID 중복확인
             </StButton>
           </StBox>
-
           <br></br>
           <StLabel htmlFor="password">비밀번호*</StLabel>
           <StBox>
@@ -254,7 +275,8 @@ const PostLoginPage = () => {
               id="email"
               value={email}
               onChange={setEmail}
-              placeholder="유효한 이메일을 입력해주세요."
+              onClick={checkEmail}
+              placeholder="ex ) abc@naver.com"
               required
               disabled={disable}
               minLength={5}
@@ -265,6 +287,7 @@ const PostLoginPage = () => {
               onClick={(e, res) => {
                 onCheckEmail(email);
                 handleClick();
+                Timer();
                 // if (res.data.statusCode === 200) {
                 //   Swal.fire("사용가능한 ID", "사용가능합니다!", "success");
                 // }
@@ -289,6 +312,7 @@ const PostLoginPage = () => {
               id="emailcode"
               checkbtn
               onClick={(e) => {
+                e.preventDefault();
                 onEmailCode(emailCode);
                 // onDisabled(e);
               }}
@@ -297,6 +321,11 @@ const PostLoginPage = () => {
               확인
             </StEmailBtn>
           </StBox>
+          {
+            <p>
+              남은 시간 : {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+            </p>
+          }
           <StButton log>가입하기</StButton>
         </StCenterBox>
       </div>
@@ -305,7 +334,7 @@ const PostLoginPage = () => {
 };
 const StContainer = styled.form`
   width: 100%;
-  height: 100vh;
+  height: 96.6vh;
   display: flex;
   background-color: white;
   align-items: center;
@@ -320,7 +349,6 @@ const StLoginBox = styled.div`
   font-size: 45px;
   margin-bottom: 15px;
   display: flex;
-  margin-top: 50px;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
 `;

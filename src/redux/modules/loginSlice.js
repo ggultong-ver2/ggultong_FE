@@ -6,7 +6,6 @@ const __postLogin = async (post) => {
   try {
     const data = await apis.postLogin(post);
     return data;
-    console.log(data);
   } catch (error) {
     Swal.fire(
       "아이디 및 비밀번호가 일치하지 않습니다.",
