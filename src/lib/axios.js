@@ -42,7 +42,7 @@ export const apis = {
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
   checkNickName: (nickname) => instance.post(`/user/nickCheck/${nickname}`),
-  checkPw: (password) => instance.post("/user/pwCheck", password),
+  checkPw: (password) => instance.post("/mypage/pwCheck", password),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
@@ -74,9 +74,9 @@ export const apis = {
   },
   deleteUser: (loginId) => {
     baseURL.delete(`/mypage/${loginId}`, {
-      headers: {
-        Authorization: localStorage.getItem("ACCESS_TOKEN"),
-      },
+      // headers: {
+      //   Authorization: localStorage.getItem("ACCESS_TOKEN"),
+      // },
     });
   },
 
@@ -87,9 +87,4 @@ export const apis = {
   // 리뷰 관련
 
   // 좋아요 관련
-  likeToggle: () =>{
-    baseURL.post("/api/like/post/{postId}", {
-      
-    })
-  }
 };
