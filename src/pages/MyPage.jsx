@@ -83,7 +83,7 @@ function MyPage() {
     if (window.confirm("확인을 누르면 회원 정보가 삭제됩니다.")) {
       __deleteId(loginId).then(() => {
         localStorage.clear();
-        alert("그동안 이용해주셔서 감사합니다.");
+        alert("그 동안 이용해주셔서 감사합니다.");
         window.location.assign("/");
       });
     }
@@ -173,7 +173,7 @@ function MyPage() {
                 }}
                 onBlur={PWChk}
                 placeholder="숫자, 영문, 특수문자 조합 최소 8자"
-                required
+                // required
                 minLength={8}
                 maxLength={15}
               />
@@ -187,7 +187,7 @@ function MyPage() {
                 }}
                 onBlur={PWConfirmChk}
                 placeholder="비밀번호 재입력"
-                required
+                // required
                 minLength={8}
                 maxLength={15}
               />
@@ -215,7 +215,8 @@ function MyPage() {
             </SettingItm>
             <SettingItm>
               <StButton
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   onDeleteLoginId();
                 }}
               >
