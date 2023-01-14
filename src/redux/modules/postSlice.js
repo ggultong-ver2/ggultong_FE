@@ -320,10 +320,10 @@ export const postSlice = createSlice({
         post.id === action.payload.id
           ? {
               ...post,
-              title: action.payload.data.title,
-              content: action.payload.data.content,
-              file: action.payload.data.imagefile,
-              category: action.payload.data.category,
+              title: action.payload.formdata.title,
+              content: action.payload.formdata.content,
+              file: action.payload.formdata.imagefile,
+              category: action.payload.formdata.category,
             }
           : post
       );

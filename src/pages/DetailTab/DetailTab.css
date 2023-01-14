@@ -26,7 +26,6 @@
   cursor: pointer;
   box-sizing: content-box;
   position: relative;
-  outline: none;
   margin-bottom: 10px;
 }
 
@@ -69,10 +68,13 @@
   display: block;
 }
 .banner {
-  width: 510px;
+  width: 515px;
   height: 250px;
   background-color: #d9d9d9;
   float: left;
-  margin-right: 10px;
+  margin-right: 20px;
   margin-bottom: 50px;
+}
+.banners {
+  margin-left: -15px;
 }
