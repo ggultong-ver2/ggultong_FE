@@ -18,7 +18,7 @@ function SocialLogin() {
           localStorage.setItem("profileImg", res.data.data.profileImg);
           localStorage.setItem("email", res.data.email);
         });
-      window.location.replace("/");
+      window.location.replace("/signnick");
     } catch (error) {
       console.log(error);
     }

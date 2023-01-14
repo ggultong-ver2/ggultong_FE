@@ -35,7 +35,7 @@ const PostLoginPage = () => {
 
   const PWChk = () => {
     if (!isPassword(password)) {
-      setPWPtag("사용 불가능합니다. 숫자/영문/특수문자를 모두포함한, 8자~15자");
+      setPWPtag("사용 불가. 숫자/영문/특수문자를 모두포함한, 8-15자");
     } else {
       setPWPtag("사용가능한 비밀번호 입니다");
     }
@@ -219,7 +219,7 @@ const PostLoginPage = () => {
               id="nickname"
               value={nickname}
               onChange={setNickname}
-              placeholder="닉네임을 입력해주세요. (최소 2 - 8자)"
+              placeholder="닉네임을 입력해주세요."
               required
               minLength={2}
               maxLength={8}
@@ -243,7 +243,7 @@ const PostLoginPage = () => {
               value={email}
               onChange={setEmail}
               onClick={checkEmail}
-              placeholder="ex ) abc@naver.com"
+              placeholder="이메일을 입력해주세요."
               required
               disabled={disable}
               minLength={5}
@@ -300,10 +300,10 @@ const StContainer = styled.form`
   align-items: center;
   justify-content: center;
   background-size: cover;
+  font-family: "Pretendard";
 `;
 
 const StLoginBox = styled.div`
-  letter-spacing: -0.1em;
   width: 400px;
   height: 80px;
   font-size: 45px;
@@ -311,6 +311,7 @@ const StLoginBox = styled.div`
   display: flex;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 
 const StLabel = styled.label`
@@ -318,18 +319,20 @@ const StLabel = styled.label`
   display: flex;
   margin-right: 320px;
   font-weight: bold;
+  font-family: "Pretendard";
 `;
 const Stdiv = styled.h2`
   font-size: 1.25rem;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 20px;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
 `;
 const StBox = styled.div`
   width: 380px;
   display: flex;
   align-items: center;
+  font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
   width: 400px;
@@ -340,7 +343,7 @@ const StCenterBox = styled.div`
   border-radius: 1px;
   display: flex;
   flex-direction: column;
-
+  font-family: "Pretendard";
   /* margin: 5px 0 0px;
   padding: 30px 0px; */
   /* position: relative; */
@@ -348,13 +351,13 @@ const StCenterBox = styled.div`
 `;
 
 const StInput = styled.input`
-  width: 360px;
+  width: 370px;
   height: 44px;
   border: 1px solid #d9d9d9;
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 5px;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
   font-size: 16px;
 `;
 const NickInput = styled.input`
@@ -364,7 +367,7 @@ const NickInput = styled.input`
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 5px;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
   font-size: 16px;
 `;
 
@@ -375,7 +378,7 @@ const StId = styled.input`
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 10px;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
   font-size: 16px;
 `;
 const StEmailInput = styled.input`
@@ -385,9 +388,10 @@ const StEmailInput = styled.input`
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 10px;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
   &:disabled {
     background-color: #c2c2c2;
+    font-family: "Pretendard";
   }
   /* background-color: orange; */
   font-size: 16px;
@@ -404,6 +408,7 @@ const StEmailBtn = styled.button`
   border: 1px solid black;
   border-radius: 4px;
   background-color: white;
+  font-family: "Pretendard";
   cursor: pointer;
   &:hover {
     background-color: #dcdcdc;
@@ -424,7 +429,7 @@ const StButton = styled.button`
 
       border-radius: 4px;
       background-color: #b5b5b5;
-      font-family: georgia;
+      font-family: "Pretendard";
       color: white;
       cursor: pointer;
       &:hover {
@@ -445,6 +450,7 @@ const StButton = styled.button`
       font-size: 15px;
       margin-right: 20px;
       margin-left: 40px;
+      font-family: "Pretendard";
       cursor: pointer;
     `}
     ${(props) =>
@@ -453,11 +459,10 @@ const StButton = styled.button`
       width: 120px;
       height: 40px;
       border: 0px;
-      letter-spacing: -0.1em;
       background-color: white;
       color: #717171;
       font-weight: bold;
-      font-size: 15px;
+      font-family: "Pretendard";
       padding-right: 10px;
       font-size: 15px;
       margin-left: 20px;
@@ -473,6 +478,7 @@ const StButton = styled.button`
       border: 1px solid black;
       border-radius: 4px;
       background-color: white;
+      font-family: "Pretendard";
       cursor: pointer;
       &:hover {
         background-color: #dcdcdc;

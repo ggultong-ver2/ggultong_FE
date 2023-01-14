@@ -183,6 +183,7 @@ const StContainer = styled.form`
   align-items: center;
   justify-content: center;
   background-size: cover;
+  font-family: "Pretendard";
 `;
 
 const StCenterBox = styled.div`
@@ -193,6 +194,7 @@ const StCenterBox = styled.div`
   border-radius: 1px;
   display: flex;
   flex-direction: column;
+  font-family: "Pretendard";
 `;
 
 const AllAgree = styled.div`
@@ -202,32 +204,33 @@ const AllAgree = styled.div`
   margin-top: 30px;
   display: flex;
   align-items: center;
+  font-family: "Pretendard";
 `;
 
 const StSignBox = styled.div`
-  letter-spacing: -0.1em;
   width: 400px;
   height: 80px;
   font-size: 45px;
   margin-bottom: 30px;
   margin-top: 50px;
-
   display: flex;
   padding-top: 0px;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 const StSmaillBox = styled.div`
   width: 400px;
   height: 200px;
   padding-left: 10px;
   margin-top: 20px;
+  font-family: "Pretendard";
 `;
 const Stlabel = styled.label`
   font-size: 20px;
   font-weight: bold;
   margin-top: 5px;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
 `;
 
 const StCheckBox = styled.div`
@@ -235,39 +238,42 @@ const StCheckBox = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  font-family: "Pretendard";
 `;
 const StChecklabel = styled.label`
   font-size: 16px;
-  letter-spacing: 0.02em;
+  font-family: "Pretendard";
 `;
 
 const AgreeCheckBox = styled.input`
   margin-right: 10px;
   width: 20px;
   height: 20px;
+  font-family: "Pretendard";
 `;
 
 const AgreeBigCheckBox = styled.input`
   width: 24px;
   height: 24px;
+  font-family: "Pretendard";
 `;
 
 const StButton = styled.button`
   margin-top: 40px;
   margin-bottom: 10px;
-
+  font-family: "Pretendard";
   width: 380px;
   height: 48px;
   border: 0;
   font-size: 18px;
   border-radius: 4px;
   background-color: #b5b5b5;
-  font-family: georgia;
   color: white;
   cursor: pointer;
 
   &:disabled {
     background-color: #ddd8d8;
+    font-family: "Pretendard";
   }
 `;
 

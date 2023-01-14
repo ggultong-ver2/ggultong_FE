@@ -35,16 +35,14 @@ function Header() {
               마이페이지
             </li>
 
-            {!localStorage.getItem("id") ? (
+            {!localStorage.getItem("Access_Token") ? (
               <li onClick={() => navigate("/login")} className="login">
                 로그인
               </li>
             ) : (
               <li
                 onClick={() => {
-                  localStorage.removeItem("id");
-                  localStorage.removeItem("nickname");
-                  localStorage.removeItem("profileImg");
+                  localStorage.clear();
                   navigate("/login");
                 }}
                 className="login"

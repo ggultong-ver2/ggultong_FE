@@ -16,6 +16,7 @@ function SignComplete() {
   );
 }
 const StContainer = styled.form`
+  font-family: "Pretendard";
   width: 100%;
   height: 100vh;
   display: flex;
@@ -25,6 +26,7 @@ const StContainer = styled.form`
   background-size: cover;
 `;
 const StCenterBox = styled.div`
+  font-family: "Pretendard";
   width: 400px;
   height: 850px;
   align-items: center;
@@ -34,7 +36,7 @@ const StCenterBox = styled.div`
   flex-direction: column;
 `;
 const StSignBox = styled.div`
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
   width: 400px;
   height: 80px;
   font-size: 45px;
@@ -48,13 +50,14 @@ const StSignBox = styled.div`
 const Stlabel = styled.label`
   font-size: 20px;
   font-weight: bold;
-  letter-spacing: -0.1em;
+  font-family: "Pretendard";
 `;
 const StImgBox = styled.img`
   margin-top: 30px;
   margin-bottom: 50px;
   width: 90px;
   height: 90px;
+  font-family: "Pretendard";
 `;
 
 const StButton = styled.button`
@@ -66,7 +69,7 @@ const StButton = styled.button`
   font-size: 18px;
   border-radius: 4px;
   background-color: #b5b5b5;
-  font-family: georgia;
+  font-family: "Pretendard";
   color: white;
   cursor: pointer;
   &:hover {

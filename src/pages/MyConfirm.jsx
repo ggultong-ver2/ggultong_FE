@@ -71,6 +71,7 @@ const StContainer = styled.form`
   align-items: center;
   justify-content: center;
   background-size: cover;
+  font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
   width: 400px;
@@ -80,9 +81,9 @@ const StCenterBox = styled.div`
   border-radius: 1px;
   display: flex;
   flex-direction: column;
+  font-family: "Pretendard";
 `;
 const StSignBox = styled.div`
-  letter-spacing: -0.1em;
   width: 400px;
   height: 80px;
   font-size: 45px;
@@ -92,16 +93,20 @@ const StSignBox = styled.div`
   padding-top: 0px;
   border-bottom: 6px solid black;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 const Stlabel = styled.label`
   font-size: 20px;
   font-weight: bold;
-  letter-spacing: -0.1em;
+
+  font-family: "Pretendard";
 `;
 
 const StInput = styled.input`
   width: 300px;
   height: 40px;
+  padding-left: 10px;
+  font-family: "Pretendard";
 `;
 
 const StButton = styled.button`
@@ -115,9 +120,11 @@ const StButton = styled.button`
   background-color: #b5b5b5;
   font-family: georgia;
   color: white;
+  font-family: "Pretendard";
   cursor: pointer;
   &:hover {
     background-color: #797777;
+    font-family: "Pretendard";
   }
 `;
 export default MyConfirm;
