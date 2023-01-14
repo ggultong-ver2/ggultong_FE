@@ -8,41 +8,48 @@ import styled from "styled-components";
 const EditPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const post = useSelector((state) => state.details.details);
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState([]);
   const [content, setContent] = useState("");
   const { id } = useParams();
-  const [editPost, setEditpost] = useState([]);
 
+  const onEditPostHandler = (id) => {
+    const formdata = new FormData();
+    for (const f of Array.from(file)) {
+      formdata.set("file", f);
+    }
+    formdata.set("title", title);
+    formdata.set("content", content);
+    formdata.set("category", category);
+    dispatch(__editPost({ id, formdata }));
+    // for (const pair of formdata) {
+    //   console.log(pair[0] + "," + pair[1]);
+    // }
+    for (let key of formdata.keys()) {
+      console.log(key);
+    }
+    for (let value of formdata.values()) {
+      console.log(value);
+    }
+  };
   useEffect(() => {
     dispatch(__getIdPost(Number(id)));
   }, [dispatch, id]);
 
-  const post = useSelector((state) => state.details.details);
-  console.log("post:", post);
-
-  const onEditPostHandler = (id, post) => {
-    const formdata = new FormData();
-    for (const f of Array.from(file)) {
-      formdata.append("file", f);
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      setCategory(post.category);
+      setContent(post.content);
+      setFile(post.imageFiles); // 없음
     }
-    formdata.append("title", title.title);
-    formdata.append("content", content.content);
-    formdata.append("category", category.category);
-    console.log(file);
-    //for (let value of formdata.values()) {
-    //console.log(key);
-    //}
-    // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
-    dispatch(__editPost({ id, formdata }));
+  }, [post]);
 
-    for (const pair of formdata) {
-      console.log(pair[0] + "," + pair[1]);
-    }
-  };
-
+  // console.log(post.imageFiles);
+  // console.log(file);
   return (
     <div>
       <Form
@@ -56,11 +63,11 @@ const EditPost = () => {
           <CategorySelect
             type="select"
             name="category"
-            defaultValue={post.category}
+            value={category}
             id="category"
             onChange={(ev) => {
               const { value } = ev.target;
-              setCategory({ ...category, category: value });
+              setCategory(value);
             }}
           >
             <option value="choose">선택해주세요</option>
@@ -78,28 +85,23 @@ const EditPost = () => {
             <TitleInput
               type="text"
               name="title"
-              defaultValue={post.title}
+              value={title}
               onChange={(ev) => {
                 const { value } = ev.target;
-                setTitle({ ...title, title: value });
+                setTitle(value);
               }}
-              //onChange={(e) => {
-              //setAddPost({ ...addPost, title: e.target.value });
-              //}}
             ></TitleInput>
           </Title>
-
           <Content
             type="text"
             placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
-            defaultValue={post.content}
+            value={content}
             onChange={(ev) => {
-              console.log(ev.target.value);
               const { value } = ev.target;
-              setContent({ ...content, content: value });
+              setContent(value);
+              console.log("value:", value);
             }}
           ></Content>
-
           <File>
             첨부파일
             <FileInput
@@ -110,7 +112,6 @@ const EditPost = () => {
               width="500px"
               onChange={(ev) => {
                 const { files } = ev.target;
-
                 setFile(files);
               }}
             />

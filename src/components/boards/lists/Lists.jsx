@@ -1,9 +1,22 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { __getIdPost } from "../../../redux/modules/postSlice";
+import { useEffect } from "react";
 
 const Lists = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const param = useParams();
   //const { title, file, content, id } = cardlist;
+
+  useEffect(() => {
+    dispatch(__getIdPost(+param.id));
+  }, [dispatch, param.id]);
+
+  const details = useSelector((state) => state.details);
+  console.log("details::", details);
 
   return (
     <Card>
@@ -24,17 +37,18 @@ const Lists = () => {
 };
 
 const Card = styled.div`
-  //border: 1px solid red;
+  border: 1px solid red;
   width: 1100px;
   height: 250px;
   margin-bottom: 40px;
   margin-left: -20px;
+  border-bottom: 1px solid #d9d9d9;
 `;
 const Textwrap = styled.div`
   float: left;
 `;
 const StTitle = styled.div`
-  //border: 1px solid green;
+  // border: 1px solid green;
   height: 50px;
   width: 850px;
   font-size: 25px;
@@ -42,25 +56,23 @@ const StTitle = styled.div`
   margin-top: 20px;
 `;
 const StFile = styled.div`
-  //border: 1px solid yellow;
+  // border: 1px solid yellow;
   height: 200px;
   width: 200px;
   float: left;
   position: relative;
-  top: 50%;
-  left: 9%;
-  transform: translate(-50%, -50%);
+  margin: 20px;
   background-color: #d9d9d9;
 `;
 const StContent = styled.div`
-  //border: 1px solid blue;
+  // border: 1px solid blue;
   height: 120px;
-  width: 830px;
+  width: 850px;
   font-size: 20px;
   margin-top: 20px;
 `;
 const Etcwrap = styled.div`
-  //border: 1px solid grey;
+  // border: 1px solid grey;
   height: 30px;
 `;
 

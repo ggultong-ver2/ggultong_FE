@@ -55,14 +55,15 @@ export const apis = {
 
   createPost: (post) => {
     console.log("payload::", post);
-    baseURL.post("/post/create", post, {
+    const data = baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    return data;
   },
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
     // console.log("string", id, post);
-    baseURL.patch(`/post/${id}`, post, {
+    baseURL.put(`/post/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
   //마이페이지수정
