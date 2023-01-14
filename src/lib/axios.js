@@ -68,11 +68,22 @@ export const apis = {
     }),
   //마이페이지수정
   patchPost: (post) => {
-    console.log("patch::", post);
     baseURL.patch("/mypage/update", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
+  deleteUser: (loginId) => {
+    baseURL.delete(`/mypage/${loginId}`, {
+      headers: {
+        Authorization: localStorage.getItem("ACCESS_TOKEN"),
+      },
+    });
+  },
+
+  signNickname: (nickname) => {
+    baseURL.patch("/mypage/update/socialSetting", nickname);
+  },
+
   // 리뷰 관련
 
   // 좋아요 관련
