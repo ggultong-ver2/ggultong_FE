@@ -87,4 +87,9 @@ export const apis = {
   // 리뷰 관련
 
   // 좋아요 관련
+  likeToggle: () =>{
+    baseURL.post("/api/like/post/{postId}", {
+      
+    })
+  }
 };

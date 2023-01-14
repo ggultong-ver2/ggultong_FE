@@ -25,9 +25,9 @@ import MyConfirm from "../pages/MyConfirm";
 // import MyPage from "../pages/MyPage";
 import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
+import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
 import SignNick from "../pages/SignNick";
-
 const Router = () => {
   return (
     <BrowserRouter>
@@ -46,6 +46,7 @@ const Router = () => {
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
+          <Route path="/search/:keyword" element={<Search />} />
           <Route path="/signnick" element={<SignNick />} />
         </Routes>
       </Layout>
