@@ -26,15 +26,17 @@ import MyConfirm from "../pages/MyConfirm";
 import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import SocialLogin from "../pages/SocialLogin";
+import SignNick from "../pages/SignNick";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
+        <categorybutton />
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
-          <Route path="/myconfirm" element={<MyConfirm />} />
+          <Route path="/myconfirm/" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signcomplete" element={<SignComplete />} />
           <Route path="/login" element={<LoginPage />} />
@@ -44,6 +46,7 @@ const Router = () => {
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
+          <Route path="/signnick" element={<SignNick />} />
         </Routes>
       </Layout>
     </BrowserRouter>

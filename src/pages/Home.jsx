@@ -116,6 +116,7 @@ const STTab = styled.ul`
   margin: 0 auto;
   padding: 0 40px;
   font-size: 14px;
+  font-family: "Pretendard";
 
   li {
     float: left;
@@ -125,21 +126,25 @@ const STTab = styled.ul`
     color: #828282;
     border: 1px solid transparent;
     padding: 10px;
+    font-family: "Pretendard";
     cursor: pointer;
   }
 
   li:first-child {
     margin-left: 0;
+    font-family: "Pretendard";
   }
 
   li:hover {
     border-bottom: 2px solid black;
     color: #000;
+    font-family: "Pretendard";
   }
 
   .is-active {
     border-bottom: 2px solid black;
     color: #000;
+    font-family: "Pretendard";
   }
 `;
 export default Home;

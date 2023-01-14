@@ -28,44 +28,46 @@ function Main(props) {
         <button onClick={() => navigate("/post")}>글쓰기</button>
       </div>
       <div className="main_container">
-        <div className="main_category">
-          <ul className="clearfix">
-            <li>
-              <div className="category_text">
-                <h3>꿀매거진</h3>
-                <p>에디터가 엄선한 자취 생활 정보</p>
-              </div>
-            </li>
-            <li>
-              <div className="category_text">
-                <h3>자취 꿀방</h3>
-                <p>에디터가 엄선한 자취 생활 정보</p>
-              </div>
-            </li>
-            <li>
-              <div className="category_text">
-                <h3>자취 꿀팁</h3>
-                <p>에디터가 엄선한 자취 생활 정보</p>
-              </div>
-            </li>
-            <li>
-              <div className="category_text">
-                <h3>자취 꿀밥</h3>
-                <p>에디터가 엄선한 자취 생활 정보</p>
-              </div>
-            </li>
-            <li>
-              <div className="category_text">
-                <h3>자취 꿀템</h3>
-                <p>에디터가 엄선한 자취 생활 정보</p>
-              </div>
-            </li>
-          </ul>
+        <div className="sub_container">
+          <div className="main_category">
+            <ul className="clearfix">
+              <li>
+                <div className="category_text">
+                  <h3>꿀매거진</h3>
+                  <p>에디터가 엄선한 자취 생활 정보</p>
+                </div>
+              </li>
+              <li>
+                <div className="category_text">
+                  <h3>자취 꿀방</h3>
+                  <p>에디터가 엄선한 자취 생활 정보</p>
+                </div>
+              </li>
+              <li>
+                <div className="category_text">
+                  <h3>자취 꿀팁</h3>
+                  <p>에디터가 엄선한 자취 생활 정보</p>
+                </div>
+              </li>
+              <li>
+                <div className="category_text">
+                  <h3>자취 꿀밥</h3>
+                  <p>에디터가 엄선한 자취 생활 정보</p>
+                </div>
+              </li>
+              <li>
+                <div className="category_text">
+                  <h3>자취 꿀템</h3>
+                  <p>에디터가 엄선한 자취 생활 정보</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <Magazine />
+          <Room />
+          <Recipe />
+          <QNA />
         </div>
-        <Magazine />
-        <Room />
-        <Recipe />
-        <QNA />
       </div>
     </>
   );

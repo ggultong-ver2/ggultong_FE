@@ -10,6 +10,7 @@ import addimage from "../assets/images/addimage.png";
 import { __patchPost } from "../redux/modules/postSlice";
 import { apis } from "../lib/axios";
 import MySmallTab from "./Tabs/MySmallTab";
+import __deleteId from "../redux/modules/deleteUserSlice";
 
 function MyPage() {
   const imgRef = useRef();
@@ -76,41 +77,39 @@ function MyPage() {
     });
   };
 
-  // const onSubmitHandler = () => {
-  //   // console.log(content);
-  //   const formdata = new FormData();
-  //   formdata.append("file", imagefile);
-  //   formdata.append("password", password.password);
-  //   formdata.append("nickname", nickname.nickname);
-  //   console.log(formdata);
-  //   console.log(typeof formdata);
-
-  //   dispatch(formdata);
-
-  //   for (const pair of formdata) {
-  //     console.log(pair[0] + ", " + pair[1]);
-  //   }
-  // };
+  //회원탈퇴
+  const loginId = localStorage.getItem("loginId");
+  const onDeleteLoginId = () => {
+    if (window.confirm("확인을 누르면 회원 정보가 삭제됩니다.")) {
+      __deleteId(loginId).then(() => {
+        localStorage.clear();
+        alert("그동안 이용해주셔서 감사합니다.");
+        window.location.assign("/");
+      });
+    }
+  };
 
   const onSubmitPostHandler = (e) => {
     e.preventDefault();
-    console.log("password", password);
     dispatch(
       __patchPost({
         password,
         profileImg,
         nickname,
       })
-    );
+    ).then((res) => {
+      console.log("res:::", res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(res.data.msg, "정보 수정이 완료되었습니다.", "success");
+      } else {
+        Swal.fire(res.data.msg, "정보 수정 실패!", "error");
+      }
+    });
   };
 
-  const handleClickLogout = (e) => {
-    e.preventDefault();
+  const handleClickLogout = () => {
     window.location.assign("/");
-    localStorage.removeItem("Access_Token");
-    localStorage.removeItem("nickname");
-    localStorage.removeItem("profileImg");
-    localStorage.removeItem("email");
+    localStorage.clear();
   };
 
   return (
@@ -147,7 +146,6 @@ function MyPage() {
             <MyNickBox>
               닉네임
               <StInput
-                required
                 type="text"
                 id="nickname"
                 value={nickname}
@@ -216,7 +214,13 @@ function MyPage() {
               </StButton>
             </SettingItm>
             <SettingItm>
-              <StButton>회원탈퇴</StButton>
+              <StButton
+                onClick={() => {
+                  onDeleteLoginId();
+                }}
+              >
+                회원탈퇴
+              </StButton>
             </SettingItm>
           </div>
         </StCenterBox2>
@@ -253,39 +257,6 @@ function MyPage() {
   );
 }
 
-//회원탈퇴
-
-// const handleDeleteProfile = (e) => {
-//   e.preventDefault();
-//   if (
-//     Swal.fire({
-//       title: "정말 탈퇴 하시겠습니까??",
-//       text: "조금만 더 생각해보세요 ㅠ.ㅠ",
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonColor: "#3085d6",
-//       cancelButtonColor: "#d33",
-//       confirmButtonText: "Yes, delete it!",
-//     })
-//   ) {
-//     apis
-//       .delete(`${process.env.REACT_APP_PROXY_URL}/users/${loginId}`, {
-//         headers: {
-//           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
-//         },
-//       })
-//       .then((result) => {
-//         if (result.isConfirmed) {
-//           localStorage.clear();
-//           Swal.fire("탈퇴 완료!", "그동안 이용해주셔서 감사합니다.", "success");
-//           Navigate("/");
-//         }
-//       });
-//   } else {
-//     return;
-//   }
-// };
-
 const StContainer = styled.form`
   background-color: gray;
   width: 100%;
@@ -293,13 +264,14 @@ const StContainer = styled.form`
   display: flex;
   background-color: white;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 
 const StSubCon = styled.div`
   background-color: gray;
   width: 1200px;
   height: 100vh;
-
+  font-family: "Pretendard";
   background-color: white;
 `;
 const StTapBox = styled.div`
@@ -308,6 +280,7 @@ const StTapBox = styled.div`
   width: 100px;
   height: 100px;
   background-color: black;
+  font-family: "Pretendard";
 `;
 
 const StCenterBox = styled.div`
@@ -322,13 +295,13 @@ const StCenterBox = styled.div`
   display: flex;
   font-size: 100%;
   background-color: pink;
+  font-family: "Pretendard";
 `;
 
 const StCenterBox2 = styled.div`
   padding-top: 20px;
   padding-left: 40px;
   margin-top: 30px;
-
   width: 1000px;
   height: 320px;
   border: 0;
@@ -338,6 +311,7 @@ const StCenterBox2 = styled.div`
   flex-shrink: 0;
   font-size: 100%;
   background-color: orange;
+  font-family: "Pretendard";
 `;
 
 const StCenterBox3 = styled.div`
@@ -352,6 +326,7 @@ const StCenterBox3 = styled.div`
   flex-shrink: 0;
   font-size: 100%;
   background-color: red;
+  font-family: "Pretendard";
 `;
 
 const StLeftBox = styled.div`
@@ -361,6 +336,7 @@ const StLeftBox = styled.div`
   height: 225px;
   float: left;
   background-color: gray;
+  font-family: Pretendard;
 `;
 
 const StRightBox = styled.div`
@@ -370,6 +346,7 @@ const StRightBox = styled.div`
   float: right;
   margin-right: 200px;
   background-color: gray;
+  font-family: "Pretendard";
 `;
 
 const StFoot = styled.div`
@@ -379,33 +356,34 @@ const StFoot = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Pretendard";
 `;
 const MyBox = styled.div`
-  letter-spacing: -0.1em;
   width: 920px;
   height: 50px;
   background-color: gray;
   font-size: 24px;
+  font-family: "Pretendard";
 `;
 const SettingBox = styled.div`
-  letter-spacing: -0.1em;
   width: 920px;
   height: 50px;
   margin-top: 20px;
   border-bottom: 1px solid #ebebeb;
   font-size: 24px;
+  font-family: "Pretendard";
 `;
 
 const SettingItm = styled.div`
   display: flex;
   align-items: center;
-  letter-spacing: -0.1em;
+
   width: 920px;
   height: 50px;
   margin-top: 10px;
   font-weight: bold;
   padding-bottom: 10px;
-
+  font-family: "Pretendard";
   border-bottom: 1px solid #ebebeb;
   font-size: 16px;
 `;
@@ -413,13 +391,14 @@ const SettingItm = styled.div`
 const SettingAlm = styled.div`
   display: flex;
   align-items: center;
-  letter-spacing: -0.1em;
+
   width: 920px;
   height: 50px;
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ebebeb;
   font-size: 16px;
+  font-family: "Pretendard";
 `;
 
 const MypageBox = styled.div`
@@ -430,6 +409,7 @@ const MypageBox = styled.div`
   font-size: 14px;
   color: #9d9d9d;
   font-weight: 600;
+  font-family: "Pretendard";
 `;
 const MyNickBox = styled.div`
   padding-left: 15px;
@@ -439,6 +419,7 @@ const MyNickBox = styled.div`
   font-size: 14px;
   color: #9d9d9d;
   font-weight: 600;
+  font-family: "Pretendard";
 `;
 const MyPW = styled.label`
   display: flex;
@@ -447,6 +428,7 @@ const MyPW = styled.label`
   float: left;
   width: 100px;
   height: 170px;
+  font-family: "Pretendard";
 `;
 
 const MyPwBox = styled.div`
@@ -458,10 +440,10 @@ const MyPwBox = styled.div`
   font-size: 14px;
   color: #9d9d9d;
   font-weight: 600;
+  font-family: "Pretendard";
 `;
 
 const LikeBox = styled.div`
-  letter-spacing: -0.1em;
   font-weight: bold;
   float: left;
   margin-top: 30px;
@@ -471,6 +453,7 @@ const LikeBox = styled.div`
   background-color: white;
   width: 200px;
   height: 80px;
+  font-family: "Pretendard";
 `;
 
 const Myprofile = styled.img`
@@ -479,6 +462,7 @@ const Myprofile = styled.img`
   height: 200px;
   border-radius: 100px;
   border: 2px solid black;
+  font-family: "Pretendard";
 `;
 const StInput = styled.input`
   padding-left: 10px;
@@ -486,9 +470,11 @@ const StInput = styled.input`
   margin-top: 20px;
   border: 1px solid #000000;
   background-color: #f5f6f9;
-  margin-left: 110px;
+  margin-left: 115px;
+  margin-bottom: 10px;
   width: 470px;
   height: 48px;
+  font-family: "Pretendard";
 `;
 const StEmailInput = styled.input`
   padding-left: 10px;
@@ -496,19 +482,22 @@ const StEmailInput = styled.input`
   margin-top: 20px;
   border: 1px solid #000000;
   background-color: #f5f6f9;
-  margin-left: 65px;
+  margin-left: 75px;
   width: 590px;
   height: 48px;
+  font-family: "Pretendard";
 `;
 const StPwInput = styled.input`
   border-radius: 4px;
   margin-top: 10px;
   padding-left: 10px;
+  margin-bottom: 5px;
   border: 1px solid #000000;
   background-color: #f5f6f9;
   margin-left: 52px;
   width: 590px;
   height: 48px;
+  font-family: "Pretendard";
 `;
 const StButton = styled.button`
   font-weight: bold;
@@ -518,6 +507,7 @@ const StButton = styled.button`
   border: 0;
   background-color: pink;
   cursor: pointer;
+  font-family: "Pretendard";
 `;
 const StNickButton = styled.button`
   width: 110px;
@@ -531,6 +521,7 @@ const StNickButton = styled.button`
   &:hover {
     background-color: #dcdcdc;
   }
+  font-family: "Pretendard";
 `;
 
 const Icon = styled.img`
