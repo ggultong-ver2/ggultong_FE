@@ -4,7 +4,13 @@
       "id": 1,
       "title": "title",
       "file": "image",
-      "content": "content"
+      "content": "content",
+      "comment": [
+        {
+          "commentId":1,
+          "commentContent":"댓글"
+        }
+      ]
     },
     {
       "id": 2,

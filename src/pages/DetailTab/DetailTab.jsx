@@ -63,7 +63,7 @@ const DetailTab = () => {
         <div
           className={toggleState === 2 ? "content active-content" : "content"}
         >
-          if (category === room) {}
+          {/* if (category === room) {} */}
           <Lists />
           <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>

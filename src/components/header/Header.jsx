@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../pages/reset.css";
 import "./style.css";
 
 function Header() {
   const navigate = useNavigate();
+
+  const[keyword, setKeyWord] = useState("");
+  const onSubmit = async () => {
+    window.location.href = "/search/" + keyword;
+  };
 
   return (
     <div className="header_container">
@@ -22,12 +28,12 @@ function Header() {
                 id="keyword"
                 placeholder="궁금한 자취 정보를 입력하세요"
                 className="searchinp"
+                onChange={(e) => {setKeyWord(e.target.value);}}
               />
-              <input
-                type="submit"
-                value="Search"
+              <button
+                type="button"
                 class="search_button"
-                onClick="search()"
+                onClick={() => {onSubmit()}}
               />
             </li>
             <li>알림</li>
