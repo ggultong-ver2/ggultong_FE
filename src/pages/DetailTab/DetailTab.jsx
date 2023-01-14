@@ -4,15 +4,48 @@ import { __getPost } from "./../../redux/modules/postSlice";
 import Lists from "../../components/boards/lists/Lists";
 import Pagination from "../../components/pagination/pagination";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
 
 const DetailTab = () => {
   const [toggleState, setToggleState] = useState(1);
   const dispatch = useDispatch();
 
+  //const posts = useSelector((posts) => state.details.details);
+
+  useEffect(() => {
+    dispatch(__getPost());
+  }, [dispatch]);
+
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  // const Categorycontent = () => {
+  //   if (toggleState === 1) {
+  //     if (posts.category === "room") {
+  //       return;
+  //       posts.map((post) => <Lists key={posts.id} />);
+  //     } else {
+  //       return null;
+  //     }
+  //   } else if (toggleState === 2) {
+  //     if (posts.category === "room") {
+  //       return posts.map((post) => <Lists key={posts.id} />);
+  //     } else {
+  //       return null;
+  //     }
+  //   } else if (toggleState === 3) {
+  //     if (posts.category === "tip") {
+  //       return posts.map((post) => <Lists key={posts.id} />);
+  //     } else {
+  //       return null;
+  //     }
+  //   } else if (toggleState === 4) {
+  //     if (posts.category === "meal") {
+  //       return posts.map((post) => <Lists key={posts.id} />);
+  //     } else {
+  //       return null;
+  //     }
+  //   }
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -63,8 +96,15 @@ const DetailTab = () => {
         <div
           className={toggleState === 2 ? "content active-content" : "content"}
         >
-          {/* if (category === room) {} */}
-          <Lists />
+          <div>
+            <Lists />
+            <Lists />
+            <Lists />
+            <Lists />
+            <Lists />
+            <Lists />
+            <Lists />
+          </div>
           <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>
         <div
@@ -73,11 +113,18 @@ const DetailTab = () => {
           <Lists />
           <Lists />
           <Lists />
+          <Lists />
+          <Lists />
+          <Lists />
+          <Lists />
           <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>
         <div
           className={toggleState === 4 ? "content active-content" : "content"}
         >
+          <Lists />
+          <Lists />
+          <Lists />
           <Lists />
           <Lists />
           <Lists />

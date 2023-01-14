@@ -4,6 +4,8 @@ import axios from "axios";
 const instance = axios.create({
   baseURL: "https://sparta-sjl.shop/api", //상정님
 
+  //process.env.REACT_APP_URL
+
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -29,7 +31,7 @@ baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("Access_Token");
 
-  config.headers["Authorization"] = `${token}`;
+  config.headers["Access_Token"] = `${token}`;
   return config;
 });
 
@@ -40,10 +42,11 @@ export const apis = {
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
   checkNickName: (nickname) => instance.post(`/user/nickCheck/${nickname}`),
-  checkPw: (password) => instance.post(`/user/pwCheck/${password}`),
+  checkPw: (password) => instance.post("/user/pwCheck", password),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
+
   // 게시글 관련
   getPost: () => baseURL.get("/post/postlist"),
   getIdPost: (id) => {
@@ -52,9 +55,10 @@ export const apis = {
 
   createPost: (post) => {
     console.log("payload::", post);
-    baseURL.post("/post/create", post, {
+    const data = baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    return data;
   },
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
@@ -64,11 +68,22 @@ export const apis = {
     }),
   //마이페이지수정
   patchPost: (post) => {
-    console.log("patch::", post);
-    baseURL.patch("/user/mypage/update", post, {
+    baseURL.patch("/mypage/update", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
+  deleteUser: (loginId) => {
+    baseURL.delete(`/mypage/${loginId}`, {
+      headers: {
+        Authorization: localStorage.getItem("ACCESS_TOKEN"),
+      },
+    });
+  },
+
+  signNickname: (nickname) => {
+    baseURL.patch("/mypage/update/socialSetting", nickname);
+  },
+
   // 리뷰 관련
 
   // 좋아요 관련

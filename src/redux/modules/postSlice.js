@@ -112,10 +112,10 @@ export const __deletePost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload: ", payload);
-      //const data = await apis.deletePost(payload);
-      const data = await axios.delete(
-        `http://localhost:3001/postss/${payload}`
-      );
+      const data = await apis.deletePost(payload);
+      //const data = await axios.delete(
+      // `http://localhost:3001/postss/${payload}`
+      //);
       console.log("data: ", data.data.msg);
       //alert(data.data.msg);
       // if (data.data.statusCode === 400) {
@@ -136,9 +136,9 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { id, formdata } = payload;
-      console.log("payload:::::: ", payload);
-      //const data = await apis.editPost(id, formdata);
-      const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
+      console.log("payload: ", payload);
+      const data = await apis.editPost(id, formdata);
+      //const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
 
       console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(payload);
@@ -203,26 +203,20 @@ export const __patchPost = createAsyncThunk(
   "patchPost",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload", payload);
-      const { nickname, password, imagefile } = payload;
-      const postData = new FormData();
-      postData.append("profileImg", imagefile);
-      postData.append("password", password);
-      postData.append("nickname", nickname); //entries
+      const { nickname, password, profileImg } = payload;
+      const formData = new FormData();
+      formData.append("profileImg", profileImg);
+      formData.append("password", password);
+      formData.append("nickname", nickname); //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
       // postData.append("title",payload.title);
       // postData.append("files", images);
       const data = await apis.patchPost(payload);
       if (data.request.statusCode === 200) {
-        Swal.fire(
-          "회원정보 수정완료!",
-          "정보 수정이 완료되었습니다.",
-          "success"
-        );
       }
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      Swal.fire("회원정보 수정 실패!", "다시 확인해주세요.", "error");
+      // Swal.fire("회원정보 수정 실패!", "다시 확인해주세요.", "error");
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -323,7 +317,7 @@ export const postSlice = createSlice({
     },
     [__addPost.fulfilled]: (state, action) => {
       // 액션으로 받은 값 = payload 추가해준다.
-      console.log("action.payload: ", action);
+      console.log("action.payload: ", action.payload);
       state.isLoading = false;
       state.posts.push(action.payload);
     },
@@ -361,10 +355,10 @@ export const postSlice = createSlice({
         post.id === action.payload.id
           ? {
               ...post,
-              title: action.payload.data.title,
-              content: action.payload.data.content,
-              file: action.payload.data.file,
-              category: action.payload.data.category,
+              title: action.payload.formdata.title,
+              content: action.payload.formdata.content,
+              file: action.payload.formdata.imagefile,
+              category: action.payload.formdata.category,
             }
           : post
       );

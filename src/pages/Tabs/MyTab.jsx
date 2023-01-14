@@ -54,10 +54,12 @@ class MyTab extends React.Component {
 const Wrap = styled.div`
   display: flex;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 
 const Tap = styled.div`
   margin-left: 150px;
   margin-top: 30px;
+  font-family: "Pretendard";
 `;
 export default MyTab;

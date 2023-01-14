@@ -28,7 +28,6 @@ const PostLoginPage = () => {
       loginId,
       password,
     }).then((res) => {
-      console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
         //console.log(res.header.access_token);
@@ -101,7 +100,7 @@ const PostLoginPage = () => {
             </SocialBtn>
             <SocialBtn
               kakao
-              href="https://kauth.kakao.com/oauth/authorize?client_id=0a5a9b8a46f9a0836b9ff04d61ffc21c&redirect_uri=http://localhost:3000/api/user/kakao/callback&response_type=code"
+              href="https://kauth.kakao.com/oauth/authorize?client_id=984b3a885f96f9996efd98ed1a00deab&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/kakao/callback&response_type=code"
             >
               <SocialDiv src={kakao} width="45px" height="45px" />
               카카오톡으로 로그인
@@ -120,6 +119,7 @@ const StContainer = styled.form`
   align-items: center;
   justify-content: center;
   background-size: cover;
+  font-family: "Pretendard";
 `;
 
 const StLoginBox = styled.div`
@@ -130,18 +130,21 @@ const StLoginBox = styled.div`
   display: flex;
   border-bottom: 6px solid #dcdcdc;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 
 const StBox = styled.div`
   width: 380px;
   display: flex;
   align-items: center;
+  font-family: "Pretendard";
 `;
 const StLine = styled.div`
   margin-bottom: 10px;
   width: 380px;
   height: 1px;
   background-color: #c2c2c2;
+  font-family: "Pretendard";
 `;
 
 const StCenterBox = styled.div`
@@ -156,6 +159,7 @@ const StCenterBox = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   font-size: 100%;
+  font-family: "Pretendard";
   /* margin: 5px 0 0px;
   padding: 30px 0px; */
   /* position: relative; */
@@ -167,8 +171,8 @@ const StInput = styled.input`
   height: 38px;
   border: 0;
   padding-left: 10px;
+  font-family: "Pretendard";
 
-  letter-spacing: -0.1em;
   /* background-color: orange; */
   font-size: 15px;
   /* &:hover {
@@ -180,12 +184,14 @@ const IconBox = styled.img`
   /* width: 20px;
   height: 20px; */
   /* float: right; */
+  font-family: "Pretendard";
   margin-left: -40px;
 `;
 
 const SocialDiv = styled.img`
   /* width: 40px;
   height: 45px; */
+  font-family: "Pretendard";
   background-color: transparent;
 `;
 
@@ -193,6 +199,7 @@ const SignDiv = styled.div`
   width: 1px;
   height: 16px;
   background-color: #c2c2c2;
+  font-family: "Pretendard";
 `;
 
 const SignBox = styled.div`
@@ -202,6 +209,7 @@ const SignBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 30px;
+  font-family: "Pretendard";
 `;
 
 const SocialBtn = styled.a`
@@ -216,11 +224,12 @@ const SocialBtn = styled.a`
       height: 60px;
       border: 0;
       font-size: 14px;
-      letter-spacing: -0.1em;
+
       border-radius: 10px;
       background-color: #fee000;
       text-decoration: none;
       color: black;
+      font-family: "Pretendard";
       cursor: pointer;
     `}
   ${(props) =>
@@ -230,13 +239,14 @@ const SocialBtn = styled.a`
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: "Pretendard";
       width: 175px;
       height: 60px;
       border: 0;
       margin-right: 20px;
       margin-top: 20px;
       font-size: 14px;
-      letter-spacing: -0.1em;
+
       border-radius: 10px;
       background-color: #00bf18;
       text-decoration: none;
@@ -244,25 +254,6 @@ const SocialBtn = styled.a`
       cursor: pointer;
     `}
 `;
-
-// const StButton = styled.button`
-//   margin: 15px 40px;
-//   width: 280px;
-//   height: 37px;
-//   border: 0;
-//   font-size: 17px;
-//   font-weight: bold;
-//   border-radius: 10px;
-//   background-color: #0095f6;
-//   font-family: georgia;
-//   color: white;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: #1877f2;
-//   }
-
-// `;
 
 const StButton = styled.button`
   cursor: pointer;
@@ -275,14 +266,14 @@ const StButton = styled.button`
       height: 48px;
       border: 0;
       font-size: 18px;
-
       border-radius: 4px;
       background-color: #b5b5b5;
-      font-family: georgia;
       color: white;
       cursor: pointer;
+      font-family: "Pretendard";
       &:hover {
         background-color: #797777;
+        font-family: "Pretendard";
       }
     `}
   ${(props) =>
@@ -299,6 +290,7 @@ const StButton = styled.button`
       font-size: 15px;
       margin-right: 20px;
       margin-left: 40px;
+      font-family: "Pretendard";
       cursor: pointer;
     `}
     ${(props) =>
@@ -307,7 +299,7 @@ const StButton = styled.button`
       width: 120px;
       height: 40px;
       border: 0px;
-      letter-spacing: -0.1em;
+
       background-color: white;
       color: #717171;
       font-weight: bold;
@@ -315,6 +307,7 @@ const StButton = styled.button`
       padding-right: 10px;
       font-size: 15px;
       margin-left: 20px;
+      font-family: "Pretendard";
       cursor: pointer;
     `}
 `;

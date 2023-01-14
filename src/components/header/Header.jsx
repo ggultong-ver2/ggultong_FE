@@ -48,9 +48,7 @@ function Header() {
             ) : (
               <li
                 onClick={() => {
-                  localStorage.removeItem("Access_Token");
-                  localStorage.removeItem("nickname");
-                  localStorage.removeItem("profileImg");
+                  localStorage.clear();
                   navigate("/login");
                 }}
                 className="login"

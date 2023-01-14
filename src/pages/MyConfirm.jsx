@@ -4,22 +4,28 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import __pwcheck from "../redux/modules/checkPwSlice copy";
 import { useInput } from "../lib/utils/useInput";
+import { useDispatch } from "react-redux";
 function MyConfirm() {
   const [password, setPassword] = useInput();
   const navigate = useNavigate();
 
   const onCheckPassword = (password) => {
     console.log("password--->", password);
-    __pwcheck(password).then((res) => {
-      console.log(password);
-
-      //   if (res.data.statusCode === 200) {
-      //     Swal.fire(res.data.msg, "확인되었습니다.", "success");
-      //     // navigate("/mypage");
-      //   } else {
-      //     Swal.fire(res.data.msg, "비밀번호가 틀렸습니다.", "error");
-      //     // navigate("/myconfirm");
-      //   }
+    __pwcheck({
+      password,
+    }).then((res) => {
+      console.log("res:::::", res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
+        //console.log(res.header.access_token);
+        navigate("/");
+      } else {
+        Swal.fire(
+          res.data.msg,
+          "아이디 및 비밀번호를 다시 확인해주세요!",
+          "error"
+        );
+      }
     });
   };
 
@@ -46,7 +52,6 @@ function MyConfirm() {
         <StButton
           onClick={() => {
             onCheckPassword(password);
-
             navigate("/mypage");
           }}
         >
@@ -66,6 +71,7 @@ const StContainer = styled.form`
   align-items: center;
   justify-content: center;
   background-size: cover;
+  font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
   width: 400px;
@@ -75,9 +81,9 @@ const StCenterBox = styled.div`
   border-radius: 1px;
   display: flex;
   flex-direction: column;
+  font-family: "Pretendard";
 `;
 const StSignBox = styled.div`
-  letter-spacing: -0.1em;
   width: 400px;
   height: 80px;
   font-size: 45px;
@@ -87,16 +93,20 @@ const StSignBox = styled.div`
   padding-top: 0px;
   border-bottom: 6px solid black;
   justify-content: center;
+  font-family: "Pretendard";
 `;
 const Stlabel = styled.label`
   font-size: 20px;
   font-weight: bold;
-  letter-spacing: -0.1em;
+
+  font-family: "Pretendard";
 `;
 
 const StInput = styled.input`
   width: 300px;
   height: 40px;
+  padding-left: 10px;
+  font-family: "Pretendard";
 `;
 
 const StButton = styled.button`
@@ -110,9 +120,11 @@ const StButton = styled.button`
   background-color: #b5b5b5;
   font-family: georgia;
   color: white;
+  font-family: "Pretendard";
   cursor: pointer;
   &:hover {
     background-color: #797777;
+    font-family: "Pretendard";
   }
 `;
 export default MyConfirm;
