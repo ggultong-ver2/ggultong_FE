@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { apis, baseURL } from "../../lib/axios";
+// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+// import { apis, baseURL } from "../../lib/axios";
 
-const initialState = {
-  comment: [],
-  isLoading: false,
-  error: null,
-};
+// const initialState = {
+//   comment: [],
+//   isLoading: false,
+//   error: null,
+// };
 
 // export const __getComment = createAsyncThunk(
 //   "getComment",
@@ -132,5 +132,5 @@ const initialState = {
 //   },
 // });
 
-export const {} = commentSlice.actions;
-export default commentSlice.reducer;
+// export const {} = commentSlice.actions;
+// export default commentSlice.reducer;
