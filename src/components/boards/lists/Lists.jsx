@@ -37,7 +37,7 @@ const Lists = () => {
 };
 
 const Card = styled.div`
-  //border: 1px solid green;
+  border: 1px solid green;
   width: 1100px;
   height: 250px;
 `;
@@ -46,12 +46,12 @@ const Textwrap = styled.div`
   margin-top: 30px;
 `;
 const StTitle = styled.div`
-  // border: 1px solid green;
+  border: 1px solid green;
   height: 50px;
   width: 850px;
   font-size: 25px;
   font-weight: bold;
-  //margin-top: 20px;
+  margin-top: 20px;
 `;
 const StFile = styled.div`
   // border: 1px solid yellow;
