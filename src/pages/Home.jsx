@@ -10,7 +10,6 @@ import Recipe from "./Recipe";
 import Room from "./Room";
 import "./style.css";
 import styled from "styled-components";
-import DetailTab from "./DetailTab/DetailTab";
 
 function Home(props) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -44,11 +43,7 @@ function Home(props) {
           꿀정보
         </li>
       ),
-      tabCont: (
-        <div>
-          <DetailTab />
-        </div>
-      ),
+      tabCont: <div></div>,
     },
     {
       tabTitle: (
