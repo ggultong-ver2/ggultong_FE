@@ -88,21 +88,13 @@ const DetailTab = () => {
             <div className="banner" />
             <div className="banner" />
           </div>
-          <div className="lists">
-            <Lists />
-          </div>
+          <div className="lists"></div>
         </div>
 
         <div
           className={toggleState === 2 ? "content active-content" : "content"}
         >
           <div>
-            <Lists />
-            <Lists />
-            <Lists />
-            <Lists />
-            <Lists />
-            <Lists />
             <Lists />
           </div>
           <Pagination total={5} limit={5} page={10} setPage={setPage} />
@@ -113,18 +105,11 @@ const DetailTab = () => {
           <Lists />
           <Lists />
           <Lists />
-          <Lists />
-          <Lists />
-          <Lists />
-          <Lists />
           <Pagination total={5} limit={5} page={10} setPage={setPage} />
         </div>
         <div
           className={toggleState === 4 ? "content active-content" : "content"}
         >
-          <Lists />
-          <Lists />
-          <Lists />
           <Lists />
           <Lists />
           <Lists />

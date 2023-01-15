@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useInput } from "../lib/utils/useInput";
-import __pwcheck from "../redux/modules/checkPwSlice copy";
+import __pwcheck from "../redux/modules/checkPwSlice";
 import __nickCheck from "../redux/modules/checkNickSlice";
 import addimage from "../assets/images/addimage.png";
 import { __patchPost } from "../redux/modules/postSlice";
