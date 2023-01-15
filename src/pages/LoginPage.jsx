@@ -51,9 +51,7 @@ const PostLoginPage = () => {
       <div>
         <StCenterBox>
           <StLoginBox>로그인</StLoginBox>
-          {/* <StRightBox2> */}
-          <img src={null} alt="" />
-          <br></br>
+          <StLabel>아이디</StLabel>
           <StBox>
             <StInput
               type="text"
@@ -65,9 +63,8 @@ const PostLoginPage = () => {
               minLength={4}
               maxLength={30}
             />
-            <IconBox src={loginprofile} width="20px" height="20px" />
           </StBox>
-          <StLine />
+          <StLabel2>비밀번호</StLabel2>
           <StBox>
             <StInput
               type="password"
@@ -79,33 +76,30 @@ const PostLoginPage = () => {
               minLength={8}
               maxLength={15}
             />
-            <IconBox src={lock} width="20px" height="20px" />
           </StBox>
-          <StLine />
+
           <StButton log>로그인</StButton>
           <SignBox>
             <StButton reg onClick={() => navigate("/agree")}>
-              회원가입
+              이메일로 회원가입
             </StButton>
-            <SignDiv />
+
             <StButton pw onClick={() => navigate("/pw")}>
-              비밀번호 찾기
+              비밀번호 재설정
             </StButton>
           </SignBox>
-          <img src={orline} width="450px" alt="" />
-          <div>
-            <SocialBtn naver>
-              <SocialDiv src={naver} width="35px" height="35px" />
-              네이버로 로그인
-            </SocialBtn>
-            <SocialBtn
-              kakao
-              href="https://kauth.kakao.com/oauth/authorize?client_id=984b3a885f96f9996efd98ed1a00deab&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/kakao/callback&response_type=code"
-            >
-              <SocialDiv src={kakao} width="45px" height="45px" />
-              카카오톡으로 로그인
-            </SocialBtn>
-          </div>
+
+          <SocialBtn
+            kakao
+            href="https://kauth.kakao.com/oauth/authorize?client_id=984b3a885f96f9996efd98ed1a00deab&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/kakao/callback&response_type=code"
+          >
+            <SocialDiv src={kakao} width="32px" height="32px" />
+            카카오톡으로 로그인
+          </SocialBtn>
+          <SocialBtn naver>
+            <SocialDiv src={naver} width="32px" height="32px" />
+            네이버로 로그인
+          </SocialBtn>
         </StCenterBox>
       </div>
     </StContainer>
@@ -115,7 +109,7 @@ const StContainer = styled.form`
   width: 100%;
   height: 100vh;
   display: flex;
-  background-color: white;
+  background-color: #f9fafb;
   align-items: center;
   justify-content: center;
   background-size: cover;
@@ -124,11 +118,11 @@ const StContainer = styled.form`
 
 const StLoginBox = styled.div`
   width: 400px;
-  height: 80px;
-  font-size: 40px;
+  height: 50px;
+  font-size: 24px;
   margin-bottom: 10px;
   display: flex;
-  border-bottom: 6px solid #dcdcdc;
+  font-weight: 600;
   justify-content: center;
   font-family: "Pretendard";
 `;
@@ -139,18 +133,13 @@ const StBox = styled.div`
   align-items: center;
   font-family: "Pretendard";
 `;
-const StLine = styled.div`
-  margin-bottom: 10px;
-  width: 380px;
-  height: 1px;
-  background-color: #c2c2c2;
-  font-family: "Pretendard";
-`;
 
 const StCenterBox = styled.div`
-  width: 450px;
-  height: 600px;
+  background-color: #ffffff;
+  width: 588px;
+  height: 707px;
   align-items: center;
+  padding-top: 80px;
   border: 0;
   border-radius: 1px;
   box-sizing: border-box;
@@ -160,54 +149,34 @@ const StCenterBox = styled.div`
   flex-shrink: 0;
   font-size: 100%;
   font-family: "Pretendard";
-  /* margin: 5px 0 0px;
-  padding: 30px 0px; */
-  /* position: relative; */
-  /* vertical-align: baseline; */
 `;
 
 const StInput = styled.input`
-  width: 370px;
-  height: 38px;
-  border: 0;
+  margin-bottom: 10px;
+  width: 384px;
+  height: 48px;
+  /* border: 1px solid #cbcbcb; */
+  border-radius: 4px;
   padding-left: 10px;
   font-family: "Pretendard";
-
-  /* background-color: orange; */
+  border: 1px solid #cbcbcb;
   font-size: 15px;
-  /* &:hover {
-    border: 0.5px solid black;
-  } */
-`;
 
-const IconBox = styled.img`
-  /* width: 20px;
-  height: 20px; */
-  /* float: right; */
-  font-family: "Pretendard";
-  margin-left: -40px;
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
 `;
 
 const SocialDiv = styled.img`
-  /* width: 40px;
-  height: 45px; */
+  margin-right: 20px;
   font-family: "Pretendard";
   background-color: transparent;
-`;
-
-const SignDiv = styled.div`
-  width: 1px;
-  height: 16px;
-  background-color: #c2c2c2;
-  font-family: "Pretendard";
 `;
 
 const SignBox = styled.div`
   width: 380px;
   height: 50px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
   margin-bottom: 30px;
   font-family: "Pretendard";
 `;
@@ -216,41 +185,38 @@ const SocialBtn = styled.a`
   ${(props) =>
     props.kakao &&
     css`
-      float: right;
       display: flex;
+      justify-content: center;
+      border: 1px solid #b5b5b5;
       align-items: center;
-      margin-top: 20px;
-      width: 175px;
-      height: 60px;
-      border: 0;
+      width: 384px;
+      height: 48px;
       font-size: 14px;
-
-      border-radius: 10px;
-      background-color: #fee000;
+      border-radius: 4px;
+      font-family: "Pretendard";
       text-decoration: none;
       color: black;
-      font-family: "Pretendard";
+      font-weight: 600;
+      padding-right: 10px;
       cursor: pointer;
     `}
   ${(props) =>
     props.naver &&
     css`
-      float: left;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Pretendard";
-      width: 175px;
-      height: 60px;
-      border: 0;
-      margin-right: 20px;
       margin-top: 20px;
+      padding-right: 32px;
+      display: flex;
+      justify-content: center;
+      border: 1px solid #b5b5b5;
+      align-items: center;
+      width: 384px;
+      height: 48px;
       font-size: 14px;
-
-      border-radius: 10px;
-      background-color: #00bf18;
+      border-radius: 4px;
+      font-family: "Pretendard";
       text-decoration: none;
-      color: white;
+      color: black;
+      font-weight: 600;
       cursor: pointer;
     `}
 `;
@@ -260,55 +226,81 @@ const StButton = styled.button`
   ${(props) =>
     props.log &&
     css`
-      margin-top: 40px;
+      margin-top: 25px;
       margin-bottom: 10px;
       width: 380px;
       height: 48px;
       border: 0;
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 4px;
       background-color: #b5b5b5;
       color: white;
       cursor: pointer;
       font-family: "Pretendard";
       &:hover {
-        background-color: #797777;
+        background-color: #ffd665;
         font-family: "Pretendard";
+        color: black;
+        font-weight: 600;
+        font-size: 16px;
       }
     `}
   ${(props) =>
     props.reg &&
     css`
-      width: 80px;
-      height: 40px;
+      float: left;
+      width: 90px;
+      height: 20px;
       border: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: left;
       background-color: white;
       color: #717171;
       font-weight: bold;
-      font-size: 15px;
-      padding-right: 10px;
-      font-size: 15px;
-      margin-right: 20px;
-      margin-left: 40px;
+      font-size: 12px;
+      margin-top: 8px;
       font-family: "Pretendard";
       cursor: pointer;
     `}
     ${(props) =>
     props.pw &&
     css`
-      width: 120px;
-      height: 40px;
+      float: right;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      width: 80px;
+      height: 20px;
       border: 0px;
-
       background-color: white;
       color: #717171;
       font-weight: bold;
-      font-size: 15px;
-      padding-right: 10px;
-      font-size: 15px;
-      margin-left: 20px;
+      font-size: 12px;
       font-family: "Pretendard";
       cursor: pointer;
+      margin-top: 8px;
     `}
 `;
+const StLabel = styled.label`
+  margin-bottom: 15px;
+  justify-content: left;
+  font-size: 14px;
+  display: flex;
+  margin-right: 340px;
+  font-weight: 600;
+  font-family: "Pretendard";
+`;
+
+const StLabel2 = styled.label`
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 13px;
+  justify-content: left;
+  display: flex;
+  margin-right: 330px;
+  font-weight: 600;
+  font-family: "Pretendard";
+`;
+
 export default PostLoginPage;

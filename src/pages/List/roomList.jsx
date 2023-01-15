@@ -9,16 +9,28 @@ const RoomList = () => {
     <div>
       <Wrapall>
         <Buttons>
-          <Button1 onClick={() => navigate("/allList")} className="all">
+          <Button1
+            onClick={() => window.location.replace("/allList")}
+            className="all"
+          >
             전체
           </Button1>
-          <Button2 onClick={() => navigate("/roomList")} className="room">
+          <Button2
+            onClick={() => window.location.replace("/roomList")}
+            className="room"
+          >
             자취꿀방
           </Button2>
-          <Button3 onClick={() => navigate("/tipList")} className="tip">
+          <Button3
+            onClick={() => window.location.replace("/tipList")}
+            className="tip"
+          >
             자취꿀팁
           </Button3>
-          <Button4 onClick={() => navigate("/mealList")} className="meal">
+          <Button4
+            onClick={() => window.location.replace("/mealList")}
+            className="meal"
+          >
             자취꿀밥
           </Button4>
         </Buttons>
@@ -50,6 +62,7 @@ const Wrap = styled.div`
 `;
 const Buttons = styled.div``;
 const Button2 = styled.button`
+  cursor: pointer;
   width: 100px;
   height: 30px;
   margin-right: 15px;
@@ -59,6 +72,7 @@ const Button2 = styled.button`
   color: black;
 `;
 const Button1 = styled.button`
+  cursor: pointer;
   width: 100px;
   height: 30px;
   margin-right: 15px;
@@ -68,6 +82,7 @@ const Button1 = styled.button`
   color: grey;
 `;
 const Button3 = styled.button`
+  cursor: pointer;
   width: 100px;
   height: 30px;
   margin-right: 15px;
@@ -77,6 +92,7 @@ const Button3 = styled.button`
   color: grey;
 `;
 const Button4 = styled.button`
+  cursor: pointer;
   width: 100px;
   height: 30px;
   margin-right: 15px;
