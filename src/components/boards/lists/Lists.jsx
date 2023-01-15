@@ -37,15 +37,13 @@ const Lists = () => {
 };
 
 const Card = styled.div`
-  border: 1px solid red;
+  //border: 1px solid green;
   width: 1100px;
   height: 250px;
-  margin-bottom: 40px;
-  margin-left: -20px;
-  border-bottom: 1px solid #d9d9d9;
 `;
 const Textwrap = styled.div`
   float: left;
+  margin-top: 30px;
 `;
 const StTitle = styled.div`
   // border: 1px solid green;
@@ -53,7 +51,7 @@ const StTitle = styled.div`
   width: 850px;
   font-size: 25px;
   font-weight: bold;
-  margin-top: 20px;
+  //margin-top: 20px;
 `;
 const StFile = styled.div`
   // border: 1px solid yellow;
@@ -69,7 +67,7 @@ const StContent = styled.div`
   height: 120px;
   width: 850px;
   font-size: 20px;
-  margin-top: 20px;
+  //margin-top: 20px;
 `;
 const Etcwrap = styled.div`
   // border: 1px solid grey;

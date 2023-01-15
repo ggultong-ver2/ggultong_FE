@@ -17,7 +17,6 @@ import SignAgree from "../pages/SignAgree";
 import Detail from "../pages/detail";
 import Post from "../pages/post";
 import EditPost from "../pages/editPost";
-import DetailTab from "../pages/DetailTab/DetailTab";
 
 import SignComplete from "../pages/SignComplete";
 
@@ -28,6 +27,13 @@ import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
 import SignNick from "../pages/SignNick";
+
+import AllList from "../pages/List/AllList";
+import MealList from "../pages/List/mealList";
+import TipList from "../pages/List/tipList";
+import RoomList from "../pages/List/roomList";
+import Listbutton from "../components/Listbutton/Listbutton";
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -48,6 +54,11 @@ const Router = () => {
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/signnick" element={<SignNick />} />
+
+          <Route path="/allList" element={<AllList />} />
+          <Route path="/mealList" element={<MealList />} />
+          <Route path="/tipList" element={<TipList />} />
+          <Route path="/roomList" element={<RoomList />} />
         </Routes>
       </Layout>
     </BrowserRouter>
