@@ -17,9 +17,7 @@ import SignAgree from "../pages/SignAgree";
 import Detail from "../pages/detail";
 import Post from "../pages/post";
 import EditPost from "../pages/editPost";
-
 import SignComplete from "../pages/SignComplete";
-
 import MyConfirm from "../pages/MyConfirm";
 // import MyPage from "../pages/MyPage";
 import Home from "../pages/Home";
@@ -38,7 +36,6 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
-        <categorybutton />
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
