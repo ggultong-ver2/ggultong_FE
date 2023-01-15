@@ -6,7 +6,7 @@ import "./style.css";
 function Header() {
   const navigate = useNavigate();
 
-  const[keyword, setKeyWord] = useState("");
+  const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
     window.location.href = "/search/" + keyword;
   };
@@ -28,12 +28,16 @@ function Header() {
                 id="keyword"
                 placeholder="궁금한 자취 정보를 입력하세요"
                 className="searchinp"
-                onChange={(e) => {setKeyWord(e.target.value);}}
+                onChange={(e) => {
+                  setKeyWord(e.target.value);
+                }}
               />
               <button
                 type="button"
                 class="search_button"
-                onClick={() => {onSubmit()}}
+                onClick={() => {
+                  onSubmit();
+                }}
               />
             </li>
             <li>알림</li>

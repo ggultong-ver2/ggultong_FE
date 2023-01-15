@@ -32,7 +32,6 @@ import TipList from "../pages/List/tipList";
 import RoomList from "../pages/List/roomList";
 import Listbutton from "../components/Listbutton/Listbutton";
 import Editor from "../components/editor/Editor";
-import PostEditor from "../pages/postEditor";
 
 const Router = () => {
   return (
@@ -48,7 +47,6 @@ const Router = () => {
           <Route path="/agree/" element={<SignAgree />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
-          <Route path="/posteditor" element={<PostEditor />} />
           <Route path="/editor" element={<Editor />} />
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
