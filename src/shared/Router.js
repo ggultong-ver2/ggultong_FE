@@ -25,13 +25,14 @@ import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
 import SignNick from "../pages/SignNick";
-
 import AllList from "../pages/List/AllList";
 import MealList from "../pages/List/mealList";
 import TipList from "../pages/List/tipList";
 import RoomList from "../pages/List/roomList";
 import Listbutton from "../components/Listbutton/Listbutton";
+
 import Editor from "../components/editor/Editor";
+
 
 const Router = () => {
   return (
@@ -47,13 +48,14 @@ const Router = () => {
           <Route path="/agree/" element={<SignAgree />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
+
           <Route path="/editor" element={<Editor />} />
+
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/signnick" element={<SignNick />} />
-
           <Route path="/allList" element={<AllList />} />
           <Route path="/mealList" element={<MealList />} />
           <Route path="/tipList" element={<TipList />} />
