@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import __pwcheck from "../redux/modules/checkPwSlice copy";
+import __pwcheck from "../redux/modules/checkPwSlice";
 import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
 function MyConfirm() {
@@ -16,15 +16,11 @@ function MyConfirm() {
     }).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
+        Swal.fire(res.data.msg, "반갑습니다!", "success");
         //console.log(res.header.access_token);
         navigate("/");
       } else {
-        Swal.fire(
-          res.data.msg,
-          "아이디 및 비밀번호를 다시 확인해주세요!",
-          "error"
-        );
+        Swal.fire(res.data.msg, "비밀번호를 다시 확인해주세요!", "error");
       }
     });
   };
