@@ -16,17 +16,19 @@ li:first-child {
   line-height: 72px;
 }
 .hero_side button {
-  width: 150px;
-  height: 50px;
+  width: 83px;
+  height: 32px;
   border: 0 none;
-  background: #a5a5a5;
+  border-radius: 40px;
+  background: #000;
+  color: white;
   cursor: pointer;
   margin-top: 35px;
 }
-.hero_side button:hover {
+/* .hero_side button:hover {
   background: #000;
   color: white;
-}
+} */
 
 .main_container {
   background-color: gray;
@@ -49,6 +51,16 @@ li:first-child {
 .sub_container {
   width: 1500px;
   height: 100vh;
+  position: relative;
+}
+
+.main_category {
+  width: 1200px;
+  margin: 0 auto;
+  position: absolute;
+  top: -9%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .main_category li {
@@ -60,20 +72,42 @@ li:first-child {
   padding: 20px 20px;
   cursor: pointer;
   border-bottom: 2px rgba(0, 0, 0, 0.1) solid;
-  box-shadow: 0px 3px 5px rgb(212, 211, 211);
+  box-shadow: 0px 1px 7px rgb(196, 196, 196);
+  transition: 0.3s;
 }
 .main_category li:hover {
-  box-shadow: 0px 5px 5px gray;
+  box-shadow: 0px 3px 15px rgb(211, 211, 211);
+  transform: scale(1.05);
 }
 
 .category_text h3 {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 30px;
   display: block;
 }
 .category_text p {
   font-size: 14px;
+  line-height: 24px;
   display: block;
 }
+
+.magazine_icon{
+  width: 32px;height: 32px;
+  background-image: url(../../public/images/magazine_o.png);
+}
+.tip_icon{
+  width: 32px;height: 32px;
+  background-image: url(../../public/images/tip_o.png);
+}
+.rice_icon{
+  width: 32px;height: 32px;
+  background-image: url(../../public/images/rice_o.png);
+}
+.home_icon{
+  width: 32px;height: 32px;
+  background-image: url(../../public/images/home_o.png);
+}
+
 
 .main_magazine {
   margin-top: 80px;

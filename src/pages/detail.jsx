@@ -56,7 +56,7 @@ const Detail = () => {
               <Date>{details?.createdAt.slice(0, 10)}</Date>
             </Etc>
             <Etcs>
-              <Countcomment>댓글 </Countcomment>
+              <Countcomment>댓글</Countcomment>
               <Heart>좋아요 {details?.likePostSum}</Heart>
             </Etcs>
           </Else>
