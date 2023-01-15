@@ -39,7 +39,7 @@ const RoomList = () => {
 const Wrapall = styled.div`
   border: 1px solid red;
   width: 1200px;
-  height: 2000px;
+  height: 2200px;
   margin: auto;
   padding: 20px;
   font-family: "Pretendard";
