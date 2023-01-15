@@ -22,11 +22,24 @@ const AllList = () => {
             자취꿀밥
           </Button4>
         </Buttons>
+        <Banners>
+          <Banner />
+          <Banner />
+        </Banners>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <Wrap>
-          {/* <Banners>
-            <Banner />
-            <Banner />
-          </Banners> */}
           <Lists />
           <Lists />
           <Lists />
@@ -43,7 +56,7 @@ const AllList = () => {
 const Wrapall = styled.div`
   border: 1px solid red;
   width: 1200px;
-  height: 2000px;
+  height: 2200px;
   margin: auto;
   padding: 20px;
   font-family: "Pretendard";
@@ -91,7 +104,7 @@ const Button4 = styled.button`
 `;
 const Banners = styled.div`
   margin-top: 20px;
-  // margin-left: -15px;
+  margin-left: 40px;
 `;
 const Banner = styled.div`
   width: 530px;
