@@ -30,9 +30,9 @@ import MealList from "../pages/List/mealList";
 import TipList from "../pages/List/tipList";
 import RoomList from "../pages/List/roomList";
 import Listbutton from "../components/Listbutton/Listbutton";
-
 import Editor from "../components/editor/Editor";
-
+import Pwfind from "../pages/Pwfind";
+import Idfind from "../pages/Idfind";
 
 const Router = () => {
   return (
@@ -48,9 +48,9 @@ const Router = () => {
           <Route path="/agree/" element={<SignAgree />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
-
           <Route path="/editor" element={<Editor />} />
-
+          <Route path="/pwfind" element={<Pwfind />} />
+          <Route path="/idfind" element={<Idfind />} />
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
