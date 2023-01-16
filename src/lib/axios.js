@@ -46,7 +46,8 @@ export const apis = {
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
-
+  pwfind: (pwfind) => instance.post("/user/pwfind", pwfind),
+  idfind: (idfind) => instance.post("/user/idfind", idfind),
   // 게시글 관련
   getPost: () => baseURL.get("/post/postlist"),
   getIdPost: (id) => {

@@ -84,7 +84,7 @@ const PostLoginPage = () => {
               이메일로 회원가입
             </StButton>
 
-            <StButton pw onClick={() => navigate("/pw")}>
+            <StButton pw onClick={() => navigate("/pwfind")}>
               비밀번호 재설정
             </StButton>
           </SignBox>
