@@ -26,8 +26,10 @@ const PostLoginPage = () => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "", "success");
+        navigate("/login");
+      } else {
+        Swal.fire(res.data.msg, "", "error");
       }
-      navigate("/login");
     });
   };
 

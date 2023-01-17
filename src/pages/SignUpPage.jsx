@@ -35,17 +35,19 @@ const PostLoginPage = () => {
 
   const PWChk = () => {
     if (!isPassword(password)) {
-      setPWPtag("사용 불가. 숫자/영문/특수문자를 모두포함한, 8-15자");
+      setPWPtag(
+        <StPs>사용 불가. 숫자/영문/특수문자를 모두포함한, 8-15자</StPs>
+      );
     } else {
-      setPWPtag("사용가능한 비밀번호 입니다");
+      setPWPtag(<StPs2>사용가능한 비밀번호 입니다</StPs2>);
     }
   };
 
   const PWConfirmChk = () => {
     if (password !== PWConfirm) {
-      setPWConfirmP("비밀번호가 일치하지않습니다");
+      setPWConfirmP(<StPs>비밀번호가 일치하지않습니다</StPs>);
     } else {
-      setPWConfirmP("비밀번호 확인되었습니다.");
+      setPWConfirmP(<StPs2>비밀번호 확인되었습니다.</StPs2>);
     }
   };
 
@@ -101,12 +103,18 @@ const PostLoginPage = () => {
     }).then((res) => {
       setIsemail(res.data);
       console.log(res);
-
-      Swal.fire(
-        "인증번호 전송이 완료되었습니다!",
-        "해당 메일함에서 인증번호를 확인해주세요.",
-        "success"
-      );
+      if (res.data.statusCode === 200) {
+        Swal.fire(
+          res.data.msg,
+          "해당 메일함에서 인증번호를 확인해주세요.",
+          "success"
+        );
+      } else {
+        if (visible) {
+          return;
+        }
+        Swal.fire(res.data.msg, "이메일을 다시 확인해주세요!", "error");
+      }
     });
   };
 
@@ -458,6 +466,24 @@ const StP = styled.p`
   padding-left: 5px;
   margin-top: 7px;
   font-size: 12px;
+  font-family: "Pretendard";
+`;
+
+const StPs = styled.p`
+  width: 384px;
+  padding-left: 5px;
+  margin-top: 7px;
+  font-size: 12px;
+  color: red;
+  font-family: "Pretendard";
+`;
+
+const StPs2 = styled.p`
+  width: 384px;
+  padding-left: 5px;
+  margin-top: 7px;
+  font-size: 12px;
+  color: limegreen;
   font-family: "Pretendard";
 `;
 

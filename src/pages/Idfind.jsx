@@ -23,7 +23,7 @@ const Idfind = () => {
     }).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "당신의 아이디 입니다!", "success");
+        Swal.fire(res.data.msg, res.data.loginId, "success");
       }
       navigate("/login");
     });
