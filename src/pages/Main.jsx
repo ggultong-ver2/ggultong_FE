@@ -21,44 +21,55 @@ function Main(props) {
 
   return (
     <>
+      <div className="top_cat">
+        <ul>
+          <li>
+            <button onClick={() => navigate("/")}>홈</button>
+          </li>
+          <li>
+            <button onClick={() => navigate("/")}>꿀정보</button>
+          </li>
+          <li>
+            <button onClick={() => navigate("/")}>즐길거리</button>
+          </li>
+        </ul>
+        <button onClick={() => navigate("/post")} className="top_post_btn">글쓰기</button>
+      </div>
       <div className="hero_side">
         <h1>
           자취하면서 궁금했던 점을 <br /> 공유해봐요!
         </h1>
-        <button onClick={() => navigate("/post")}>글쓰기</button>
       </div>
       <div className="main_container">
         <div className="sub_container">
           <div className="main_category">
             <ul className="clearfix">
               <li>
+                <div className="magazine_icon"></div>
                 <div className="category_text">
                   <h3>꿀매거진</h3>
-                  <p>에디터가 엄선한 자취 생활 정보</p>
+                  <p>에디터가 직접 정리한 자취의 모든 글!</p>
                 </div>
               </li>
               <li>
-                <div className="category_text">
-                  <h3>자취 꿀방</h3>
-                  <p>에디터가 엄선한 자취 생활 정보</p>
-                </div>
-              </li>
-              <li>
+                <div className="tip_icon"></div>
                 <div className="category_text">
                   <h3>자취 꿀팁</h3>
-                  <p>에디터가 엄선한 자취 생활 정보</p>
+                  <p>나만 아는 자취 꿀팁을 나눠보아요.</p>
                 </div>
               </li>
               <li>
+                <div className="rice_icon"></div>
                 <div className="category_text">
                   <h3>자취 꿀밥</h3>
-                  <p>에디터가 엄선한 자취 생활 정보</p>
+                  <p>요리 못해도 괜찮아! 맛있으면 OK!</p>
                 </div>
               </li>
               <li>
+                <div className="home_icon"></div>
                 <div className="category_text">
-                  <h3>자취 꿀템</h3>
-                  <p>에디터가 엄선한 자취 생활 정보</p>
+                  <h3>자취 꿀방</h3>
+                  <p>자취방을 구하거나 내놓을 수 있어요!</p>
                 </div>
               </li>
             </ul>
@@ -66,7 +77,7 @@ function Main(props) {
           <Magazine />
           <Room />
           <Recipe />
-          <QNA />
+          {/* <QNA /> */}
         </div>
       </div>
     </>

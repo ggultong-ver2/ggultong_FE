@@ -11,15 +11,10 @@ function Recipe() {
               간단하게 할 수 있는 <br />
               요리 레시피 추천!
             </h3>
-            <div>
-              더 이상 혼자 고민하지마!
-              <br />
-              구하거나 내놓을 수 있어요.
-            </div>
-            <div className="write_wrap">
-              <button>글 구경하기</button>
-              <img src="https://cdn.discordapp.com/attachments/1047386886269829182/1064616579448459265/Group_212.png"></img>
-            </div>
+
+            <h4>더 이상 혼자 고민하지마! <br /> 자취방 구하거나 내놓을 수 있어요.</h4>
+            <button><h5>글 구경하기</h5> <div className="btn_arrow"></div></button>
+
           </li>
           <li>
             <div className="recipe_image"></div>

@@ -1,10 +1,11 @@
-// import { useRef, useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { __likeToggle, __postLike } from "../../redux/modules/postSlice";
-// import { Provider, LikeButton } from "@lyket/react";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { __likeToggle, __postLike } from "../../redux/modules/postSlice";
+import { Provider, LikeButton } from "@lyket/react";
+import "./style.css"
 
-// function Likes() {
+function Likes() {
 //   const navigate = useNavigate();
 //   const [likeToggle, setLikeToggle] = useState(false);
 //   const likes = useRef(0);
@@ -63,67 +64,71 @@
 // }
 // export default Likes;
 
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { __postLike } from "../../redux/modules/postSlice";
-import { Provider, LikeButton } from "@lyket/react";
 
-const Likes = ({ onClick }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams();
 
-  //   const [likeToggle, setLikeToggle] = useState(false);
-  //   const likes = useRef(0);
 
-  const [isLike, setIsLike] = useState(false);
 
-  const onClickLike = () => {
-    dispatch(__postLike(id));
-    setIsLike(!isLike);
-  };
+// import { useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useParams } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import { __postLike } from "../../redux/modules/postSlice";
+// import { Provider, LikeButton } from "@lyket/react";
 
-  const checkPostLike = useSelector((state) => state.post.checkPostLike);
+// const Likes = ({ onClick }) => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const { id } = useParams();
 
-  const likeCount = useSelector((state) => state.post.likeCount);
+// //   const [likeToggle, setLikeToggle] = useState(false);
+// //   const likes = useRef(0);
 
-  //   dispatch(__postLike(id));
-  // };
+//   const [isLike, setIsLike] = useState(false);
+  
+//   const onClickLike = () => {
+//     dispatch(__postLike(id));
+//     setIsLike(!isLike);
+//   }
 
-  const onClickloginHandler = () => {
-    alert("로그인 후 이용할 수 있어요!");
-    navigate("/login");
-  };
+//   const checkPostLike = useSelector(
+//     (state) => state.post.checkPostLike
+//   );
+
+//   const likeCount = useSelector(
+//     (state) => state.post.likeCount
+//   );
+
+//   //   dispatch(__postLike(id));
+//   // };
+
+//   const onClickloginHandler = () => {
+//     alert("로그인 후 이용할 수 있어요!");
+//     navigate("/login");
+//   };
 
   return (
-    <>
-      <div>
-        {localStorage.getItem("Access_Token") !== null ? (
-          <div onClick={onClickLike}>
-            <div>좋아요{checkPostLike === true ? "💛" : "🖤"}</div>
-            <div>{likeCount}</div>
-          </div>
-        ) : (
-          <div onClick={onClickloginHandler}>
-            <div>좋아요{checkPostLike === true ? "💛" : "🖤"}</div>
-            <div>{likeCount}</div>
-          </div>
-        )}
-      </div>
-
+//     <>
+//       <div>
+//         {localStorage.getItem("Access_Token") !== null ? (
+//           <div onClick={onClickLike}>
+//             <div>좋아요{checkPostLike === true ? "💛" : "🖤"}</div>
+//             <div>{likeCount}</div>
+//           </div>
+//         ) : (
+//           <div onClick={onClickloginHandler}>
+//             <div>좋아요{checkPostLike === true ? "💛" : "🖤"}</div>
+//             <div>{likeCount}</div>
+//           </div>
+//         )}
+//       </div>
+      
       <div className="like_button">
         <Provider apiKey="acc0dbccce8e557db5ebbe6d605aaa">
-          <LikeButton
-            namespace="testing-react"
-            id="everybody-like-now"
-            component={LikeButton.templates.Twitter}
-          />
+          <LikeButton namespace="test_button" id="everybody-like-now" component={LikeButton.templates.Twitter}/>
         </Provider>
       </div>
-    </>
+//     </>
   );
 };
 
-export default Likes;
+export default Likes

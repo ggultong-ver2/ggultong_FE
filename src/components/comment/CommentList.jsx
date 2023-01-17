@@ -62,14 +62,14 @@ const CommentList = ({ comment }) => {
         )}
 
         <div>
-          <button className="review_button"
+          <button
             onClick={() => {
               onClickEditCommentHandler(comment);
             }}
           >
             수정
           </button>
-          <button className="review_button"
+          <button
             onClick={() => {
               onClickDeleteCommentHandler(comment);
             }}

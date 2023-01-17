@@ -18,9 +18,19 @@
   font-size: 14px;
 }
 
-.logo {
-  font-size: 32px;
-  margin-right: 22px;
+.header_left{display: flex;}
+.logo{
+    margin-right: 22px;
+
+}
+.logo a{
+    width: 42px;height: 30px;
+    display: block;
+    background-image: url(../../../public/images/logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    text-indent: -9999px;
 }
 
 .logowrap {
@@ -41,30 +51,58 @@
   line-height: 32px;
 }
 
-.search {
-  position: relative;
+.searchinp{
+    width: 290px;
+    height: 35px;
+    border-radius: 10px;
+    text-indent: 15px;
+    border: 0 none;
+    background: #fafafa;
+    color: #a0a0a0;
 }
-.searchinp {
-  width: 235px;
-  height: 35px;
-  border-radius: 30px;
-  text-indent: 15px;
-  outline: none;
-  border: none;
-  background-color: rgb(240, 239, 239);
+.search_button{
+    position: absolute;
+    bottom: -7.5px;
+    right: 5px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border: 0 none;
+    background: url(../../../public/images/search-o.png) center no-repeat;
+    cursor: pointer;
 }
-.search_button {
-  position: absolute;
-  bottom: -7.5px;
-  right: 5px;
-  transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
-  border: none;
-  border-radius: 50%;
-  text-indent: -9999px;
-  background: url(../../../public/images/default_search.jpg) center no-repeat;
-  cursor: pointer;
+.search_button:hover{
+    background-image: url(../../../public/images/search.png);
+}
+
+.alarm{
+    display: block;
+    width: 24px;height: 24px;
+    background-image: url(../../../public/images/alarm-o.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+}
+.alarm:hover{
+    background-image: url(../../../public/images/alarm.png);
+}
+.mypage{
+    display: block;
+    width: 24px;height: 24px;
+    background-image: url(../../../public/images/mypage-o.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+}
+.mypage:hover{
+    background-image: url(../../../public/images/mypage.png);
+}
+
+
+.category_wrap li{
+    float: left;
+    margin-left: 20px;
+
 }
 
 .category_wrap li {
