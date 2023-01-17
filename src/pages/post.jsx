@@ -30,7 +30,7 @@ const Post = () => {
       formdata.append("file", f);
     }
     formdata.append("title", title.title);
-    formdata.append("content", content.content);
+    // formdata.append("content", content.content);
     formdata.append("category", category.category);
     console.log(file);
     //for (let value of formdata.values()) {
@@ -105,7 +105,6 @@ const Post = () => {
             width="500px"
             onChange={(ev) => {
               const { files } = ev.target;
-
               setFile(files);
             }}
           />
@@ -120,7 +119,7 @@ const Post = () => {
 };
 
 const Form = styled.form`
-  border: 1px solid black;
+  //border: 1px solid black;
   width: 900px;
   height: 1250px;
   margin: auto;
@@ -165,6 +164,7 @@ const Content = styled.textarea`
 `;
 const File = styled.div`
   font-size: 20px;
+  margin-top: 10px;
 `;
 const FileInput = styled.input`
   //border: 1px solid green;

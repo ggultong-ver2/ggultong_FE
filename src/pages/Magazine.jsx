@@ -1,5 +1,5 @@
-import "../pages/reset.css"
-import "../pages/style.css"
+import "../pages/reset.css";
+import "../pages/style.css";
 
 function Magazine() {
   return (
@@ -9,6 +9,12 @@ function Magazine() {
         <ul className="clearfix">
           <li>
             {/* <img src={post.imageUrl} alt="image" /> */}
+            <div>
+              <div className="magazine_image"></div>
+              <p>자취방에서 위잉거리는 소리가 나요</p>
+            </div>
+          </li>
+          <li>
             <div>
               <div className="magazine_image"></div>
               <p>자취방에서 위잉거리는 소리가 나요</p>
