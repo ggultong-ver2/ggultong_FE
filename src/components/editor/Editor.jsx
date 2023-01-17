@@ -3,6 +3,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import "./Editor.css";
 
 const Editor = () => {
   //   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const Editor = () => {
     <div className="App">
       <CKEditor
         editor={ClassicEditor}
-        data="<p>Hello from CKEditor 5!</p>"
+        data=""
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
           console.log("Editor is ready to use!", editor);

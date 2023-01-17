@@ -11,8 +11,10 @@ function Room() {
               지금 자취방을 <br />
               구하고 있다면?
             </h3>
+
             <h4>더 이상 혼자 고민하지마! <br /> 자취방 구하거나 내놓을 수 있어요.</h4>
             <button><h5>글 구경하기</h5> <div className="btn_arrow"></div></button>
+
           </li>
           <li>
             <div className="room_image"></div>

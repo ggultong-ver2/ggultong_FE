@@ -1,25 +1,27 @@
-.headerwrap{
-    width: 1200px;
-    height: 72px;
-    /* background: slategrey; */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 0 40px;
+.headerwrap {
+  width: 1200px;
+  height: 72px;
+  /* background: slategrey; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 40px;
 }
-.category_wrap{
-    width: 1200px;
-    height: 44px;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 0 40px;
-    font-size: 14px;
+.category_wrap {
+  width: 1200px;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 40px;
+  font-size: 14px;
 }
+
 .header_left{display: flex;}
 .logo{
     margin-right: 22px;
+
 }
 .logo a{
     width: 42px;height: 30px;
@@ -31,21 +33,24 @@
     text-indent: -9999px;
 }
 
-.logo_text{
-    font-size: 14px;
+.logowrap {
+  display: flex;
+  justify-content: center;
 }
 
-.gnb li{
-    float: left;
-    margin-left: 40px;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 32px;
+.logo_text {
+  font-size: 14px;
+  margin-top: 10px;
 }
 
-.search{
-    position: relative;
+.gnb li {
+  float: left;
+  margin-left: 40px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 32px;
 }
+
 .searchinp{
     width: 290px;
     height: 35px;
@@ -97,29 +102,34 @@
 .category_wrap li{
     float: left;
     margin-left: 20px;
+
 }
 
+.category_wrap li {
+  float: left;
+  margin-left: 20px;
+}
 
 .category_wrap .post_button {
-    background: #000;
-    border: 0 none;
-    width: 65px;height: 25px;
-    border-radius: 20px;
-    cursor: pointer;
-    text-align: center;
+  background: #000;
+  border: 0 none;
+  width: 65px;
+  height: 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
 }
-.category_wrap .post_button a{
-    color: white;
-    line-height: 24px;
-}
-
-.category_wrap .post_button:hover{
-    background: #a5a5a5;
-}
-.category_wrap .post_button:hover a{
-    color: #000;
+.category_wrap .post_button a {
+  color: white;
+  line-height: 24px;
 }
 
+.category_wrap .post_button:hover {
+  background: #a5a5a5;
+}
+.category_wrap .post_button:hover a {
+  color: #000;
+}
 
 /* .header_container::after{
     display: block;
