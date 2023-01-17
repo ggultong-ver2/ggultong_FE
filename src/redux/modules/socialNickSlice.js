@@ -1,8 +1,7 @@
 import { apis } from "../../lib/axios";
 import Swal from "sweetalert2";
 
-// id 중복체크
-const __signNick = async (nickname) => {
+const __socialNick = async (nickname) => {
   try {
     const data = await apis.signNickname(nickname);
     console.log("nickname:::", nickname);
@@ -20,4 +19,4 @@ const __signNick = async (nickname) => {
   }
 };
 
-export default __signNick;
+export default __socialNick;

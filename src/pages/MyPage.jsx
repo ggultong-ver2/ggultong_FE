@@ -31,17 +31,21 @@ function MyPage() {
 
   const PWChk = () => {
     if (!isPassword(password)) {
-      setPWPtag("사용 불가능합니다. 숫자/영문/특수문자를 모두포함한, 8자~15자");
+      setPWPtag(
+        <StPs>
+          사용 불가능합니다. 숫자/영문/특수문자를 모두포함한, 8자~15자
+        </StPs>
+      );
     } else {
-      setPWPtag("사용가능한 비밀번호 입니다");
+      setPWPtag(<StPs2>사용가능한 비밀번호 입니다</StPs2>);
     }
   };
 
   const PWConfirmChk = () => {
     if (password !== PWConfirm) {
-      setPWConfirmP("비밀번호가 일치하지않습니다");
+      setPWConfirmP(<StPs>비밀번호가 일치하지않습니다</StPs>);
     } else {
-      setPWConfirmP("비밀번호 확인되었습니다.");
+      setPWConfirmP(<StPs2>비밀번호 확인되었습니다.</StPs2>);
     }
   };
 
@@ -88,6 +92,7 @@ function MyPage() {
     }
   };
 
+  //회원정보수정
   const onSubmitPostHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -274,14 +279,6 @@ const StSubCon = styled.div`
   font-family: "Pretendard";
   background-color: white;
 `;
-const StTapBox = styled.div`
-  margin-top: 30px;
-  float: left;
-  width: 100px;
-  height: 100px;
-  background-color: black;
-  font-family: "Pretendard";
-`;
 
 const StCenterBox = styled.div`
   padding-top: 40px;
@@ -388,19 +385,6 @@ const SettingItm = styled.div`
   font-size: 16px;
 `;
 
-const SettingAlm = styled.div`
-  display: flex;
-  align-items: center;
-
-  width: 920px;
-  height: 50px;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ebebeb;
-  font-size: 16px;
-  font-family: "Pretendard";
-`;
-
 const MypageBox = styled.div`
   padding-left: 15px;
   width: 450px;
@@ -453,6 +437,22 @@ const LikeBox = styled.div`
   background-color: white;
   width: 200px;
   height: 80px;
+  font-family: "Pretendard";
+`;
+
+const StPs = styled.p`
+  width: 384px;
+  margin-top: 3px;
+  font-size: 12px;
+  color: red;
+  font-family: "Pretendard";
+`;
+
+const StPs2 = styled.p`
+  width: 384px;
+  margin-top: 3px;
+  font-size: 12px;
+  color: limegreen;
   font-family: "Pretendard";
 `;
 

@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "http://sparta-sjl.shop/api", //상정님
+  baseURL: "https://sparta-sjl.shop/api", //상정님
 
   //process.env.REACT_APP_URL
 
@@ -17,7 +17,7 @@ const instance = axios.create({
 //43.201.7.130 - 종열님 아이피
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "http://sparta-sjl.shop/api",
+  baseURL: "https://sparta-sjl.shop/api",
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -46,8 +46,8 @@ export const apis = {
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
-  pwfind: (pwfind) => instance.post("/user/pwfind", pwfind),
-  idfind: (idfind) => instance.post("/user/idfind", idfind),
+  pwfind: (pwfind) => instance.post("/user/findPw", pwfind),
+  idfind: (idfind) => instance.post("/user/findId", idfind),
   // 게시글 관련
   getPost: () => baseURL.get("/post/postlist"),
   getIdPost: (id) => {

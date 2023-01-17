@@ -24,7 +24,7 @@ import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
-import SignNick from "../pages/SignNick";
+import SignNick from "../pages/SocialNick";
 import AllList from "../pages/List/AllList";
 import MealList from "../pages/List/mealList";
 import TipList from "../pages/List/tipList";
@@ -33,6 +33,7 @@ import Listbutton from "../components/Listbutton/Listbutton";
 import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
+import SocialNick from "../pages/SocialNick";
 
 const Router = () => {
   return (
@@ -55,7 +56,7 @@ const Router = () => {
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
-          <Route path="/signnick" element={<SignNick />} />
+          <Route path="/socialnick" element={<SocialNick />} />
           <Route path="/allList" element={<AllList />} />
           <Route path="/mealList" element={<MealList />} />
           <Route path="/tipList" element={<TipList />} />
