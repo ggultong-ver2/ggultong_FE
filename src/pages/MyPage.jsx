@@ -81,10 +81,10 @@ function MyPage() {
   };
 
   //회원탈퇴
-  const loginId = localStorage.getItem("loginId");
+
   const onDeleteLoginId = () => {
     if (window.confirm("확인을 누르면 회원 정보가 삭제됩니다.")) {
-      __deleteId(loginId).then(() => {
+      __deleteId(localStorage.getItem("loginId")).then(() => {
         localStorage.clear();
         alert("그 동안 이용해주셔서 감사합니다.");
         window.location.assign("/");
