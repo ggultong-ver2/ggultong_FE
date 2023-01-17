@@ -32,7 +32,7 @@ function Timer() {
   return (
     <StDiv>
       <StP>
-        {min} 분 {sec} 초
+        입력시간 &nbsp;&nbsp;{min} : {sec}
       </StP>
     </StDiv>
   );
@@ -40,13 +40,12 @@ function Timer() {
 
 const StP = styled.p`
   color: gray;
-  font-size: 15px;
+  font-size: 12px;
 `;
 
 const StDiv = styled.div`
-  display: flex;
-  margin-left: 115px;
-  justify-content: right;
+  margin-top: 10px;
+  margin-left: 5px;
   align-items: center;
   color: orange;
   width: 200px;

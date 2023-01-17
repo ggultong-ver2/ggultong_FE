@@ -17,28 +17,28 @@ import SignAgree from "../pages/SignAgree";
 import Detail from "../pages/detail";
 import Post from "../pages/post";
 import EditPost from "../pages/editPost";
-
 import SignComplete from "../pages/SignComplete";
-
 import MyConfirm from "../pages/MyConfirm";
 // import MyPage from "../pages/MyPage";
 import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
-import SignNick from "../pages/SignNick";
-
+import SignNick from "../pages/SocialNick";
 import AllList from "../pages/List/AllList";
 import MealList from "../pages/List/mealList";
 import TipList from "../pages/List/tipList";
 import RoomList from "../pages/List/roomList";
 import Listbutton from "../components/Listbutton/Listbutton";
+import Editor from "../components/editor/Editor";
+import Pwfind from "../pages/Pwfind";
+import Idfind from "../pages/Idfind";
+import SocialNick from "../pages/SocialNick";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
-        <categorybutton />
         <Routes>
           <Route path="/" element={<Main />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
@@ -49,12 +49,14 @@ const Router = () => {
           <Route path="/agree/" element={<SignAgree />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/editor" element={<Editor />} />
+          <Route path="/pwfind" element={<Pwfind />} />
+          <Route path="/idfind" element={<Idfind />} />
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
-          <Route path="/signnick" element={<SignNick />} />
-
+          <Route path="/socialnick" element={<SocialNick />} />
           <Route path="/allList" element={<AllList />} />
           <Route path="/mealList" element={<MealList />} />
           <Route path="/tipList" element={<TipList />} />

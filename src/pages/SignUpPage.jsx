@@ -35,17 +35,19 @@ const PostLoginPage = () => {
 
   const PWChk = () => {
     if (!isPassword(password)) {
-      setPWPtag("사용 불가. 숫자/영문/특수문자를 모두포함한, 8-15자");
+      setPWPtag(
+        <StPs>사용 불가. 숫자/영문/특수문자를 모두포함한, 8-15자</StPs>
+      );
     } else {
-      setPWPtag("사용가능한 비밀번호 입니다");
+      setPWPtag(<StPs2>사용가능한 비밀번호 입니다</StPs2>);
     }
   };
 
   const PWConfirmChk = () => {
     if (password !== PWConfirm) {
-      setPWConfirmP("비밀번호가 일치하지않습니다");
+      setPWConfirmP(<StPs>비밀번호가 일치하지않습니다</StPs>);
     } else {
-      setPWConfirmP("비밀번호 확인되었습니다.");
+      setPWConfirmP(<StPs2>비밀번호 확인되었습니다.</StPs2>);
     }
   };
 
@@ -101,12 +103,18 @@ const PostLoginPage = () => {
     }).then((res) => {
       setIsemail(res.data);
       console.log(res);
-
-      Swal.fire(
-        "인증번호 전송이 완료되었습니다!",
-        "해당 메일함에서 인증번호를 확인해주세요.",
-        "success"
-      );
+      if (res.data.statusCode === 200) {
+        Swal.fire(
+          res.data.msg,
+          "해당 메일함에서 인증번호를 확인해주세요.",
+          "success"
+        );
+      } else {
+        if (visible) {
+          return;
+        }
+        Swal.fire(res.data.msg, "이메일을 다시 확인해주세요!", "error");
+      }
     });
   };
 
@@ -152,8 +160,7 @@ const PostLoginPage = () => {
       <div>
         <StCenterBox>
           <StLoginBox>회원가입</StLoginBox>
-          <Stdiv>상세 정보를 기입해주세요.</Stdiv>
-          <StLabel htmlFor="loginId">아이디*</StLabel>
+          <StLabel htmlFor="loginId">아이디</StLabel>
           <StBox>
             <StId
               type="text"
@@ -176,7 +183,7 @@ const PostLoginPage = () => {
             </StButton>
           </StBox>
           <br></br>
-          <StLabel htmlFor="password">비밀번호*</StLabel>
+          <StLabel2 htmlFor="password">비밀번호</StLabel2>
           <StBox>
             <StInput
               type="password"
@@ -192,9 +199,10 @@ const PostLoginPage = () => {
               minLength={8}
               maxLength={15}
             />
-            .
           </StBox>
-          {<p className="ptag">{PWPtag}</p>}
+          <div>
+            <StP>{<p className="ptag">{PWPtag}</p>}</StP>
+          </div>
           <StBox>
             <StInput
               type="password"
@@ -204,15 +212,17 @@ const PostLoginPage = () => {
                 setPWConfirm(e.target.value);
               }}
               onBlur={PWConfirmChk}
-              placeholder="비밀번호 재입력"
+              placeholder="비밀번호를 재입력 해주세요."
               required
               minLength={8}
               maxLength={15}
             />
           </StBox>
-          {<p className="ptag">{PWConfirmP}</p>}
+          <div>
+            <StP>{<p className="ptag">{PWConfirmP}</p>}</StP>
+          </div>
           <br></br>
-          <StLabel htmlFor="nickname">닉네임*</StLabel>
+          <StLabel htmlFor="nickname">닉네임</StLabel>
           <StBox>
             <NickInput
               type="text"
@@ -225,7 +235,7 @@ const PostLoginPage = () => {
               maxLength={8}
             />
             <StButton
-              checkbtn
+              nickbtn
               onClick={() => {
                 onCheckNickName(nickname);
               }}
@@ -235,7 +245,7 @@ const PostLoginPage = () => {
             </StButton>
           </StBox>
           <br></br>
-          <StLabel htmlFor="email">이메일*</StLabel>
+          <StLabel htmlFor="email">이메일</StLabel>
           <StBox>
             <StEmailInput
               type="email"
@@ -261,13 +271,15 @@ const PostLoginPage = () => {
               {visible ? "다시 보내기" : "인증번호 전송"}
             </StEmailBtn>
           </StBox>
+          <br></br>
+          <StLabel2 htmlFor="emailcode">인증번호</StLabel2>
           <StBox>
             <StEmailInput
               type="text"
               id="emailcode"
               value={emailCode}
               onChange={setEmailCode}
-              placeholder="인증번호를 입력해주세요!"
+              placeholder="인증번호를 입력해주세요."
               required
               minLength={6}
               maxLength={6}
@@ -285,8 +297,11 @@ const PostLoginPage = () => {
               확인
             </StEmailBtn>
           </StBox>
-          {visible && <Timer />}
-          <StButton log>가입하기</StButton>
+          <StTimer>{visible && <Timer />}</StTimer>
+          <StBtnBox>
+            <StBack onClick={() => navigate("/agree")}>이전</StBack>
+            <StButton log>다음</StButton>
+          </StBtnBox>
         </StCenterBox>
       </div>
     </StContainer>
@@ -296,7 +311,7 @@ const StContainer = styled.form`
   width: 100%;
   height: 96.6vh;
   display: flex;
-  background-color: white;
+  background-color: #f9fafb;
   align-items: center;
   justify-content: center;
   background-size: cover;
@@ -306,28 +321,33 @@ const StContainer = styled.form`
 const StLoginBox = styled.div`
   width: 400px;
   height: 80px;
-  font-size: 45px;
-  margin-bottom: 15px;
+  font-size: 24px;
   display: flex;
-  border-bottom: 6px solid #dcdcdc;
+  font-weight: 600;
   justify-content: center;
   font-family: "Pretendard";
 `;
 
 const StLabel = styled.label`
+  margin-bottom: 5px;
+  justify-content: left;
+  font-size: 14px;
+  display: flex;
+  margin-right: 340px;
+  font-weight: 600;
+  font-family: "Pretendard";
+`;
+
+const StLabel2 = styled.label`
+  font-size: 14px;
+  margin-bottom: 5px;
   justify-content: left;
   display: flex;
-  margin-right: 320px;
-  font-weight: bold;
+  margin-right: 330px;
+  font-weight: 600;
   font-family: "Pretendard";
 `;
-const Stdiv = styled.h2`
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  font-family: "Pretendard";
-`;
+
 const StBox = styled.div`
   width: 380px;
   display: flex;
@@ -335,9 +355,10 @@ const StBox = styled.div`
   font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
-  width: 400px;
-  height: 850px;
-  justify-content: center;
+  width: 588px;
+  height: 908px;
+  background-color: #ffffff;
+  padding-top: 80px;
   align-items: center;
   border: 0;
   border-radius: 1px;
@@ -351,67 +372,142 @@ const StCenterBox = styled.div`
 `;
 
 const StInput = styled.input`
-  width: 370px;
-  height: 44px;
+  width: 384px;
+  height: 48px;
   border: 1px solid #d9d9d9;
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 5px;
   font-family: "Pretendard";
-  font-size: 16px;
+  font-size: 14px;
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
 `;
 const NickInput = styled.input`
-  width: 250px;
-  height: 44px;
+  width: 274px;
+  height: 48px;
   border: 1px solid #d9d9d9;
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 5px;
   font-family: "Pretendard";
-  font-size: 16px;
+  font-size: 14px;
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
 `;
 
 const StId = styled.input`
-  width: 250px;
-  height: 44px;
+  width: 274px;
+  height: 48px;
   border: 1px solid #d9d9d9;
+  color: #a0a0a0;
+  font-size: 14px;
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 10px;
   font-family: "Pretendard";
-  font-size: 16px;
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
 `;
 const StEmailInput = styled.input`
-  width: 250px;
-  height: 44px;
+  width: 274px;
+  height: 48px;
   border: 1px solid #d9d9d9;
   padding-left: 10px;
   border-radius: 4px;
-  margin-top: 10px;
+  margin-top: 5px;
   font-family: "Pretendard";
   &:disabled {
     background-color: #c2c2c2;
     font-family: "Pretendard";
   }
-  /* background-color: orange; */
-  font-size: 16px;
-  /* &:hover {
-    border: 0.5px solid black;
-  } */
+
+  font-size: 14px;
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
+`;
+
+const StBtnBox = styled.div`
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+`;
+
+const StBack = styled.button`
+  font-family: "Pretendard";
+  width: 186px;
+  height: 48px;
+  border: 1px solid #a0a0a0;
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border: 0;
+    background-color: #ffd665;
+    font-family: "Pretendard";
+  }
+`;
+
+const StP = styled.p`
+  width: 384px;
+  padding-left: 5px;
+  margin-top: 7px;
+  font-size: 12px;
+  font-family: "Pretendard";
+`;
+
+const StPs = styled.p`
+  width: 384px;
+  padding-left: 5px;
+  margin-top: 7px;
+  font-size: 12px;
+  color: red;
+  font-family: "Pretendard";
+`;
+
+const StPs2 = styled.p`
+  width: 384px;
+  padding-left: 5px;
+  margin-top: 7px;
+  font-size: 12px;
+  color: limegreen;
+  font-family: "Pretendard";
+`;
+
+const StTimer = styled.p`
+  width: 384px;
+  font-size: 12px;
+  font-family: "Pretendard";
 `;
 
 const StEmailBtn = styled.button`
-  width: 110px;
-  height: 44px;
-  margin-top: 8px;
+  width: 100px;
+  height: 48px;
+  margin-top: 4px;
   margin-left: 10px;
   border: 1px solid black;
   border-radius: 4px;
+  font-weight: 600;
   background-color: white;
   font-family: "Pretendard";
   cursor: pointer;
   &:hover {
-    background-color: #dcdcdc;
+    border: 0;
+    color: black;
+    background-color: #ffd665;
   }
 `;
 const StButton = styled.button`
@@ -419,21 +515,21 @@ const StButton = styled.button`
   ${(props) =>
     props.log &&
     css`
-      margin-top: 30px;
+      letter-spacing: 0.1em;
       margin-bottom: 10px;
-      margin-right: 15px;
-      width: 380px;
+      width: 186px;
       height: 48px;
       border: 0;
-      font-size: 18px;
-
+      font-size: 16px;
+      font-weight: 600;
       border-radius: 4px;
       background-color: #b5b5b5;
       font-family: "Pretendard";
       color: white;
       cursor: pointer;
       &:hover {
-        background-color: #797777;
+        color: black;
+        background-color: #ffd665;
       }
     `}
   ${(props) =>
@@ -444,7 +540,7 @@ const StButton = styled.button`
       border: 0px;
       background-color: white;
       color: #717171;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 15px;
       padding-right: 10px;
       font-size: 15px;
@@ -464,24 +560,46 @@ const StButton = styled.button`
       font-weight: bold;
       font-family: "Pretendard";
       padding-right: 10px;
-      font-size: 15px;
+      font-size: 14px;
       margin-left: 20px;
       cursor: pointer;
     `}
     ${(props) =>
     props.checkbtn &&
     css`
-      width: 110px;
-      height: 45px;
-      margin-top: 8px;
+      width: 100px;
+      height: 48px;
+      margin-top: 10px;
       margin-left: 10px;
       border: 1px solid black;
       border-radius: 4px;
       background-color: white;
       font-family: "Pretendard";
+      font-weight: 600;
       cursor: pointer;
       &:hover {
-        background-color: #dcdcdc;
+        border: 0;
+        color: black;
+        background-color: #ffd665;
+      }
+    `}
+    ${(props) =>
+    props.nickbtn &&
+    css`
+      width: 100px;
+      height: 48px;
+      margin-top: 4px;
+      margin-left: 10px;
+      border: 1px solid black;
+      border-radius: 4px;
+      background-color: white;
+      font-family: "Pretendard";
+      font-weight: 600;
+      cursor: pointer;
+      &:hover {
+        border: 0;
+        color: black;
+        background-color: #ffd665;
       }
     `}
 `;

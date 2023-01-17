@@ -10,16 +10,12 @@ function Likes() {
 //   const [likeToggle, setLikeToggle] = useState(false);
 //   const likes = useRef(0);
 //   const dispatch = useDispatch();
-  
 
 //   const [isLike, setIsLike] = useState(false);
 //   const onClickLike = () => {
 //     dispatch(__postLike());
 //     setIsLike(!isLike);
 //   };
-
-
-
 
 //   const toggleButton = () => {
 //     if (!localStorage.getItem("Access_Token")) {
@@ -67,11 +63,6 @@ function Likes() {
 //   );
 // }
 // export default Likes;
-
-
-
-
-
 
 
 

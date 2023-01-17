@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
 import "./reset.css";
+import Editor from "../components/editor/Editor";
 
 const Post = () => {
   const dispatch = useDispatch();
@@ -85,14 +86,15 @@ const Post = () => {
           ></TitleInput>
         </Title>
 
-        <Content
+        {/* <Content
           type="text"
           placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
           onChange={(ev) => {
             const { value } = ev.target;
             setContent({ ...content, content: value });
           }}
-        ></Content>
+        ></Content> */}
+        <Editor />
 
         <File>
           첨부파일

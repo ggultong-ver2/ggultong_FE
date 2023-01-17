@@ -5,17 +5,17 @@ import Swal from "sweetalert2";
 
 import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
-import __signNick from "../redux/modules/signnickSlice";
 import __nickCheck from "../redux/modules/checkNickSlice";
+import __socialNick from "../redux/modules/socialNickSlice";
 
-function SignNick() {
+function SocialNick() {
   const [nickname, setNickname] = useInput();
   const navigate = useNavigate();
 
   const onSignNickname = (e) => {
     e.preventDefault();
     console.log("nickname--->", nickname);
-    __signNick({
+    __socialNick({
       nickname,
     }).then((res) => {
       console.log("res:::::", res);
@@ -50,13 +50,8 @@ function SignNick() {
     <StContainer onSubmit={onSignNickname}>
       <StCenterBox>
         <StSignBox>회원가입</StSignBox>
-        <StLabels>상세 정보를 기입해주세요.</StLabels>
-        <br></br>
-        <br></br>
-        <br></br>
         <StNickBox>
-          <StLabel>닉네임*</StLabel>
-
+          <StLabel>닉네임</StLabel>
           <StInput
             placeholder="닉네임을 입력해주세요."
             type="text"
@@ -91,51 +86,53 @@ const StContainer = styled.form`
   width: 100%;
   height: 100vh;
   display: flex;
-  background-color: white;
+  background-color: #f9fafb;
   align-items: center;
   justify-content: center;
   background-size: cover;
   font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
-  width: 400px;
-  height: 850px;
+  background-color: #ffffff;
+  width: 588px;
+  height: 663px;
   align-items: center;
+  padding-top: 80px;
   border: 0;
   border-radius: 1px;
+  box-sizing: border-box;
   display: flex;
+  float: right;
   flex-direction: column;
+  flex-shrink: 0;
+  font-size: 100%;
   font-family: "Pretendard";
 `;
+
 const StSignBox = styled.div`
   width: 400px;
-  height: 80px;
-  font-size: 45px;
-  margin-bottom: 25px;
-  margin-top: 50px;
+  height: 50px;
+  font-size: 24px;
+  margin-bottom: 10px;
   display: flex;
-  padding-top: 0px;
-  border-bottom: 6px solid black;
+  font-weight: 600;
   justify-content: center;
-  font-family: "Pretendard";
-`;
-const StLabels = styled.label`
-  font-size: 20px;
-  font-weight: bold;
   font-family: "Pretendard";
 `;
 
 const StInput = styled.input`
-  width: 280px;
-  height: 45px;
+  width: 274px;
+  height: 48px;
   padding-left: 10px;
   font-family: "Pretendard";
 `;
 
 const StButton = styled.button`
-  margin-top: 40px;
+  letter-spacing: 0.1em;
+  margin-left: 10px;
+  margin-top: 250px;
   margin-bottom: 10px;
-  width: 380px;
+  width: 384px;
   height: 48px;
   border: 0;
   font-size: 18px;
@@ -153,7 +150,7 @@ const StButton = styled.button`
 
 const StButtons = styled.button`
   width: 100px;
-  height: 45px;
+  height: 48px;
   margin-top: 8px;
   margin-left: 10px;
   border: 1px solid black;
@@ -171,9 +168,13 @@ const StNickBox = styled.div`
 `;
 
 const StLabel = styled.label`
-  margin-right: 250px;
-  margin-bottom: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 13px;
+  justify-content: left;
+  display: flex;
+  margin-right: 330px;
+  font-weight: 600;
   font-family: "Pretendard";
 `;
-export default SignNick;
+export default SocialNick;

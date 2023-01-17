@@ -1,0 +1,297 @@
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+import { useInput } from "../lib/utils/useInput";
+import Swal from "sweetalert2";
+import "../pages/reset.css";
+
+import __pwfind from "../redux/modules/findPwSlice";
+
+const PostLoginPage = () => {
+  // const url1 =
+  //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
+  // const url2 =
+  //   "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
+  const [email, setEmail] = useInput();
+  const [loginId, setloginId] = useInput();
+
+  const navigate = useNavigate();
+  // 회원가입 관련
+  const onSubmitPwFind = (e) => {
+    e.preventDefault();
+    __pwfind({
+      loginId,
+      email,
+    }).then((res) => {
+      console.log("res:::::", res);
+      if (res.data.statusCode === 200) {
+        Swal.fire(res.data.msg, "", "success");
+        navigate("/login");
+      } else {
+        Swal.fire(res.data.msg, "", "error");
+      }
+    });
+  };
+
+  // 이메일 유효성 검사
+  const checkEmail = (e) => {
+    var regExp =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    // 형식에 맞는 경우 true 리턴
+    console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
+  };
+
+  return (
+    <StContainer onSubmit={onSubmitPwFind}>
+      <div>
+        <StCenterBox>
+          <StLoginBox>비밀번호 재설정</StLoginBox>
+          <StLabel htmlFor="loginId">아이디</StLabel>
+          <StBox>
+            <StId
+              type="text"
+              id="loginId"
+              value={loginId}
+              onChange={setloginId}
+              placeholder="아이디를 입력해주세요."
+              required
+              minLength={6}
+              maxLength={10}
+            />
+          </StBox>
+          <br></br>
+          <StLabel htmlFor="email">이메일</StLabel>
+          <StBox>
+            <StEmailInput
+              type="email"
+              id="email"
+              value={email}
+              onChange={setEmail}
+              onClick={checkEmail}
+              placeholder="이메일을 입력해주세요."
+              required
+              minLength={5}
+              maxLength={30}
+            />
+          </StBox>
+          <br></br>
+          <StBtnBox>
+            <StBack onClick={() => navigate("/login")}>이전</StBack>
+            <StButton log>다음</StButton>
+          </StBtnBox>
+        </StCenterBox>
+      </div>
+    </StContainer>
+  );
+};
+const StContainer = styled.form`
+  width: 100%;
+  height: 96.6vh;
+  display: flex;
+  background-color: #f9fafb;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  font-family: "Pretendard";
+`;
+
+const StLoginBox = styled.div`
+  width: 400px;
+  height: 80px;
+  font-size: 24px;
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  font-family: "Pretendard";
+`;
+
+const StLabel = styled.label`
+  margin-bottom: 5px;
+  justify-content: left;
+  font-size: 14px;
+  display: flex;
+  margin-right: 340px;
+  font-weight: 600;
+  font-family: "Pretendard";
+`;
+
+const StBox = styled.div`
+  width: 380px;
+  display: flex;
+  align-items: center;
+  font-family: "Pretendard";
+`;
+const StCenterBox = styled.div`
+  width: 588px;
+  height: 800px;
+  background-color: #ffffff;
+  padding-top: 80px;
+  align-items: center;
+  border: 0;
+  border-radius: 1px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard";
+  /* margin: 5px 0 0px;
+  padding: 30px 0px; */
+  /* position: relative; */
+  /* vertical-align: baseline; */
+`;
+
+const StId = styled.input`
+  width: 384px;
+  height: 48px;
+  border: 1px solid #d9d9d9;
+  color: #a0a0a0;
+  font-size: 14px;
+  padding-left: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-family: "Pretendard";
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
+`;
+const StEmailInput = styled.input`
+  width: 384px;
+  height: 48px;
+  border: 1px solid #d9d9d9;
+  padding-left: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-family: "Pretendard";
+  &:disabled {
+    background-color: #c2c2c2;
+    font-family: "Pretendard";
+  }
+
+  font-size: 14px;
+  &:focus {
+    border: 1px solid #ffd665;
+    outline: 1px solid #ffd665;
+  }
+`;
+
+const StBtnBox = styled.div`
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+`;
+
+const StBack = styled.button`
+  font-family: "Pretendard";
+  margin-top: 150px;
+  width: 186px;
+  height: 48px;
+  border: 1px solid #a0a0a0;
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border: 0;
+    background-color: #ffd665;
+    font-family: "Pretendard";
+  }
+`;
+
+const StButton = styled.button`
+  cursor: pointer;
+  ${(props) =>
+    props.log &&
+    css`
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      width: 186px;
+      height: 48px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 4px;
+      background-color: #b5b5b5;
+      font-family: "Pretendard";
+      color: white;
+      margin-top: 150px;
+      cursor: pointer;
+      &:hover {
+        color: black;
+        background-color: #ffd665;
+      }
+    `}
+  ${(props) =>
+    props.reg &&
+    css`
+      width: 80px;
+      height: 40px;
+      border: 0px;
+      background-color: white;
+      color: #717171;
+      font-weight: 600;
+      font-size: 15px;
+      padding-right: 10px;
+      font-size: 15px;
+      margin-right: 20px;
+      margin-left: 40px;
+      font-family: "Pretendard";
+      cursor: pointer;
+    `}
+    ${(props) =>
+    props.pw &&
+    css`
+      width: 120px;
+      height: 40px;
+      border: 0px;
+      background-color: white;
+      color: #717171;
+      font-weight: bold;
+      font-family: "Pretendard";
+      padding-right: 10px;
+      font-size: 14px;
+      margin-left: 20px;
+      cursor: pointer;
+    `}
+    ${(props) =>
+    props.checkbtn &&
+    css`
+      width: 100px;
+      height: 48px;
+      margin-top: 10px;
+      margin-left: 10px;
+      border: 1px solid black;
+      border-radius: 4px;
+      background-color: white;
+      font-family: "Pretendard";
+      font-weight: 600;
+      cursor: pointer;
+      &:hover {
+        border: 0;
+        color: black;
+        background-color: #ffd665;
+      }
+    `}
+    ${(props) =>
+    props.nickbtn &&
+    css`
+      width: 100px;
+      height: 48px;
+      margin-top: 4px;
+      margin-left: 10px;
+      border: 1px solid black;
+      border-radius: 4px;
+      background-color: white;
+      font-family: "Pretendard";
+      font-weight: 600;
+      cursor: pointer;
+      &:hover {
+        border: 0;
+        color: black;
+        background-color: #ffd665;
+      }
+    `}
+`;
+export default PostLoginPage;
