@@ -27,6 +27,8 @@ const PostLoginPage = () => {
   const [PWConfirmP, setPWConfirmP] = useState(false);
   const [isemail, setIsemail] = useState();
   const [visible, setVisible] = useState(false);
+  const [emailP, setEmailP] = useState();
+
   function isPassword(asValue) {
     const regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -102,6 +104,8 @@ const PostLoginPage = () => {
       email,
     }).then((res) => {
       setIsemail(res.data);
+      setEmailP(res.data.msg);
+      console.log("emailP:", emailP);
       console.log(res);
       if (res.data.statusCode === 200) {
         Swal.fire(
@@ -109,6 +113,7 @@ const PostLoginPage = () => {
           "해당 메일함에서 인증번호를 확인해주세요.",
           "success"
         );
+        return;
       } else {
         if (visible) {
           return;
@@ -271,7 +276,7 @@ const PostLoginPage = () => {
               {visible ? "다시 보내기" : "인증번호 전송"}
             </StEmailBtn>
           </StBox>
-          <br></br>
+          <StTimer>{visible && <StP>{emailP}</StP>}</StTimer>
           <StLabel2 htmlFor="emailcode">인증번호</StLabel2>
           <StBox>
             <StEmailInput
@@ -464,7 +469,7 @@ const StBack = styled.button`
 const StP = styled.p`
   width: 384px;
   padding-left: 5px;
-  margin-top: 7px;
+
   font-size: 12px;
   font-family: "Pretendard";
 `;
@@ -488,6 +493,8 @@ const StPs2 = styled.p`
 `;
 
 const StTimer = styled.p`
+  margin-top: 5px;
+  margin-bottom: 10px;
   width: 384px;
   font-size: 12px;
   font-family: "Pretendard";

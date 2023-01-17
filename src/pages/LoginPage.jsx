@@ -43,6 +43,7 @@ const PostLoginPage = () => {
       localStorage.setItem("nickname", res.data.nickname);
       localStorage.setItem("profileImg", res.data.profileImg);
       localStorage.setItem("email", res.data.email);
+      localStorage.setItem("loginId", res.data.loginId);
     });
   };
 

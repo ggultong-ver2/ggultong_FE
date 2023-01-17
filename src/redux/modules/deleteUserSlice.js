@@ -1,7 +1,7 @@
 import { apis } from "../../lib/axios";
 import Swal from "sweetalert2";
 
-// id 중복체크
+// 회원탈퇴
 const __deleteId = async (loginId) => {
   try {
     const data = await apis.deleteUser(loginId);
