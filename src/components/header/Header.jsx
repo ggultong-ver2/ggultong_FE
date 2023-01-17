@@ -9,39 +9,40 @@ function Header() {
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
     window.location.href = "/search/" + keyword;
+    //navigate(`/?q=${keyword}`)
   };
 
   return (
     <div className="header_container">
       <div className="headerwrap">
-        <div className="logowrap">
-          <span className="logo">
-            <a href="/">LOGO</a>
-          </span>
-          <span className="logo_text">자취하는 우리를 위한 커뮤니티</span>
+        <div className="header_left">
+          <div className="logo">
+              <a href="/">LOGO</a>
+          </div>
+          <div className="search">
+            <input
+              type="text"
+              id="keyword"
+              placeholder="궁금한 자취 정보를 입력하세요"
+              className="searchinp"
+              onChange={(e) => {
+                setKeyWord(e.target.value);
+              }}
+            />
+            <button
+              type="button"
+              class="search_button"
+              onClick={() => {
+                onSubmit();
+              }}
+            />
+          </div>
         </div>
         <nav className="gnb">
           <ul className="clearfix">
-            <li className="search">
-              <input
-                type="text"
-                id="keyword"
-                placeholder="궁금한 자취 정보를 입력하세요"
-                className="searchinp"
-                onChange={(e) => {
-                  setKeyWord(e.target.value);
-                }}
-              />
-              <button
-                type="button"
-                class="search_button"
-                onClick={() => {
-                  onSubmit();
-                }}
-              />
-            </li>
-            <li>알림</li>
-            <li onClick={() => navigate("/myconfirm")} className="myconfirm">
+            <li className="search"></li>
+            <li className="alarm">알림</li>
+            <li onClick={() => navigate("/myconfirm")} className="mypage">
               마이페이지
             </li>
 

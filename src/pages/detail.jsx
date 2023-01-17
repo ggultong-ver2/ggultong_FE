@@ -5,6 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
 import Swal from "sweetalert2";
+import Likes from "../components/like/Likes";
+// import Comments from "../components/comment/Comments";
 
 
 const Detail = () => {
@@ -56,7 +58,7 @@ const Detail = () => {
               <Date>{details?.createdAt.slice(0, 10)}</Date>
             </Etc>
             <Etcs>
-              <Countcomment>댓글 </Countcomment>
+              <Countcomment>댓글</Countcomment>
               <Heart>좋아요 {details?.likePostSum}</Heart>
             </Etcs>
           </Else>
@@ -68,9 +70,11 @@ const Detail = () => {
             <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
           </Btns>
         </Wrap>
+        <Likes />
         <Commentarea>
           <Writecomment>
             <Myprofile />
+            {/* <Comments /> */}
             <Commentinput placeholder="댓글을 작성할 수 있어요." />
           </Writecomment>
           <Commentbox>
@@ -174,11 +178,9 @@ const StDeleteBtn = styled.button`
 `;
 const Date = styled.p``;
 const Commentarea = styled.div`
-  //border: 1px solid pink;
   margin-top: 10px;
 `;
 const Writecomment = styled.div`
-  // border: 1px solid purple;
   width: 800px;
   height: 105px;
   margin-left: 200px;
@@ -198,7 +200,6 @@ const Commentinput = styled.textarea`
   resize: none;
 `;
 const Commentbox = styled.div`
-  // border: 1px solid yellow;
   width: 800px;
   height: 80px;
   margin-left: 200px;
@@ -209,7 +210,6 @@ const Commenttextarea = styled.div`
 const WrapWritten = styled.div`
   width: 200px;
   height: 25px;
-  // border: 1px solid red;
   float: left;
 `;
 const Writtenby = styled.p`

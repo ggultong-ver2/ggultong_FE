@@ -11,19 +11,20 @@ function Room() {
               지금 자취방을 <br />
               구하고 있다면?
             </h3>
-            <button>글 구경하기</button>
+            <h4>더 이상 혼자 고민하지마! <br /> 자취방 구하거나 내놓을 수 있어요.</h4>
+            <button><h5>글 구경하기</h5> <div className="btn_arrow"></div></button>
           </li>
           <li>
             <div className="room_image"></div>
-            <p>벌레가 나왔을 때 퇴치법 A to Z</p>
+            <p>신촌 여름 방학 동안 방 뺄건데 살 사람?! 같은 학교면 싸게 해줌</p>
           </li>
           <li>
             <div className="room_image"></div>
-            <p>벌레가 나왔을 때 퇴치법 A to Z</p>
+            <p>삼성동 근처 투룸 구합니다!</p>
           </li>
           <li>
             <div className="room_image"></div>
-            <p>벌레가 나왔을 때 퇴치법 A to Z</p>
+            <p>이사하기 전 자취방 구조 3D 돌려봄 이정도면 ㄱㅊ?</p>
           </li>
         </ul>
       </div>
