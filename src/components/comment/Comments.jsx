@@ -35,18 +35,20 @@ const Comments = () => {
   return (
     <div className="comment_wrap">
       <div className="comment_box">댓글</div>
-      <input
-        value={addComment.comment}
-        placeholder="댓글을 입력해주세요."
-        onChange={(e) => {
-          setAddComment({
-            ...addComment,
-            comment: e.target.value,
-          });
-        }}
-      ></input>
-
-      <button onClick={onClickAddCommentHandler}>등록하기</button>
+      <div className="comment_input">
+        <textarea
+        className="comment_write"
+          value={addComment.comment}
+          placeholder="댓글을 입력해주세요."
+          onChange={(e) => {
+            setAddComment({
+              ...addComment,
+              comment: e.target.value,
+            });
+          }}
+        ></textarea>
+        <button onClick={onClickAddCommentHandler} className="comment_post_btn">등록하기</button>
+      </div>
 
       {comment.map((comment) => (
         <CommentList comment={comment}/>
