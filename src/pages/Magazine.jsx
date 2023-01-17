@@ -32,12 +32,6 @@ function Magazine() {
               <p>잠옷 입고 자기 vs 아무거나 입고 자기</p>
             </div>
           </li>
-          <li>
-            <div>
-              <div className="magazine_image"></div>
-              <p>자취방에서 위잉거리는 소리가 나요</p>
-            </div>
-          </li>
         </ul>
       </div>
     </>
