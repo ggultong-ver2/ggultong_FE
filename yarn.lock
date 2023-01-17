@@ -3596,7 +3596,7 @@ axe-core@^4.4.3:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.5.2.tgz#823fdf491ff717ac3c58a52631d4206930c1d9f7"
   integrity sha512-u2MVsXfew5HBvjsczCv+xlwdNnB1oQR9HlAcsejZttNjKKSkeDNVwB1vMThIUIFI9GoT57Vtk8iQLwqOfAkboA==
 
-axios@^1.2.2:
+axios@^1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.2.tgz#72681724c6e6a43a9fea860fc558127dbe32f9f1"
   integrity sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==
@@ -9154,11 +9154,6 @@ pirates@^4.0.4, pirates@^4.0.5:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.5.tgz#feec352ea5c3268fb23a37c702ab1699f35a5f3b"
   integrity sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==
 
-pjs@*:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/pjs/-/pjs-5.1.2.tgz#856be7e0f3276604a055c52479ec7437c8a9255f"
-  integrity sha512-aoPrjtnYOknat/wiO5hyCkub7LymxSY1BN8gIsW49PfbdPyQiaU+UOo9DfSEhhl48cWLd28IwpERutBveLdQLA==
-
 pkg-dir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-3.0.0.tgz#2749020f239ed990881b1f71210d51eb6523bea3"
@@ -11487,13 +11482,6 @@ through2@^2.0.1:
   dependencies:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
-
-thunk@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/thunk/-/thunk-0.0.1.tgz#6575b00ba36ff4c6c5edf84f923212239a0a7c37"
-  integrity sha512-pmOMtF63oJP7v+Hka9yRmcoPVeLGZtq2S0NwAh+rE8guWEOcg27dddYsJYZSJiKg4DTs/i71eaUDEvyCuTDNrg==
-  dependencies:
-    pjs "*"
 
 thunky@^1.0.2:
   version "1.1.0"

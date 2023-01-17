@@ -10,7 +10,7 @@ import Layout from "../components/layout/Layout";
 import Lists from "../components/boards/lists/Lists";
 //import Magazine from "../components/boards/magazine/magazine";
 // 주석 풀고 사용
-import Main from "../pages/Home";
+import Main from "../pages/Main";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignAgree from "../pages/SignAgree";
@@ -40,7 +40,7 @@ const Router = () => {
       <Layout>
         <categorybutton />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Main />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
           <Route path="/myconfirm/" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />

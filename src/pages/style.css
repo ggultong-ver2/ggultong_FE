@@ -1,6 +1,35 @@
-li:first-child {
+.top_cat{
+  width: 1200px;
+  height: 45px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top_cat li{
+  float: left;
+  margin-left: 10px;
+  font-size: 14px;
+}
+.top_cat li:first-child{
   margin-left: 0;
 }
+
+.top_cat button {
+  width: 83px;
+  height: 32px;
+  border: 1px solid black;
+  border-radius: 40px;
+  background: transparent;
+  color: black;
+  cursor: pointer;
+}
+.top_cat button:hover{
+  background: #000;
+  color: white;
+}
+
 
 .hero_side {
   background: #ffe7a4;
@@ -15,27 +44,14 @@ li:first-child {
   padding-top: 100px;
   line-height: 72px;
 }
-.hero_side button {
-  width: 83px;
-  height: 32px;
-  border: 0 none;
-  border-radius: 40px;
-  background: #000;
-  color: white;
-  cursor: pointer;
-  margin-top: 35px;
-}
 /* .hero_side button:hover {
   background: #000;
   color: white;
 } */
 
 .main_container {
-  background-color: gray;
   width: 100%;
-  height: 100vh;
   display: flex;
-  background-color: white;
   justify-content: center;
 }
 
@@ -43,7 +59,7 @@ li:first-child {
 .main_recipe,
 .main_room,
 .main_magazine {
-  width: 1500px;
+  width: 1200px;
   margin-left: 150px;
   padding: 20px 0;
 }
@@ -110,34 +126,40 @@ li:first-child {
 
 
 .main_magazine {
-  margin-top: 80px;
+  margin-top: 120px;
 }
 .main_magazine h3 {
-  font-size: 28px;
-  margin-bottom: 12px;
+  width: 1200px;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 30px;
 }
 .main_magazine li {
   float: left;
-  width: 380px;
-  height: 320px;
-  margin-left: 18px;
+  width: 282px;
+  height: 306px;
+  margin-left: 24px;
   cursor: pointer;
 }
+.main_magazine li:first-child{
+  margin-left: 0;
+}
 .magazine_image {
-  width: 380px;
-  height: 230px;
+  width: 282px;
+  height: 240px;
   background-image: url(../../public/images/default_image.jpeg);
   background-size: contain;
   background-position: center;
 }
 .main_magazine p {
-  height: 90px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 18px 27px;
+  width: 282px;
+  height: 56px;
+  margin-top: 10px;
   font-size: 18px;
+  line-height: 28px;
 }
 .main_room {
-  margin-top: 65px;
+  margin-top: 120px;
 }
 .main_room li {
   float: left;
@@ -148,24 +170,40 @@ li:first-child {
 }
 .main_room li:first-child {
   cursor: default;
+  margin-left: 0;
 }
 .main_room h3 {
-  font-size: 28px;
-  line-height: 42px;
+  font-size: 24px;
+  line-height: 36px;
   margin-top: 26px;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
+}
+.main_room h4{
+  font-weight: normal;
+  font-size: 14px;line-height: 22px;
+  margin-bottom: 30px;
 }
 .main_room button {
   border: 0 none;
-  width: 150px;
-  height: 60px;
+  width: 121px;
+  height: 28px;
   cursor: pointer;
   font-size: 16px;
-  background: #a5a5a5;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
 }
-.main_room button:hover {
-  background: #000;
-  color: white;
+.main_room h5{
+  width: 74px;
+  font-size: 16px;line-height: 28px;
+}
+.btn_arrow{
+  width: 37px;
+  height: 18px;
+  background-image: url(../../public/images/arrow.png);
+  background-repeat: no-repeat;
 }
 .room_image {
   height: 230px;
@@ -173,13 +211,14 @@ li:first-child {
   background-size: contain;
   background-position: center;
 }
-
 .main_room p {
-  height: 90px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 13px 20px;
+  margin-top: 10px;
+  height: 56px;
   font-size: 18px;
+  line-height: 28px;
 }
+
+
 .main_recipe {
   margin-top: 50px;
 }
@@ -192,24 +231,35 @@ li:first-child {
 }
 .main_recipe li:first-child {
   cursor: default;
+  margin-left: 0;
 }
 .main_recipe h3 {
-  font-size: 28px;
-  line-height: 42px;
+  font-size: 24px;
+  line-height: 36px;
   margin-top: 26px;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 }
+.main_recipe h4{
+  font-weight: normal;
+  font-size: 14px;line-height: 22px;
+  margin-bottom: 30px;
+}
+.main_recipe h5{
+  width: 74px;
+  font-size: 16px;line-height: 28px;
+}
+
 .main_recipe button {
   border: 0 none;
-  width: 150px;
-  height: 60px;
+  width: 121px;
+  height: 28px;
   cursor: pointer;
   font-size: 16px;
-  background: #a5a5a5;
-}
-.main_recipe button:hover {
-  background: #000;
-  color: white;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
 }
 .recipe_image {
   height: 230px;

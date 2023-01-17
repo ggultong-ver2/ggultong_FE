@@ -21,11 +21,24 @@ function Main(props) {
 
   return (
     <>
+      <div className="top_cat">
+        <ul>
+          <li>
+            <button onClick={() => navigate("/")}>홈</button>
+          </li>
+          <li>
+            <button onClick={() => navigate("/")}>꿀정보</button>
+          </li>
+          <li>
+            <button onClick={() => navigate("/")}>즐길거리</button>
+          </li>
+        </ul>
+        <button onClick={() => navigate("/post")} className="top_post_btn">글쓰기</button>
+      </div>
       <div className="hero_side">
         <h1>
           자취하면서 궁금했던 점을 <br /> 공유해봐요!
         </h1>
-        <button onClick={() => navigate("/post")}>글쓰기</button>
       </div>
       <div className="main_container">
         <div className="sub_container">
@@ -64,7 +77,7 @@ function Main(props) {
           <Magazine />
           <Room />
           <Recipe />
-          <QNA />
+          {/* <QNA /> */}
         </div>
       </div>
     </>

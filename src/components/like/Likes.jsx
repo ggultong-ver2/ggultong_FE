@@ -1,10 +1,11 @@
-// import { useRef, useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { __likeToggle, __postLike } from "../../redux/modules/postSlice";
-// import { Provider, LikeButton } from "@lyket/react";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { __likeToggle, __postLike } from "../../redux/modules/postSlice";
+import { Provider, LikeButton } from "@lyket/react";
+import "./style.css"
 
-// function Likes() {
+function Likes() {
 //   const navigate = useNavigate();
 //   const [likeToggle, setLikeToggle] = useState(false);
 //   const likes = useRef(0);
@@ -114,7 +115,7 @@
 //     navigate("/login");
 //   };
 
-//   return (
+  return (
 //     <>
 //       <div>
 //         {localStorage.getItem("Access_Token") !== null ? (
@@ -130,13 +131,13 @@
 //         )}
 //       </div>
       
-//       <div className="like_button">
-//         <Provider apiKey="acc0dbccce8e557db5ebbe6d605aaa">
-//           <LikeButton namespace="testing-react" id="everybody-like-now" component={LikeButton.templates.Twitter}/>
-//         </Provider>
-//       </div>
+      <div className="like_button">
+        <Provider apiKey="acc0dbccce8e557db5ebbe6d605aaa">
+          <LikeButton namespace="test_button" id="everybody-like-now" component={LikeButton.templates.Twitter}/>
+        </Provider>
+      </div>
 //     </>
-//   );
-// };
+  );
+};
 
-// export default Likes;
+export default Likes

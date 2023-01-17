@@ -9,6 +9,7 @@ function Header() {
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
     window.location.href = "/search/" + keyword;
+    //navigate(`/?q=${keyword}`)
   };
 
   return (
