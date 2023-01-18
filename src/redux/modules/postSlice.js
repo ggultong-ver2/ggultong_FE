@@ -148,8 +148,6 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-
-
 //좋아요
 export const __likeToggle = createAsyncThunk(
   "likeToggle",
@@ -195,8 +193,6 @@ export const __postLike = createAsyncThunk(
   }
 );
 
-
-
 //마이페이지 수정
 export const __patchPost = createAsyncThunk(
   "patchPost",
@@ -204,13 +200,17 @@ export const __patchPost = createAsyncThunk(
     try {
       const { nickname, password, profileImg } = payload;
       const formData = new FormData();
-      formData.append("profileImg", profileImg);
+
+      formData.append(
+        "profileImg",
+        profileImg === "" ? new File([], "") : profileImg
+      );
       formData.append("password", password);
-      formData.append("nickname", nickname); //entries
+      formData.append("nickname", nickname);
+      //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
-      // postData.append("title",payload.title);
-      // postData.append("files", images);
-      const data = await apis.patchPost(payload);
+
+      const data = await apis.patchPost(formData);
       if (data.request.statusCode === 200) {
       }
       return thunkAPI.fulfillWithValue(data.data);
@@ -408,7 +408,6 @@ export const postSlice = createSlice({
 
 // export const {} = recipesSlice.actions;
 export default postSlice.reducer;
-
 
 // export const __postComment = createAsyncThunk(
 //   "postComment",
