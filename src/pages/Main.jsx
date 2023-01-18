@@ -30,13 +30,15 @@ function Main(props) {
             <button onClick={() => navigate("/")}>홈</button>
           </li>
           <li>
-            <button onClick={() => navigate("/")}>꿀정보</button>
+            <button onClick={() => navigate("/drinklist")}>꿀정보</button>
           </li>
           <li>
             <button onClick={() => navigate("/")}>즐길거리</button>
           </li>
         </ul>
-        <button onClick={() => navigate("/post")} className="top_post_btn">글쓰기</button>
+        <button onClick={() => navigate("/post")} className="top_post_btn">
+          글쓰기
+        </button>
       </div>
       {/* <div className="hero_side">
         <h1>

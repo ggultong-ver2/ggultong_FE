@@ -21,6 +21,15 @@ const Post = () => {
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
 
+  const getValue = (e) => {
+    const { value } = e.target;
+    setContent({
+      ...content,
+      content: value,
+    });
+    console.log(content);
+  };
+
   const onSubmitHandler = (e) => {
     const formdata = new FormData();
     //console.log("addpost::", title, content, category, file);
@@ -30,7 +39,7 @@ const Post = () => {
       formdata.append("file", f);
     }
     formdata.append("title", title.title);
-    // formdata.append("content", content.content);
+    formdata.append("content", content.content);
     formdata.append("category", category.category);
     console.log(file);
     //for (let value of formdata.values()) {
@@ -63,12 +72,9 @@ const Post = () => {
           }}
         >
           <option value="choose">선택해주세요</option>
-          <option value="tip">꿀팁</option>
-          <option value="item">꿀템</option>
-          <option value="room">꿀방</option>
-          <option value="meal">꿀밥</option>
-          <option value="free">자유게시판</option>
-          <option value="question">Q&A</option>
+          <option value="drink">혼술</option>
+          <option value="meal">혼밥</option>
+          <option value="recycle">리사이꿀</option>
         </CategorySelect>
       </Category>
       <Wrap>
@@ -94,7 +100,17 @@ const Post = () => {
             setContent({ ...content, content: value });
           }}
         ></Content> */}
-        <Editor />
+        <Editor
+          type="text"
+          content={content}
+          setContent={setContent}
+          // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
+          // onChange={(e, editor) => {
+          //   const data = editor.getData();
+          //   console.log({ e, editor, data });
+          //   setContent({ ...content, content: data });
+          // }}
+        />
 
         <File>
           첨부파일
