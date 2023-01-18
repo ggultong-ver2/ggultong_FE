@@ -1,6 +1,4 @@
-
 .top_cat{
-
   width: 1200px;
   height: 45px;
   margin: 0 auto;
@@ -17,7 +15,6 @@
 .top_cat li:first-child {
   margin-left: 0;
 }
-
 .top_cat button {
   width: 83px;
   height: 32px;
@@ -32,7 +29,7 @@
   color: white;
 }
 
-.hero_side {
+/* .hero_side {
   background: #ffe7a4;
   height: 480px;
   text-align: center;
@@ -44,7 +41,7 @@
   font-weight: normal;
   padding-top: 100px;
   line-height: 72px;
-}
+} */
 /* .hero_side button:hover {
   background: #000;
   color: white;
@@ -291,7 +288,7 @@
   line-height: 36px;
   margin-bottom: 30px;
 }
-.qna_wrap {
+/* .qna_wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -310,4 +307,34 @@
 .qna p {
   font-size: 14px;
   line-height: 20px;
+} */
+
+
+.slider{
+  width: 1200px;
+  height: 400px;
+  margin: 0 auto;
+  text-align: center;
+  background: #f2f2f2;
+}
+
+.slide1 h1{
+  margin-top: 96px;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: normal;
+}
+.slide1 button{
+  margin-top: 36px;
+  width: 83px;
+  height: 32px;
+  border: 1px solid black;
+  border-radius: 40px;
+  background: transparent;
+  color: black;
+  cursor: pointer;
+}
+.slide1 button:hover{
+  background: #000;
+  color: white;
 }
