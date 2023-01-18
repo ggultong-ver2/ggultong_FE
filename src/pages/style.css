@@ -1,6 +1,4 @@
-
 .top_cat{
-
   width: 1200px;
   height: 45px;
   margin: 0 auto;
@@ -17,7 +15,6 @@
 .top_cat li:first-child {
   margin-left: 0;
 }
-
 .top_cat button {
   width: 83px;
   height: 32px;
@@ -32,7 +29,7 @@
   color: white;
 }
 
-.hero_side {
+/* .hero_side {
   background: #ffe7a4;
   height: 480px;
   text-align: center;
@@ -44,7 +41,7 @@
   font-weight: normal;
   padding-top: 100px;
   line-height: 72px;
-}
+} */
 /* .hero_side button:hover {
   background: #000;
   color: white;
@@ -75,14 +72,14 @@
   width: 1200px;
   margin: 0 auto;
   position: absolute;
-  top: -9%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -63px;
+  left: 56%;
+  transform: translate(-50%);
 }
 
 .main_category li {
   float: left;
-  margin-left: 15px;
+  margin-left: 41px;
   background: white;
   width: 280px;
   height: 126px;
@@ -291,7 +288,7 @@
   line-height: 36px;
   margin-bottom: 30px;
 }
-.qna_wrap {
+/* .qna_wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -310,4 +307,102 @@
 .qna p {
   font-size: 14px;
   line-height: 20px;
+} */
+
+.random_recipe{
+  width: 100%;
+  height: 230px;
+  padding-top: 60px;
+  text-align: center;
+  background: #f2f2f2;
+  font-size: 22px;
+  line-height: 36px;
+  margin-top: 75px;
+}
+.random_recipe button{
+  width: 185px;
+  height: 50px;
+  margin-top: 15px;
+  background: #4e4e4e;
+  color: white;
+  border: 0 none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.random_recipe button:hover{
+  background: #a5a5a5;
+  color: #000;
+}
+
+.slider{
+  width: 1200px;
+  height: 400px;
+  margin: 0 auto;
+  text-align: center;
+  background: #f2f2f2;
+}
+
+.slide1 h1{
+  margin-top: 96px;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: normal;
+}
+.slide1 button{
+  margin-top: 36px;
+  width: 83px;
+  height: 32px;
+  border: 1px solid black;
+  border-radius: 40px;
+  background: transparent;
+  color: black;
+  cursor: pointer;
+}
+.slide1 button:hover{
+  background: #000;
+  color: white;
+}
+
+.shorts_slider{
+  width: 1200px;
+  margin: 0 auto;
+  padding-left: 24px;
+}
+.shorts_slider h2{
+  font-size: 22px;
+  line-height: 36px;
+  font-weight: normal;
+}
+
+.shorts_slide{
+  width: 280px;
+  height: 364px;
+  background: #f2f2f2;
+}
+
+.cup_container{
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 90px;
+}
+.cup_playing{
+  width: 760px;height: 470px;
+  background: #f5f5f5;
+  padding: 43px 57px;
+}
+.play_text{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cup_ranking{
+  width: 350px;
+  height: 470px;
+  border: 1px solid #000;
+  padding: 25px 30px;
 }

@@ -2,12 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __getPost } from "../redux/modules/postSlice";
+import Heroside from "./Heroside";
 import Magazine from "./Magazine";
 import QNA from "./QNA";
 import Recipe from "./Recipe";
 import "./reset.css";
 import Room from "./Room";
+import Shorts from "./Shorts";
 import "./style.css";
+import WorldCup from "./WorldCup";
 
 function Main(props) {
   const selectedCategory = props.category;
@@ -37,11 +40,12 @@ function Main(props) {
           글쓰기
         </button>
       </div>
-      <div className="hero_side">
+      {/* <div className="hero_side">
         <h1>
-          자취하면서 궁금했던 점을 <br /> 공유해봐요!
+          혼술 / 혼밥하는 당신의 <br /> 특별한 요리를 공유해봐요!
         </h1>
-      </div>
+      </div> */}
+      <Heroside />
       <div className="main_container">
         <div className="sub_container">
           <div className="main_category">
@@ -49,37 +53,44 @@ function Main(props) {
               <li>
                 <div className="magazine_icon"></div>
                 <div className="category_text">
-                  <h3>꿀매거진</h3>
-                  <p>에디터가 직접 정리한 자취의 모든 글!</p>
+                  <h3>혼술</h3>
+                  <p>혼술하는 사람들의 팁이 궁금하다면?</p>
                 </div>
               </li>
               <li>
                 <div className="tip_icon"></div>
                 <div className="category_text">
-                  <h3>자취 꿀팁</h3>
-                  <p>나만 아는 자취 꿀팁을 나눠보아요.</p>
+                  <h3>혼밥</h3>
+                  <p>혼밥하는 사람들의 요리 레시피가 궁금하다면?</p>
                 </div>
               </li>
               <li>
                 <div className="rice_icon"></div>
                 <div className="category_text">
-                  <h3>자취 꿀밥</h3>
-                  <p>요리 못해도 괜찮아! 맛있으면 OK!</p>
+                  <h3>푸드 리사이꿀</h3>
+                  <p>남은 음식 활용 및 재료 보관법이 궁금하다면?</p>
                 </div>
               </li>
-              <li>
+              {/* <li>
                 <div className="home_icon"></div>
                 <div className="category_text">
                   <h3>자취 꿀방</h3>
                   <p>자취방을 구하거나 내놓을 수 있어요!</p>
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
-          <Magazine />
+          {/* <Magazine /> */}
           <Room />
           <Recipe />
+          <Recipe />
           {/* <QNA /> */}
+          <Shorts />
+          <div className="random_recipe">
+            <h3>오늘 뭐 먹지?</h3>
+            <button>도와줘요 꿀통대장</button>
+          </div>
+          <WorldCup />
         </div>
       </div>
     </>

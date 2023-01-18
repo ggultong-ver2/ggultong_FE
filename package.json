@@ -23,11 +23,13 @@
     "react-360-web": "^1.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-modal": "^3.16.1",
     "react-native": "^0.70.6",
     "react-query": "^3.39.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.6.16",
@@ -60,5 +62,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "slick-carousel": "^1.8.1"
+  }
 }

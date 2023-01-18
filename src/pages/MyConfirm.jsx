@@ -17,9 +17,9 @@ function MyConfirm() {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "반갑습니다!", "success");
-        //console.log(res.header.access_token);
-        navigate("/");
+        navigate("/mypage");
       } else {
+        navigate("/myconfirm");
         Swal.fire(res.data.msg, "비밀번호를 다시 확인해주세요!", "error");
       }
     });

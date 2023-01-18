@@ -194,6 +194,7 @@ export const __postLike = createAsyncThunk(
   }
 );
 
+
 // 카테고리별 get
 export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
@@ -215,13 +216,17 @@ export const __patchPost = createAsyncThunk(
     try {
       const { nickname, password, profileImg } = payload;
       const formData = new FormData();
-      formData.append("profileImg", profileImg);
+
+      formData.append(
+        "profileImg",
+        profileImg === "" ? new File([], "") : profileImg
+      );
       formData.append("password", password);
-      formData.append("nickname", nickname); //entries
+      formData.append("nickname", nickname);
+      //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
-      // postData.append("title",payload.title);
-      // postData.append("files", images);
-      const data = await apis.patchPost(payload);
+
+      const data = await apis.patchPost(formData);
       if (data.request.statusCode === 200) {
       }
       return thunkAPI.fulfillWithValue(data.data);

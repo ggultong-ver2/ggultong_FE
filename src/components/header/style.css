@@ -50,7 +50,9 @@
   font-size: 14px;
   line-height: 32px;
 }
-
+.search{
+  position: relative;
+}
 .searchinp{
     width: 290px;
     height: 35px;
