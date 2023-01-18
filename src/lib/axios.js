@@ -3,9 +3,9 @@ import axios from "axios";
 // 기본 URL
 const instance = axios.create({
   baseURL: "https://sparta-sjl.shop/api", //상정님
-
+  //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
-
+  //https://sparta-sjl.shop/api
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -15,9 +15,10 @@ const instance = axios.create({
 //39.117.151.189 - 승섭님 아이피 / 마이페이지 전용
 //13.209.15.249 - 재용님 아이피
 //43.201.7.130 - 종열님 아이피
+//
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: "https://tom-jelly.shop/api",
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -42,7 +43,10 @@ export const apis = {
   postSignup: (signup) => instance.post("/user/signup", signup),
   checkUserName: (loginId) => instance.post(`/user/idCheck/${loginId}`),
   checkNickName: (nickname) => instance.post(`/user/nickCheck/${nickname}`),
-  checkPw: (password) => instance.post("/mypage/pwCheck", password),
+  checkPw: (password) =>
+    instance.post("/mypage/pwCheck", password, {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    }),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
@@ -75,9 +79,7 @@ export const apis = {
   },
   deleteUser: (loginId) => {
     baseURL.delete(`/mypage/${loginId}`, {
-      // headers: {
-      //   Authorization: localStorage.getItem("ACCESS_TOKEN"),
-      // },
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     });
   },
 
