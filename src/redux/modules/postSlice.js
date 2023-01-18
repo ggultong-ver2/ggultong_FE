@@ -7,6 +7,7 @@ const initialState = {
   login: [],
   signup: [],
   posts: [],
+  categoryPosts: [],
   // patch:[],
   comments: [],
   // like: [],
@@ -148,8 +149,6 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-
-
 //좋아요
 export const __likeToggle = createAsyncThunk(
   "likeToggle",
@@ -195,7 +194,19 @@ export const __postLike = createAsyncThunk(
   }
 );
 
-
+// 카테고리별 get
+export const __getCategoryPost = createAsyncThunk(
+  "getCategoryPost",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await apis.getCategoryPost();
+      console.log("categorydata:", data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 //마이페이지 수정
 export const __patchPost = createAsyncThunk(
@@ -387,6 +398,18 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
+    [__getCategoryPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getCategoryPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.categoryPosts = action.payload;
+    },
+    [__getCategoryPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     // // 아이디 중복체크
     // [__checkUserName.pending]: (state) => {
     //   state.isLoading = true;
@@ -408,7 +431,6 @@ export const postSlice = createSlice({
 
 // export const {} = recipesSlice.actions;
 export default postSlice.reducer;
-
 
 // export const __postComment = createAsyncThunk(
 //   "postComment",

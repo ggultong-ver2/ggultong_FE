@@ -53,6 +53,9 @@ export const apis = {
   getIdPost: (id) => {
     return baseURL.get(`/post/${id}`);
   },
+  getCategoryPost: (category, pageNum) => {
+    return baseURL.get(`/post/postList/${category}/${pageNum}`);
+  },
 
   createPost: (post) => {
     console.log("payload::", post);
@@ -67,6 +70,7 @@ export const apis = {
     baseURL.put(`/post/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
+
   //마이페이지수정
   patchPost: (post) => {
     baseURL.patch("/mypage/update", post, {

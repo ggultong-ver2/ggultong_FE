@@ -1,40 +1,36 @@
-import Listbutton from "../../components/Listbutton/Listbutton";
 import Lists from "../../components/boards/lists/Lists";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const RoomList = () => {
+const RecycleList = () => {
   const navigate = useNavigate();
   return (
     <div>
       <Wrapall>
         <Buttons>
           <Button1
-            onClick={() => window.location.replace("/allList")}
-            className="all"
+            onClick={() => window.location.replace("/drinkList")}
+            className="drink"
           >
-            전체
+            혼술
           </Button1>
           <Button2
-            onClick={() => window.location.replace("/roomList")}
-            className="room"
-          >
-            자취꿀방
-          </Button2>
-          <Button3
-            onClick={() => window.location.replace("/tipList")}
-            className="tip"
-          >
-            자취꿀팁
-          </Button3>
-          <Button4
             onClick={() => window.location.replace("/mealList")}
             className="meal"
           >
-            자취꿀밥
-          </Button4>
+            혼밥
+          </Button2>
+          <Button3
+            onClick={() => window.location.replace("/recycleList")}
+            className="recycle"
+          >
+            리사이꿀
+          </Button3>
         </Buttons>
         <Wrap>
+          <Lists />
+          <Lists />
+          <Lists />
           <Lists />
           <Lists />
           <Lists />
@@ -51,7 +47,7 @@ const RoomList = () => {
 const Wrapall = styled.div`
   border: 1px solid red;
   width: 1200px;
-  height: 2200px;
+  height: 2700px;
   margin: auto;
   padding: 20px;
   font-family: "Pretendard";
@@ -61,7 +57,7 @@ const Wrap = styled.div`
   margin-top: 20px;
 `;
 const Buttons = styled.div``;
-const Button2 = styled.button`
+const Button3 = styled.button`
   cursor: pointer;
   width: 100px;
   height: 30px;
@@ -81,17 +77,7 @@ const Button1 = styled.button`
   border: 1px solid grey;
   color: grey;
 `;
-const Button3 = styled.button`
-  cursor: pointer;
-  width: 100px;
-  height: 30px;
-  margin-right: 15px;
-  border-radius: 20px;
-  background-color: white;
-  border: 1px solid grey;
-  color: grey;
-`;
-const Button4 = styled.button`
+const Button2 = styled.button`
   cursor: pointer;
   width: 100px;
   height: 30px;
@@ -102,4 +88,4 @@ const Button4 = styled.button`
   color: grey;
 `;
 
-export default RoomList;
+export default RecycleList;
