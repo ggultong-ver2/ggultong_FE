@@ -8,7 +8,9 @@ import QNA from "./QNA";
 import Recipe from "./Recipe";
 import "./reset.css";
 import Room from "./Room";
+import Shorts from "./Shorts";
 import "./style.css";
+import WorldCup from "./WorldCup";
 
 function Main(props) {
   const selectedCategory = props.category;
@@ -76,22 +78,17 @@ function Main(props) {
               </li> */}
             </ul>
           </div>
-          <Magazine />
+          {/* <Magazine /> */}
           <Room />
           <Recipe />
+          <Recipe />
           {/* <QNA /> */}
-          <div className="shorts">
-            <ul className="clearfix">
-              <li></li>
-            </ul>
-          </div>
-          <div>
+          <Shorts />
+          <div className="random_recipe">
             <h3>오늘 뭐 먹지?</h3>
             <button>도와줘요 꿀통대장</button>
           </div>
-          <div>
-
-          </div>
+          <WorldCup />
         </div>
       </div>
     </>
