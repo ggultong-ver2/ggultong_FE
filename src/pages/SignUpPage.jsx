@@ -160,6 +160,10 @@ const PostLoginPage = () => {
     setDisable(!disable);
   };
 
+  function handleOnInput(e) {
+    e.value = e.value.replace(/[^A-Za-z]/gi, "");
+  }
+
   return (
     <StContainer onSubmit={onSubmitSignup}>
       <div>
@@ -280,8 +284,8 @@ const PostLoginPage = () => {
           <StLabel2 htmlFor="emailcode">인증번호</StLabel2>
           <StBox>
             <StEmailInput
-              type="text"
               id="emailcode"
+              type="text"
               value={emailCode}
               onChange={setEmailCode}
               placeholder="인증번호를 입력해주세요."
@@ -290,7 +294,6 @@ const PostLoginPage = () => {
               maxLength={6}
             />
             <StEmailBtn
-              id="emailcode"
               checkbtn
               onClick={(e) => {
                 e.preventDefault();
@@ -409,7 +412,7 @@ const StId = styled.input`
   width: 274px;
   height: 48px;
   border: 1px solid #d9d9d9;
-  color: #a0a0a0;
+  color: black;
   font-size: 14px;
   padding-left: 10px;
   border-radius: 4px;
