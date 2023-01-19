@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 function SocialLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
-  const IP = "43.201.7.130:8080";
+  const IP = "tom-jelly.shop";
 
   const getToken = async () => {
     console.log("::::::");
@@ -18,7 +18,7 @@ function SocialLogin() {
           localStorage.setItem("profileImg", res.data.data.profileImg);
           localStorage.setItem("email", res.data.email);
         });
-      window.location.replace("/socialnick");
+      // window.location.replace("/socialnick");
     } catch (error) {
       console.log(error);
     }
