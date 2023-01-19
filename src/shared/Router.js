@@ -24,15 +24,11 @@ import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
-import SignNick from "../pages/SocialNick";
-import DrinkList from "../pages/List/drinkList";
 import MealList from "../pages/List/mealList";
-import RecycleList from "../pages/List/recycleList";
 import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
 import SocialNick from "../pages/SocialNick";
-import WorldCup from "../pages/WorldCup";
 
 const Router = () => {
   return (
@@ -56,9 +52,7 @@ const Router = () => {
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
-          <Route path="/drinkList" element={<DrinkList />} />
           <Route path="/mealList" element={<MealList />} />
-          <Route path="/recycleList" element={<RecycleList />} />
         </Routes>
       </Layout>
     </BrowserRouter>

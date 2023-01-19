@@ -208,12 +208,7 @@ function MyPage() {
             <SettingBox>설정</SettingBox>
             <SettingItm>&nbsp;알림</SettingItm>
             <SettingItm>
-              <StButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleClickLogout();
-                }}
-              >
+              <StButton onClick={() => window.location.assign("/login")}>
                 로그아웃
               </StButton>
             </SettingItm>
