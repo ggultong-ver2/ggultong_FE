@@ -18,7 +18,7 @@ const instance = axios.create({
 //
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "https://tom-jelly.shop/api",
+  baseURL: "https://sparta-sjl.shop/api",
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -57,12 +57,12 @@ export const apis = {
   pwfind: (pwfind) => instance.post("/user/findPw", pwfind),
   idfind: (idfind) => instance.post("/user/findId", idfind),
   // 게시글 관련
-  getPost: () => baseURL.get("/post/postlist"),
+  getPost: () => baseURL.get("/post/postList"),
   getIdPost: (id) => {
     return baseURL.get(`/post/${id}`);
   },
   getCategoryPost: (category, pageNum) => {
-    return baseURL.get(`/post/postList/${category}/${pageNum}`);
+    return baseURL.get(`/post/postList/${category}/1`);
   },
 
   createPost: (post) => {

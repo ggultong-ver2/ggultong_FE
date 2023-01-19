@@ -21,14 +21,14 @@ const Post = () => {
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
 
-  const getValue = (e) => {
-    const { value } = e.target;
-    setContent({
-      ...content,
-      content: value,
-    });
-    console.log(content);
-  };
+  // const getValue = (e) => {
+  //   const { value } = e.target;
+  //   setContent({
+  //     ...content,
+  //     content: value,
+  //   });
+  //   console.log(content);
+  // };
 
   const onSubmitHandler = (e) => {
     const formdata = new FormData();
@@ -52,6 +52,8 @@ const Post = () => {
       console.log(pair[0] + "," + pair[1]);
     }
   };
+
+  const [viewContent, setViewContent] = useState([]);
 
   return (
     <Form
@@ -104,6 +106,7 @@ const Post = () => {
           type="text"
           content={content}
           setContent={setContent}
+
           // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
           // onChange={(e, editor) => {
           //   const data = editor.getData();

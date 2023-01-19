@@ -4,6 +4,7 @@ import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useParams, useNavigate } from "react-router";
 import "./reset.css";
 import styled from "styled-components";
+import Editor from "../components/editor/Editor";
 
 const EditPost = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,13 @@ const EditPost = () => {
   const { id } = useParams();
 
   const onEditPostHandler = (id) => {
+    // console.log("content:", content.content);
     const formdata = new FormData();
     for (const f of Array.from(file)) {
       formdata.set("file", f);
     }
     formdata.set("title", title);
-    formdata.set("content", content);
+    formdata.set("content", content.content);
     formdata.set("category", category);
     dispatch(__editPost({ id, formdata }));
     // for (const pair of formdata) {
@@ -71,12 +73,9 @@ const EditPost = () => {
             }}
           >
             <option value="choose">선택해주세요</option>
-            <option value="tip">꿀팁</option>
-            <option value="item">꿀템</option>
-            <option value="room">꿀방</option>
-            <option value="meal">꿀밥</option>
-            <option value="free">자유게시판</option>
-            <option value="question">Q&A</option>
+            <option value="drink">혼술</option>
+            <option value="meal">혼밥</option>
+            <option value="recycle">리사이꿀</option>
           </CategorySelect>
         </Category>
         <Wrap>
@@ -92,7 +91,7 @@ const EditPost = () => {
               }}
             ></TitleInput>
           </Title>
-          <Content
+          {/* <Content
             type="text"
             placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
             value={content}
@@ -101,7 +100,19 @@ const EditPost = () => {
               setContent(value);
               console.log("value:", value);
             }}
-          ></Content>
+          ></Content> */}
+          <Editor
+            type="text"
+            content={content}
+            setContent={setContent}
+
+            // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
+            // onChange={(e, editor) => {
+            //   const data = editor.getData();
+            //   console.log({ e, editor, data });
+            //   setContent({ ...content, content: data });
+            // }}
+          />
           <File>
             첨부파일
             <FileInput
