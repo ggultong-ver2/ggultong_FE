@@ -58,7 +58,7 @@ function MyPwChange() {
     <StContainer>
       <StCenterBox>
         <StSignBox>비밀번호 재설정</StSignBox>
-        <StLabel>비밀번호</StLabel>
+        <StLabel htmlFor="password">비밀번호</StLabel>
         <MyPwBox>
           <StPwInput
             type="password"
@@ -160,16 +160,6 @@ const StLabel = styled.label`
   display: flex;
   margin-right: 340px;
   font-weight: 600;
-  font-family: "Pretendard";
-`;
-
-const MyPW = styled.label`
-  display: flex;
-  align-items: center;
-  padding-bottom: 50px;
-  float: left;
-  width: 100px;
-  height: 170px;
   font-family: "Pretendard";
 `;
 
