@@ -17,8 +17,11 @@ function SocialLogin() {
           localStorage.setItem("nickname", res.data.nickname);
           localStorage.setItem("profileImg", res.data.data.profileImg);
           localStorage.setItem("email", res.data.email);
+        })
+        .then(() => {
+          window.location.assign("/socialnick");
         });
-      window.location.assign("/socialnick");
+      // window.location.replace("/socialnick");
     } catch (error) {
       console.log(error);
     }
