@@ -7,6 +7,7 @@ const initialState = {
   login: [],
   signup: [],
   posts: [],
+  categoryPosts: [],
   // patch:[],
   comments: [],
   // like: [],
@@ -186,6 +187,21 @@ export const __postLike = createAsyncThunk(
     try {
       const { data } = await apis.post(`/api/like/post/${payload}`);
       console.log(data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+
+// 카테고리별 get
+export const __getCategoryPost = createAsyncThunk(
+  "getCategoryPost",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await apis.getCategoryPost();
+      console.log("categorydata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -383,6 +399,18 @@ export const postSlice = createSlice({
       state.posts = action.payload;
     },
     [__likeToggle.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__getCategoryPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getCategoryPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.categoryPosts = action.payload;
+    },
+    [__getCategoryPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
