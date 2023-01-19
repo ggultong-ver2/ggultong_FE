@@ -29,6 +29,8 @@ import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
 import SocialNick from "../pages/SocialNick";
 import MyPwChange from "../pages/MyPwChange";
+import DrinkList from "../pages/List/drinkList";
+import RecycleList from "../pages/List/recycleList";
 
 const Router = () => {
   return (
@@ -53,11 +55,9 @@ const Router = () => {
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
-
           <Route path="/drinkList/:id" element={<DrinkList />} />
           <Route path="/mealList/:id" element={<MealList />} />
           <Route path="/recycleList/:id" element={<RecycleList />} />
-
         </Routes>
       </Layout>
     </BrowserRouter>
