@@ -29,6 +29,7 @@ import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
 import SocialNick from "../pages/SocialNick";
+import MyPwChange from "../pages/MyPwChange";
 
 const Router = () => {
   return (
@@ -37,6 +38,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
+          <Route path="/pwchange" element={<MyPwChange />} />
           <Route path="/myconfirm/" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signcomplete" element={<SignComplete />} />
