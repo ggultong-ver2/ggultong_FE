@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "https://sparta-sjl.shop/api", //상정님
+  baseURL: "https://tom-jelly.shop/api", //상정님
   //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
   //https://sparta-sjl.shop/api
@@ -88,7 +88,7 @@ export const apis = {
   },
 
   signNickname: (nickname) => {
-    baseURL.patch("/mypage/update/socialSetting", nickname);
+    baseURL.patch(`/mypage/update/socialSetting/${nickname}`);
   },
 
   // 리뷰 관련

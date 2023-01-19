@@ -32,6 +32,7 @@ import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
 import SocialNick from "../pages/SocialNick";
+import WorldCup from "../pages/WorldCup";
 
 const Router = () => {
   return (

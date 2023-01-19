@@ -9,15 +9,13 @@ import __nickCheck from "../redux/modules/checkNickSlice";
 import __socialNick from "../redux/modules/socialNickSlice";
 
 function SocialNick() {
-  const [nickname, setNickname] = useInput();
+  const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
 
   const onSignNickname = (e) => {
     e.preventDefault();
     console.log("nickname--->", nickname);
-    __socialNick({
-      nickname,
-    }).then((res) => {
+    __socialNick(nickname).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
