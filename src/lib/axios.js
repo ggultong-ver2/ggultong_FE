@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 기본 URL
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: "https://sparta-sjl.shop/api", //상정님
   //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
@@ -18,7 +18,8 @@ const instance = axios.create({
 //
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "https://tom-jelly.shop/api",
+  baseURL: "https://sparta-sjl.shop/api",
+  withCredentials: true,
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
