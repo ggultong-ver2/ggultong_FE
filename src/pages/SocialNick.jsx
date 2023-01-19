@@ -9,7 +9,7 @@ import __nickCheck from "../redux/modules/checkNickSlice";
 import __socialNick from "../redux/modules/socialNickSlice";
 
 function SocialNick() {
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useInput();
   const navigate = useNavigate();
 
   const onSignNickname = (e) => {
