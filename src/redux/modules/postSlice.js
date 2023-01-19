@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { apis } from "../../lib/axios";
+import { apis, baseURL } from "../../lib/axios";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -150,22 +150,6 @@ export const __editPost = createAsyncThunk(
 );
 
 //좋아요
-export const __likeToggle = createAsyncThunk(
-  "likeToggle",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await apis.likeToggle();
-      // const data = await axios.post("http://localhost:3002/post", payload);
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (err) {
-      console.log(err);
-      return thunkAPI.rejectWithValue(err);
-    }
-  }
-);
-
 // export const __postLike = createAsyncThunk(
 //   "postLike",
 //   async (payload, thunkAPI) => {
@@ -185,7 +169,8 @@ export const __postLike = createAsyncThunk(
   "postLike",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await apis.post(`/api/like/post/${payload}`);
+      const { data } = await axios.post(`https://sparta-sjl.shop/api/like/post/${payload}` , {}, {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` }});
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -389,16 +374,16 @@ export const postSlice = createSlice({
     },
 
     // 좋아요 토글
-    [__likeToggle.pending]: (state) => {
+    [__postLike.pending]: (state) => {
       state.isLoading = true;
     },
-    [__likeToggle.fulfilled]: (state, action) => {
+    [__postLike.fulfilled]: (state, action) => {
       // 액션으로 받은 값 = payload 추가해준다.
       console.log("action: ", action.payload);
       state.isLoading = false;
       state.posts = action.payload;
     },
-    [__likeToggle.rejected]: (state, action) => {
+    [__postLike.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
