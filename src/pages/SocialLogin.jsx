@@ -21,7 +21,6 @@ function SocialLogin() {
         .then(() => {
           window.location.assign("/socialnick");
         });
-      // window.location.replace("/socialnick");
     } catch (error) {
       console.log(error);
     }
