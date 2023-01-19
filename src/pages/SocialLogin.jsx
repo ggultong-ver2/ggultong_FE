@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
 function SocialLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
@@ -18,8 +18,12 @@ function SocialLogin() {
           // localStorage.setItem("profileImg", res.data.data.profileImg);
           // localStorage.setItem("email", res.data.email);
         })
-        .then(() => {
-          window.location.assign("/socialnick");
+        .then((res) => {
+          if (res.data.login === true) {
+            window.location.assign("/socialnick");
+          } else {
+            window.location.assign("/");
+          }
         });
     } catch (error) {
       console.log(error);

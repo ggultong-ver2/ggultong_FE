@@ -38,7 +38,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
-          <Route path="/pwchange" element={<MyPwChange />} />
+          <Route path="myconfirm/pwchange" element={<MyPwChange />} />
           <Route path="/myconfirm/" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signcomplete" element={<SignComplete />} />
