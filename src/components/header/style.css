@@ -1,3 +1,7 @@
+.header_container{
+  width: 100%;
+  background: #000;
+}
 .headerwrap {
   width: 1200px;
   height: 72px;
@@ -7,6 +11,7 @@
   justify-content: space-between;
   margin: 0 auto;
   padding: 0 40px;
+  background: #000;
 }
 .category_wrap {
   width: 1200px;
@@ -26,7 +31,7 @@
 .logo a{
     width: 42px;height: 30px;
     display: block;
-    background-image: url(../../../public/images/logo.png);
+    background-image: url(../../../public/images/logo_2.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -84,9 +89,40 @@
     background-repeat: no-repeat;
     background-position: center;
     text-indent: -9999px;
+    position: relative;
 }
 .alarm:hover{
     background-image: url(../../../public/images/alarm.png);
+}
+.alarm_menu{
+  position: absolute;
+  top: 40px;
+  margin: 5px 0;
+  padding: 15px 12px;
+  border: 1px solid #a0a0a0;
+  width: 300px;
+  background: white;
+}
+.alarm_menu li:first-child{
+  cursor: default;
+}
+.alarm_menu li:first-child:hover{
+  background: none;
+}
+.alarm_menu li:first-child::after{
+  display: block;
+  content: "";
+  width: 270px;
+  height: 1px;
+  background: #000;
+}
+.alarm_menu li{
+  margin: 0;
+  background: white;
+  display: block;
+}
+.alarm_menu li:hover{
+  background: #f2f2f2;
 }
 .mypage{
     display: block;
@@ -100,7 +136,9 @@
     background-image: url(../../../public/images/mypage.png);
 }
 
-
+.login{
+  color: white;
+}
 .category_wrap li{
     float: left;
     margin-left: 20px;

@@ -1,3 +1,7 @@
+.top_cat_wrap{
+  width: 100%;
+  background: #000;
+}
 .top_cat{
   width: 1200px;
   height: 45px;
@@ -18,15 +22,21 @@
 .top_cat button {
   width: 83px;
   height: 32px;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 40px;
   background: transparent;
-  color: black;
+  color: white;
   cursor: pointer;
 }
 .top_cat button:hover {
   background: #000;
   color: white;
+}
+
+.top_cat .top_post_btn{
+  background: #FFD665;
+  color: #000;
+  border: 0 none;
 }
 
 /* .hero_side {
@@ -337,8 +347,7 @@
 }
 
 .slider{
-  width: 1200px;
-  height: 400px;
+  height: 480px;
   margin: 0 auto;
   text-align: center;
   background: #f2f2f2;

@@ -19,6 +19,7 @@ const instance = axios.create({
 // baseURL
 export const baseURL = axios.create({
   baseURL: "https://sparta-sjl.shop/api",
+  withCredentials: true,
 
   headers: {
     "content-type": "application/json;charset=UTF-8",
