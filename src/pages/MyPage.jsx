@@ -146,19 +146,20 @@ function MyPage() {
             <SettingBox>설정</SettingBox>
             <SettingItm>&nbsp;알림</SettingItm>
             <SettingItm>
-              <StButton onClick={() => window.location.assign("/login")}>
-                로그아웃
+              <StButton onClick={() => window.location.assign("/myconfirm")}>
+                비밀번호 재설정
               </StButton>
+              <StP2>⚠️ 소셜로그인 계정은 비밀번호 재설정이 불가합니다.</StP2>
             </SettingItm>
             <SettingItm>
-              <StButton
+              <StDeleteButton
                 onClick={(e) => {
                   e.preventDefault();
                   onDeleteLoginId();
                 }}
               >
                 회원탈퇴
-              </StButton>
+              </StDeleteButton>
             </SettingItm>
           </div>
         </StCenterBox2>
@@ -386,6 +387,17 @@ const StEmailInput = styled.input`
 
 const StButton = styled.button`
   font-weight: bold;
+  width: 110px;
+  font-size: 16px;
+  height: 50px;
+  border: 0;
+  background-color: pink;
+  cursor: pointer;
+  font-family: "Pretendard";
+`;
+
+const StDeleteButton = styled.button`
+  font-weight: bold;
   width: 70px;
   font-size: 16px;
   height: 50px;
@@ -446,6 +458,13 @@ const AppStyle = styled.div`
 const StP = styled.div`
   width: 800px;
   margin-left: 155px;
+`;
+const StP2 = styled.div`
+  letter-spacing: 0.1em;
+  color: #9d9d9d;
+  width: 500px;
+  margin-left: 20px;
+  font-weight: 500;
 `;
 
 const StCount = styled.div`

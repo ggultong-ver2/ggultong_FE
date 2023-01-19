@@ -17,11 +17,11 @@ function MyPwChange() {
     __pwchange(password).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "반갑습니다!", "success");
-        navigate("/mypage");
+        Swal.fire(res.data.msg, "비밀번호가 변경되었습니다!", "success");
+        navigate("/login");
       } else {
-        navigate("/myconfirm");
-        Swal.fire(res.data.msg, "비밀번호를 다시 확인해주세요!", "error");
+        Swal.fire(res.data.msg, "비밀번호 변경실패", "error");
+        // window.location.assign("/myconfirm");
       }
     });
   };
@@ -88,11 +88,11 @@ function MyPwChange() {
           {<StP>{PWConfirmP}</StP>}
         </MyPwBox>
         <StBtnBox>
-          <StBack onClick={() => navigate("/mypage")}>이전</StBack>
+          <StBack onClick={() => navigate("/myconfirm")}>이전</StBack>
           <StButton
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               onCheckPassword(password);
-              navigate("/mypage");
             }}
           >
             확인

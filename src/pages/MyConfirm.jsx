@@ -45,7 +45,7 @@ function MyConfirm() {
           <StButton
             onClick={() => {
               onCheckPassword(password);
-              navigate("/mypage");
+              navigate("/pwchange");
             }}
           >
             확인

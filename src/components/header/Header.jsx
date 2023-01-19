@@ -17,7 +17,7 @@ function Header() {
       <div className="headerwrap">
         <div className="header_left">
           <div className="logo">
-              <a href="/">LOGO</a>
+            <a href="/">LOGO</a>
           </div>
           <div className="search">
             <input
@@ -42,7 +42,7 @@ function Header() {
           <ul className="clearfix">
             <li className="search"></li>
             <li className="alarm">알림</li>
-            <li onClick={() => navigate("/myconfirm")} className="mypage">
+            <li onClick={() => navigate("/mypage")} className="mypage">
               마이페이지
             </li>
 
