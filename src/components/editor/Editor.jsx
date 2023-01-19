@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./Editor.css";
 
-const Editor = () => {
+const Editor = ({ content, setContent }) => {
   //   const dispatch = useDispatch();
   //   const navigate = useNavigate();
 
@@ -43,6 +43,12 @@ const Editor = () => {
   //     }
   //   };
 
+  // function MyCustomUploadAdapterPlugin(editor) {
+  //   editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+  //     return new UploadAdapter(loader);
+  //   };
+  // }
+
   return (
     <div className="App">
       <CKEditor
@@ -55,6 +61,7 @@ const Editor = () => {
         onChange={(event, editor) => {
           const data = editor.getData();
           console.log({ event, editor, data });
+          setContent({ ...content, content: data });
         }}
         onBlur={(event, editor) => {
           console.log("Blur.", editor);

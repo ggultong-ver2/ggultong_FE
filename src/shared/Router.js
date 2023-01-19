@@ -25,11 +25,9 @@ import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
 import SignNick from "../pages/SocialNick";
-import AllList from "../pages/List/AllList";
+import DrinkList from "../pages/List/drinkList";
 import MealList from "../pages/List/mealList";
-import TipList from "../pages/List/tipList";
-import RoomList from "../pages/List/roomList";
-import Listbutton from "../components/Listbutton/Listbutton";
+import RecycleList from "../pages/List/recycleList";
 import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
@@ -58,11 +56,9 @@ const Router = () => {
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
-          <Route path="/allList" element={<AllList />} />
+          <Route path="/drinkList" element={<DrinkList />} />
           <Route path="/mealList" element={<MealList />} />
-          <Route path="/tipList" element={<TipList />} />
-          <Route path="/roomList" element={<RoomList />} />
-          <Route path="/world" element={<WorldCup />} />
+          <Route path="/recycleList" element={<RecycleList />} />
         </Routes>
       </Layout>
     </BrowserRouter>
