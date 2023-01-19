@@ -3,7 +3,7 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 // import SearchPagination from "../pagination/searchpagination";
 import Pagination from "../pagination/pagination";
-import Lists from "../boards/lists/Lists";
+// import Lists from "../boards/lists/Lists";
 import { baseURL } from "../../lib/axios";
 
 function Search() {
