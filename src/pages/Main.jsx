@@ -31,7 +31,7 @@ function Main(props) {
               <button onClick={() => navigate("/")}>홈</button>
             </li>
             <li>
-              <button onClick={() => navigate("/drinklist")}>꿀정보</button>
+              <button onClick={() => navigate("/drinklist/drink")}>꿀정보</button>
             </li>
             <li>
               <button onClick={() => navigate("/")}>즐길거리</button>

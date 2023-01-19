@@ -8,6 +8,7 @@ const initialState = {
   signup: [],
   posts: [],
   categoryPosts: [],
+  details: [],
   // patch:[],
   comments: [],
   // like: [],
@@ -73,6 +74,7 @@ export const __getPost = createAsyncThunk(
 export const __getIdPost = createAsyncThunk(
   "getIdPost",
   async (payload, thunkAPI) => {
+    console.log("payload", payload);
     try {
       const data = await apis.getIdPost(payload);
       //const data = await axios.get(`http://localhost:3001/postss/${payload}`);
@@ -179,13 +181,12 @@ export const __postLike = createAsyncThunk(
   }
 );
 
-
 // 카테고리별 get
 export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await apis.getCategoryPost();
+      const { data } = await apis.getCategoryPost(payload);
       console.log("categorydata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {

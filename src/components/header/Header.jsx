@@ -22,7 +22,7 @@ function Header() {
       <div className="headerwrap">
         <div className="header_left">
           <div className="logo">
-              <a href="/">LOGO</a>
+            <a href="/">LOGO</a>
           </div>
           <div className="search">
             <input
@@ -56,7 +56,7 @@ function Header() {
                 <li className="menu_item">lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.</li>
               </ul>
             ) : null}
-            <li onClick={() => navigate("/myconfirm")} className="mypage">
+            <li onClick={() => navigate("/mypage")} className="mypage">
               마이페이지
             </li>
 

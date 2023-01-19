@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
 function SocialLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
-  const IP = "43.201.7.130:8080";
+  const IP = "tom-jelly.shop";
 
   const getToken = async () => {
     console.log("::::::");
@@ -13,12 +13,18 @@ function SocialLogin() {
       const data = axios
         .get(`http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`)
         .then((res) => {
-          localStorage.setItem("authorization", res.headers.authorization);
-          localStorage.setItem("nickname", res.data.nickname);
-          localStorage.setItem("profileImg", res.data.data.profileImg);
-          localStorage.setItem("email", res.data.email);
+          localStorage.setItem("Access_Token", res.headers.authorization);
+          // localStorage.setItem("nickname", res.data.nickname);
+          // localStorage.setItem("profileImg", res.data.data.profileImg);
+          // localStorage.setItem("email", res.data.email);
+        })
+        .then((res) => {
+          if (res.data.login === true) {
+            window.location.assign("/socialnick");
+          } else {
+            window.location.assign("/");
+          }
         });
-      window.location.replace("/socialnick");
     } catch (error) {
       console.log(error);
     }

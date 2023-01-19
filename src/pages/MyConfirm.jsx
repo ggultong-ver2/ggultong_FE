@@ -29,10 +29,7 @@ function MyConfirm() {
     <StContainer>
       <StCenterBox>
         <StSignBox>마이페이지</StSignBox>
-        <Stlabel>개인정보로 인해 비밀번호를 한번 더 확인합니다.</Stlabel>
-        <br></br>
-        <br></br>
-        <br></br>
+        <StLabel>현재 비밀번호</StLabel>
         <StInput
           placeholder="비밀번호를 입력 해 주세요"
           type="password"
@@ -43,18 +40,17 @@ function MyConfirm() {
           minLength={8}
           maxLength={15}
         ></StInput>
-        <br></br>
-        <br></br>
-        <StButton
-          onClick={() => {
-            onCheckPassword(password);
-            navigate("/mypage");
-          }}
-        >
-          확인
-        </StButton>
-        <br></br>
-        <br></br>
+        <StBtnBox>
+          <StBack onClick={() => navigate("/mypage")}>이전</StBack>
+          <StButton
+            onClick={() => {
+              onCheckPassword(password);
+              navigate("/pwchange");
+            }}
+          >
+            확인
+          </StButton>
+        </StBtnBox>
       </StCenterBox>
     </StContainer>
   );
@@ -63,63 +59,98 @@ const StContainer = styled.form`
   width: 100%;
   height: 100vh;
   display: flex;
-  background-color: white;
+  background-color: #f3f3f3;
   align-items: center;
   justify-content: center;
   background-size: cover;
   font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
-  width: 400px;
-  height: 850px;
+  width: 588px;
+  height: 570px;
   align-items: center;
   border: 0;
   border-radius: 1px;
   display: flex;
+  background-color: white;
   flex-direction: column;
   font-family: "Pretendard";
 `;
 const StSignBox = styled.div`
   width: 400px;
   height: 80px;
-  font-size: 45px;
-  margin-bottom: 25px;
+  font-size: 24px;
+
   margin-top: 50px;
   display: flex;
   padding-top: 0px;
-  border-bottom: 6px solid black;
+
   justify-content: center;
   font-family: "Pretendard";
 `;
-const Stlabel = styled.label`
-  font-size: 20px;
-  font-weight: bold;
 
+const StLabel = styled.label`
+  margin-bottom: 10px;
+  margin-left: 30px;
+  justify-content: left;
+  font-size: 14px;
+  display: flex;
+  margin-right: 340px;
+  font-weight: 600;
   font-family: "Pretendard";
 `;
 
 const StInput = styled.input`
-  width: 300px;
-  height: 40px;
+  width: 384px;
+  height: 48px;
   padding-left: 10px;
+  margin-bottom: 150px;
   font-family: "Pretendard";
 `;
 
 const StButton = styled.button`
-  margin-top: 40px;
+  letter-spacing: 0.1em;
   margin-bottom: 10px;
-  width: 380px;
+  width: 186px;
   height: 48px;
   border: 0;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
   border-radius: 4px;
   background-color: #b5b5b5;
-  font-family: georgia;
-  color: white;
   font-family: "Pretendard";
+  color: white;
+
   cursor: pointer;
   &:hover {
-    background-color: #797777;
+    color: black;
+    background-color: #ffd665;
+  }
+`;
+
+const StBtnBox = styled.div`
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+`;
+
+const StBack = styled.button`
+  font-family: "Pretendard";
+
+  width: 186px;
+  height: 48px;
+  border: 1px solid #a0a0a0;
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border: 0;
+    background-color: #ffd665;
     font-family: "Pretendard";
   }
 `;
