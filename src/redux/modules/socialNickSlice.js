@@ -1,5 +1,4 @@
 import { apis } from "../../lib/axios";
-import Swal from "sweetalert2";
 
 const __socialNick = async (nickname) => {
   try {
