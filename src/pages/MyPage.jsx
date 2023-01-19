@@ -23,32 +23,6 @@ function MyPage() {
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
 
-  function isPassword(asValue) {
-    const regExp =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    return regExp.test(asValue);
-  }
-
-  const PWChk = () => {
-    if (!isPassword(password)) {
-      setPWPtag(
-        <StPs>
-          사용 불가능합니다. 숫자/영문/특수문자를 모두포함한, 8자~15자
-        </StPs>
-      );
-    } else {
-      setPWPtag(<StPs2>사용가능한 비밀번호 입니다</StPs2>);
-    }
-  };
-
-  const PWConfirmChk = () => {
-    if (password !== PWConfirm) {
-      setPWConfirmP(<StPs>비밀번호가 일치하지않습니다</StPs>);
-    } else {
-      setPWConfirmP(<StPs2>비밀번호 확인되었습니다.</StPs2>);
-    }
-  };
-
   const onChangeImage = (event) => {
     const file = event.target.files[0];
     setProfileImg(file);
@@ -97,7 +71,6 @@ function MyPage() {
     e.preventDefault();
     dispatch(
       __patchPost({
-        password,
         profileImg,
         nickname,
       })
@@ -109,11 +82,6 @@ function MyPage() {
         Swal.fire(res.data.msg, "정보 수정 실패!", "error");
       }
     });
-  };
-
-  const handleClickLogout = () => {
-    window.location.assign("/");
-    localStorage.clear();
   };
 
   return (
@@ -166,37 +134,7 @@ function MyPage() {
               </StNickButton>
               <StP>현재 닉네임 : {localStorage.getItem("nickname")}</StP>
             </MyNickBox>
-            <MyPwBox>
-              <MyPW htmlFor="password">비밀번호 변경</MyPW>
-              <StPwInput
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                onBlur={PWChk}
-                placeholder="숫자, 영문, 특수문자 조합 최소 8자"
-                // required
-                minLength={8}
-                maxLength={15}
-              />
-              {<StP>{PWPtag}</StP>}
-              <StPwInput
-                type="password"
-                id="PWConfirm"
-                value={PWConfirm}
-                onChange={(e) => {
-                  setPWConfirm(e.target.value);
-                }}
-                onBlur={PWConfirmChk}
-                placeholder="비밀번호 재입력"
-                // required
-                minLength={8}
-                maxLength={15}
-              />
-              {<StP>{PWConfirmP}</StP>}
-            </MyPwBox>
+
             <MyNickBox>
               가입한 이메일
               <StEmailInput disabled value={localStorage.getItem("email")} />
@@ -400,27 +338,6 @@ const MyNickBox = styled.div`
   font-weight: 600;
   font-family: "Pretendard";
 `;
-const MyPW = styled.label`
-  display: flex;
-  align-items: center;
-  padding-bottom: 50px;
-  float: left;
-  width: 100px;
-  height: 170px;
-  font-family: "Pretendard";
-`;
-
-const MyPwBox = styled.div`
-  float: right;
-  padding-left: 15px;
-  width: 920px;
-  height: 150px;
-  background-color: orange;
-  font-size: 14px;
-  color: #9d9d9d;
-  font-weight: 600;
-  font-family: "Pretendard";
-`;
 
 const LikeBox = styled.div`
   font-weight: bold;
@@ -432,22 +349,6 @@ const LikeBox = styled.div`
   background-color: white;
   width: 200px;
   height: 80px;
-  font-family: "Pretendard";
-`;
-
-const StPs = styled.p`
-  width: 384px;
-  margin-top: 3px;
-  font-size: 12px;
-  color: red;
-  font-family: "Pretendard";
-`;
-
-const StPs2 = styled.p`
-  width: 384px;
-  margin-top: 3px;
-  font-size: 12px;
-  color: limegreen;
   font-family: "Pretendard";
 `;
 
@@ -482,18 +383,7 @@ const StEmailInput = styled.input`
   height: 48px;
   font-family: "Pretendard";
 `;
-const StPwInput = styled.input`
-  border-radius: 4px;
-  margin-top: 10px;
-  padding-left: 10px;
-  margin-bottom: 5px;
-  border: 1px solid #000000;
-  background-color: #f5f6f9;
-  margin-left: 52px;
-  width: 590px;
-  height: 48px;
-  font-family: "Pretendard";
-`;
+
 const StButton = styled.button`
   font-weight: bold;
   width: 70px;
