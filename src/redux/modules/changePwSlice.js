@@ -1,9 +1,9 @@
 import { apis } from "../../lib/axios";
 
-const __socialNick = async (nickname) => {
+const __pwchange = async (password) => {
   try {
-    const data = await apis.signNickname(nickname);
-    console.log("nickname:::", nickname);
+    const data = await apis.changePw(password);
+    console.log("password:::", password);
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
@@ -18,4 +18,4 @@ const __socialNick = async (nickname) => {
   }
 };
 
-export default __socialNick;
+export default __pwchange;

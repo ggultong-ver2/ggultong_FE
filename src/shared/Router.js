@@ -23,14 +23,12 @@ import Home from "../pages/Home";
 import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
-import SignNick from "../pages/SocialNick";
-import DrinkList from "../pages/List/drinkList";
 import MealList from "../pages/List/mealList";
-import RecycleList from "../pages/List/recycleList";
 import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
 import SocialNick from "../pages/SocialNick";
+import MyPwChange from "../pages/MyPwChange";
 
 const Router = () => {
   return (
@@ -39,6 +37,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           {/* <Route path="/mypage" element={<MyPage />} /> */}
+          <Route path="myconfirm/pwchange" element={<MyPwChange />} />
           <Route path="/myconfirm/" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signcomplete" element={<SignComplete />} />
@@ -54,9 +53,11 @@ const Router = () => {
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
+
           <Route path="/drinkList/:id" element={<DrinkList />} />
           <Route path="/mealList/:id" element={<MealList />} />
           <Route path="/recycleList/:id" element={<RecycleList />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>
