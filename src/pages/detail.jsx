@@ -8,24 +8,33 @@ import Swal from "sweetalert2";
 import Likes from "../components/like/Likes";
 // import Comments from "../components/comment/Comments";
 
-
 const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const param = useParams();
   const { id } = useParams();
+  console.log(param, id);
+  const [details, setDetails] = useState({});
 
-  const details = useSelector((state) => state.details.details);
-  console.log("details:", details);
+  const detailList = useSelector((state) => state.details.details);
+  console.log("details:", detailList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
 
   useEffect(() => {
+    console.log("param.id:", param.id);
     dispatch(__getIdPost(+param.id));
-  }, [dispatch, param.id]);
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (detailList) {
+      setDetails(detailList);
+    }
+  }, [detailList]);
+  console.log("detailList:", details);
 
   const onClickDeletePostHandler = () => {
-    if (localStorage.getItem("nickname") === details.nickname) {
+    if (localStorage.getItem("nickname") === detailList.nickname) {
       dispatch(__deletePost(id));
       Swal.fire("삭제 완료", "삭제 완료되었습니다", "success");
     } else {
@@ -34,7 +43,7 @@ const Detail = () => {
   };
 
   const onClickEditPostHandler = () => {
-    if (details.nickname === localStorage.getItem("nickname")) {
+    if (detailList.nickname === localStorage.getItem("nickname")) {
       //localStorage.getItem = key(nickname)로부터 data 읽기
       navigate(`/editpost/${id}`);
     } else {
@@ -45,56 +54,61 @@ const Detail = () => {
       );
     }
   };
+  // console.log(details.createdAt);
 
-  return (
-    <div>
-      <StDetail>
-        <p>{details?.id}</p>
-        <Wrap>
-          <StTitle>{details?.title}</StTitle>
-          <Else>
-            <Etc>
-              <StNickname>{details?.nickname}</StNickname>
-              <Date>{details?.createdAt.slice(0, 10)}</Date>
-            </Etc>
-            <Etcs>
-              <Countcomment>댓글</Countcomment>
-              <Heart>좋아요 {details?.likePostSum}</Heart>
-            </Etcs>
-          </Else>
-          <StFile src={details?.imageFiles[0]} />
-          <StContent>{details?.content}</StContent>
-          <StFiles src={details?.imageFiles[1]} />
-          <Btns>
-            <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
-            <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
-          </Btns>
-        </Wrap>
-        <Likes />
-        <Commentarea>
-          <Writecomment>
-            <Myprofile />
-            {/* <Comments /> */}
-            <Commentinput placeholder="댓글을 작성할 수 있어요." />
-          </Writecomment>
-          <Commentbox>
-            <Commenttextarea>
-              <Profileimg />
-              <WrapWritten>
-                <Writtenby>자취왕초보</Writtenby>
-                <Writtendate>2023.01.12</Writtendate>
-                <Commentcontent>
-                  국, 카레, 찌개, 볶음 등 국물이 조금이라도 있는 음식을 하루
-                  이상 먹을 분량을 조리했다면 그 날 먹을 예정이 없더라도
-                  한번씩은 불을 켜서 데워줘야 한다.
-                </Commentcontent>
-              </WrapWritten>
-            </Commenttextarea>
-          </Commentbox>
-        </Commentarea>
-      </StDetail>
-    </div>
-  );
+  if (details.id) {
+    return (
+      <div>
+        <StDetail>
+          <p>{details?.id}</p>
+          <Wrap>
+            <StTitle>{details?.title}</StTitle>
+            <Else>
+              <Etc>
+                <StNickname>{details?.nickname}</StNickname>
+                <Date>{details?.createdAt.slice(0, 10)}</Date>
+              </Etc>
+              <Etcs>
+                <Countcomment>댓글</Countcomment>
+                <Heart>좋아요 {details?.likePostSum}</Heart>
+              </Etcs>
+            </Else>
+            <StFile src={details?.imageFiles[0]} />
+            <StContent
+              dangerouslySetInnerHTML={{ __html: details?.content }}
+            ></StContent>
+            <StFiles src={details?.imageFiles[1]} />
+            <Btns>
+              <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
+              <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
+            </Btns>
+          </Wrap>
+          <Likes />
+          <Commentarea>
+            <Writecomment>
+              <Myprofile />
+              {/* <Comments /> */}
+              <Commentinput placeholder="댓글을 작성할 수 있어요." />
+            </Writecomment>
+            <Commentbox>
+              <Commenttextarea>
+                <Profileimg />
+                <WrapWritten>
+                  <Writtenby>자취왕초보</Writtenby>
+                  <Writtendate>2023.01.12</Writtendate>
+                  <Commentcontent>
+                    국, 카레, 찌개, 볶음 등 국물이 조금이라도 있는 음식을 하루
+                    이상 먹을 분량을 조리했다면 그 날 먹을 예정이 없더라도
+                    한번씩은 불을 켜서 데워줘야 한다.
+                  </Commentcontent>
+                </WrapWritten>
+              </Commenttextarea>
+            </Commentbox>
+          </Commentarea>
+        </StDetail>
+      </div>
+    );
+  }
 };
 
 const StDetail = styled.div`

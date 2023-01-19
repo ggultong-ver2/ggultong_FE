@@ -7,7 +7,6 @@ import Layout from "../components/layout/Layout";
 // import Board from "../components/board/Board";
 // import Edit from "../components/edit/Edit";
 // import RecipeList from "../pages/RecipeList";
-import Lists from "../components/boards/lists/Lists";
 //import Magazine from "../components/boards/magazine/magazine";
 // 주석 풀고 사용
 import Main from "../pages/Main";
@@ -45,7 +44,7 @@ const Router = () => {
           <Route path="/signcomplete" element={<SignComplete />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/agree/" element={<SignAgree />} />
-          <Route path="detail/:id" element={<Detail />} />
+          <Route path="drinkList/:category/detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
           <Route path="/editor" element={<Editor />} />
           <Route path="/pwfind" element={<Pwfind />} />
@@ -55,9 +54,9 @@ const Router = () => {
           <Route path="/mypage" element={<MyTab />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
-          <Route path="/drinkList" element={<DrinkList />} />
-          <Route path="/mealList" element={<MealList />} />
-          <Route path="/recycleList" element={<RecycleList />} />
+          <Route path="/drinkList/:id" element={<DrinkList />} />
+          <Route path="/mealList/:id" element={<MealList />} />
+          <Route path="/recycleList/:id" element={<RecycleList />} />
         </Routes>
       </Layout>
     </BrowserRouter>
