@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import __pwcheck from "../redux/modules/checkPwSlice";
 import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
+import __pwchange from "../redux/modules/changePwSlice";
 function MyPwChange() {
-  const [password, setPassword] = useInput();
+  const [password, setPassword] = useState("");
   const [PWPtag, setPWPtag] = useState();
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
@@ -14,9 +14,7 @@ function MyPwChange() {
 
   const onCheckPassword = (password) => {
     console.log("password--->", password);
-    __pwcheck({
-      password,
-    }).then((res) => {
+    __pwchange(password).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "반갑습니다!", "success");

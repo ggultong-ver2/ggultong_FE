@@ -47,6 +47,10 @@ export const apis = {
     instance.post("/mypage/pwCheck", password, {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     }),
+  changePw: (password) =>
+    instance.post(`/mypage/pwChange/${password}`, "", {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    }),
   postLogout: () => instance.get("/user/logout"),
   checkEmail: (email) => instance.post("/user/emailCheck/", email),
   checkemailCode: (post) => instance.post("/user/emailCode/", post),
@@ -82,13 +86,13 @@ export const apis = {
     });
   },
   deleteUser: (loginId) => {
-    baseURL.delete(`/mypage/${loginId}`, {
+    baseURL.delete(`/mypage/${loginId}`, "", {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     });
   },
 
   signNickname: (nickname) => {
-    baseURL.patch(`/mypage/update/socialSetting/${nickname}`, {
+    baseURL.patch(`/mypage/update/socialSetting/${nickname}`, "", {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     });
   },
