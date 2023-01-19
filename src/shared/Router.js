@@ -24,6 +24,8 @@ import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
 import MealList from "../pages/List/mealList";
+import DrinkList from "../pages/List/drinkList";
+import RecycleList from "../pages/List/recycleList";
 import Editor from "../components/editor/Editor";
 import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";

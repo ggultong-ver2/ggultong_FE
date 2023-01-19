@@ -12,6 +12,11 @@ function Header() {
     //navigate(`/?q=${keyword}`)
   };
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () =>{
+    setOpen(!open);
+  };
+
   return (
     <div className="header_container">
       <div className="headerwrap">
@@ -41,7 +46,16 @@ function Header() {
         <nav className="gnb">
           <ul className="clearfix">
             <li className="search"></li>
-            <li className="alarm">알림</li>
+            <li onClick={handleOpen} className="alarm">
+              알림
+            </li>
+            {open ? (
+              <ul className="alarm_menu">
+                <li>읽지 않은 알림 (1)</li>
+                <li className="menu_item">lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.</li>
+                <li className="menu_item">lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.</li>
+              </ul>
+            ) : null}
             <li onClick={() => navigate("/mypage")} className="mypage">
               마이페이지
             </li>

@@ -24,21 +24,23 @@ function Main(props) {
 
   return (
     <>
-      <div className="top_cat">
-        <ul>
-          <li>
-            <button onClick={() => navigate("/")}>홈</button>
-          </li>
-          <li>
-            <button onClick={() => navigate("/drinklist/drink")}>꿀정보</button>
-          </li>
-          <li>
-            <button onClick={() => navigate("/")}>즐길거리</button>
-          </li>
-        </ul>
-        <button onClick={() => navigate("/post")} className="top_post_btn">
-          글쓰기
-        </button>
+      <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul>
+            <li>
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/drinklist/drink")}>꿀정보</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/")}>즐길거리</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
       </div>
       {/* <div className="hero_side">
         <h1>
