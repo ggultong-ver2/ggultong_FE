@@ -1,0 +1,24 @@
+.search_container{
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 42px;
+}
+.search_top{
+    width: 1000px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.search_sort{
+    padding: 6px 13px;
+}
+.no_results{
+    width: 1000px;
+    margin: 0 auto;
+}
+.search_results{
+    width: 1200px;
+    margin: 0 auto;
+}
