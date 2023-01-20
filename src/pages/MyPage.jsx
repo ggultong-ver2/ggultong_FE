@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useInput } from "../lib/utils/useInput";
 import __nickCheck from "../redux/modules/checkNickSlice";
-import addimage from "../assets/images/addimage.png";
+import fileinput from "../assets/images/fileinput.png";
 import { __patchPost } from "../redux/modules/postSlice";
 import { apis } from "../lib/axios";
 import MySmallTab from "./Tabs/MySmallTab";
@@ -96,58 +96,63 @@ function MyPage() {
         <StCenterBox>
           <AllBox>
             <MyBox>내 정보</MyBox>
-            <MypageBox>
-              프로필 사진
-              <AppStyle>
-                <label htmlFor="ex_file">
-                  <div className="addImage">
-                    <img src={addimage} alt="addimage" />
-                  </div>
-                </label>
-                <input
-                  type="file"
-                  accept="image/jpg, image/png, image/jpeg"
-                  id="ex_file"
-                  ref={imgRef}
-                  // onChange={onChangeImage}
-                  onChange={onChangeImage}
-                  width="140px"
-                  height="140px"
+            <ProfileBox>
+              <MypageBox>
+                프로필 사진
+                <AppStyle>
+                  <label htmlFor="ex_file">
+                    <div className="fileinput">
+                      <img src={fileinput} alt="fileinput" />
+                    </div>
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/jpg, image/png, image/jpeg"
+                    id="ex_file"
+                    ref={imgRef}
+                    // onChange={onChangeImage}
+                    onChange={onChangeImage}
+                    width="92px"
+                    height="32px"
+                  />
+                </AppStyle>
+                <Myprofile
+                  alt=""
+                  src={imgUrl ? imgUrl : localStorage.getItem("profileImg")}
                 />
-              </AppStyle>
-              <Myprofile
-                alt=""
-                src={imgUrl ? imgUrl : localStorage.getItem("profileImg")}
-              />
-            </MypageBox>
-
-            <MyNickBox>
-              닉네임
-              <StInput
-                type="text"
-                id="nickname"
-                value={nickname}
-                onChange={setNickname}
-              />
-              <StNickButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  onCheckNickName(nickname);
-                }}
-                type="button"
-              >
-                중복확인
-              </StNickButton>
-              <StP>현재 닉네임 : {localStorage.getItem("nickname")}</StP>
-            </MyNickBox>
-
-            <MyNickBox>
-              가입한 이메일
-              <StEmailInput disabled value={localStorage.getItem("email")} />
-            </MyNickBox>
-            <StFoot>
-              <StProfileButton>프로필 수정</StProfileButton>
-            </StFoot>
+              </MypageBox>
+              <StFoot>
+                <StProfileButton>프로필 수정</StProfileButton>
+              </StFoot>
+            </ProfileBox>
+            <div>
+              <MyNickBox>
+                닉네임
+                <StInput
+                  type="text"
+                  id="nickname"
+                  value={nickname}
+                  onChange={setNickname}
+                />
+                <StNickButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onCheckNickName(nickname);
+                  }}
+                  type="button"
+                >
+                  중복확인
+                </StNickButton>
+                <StP>현재 닉네임 : {localStorage.getItem("nickname")}</StP>
+                <MyNickBox>
+                  가입한 이메일
+                  <StEmailInput
+                    disabled
+                    value={localStorage.getItem("email")}
+                  />
+                </MyNickBox>
+              </MyNickBox>
+            </div>
           </AllBox>
         </StCenterBox>
         <StCenterBox2>
@@ -196,17 +201,22 @@ const StContainer = styled.form`
 `;
 
 const StSubCon = styled.div`
-  background-color: #f3f3f3;
-  width: 1080px;
+  background-color: black;
+  width: 996px;
   height: 2500px;
   font-family: "Pretendard";
+`;
+
+const ProfileBox = styled.div`
+  width: 920px;
+  height: 150px;
 `;
 
 const StCenterBox = styled.div`
   padding-top: 40px;
   padding-left: 40px;
   margin-top: 30px;
-  max-width: 1080px;
+  max-width: 996px;
   height: 620px;
   border: 0;
   border-radius: 1px;
@@ -256,11 +266,14 @@ const AllBox2 = styled.div`
 `;
 
 const StFoot = styled.div`
-  width: 920px;
-  height: 100px;
+  float: right;
+  margin-right: 130px;
+  margin-top: -45px;
+  width: 350px;
+  height: 150px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+
   font-family: "Pretendard";
 `;
 const MyBox = styled.div`
@@ -295,17 +308,15 @@ const SettingItm = styled.div`
 `;
 
 const MypageBox = styled.div`
-  padding-left: 15px;
-  width: 450px;
-  height: 220px;
-
+  float: left;
+  width: 310px;
+  height: 150px;
   font-size: 14px;
   color: #9d9d9d;
   font-weight: 600;
   font-family: "Pretendard";
 `;
 const MyNickBox = styled.div`
-  padding-left: 15px;
   width: 920px;
   height: 100px;
   font-size: 14px;
@@ -315,13 +326,13 @@ const MyNickBox = styled.div`
 `;
 
 const AllBox = styled.div`
-  margin-left: 40px;
+  margin-left: 50px;
 `;
 
 const Myprofile = styled.img`
-  margin-left: 150px;
-  width: 200px;
-  height: 200px;
+  margin-left: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 100px;
   border: 2px solid black;
   font-family: "Pretendard";
@@ -364,17 +375,18 @@ const StButton = styled.button`
 
 const StProfileButton = styled.button`
   font-weight: 500;
-  width: 94px;
+  width: 112px;
   font-size: 14px;
-  height: 34px;
+  height: 32px;
   border: 0;
   color: white;
   border-radius: 30px;
-  background-color: #474747;
+  background-color: #979797;
   cursor: pointer;
   font-family: "Pretendard";
 
   &:hover {
+    font-weight: 500;
     color: black;
     background-color: #ffd665;
   }
@@ -411,25 +423,18 @@ const StNickButton = styled.button`
 
 const AppStyle = styled.div`
   float: right;
-  margin: 0 8px 0 8px;
-  img {
-    max-width: 50px;
-  }
+  margin-top: 15px;
   label {
-    margin-top: 10px;
-    display: inline-block;
-    font-size: inherit;
-    line-height: normal;
-    vertical-align: middle;
     cursor: pointer;
   }
   input[type="file"] {
     position: absolute;
-    width: 0;
-    height: 0;
+    width: 92px;
+    height: 32px;
     padding: 0;
     margin: -1px;
     overflow: hidden;
+    background-color: black;
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
