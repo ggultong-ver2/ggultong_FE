@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import "../../pages/reset.css";
 import "./style.css";
 
@@ -13,7 +14,7 @@ function Header() {
   };
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () =>{
+  const handleOpen = () => {
     setOpen(!open);
   };
 
@@ -52,11 +53,31 @@ function Header() {
             {open ? (
               <ul className="alarm_menu">
                 <li>읽지 않은 알림 (1)</li>
-                <li className="menu_item">lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.</li>
-                <li className="menu_item">lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.</li>
+                <li className="menu_item">
+                  lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
+                </li>
+                <li className="menu_item">
+                  lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
+                </li>
               </ul>
             ) : null}
-            <li onClick={() => navigate("/mypage")} className="mypage">
+            <li
+              onClick={(res) => {
+                console.log(res.headers);
+                if (
+                  localStorage.getItem("Access_Token", res.headers) !== null
+                ) {
+                  navigate("/mypage");
+                } else {
+                  Swal.fire(
+                    "로그인 하셨나요?",
+                    "로그인 후 이용해 주세요!",
+                    "error"
+                  );
+                }
+              }}
+              className="mypage"
+            >
               마이페이지
             </li>
 

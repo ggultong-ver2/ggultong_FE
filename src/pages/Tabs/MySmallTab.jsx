@@ -6,29 +6,34 @@ const MySmallTab = () => {
 
   const menuArr = [
     {
-      name: "내 꿀정보",
+      name: "내가 쓴 글",
       content: (
         <OneBox>
-          <CardBox>
-            <CardList></CardList>
-            <CardList></CardList>
-            <CardList></CardList>
-          </CardBox>
-          <CardBox>
-            <CardList></CardList>
-            <CardList></CardList>
-            <CardList></CardList>
-          </CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
+          <CardBox>페이지</CardBox>
         </OneBox>
       ),
     },
     {
-      name: "내 Q&A",
+      name: "스크랩",
       content: (
         <OneBox>
-          <QACard></QACard>
-          <QACard></QACard>
-          <QACard></QACard>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
+          <CardBox>움직임</CardBox>
         </OneBox>
       ),
     },
@@ -63,22 +68,25 @@ const MySmallTab = () => {
 };
 
 const TabMenu = styled.ul`
-  margin-left: 60px;
-
+  margin-left: 30px;
+  width: 250px;
+  height: 42px;
+  font-size: 24px;
+  font-weight: 600;
   color: #afafaf;
-  font-weight: bold;
+
   display: flex;
-  flex-direction: row;
   align-items: center;
   list-style: none;
   margin-top: 30px;
 
   .submenu {
     display: flex;
-    width: 100px;
+    width: 126px;
+    height: 42px;
     /* calc(100% / 3); */
     padding: 10px;
-    font-size: 15px;
+    font-size: 24px;
     transition: 0.5s;
     cursor: pointer;
   }
@@ -94,43 +102,25 @@ const TabMenu = styled.ul`
   }
 `;
 const OneBox = styled.div`
-  background-color: gray;
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 10px;
   width: 880px;
   height: 800px;
 `;
 
 const Desc = styled.div`
   margin-left: 30px;
-  background-color: pink;
   width: 940px;
   height: 800px;
 `;
 
 const CardBox = styled.div`
   display: flex;
-  margin-bottom: 20px;
-  width: 900px;
-  height: 345px;
-`;
-const CardList = styled.div`
-  margin-top: 20px;
-  margin-right: 20px;
-  background-color: white;
-  width: 280px;
-  height: 340px;
-  border: 1px solid black;
-`;
-
-const QACard = styled.div`
-  display: flex;
   margin-bottom: 30px;
-  width: 880px;
-  height: 245px;
-  border-radius: 20px;
+  width: 996px;
+  height: 201px;
+  border-bottom: 1px solid #979797;
   background-color: white;
-  border: 1px solid black;
 `;
 
 export default MySmallTab;

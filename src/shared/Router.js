@@ -20,7 +20,7 @@ import SignComplete from "../pages/SignComplete";
 import MyConfirm from "../pages/MyConfirm";
 // import MyPage from "../pages/MyPage";
 import Home from "../pages/Home";
-import MyTab from "../pages/Tabs/MyTab";
+// import MyTab from "../pages/Tabs/MyTab";
 import Search from "../components/search/Search";
 import SocialLogin from "../pages/SocialLogin";
 import MealList from "../pages/List/mealList";
@@ -31,8 +31,7 @@ import Pwfind from "../pages/Pwfind";
 import Idfind from "../pages/Idfind";
 import SocialNick from "../pages/SocialNick";
 import MyPwChange from "../pages/MyPwChange";
-import DrinkList from "../pages/List/drinkList";
-import RecycleList from "../pages/List/recycleList";
+import MyPage from "../pages/MyPage";
 
 const Router = () => {
   return (
@@ -54,7 +53,8 @@ const Router = () => {
           <Route path="/idfind" element={<Idfind />} />
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<SocialLogin />} />
-          <Route path="/mypage" element={<MyTab />} />
+          {/* <Route path="/mypage" element={<MyTab />} /> */}
+          <Route path="/mypage" element={<MyPage />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
           <Route path="/drinkList/:id" element={<DrinkList />} />

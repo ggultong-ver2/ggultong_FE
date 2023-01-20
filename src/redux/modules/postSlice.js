@@ -171,8 +171,13 @@ export const __postLike = createAsyncThunk(
   "postLike",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.post(`https://sparta-sjl.shop/api/like/post/${payload}` , {}, {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` }});
+      const { data } = await axios.post(
+        `https://sparta-sjl.shop/api/like/post/${payload}`,
+        {},
+        {
+          headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+        }
+      );
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -200,14 +205,13 @@ export const __patchPost = createAsyncThunk(
   "patchPost",
   async (payload, thunkAPI) => {
     try {
-      const { nickname, password, profileImg } = payload;
+      const { nickname, profileImg } = payload;
       const formData = new FormData();
 
       formData.append(
         "profileImg",
         profileImg === "" ? new File([], "") : profileImg
       );
-      formData.append("password", password);
       formData.append("nickname", nickname);
       //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
