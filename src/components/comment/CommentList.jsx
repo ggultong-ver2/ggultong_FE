@@ -14,7 +14,7 @@ const CommentList = ({ comment }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const onClickDeleteCommentHandler = () => {
+  const onClickDeleteHandler = () => {
       dispatch(__deleteComment({ postId: id }));
   };
   const [isCommentChange, setIsCommentChange] = useState(false);
@@ -23,7 +23,7 @@ const CommentList = ({ comment }) => {
     comment: "",
   });
 
-  const onClickEditCommentHandler = () => {
+  const onClickEditHandler = () => {
       if (isCommentChange === false) {
         setIsCommentChange(true);
       } else {
@@ -42,12 +42,12 @@ const CommentList = ({ comment }) => {
       <div className="comment">
         {isCommentChange === false ? (
           <div className="comment_text">
-            <div className="comment_nick">{comment.nickname}</div>
-            <div className="comment_text">{comment.comment}</div>
+            <div className="comment_nick">{comment?.nickname}</div>
+            <div className="comment_text">{comment?.comment}</div>
           </div>
         ) : (
           <div className="comment_edit_input">
-            <div className="comment_text">{comment.nickname}</div>
+            <div className="comment_text">{comment?.nickname}</div>
             <input
               type="text"
               onChange={(e) => {
@@ -64,14 +64,14 @@ const CommentList = ({ comment }) => {
         <div>
           <button
             onClick={() => {
-              onClickEditCommentHandler(comment);
+              onClickEditHandler(comment);
             }}
           >
             수정
           </button>
           <button
             onClick={() => {
-              onClickDeleteCommentHandler(comment);
+              onClickDeleteHandler(comment);
             }}
           >
             삭제
