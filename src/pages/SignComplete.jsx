@@ -10,7 +10,9 @@ function SignComplete() {
         <StSignBox>회원가입</StSignBox>
         <Stlabel>꿀통의 회원이 되신걸 축하해요!</Stlabel>
         <StImgBox src={checkbox} />
-        <StButton onClick={() => navigate("/login")}>홈으로 돌아가기</StButton>
+        <StButton onClick={() => navigate("/login")}>
+          로그인창으로 돌아가기
+        </StButton>
       </StCenterBox>
     </StContainer>
   );
