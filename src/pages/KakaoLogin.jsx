@@ -15,12 +15,12 @@ function KakaoLogin() {
         .then((res) => {
           console.log("RES", res.data.data);
           localStorage.setItem("Access_Token", res.headers.authorization);
-          localStorage.setItem("nickname", res.data.data.nickname);
-          localStorage.setItem("profileImg", res.data.data.profileImg);
-          localStorage.setItem("email", res.data.data.email);
+          localStorage.setItem("nickname", res.data.nickname);
+          localStorage.setItem("profileImg", res.data.profileImg);
+          localStorage.setItem("email", res.data.email);
         })
         .then((res) => {
-          if (res.data.login === true) {
+          if (res.data.nickname === "tlsrbrkdlqwk") {
             window.location.assign("/socialnick");
           } else {
             window.location.assign("/");
