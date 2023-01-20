@@ -22,13 +22,12 @@ function KakaoLogin() {
         })
         .then((res) => {
           console.log(res.data.nickname);
-          if (
-            res.data.nickname ===
-            localStorage.getItem("nickname", "tlsrbrkdlqwk")
-          ) {
-            window.location.assign("/socialnick");
+          if (res.data.nickname === "tlsrbrkdlqwk") {
+            console.log("nickname", res.data.nickname);
+            // window.location.assign("/socialnick");
           } else {
-            window.location.assign("/");
+            console.log("else", res.data.nickname);
+            // window.location.assign("/");
           }
         });
     } catch (error) {
