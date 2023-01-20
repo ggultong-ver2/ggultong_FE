@@ -13,17 +13,18 @@ function KakaoLogin() {
       const data = axios
         .get(`http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`)
         .then((res) => {
-          console.log("RES", res.data.data);
+          console.log("RES", res.data);
           localStorage.setItem("Access_Token", res.headers.authorization);
           localStorage.setItem("nickname", res.data.nickname);
           localStorage.setItem("profileImg", res.data.profileImg);
           localStorage.setItem("email", res.data.email);
         })
         .then((res) => {
+          console.log(res.data.nickname);
           if (res.data.nickname === "tlsrbrkdlqwk") {
-            window.location.assign("/socialnick");
+            window.location.replace("/socialnick");
           } else {
-            window.location.assign("/");
+            window.location.replace("/");
           }
         });
     } catch (error) {
