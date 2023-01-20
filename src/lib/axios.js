@@ -93,7 +93,7 @@ export const apis = {
   },
 
   signNickname: (nickname) => {
-    baseURL.patch(`/mypage/update/socialSetting/${nickname}`, "", {
+    baseURL.patch(`/mypage/socialSetting/${nickname}`, "", {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     });
   },
