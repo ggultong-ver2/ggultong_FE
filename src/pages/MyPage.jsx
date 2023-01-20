@@ -23,6 +23,8 @@ function MyPage() {
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
 
+  const navigate = useNavigate();
+
   const onChangeImage = (event) => {
     const file = event.target.files[0];
     setProfileImg(file);
@@ -76,17 +78,26 @@ function MyPage() {
       })
     ).then((res) => {
       console.log("res:::", res);
-      if (res.data.statusCode === 200) {
-        Swal.fire(
-          res.data.msg,
-          "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
-          "success"
-        );
-        localStorage.clear();
-        window.location.assign("/login");
-      } else {
-        Swal.fire(res.data.msg, "정보 수정 실패!", "error");
-      }
+
+      Swal.fire(
+        "정보수정 완료!",
+        "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
+        "success"
+      );
+      localStorage.clear();
+      navigate("/login");
+
+      // if (res.data.statusCode === 200) {
+      //   Swal.fire(
+      //     res.data.msg,
+      //     "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
+      //     "success"
+      //   );
+      //   localStorage.clear();
+      //   window.location.assign("/login");
+      // } else {
+      //   Swal.fire(res.data.msg, "정보 수정 실패!", "error");
+      // }
     });
   };
 
@@ -127,7 +138,7 @@ function MyPage() {
             </ProfileBox>
             <div>
               <MyNickBox>
-                닉네임
+                닉네임<br></br>
                 <StInput
                   type="text"
                   id="nickname"
@@ -141,17 +152,14 @@ function MyPage() {
                   }}
                   type="button"
                 >
-                  중복확인
+                  중복 확인
                 </StNickButton>
                 <StP>현재 닉네임 : {localStorage.getItem("nickname")}</StP>
-                <MyNickBox>
-                  가입한 이메일
-                  <StEmailInput
-                    disabled
-                    value={localStorage.getItem("email")}
-                  />
-                </MyNickBox>
               </MyNickBox>
+              <MyEmailBox>
+                가입한 이메일<br></br>
+                <StEmailInput disabled value={localStorage.getItem("email")} />
+              </MyEmailBox>
             </div>
           </AllBox>
         </StCenterBox>
@@ -170,22 +178,22 @@ function MyPage() {
               </StButton>
               <StP2>⚠️ 소셜로그인 계정은 비밀번호 재설정이 불가합니다.</StP2>
             </SettingItm>
+            <SettingItm2>
+              <StDeleteButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  onDeleteLoginId();
+                }}
+              >
+                회원탈퇴
+              </StDeleteButton>
+            </SettingItm2>
           </AllBox2>
         </StCenterBox2>
 
         <StCenterBox3>
           <MySmallTab />
         </StCenterBox3>
-        <div>
-          <StDeleteButton
-            onClick={(e) => {
-              e.preventDefault();
-              onDeleteLoginId();
-            }}
-          >
-            회원탈퇴
-          </StDeleteButton>
-        </div>
       </StSubCon>
     </StContainer>
   );
@@ -201,7 +209,7 @@ const StContainer = styled.form`
 `;
 
 const StSubCon = styled.div`
-  background-color: black;
+  background-color: #f3f3f3;
   width: 996px;
   height: 2500px;
   font-family: "Pretendard";
@@ -217,7 +225,7 @@ const StCenterBox = styled.div`
   padding-left: 40px;
   margin-top: 30px;
   max-width: 996px;
-  height: 620px;
+  height: 370px;
   border: 0;
   border-radius: 1px;
   box-sizing: border-box;
@@ -231,8 +239,8 @@ const StCenterBox2 = styled.div`
   padding-top: 20px;
   padding-left: 40px;
   margin-top: 30px;
-  width: 1080px;
-  height: 320px;
+  width: 996px;
+  height: 292px;
   border: 0;
   border-radius: 1px;
   box-sizing: border-box;
@@ -247,7 +255,7 @@ const StCenterBox3 = styled.div`
   margin-top: 30px;
 
   margin-bottom: 30px;
-  width: 1080px;
+  width: 996px;
   height: 2500px;
   border: 0;
 
@@ -261,8 +269,7 @@ const StCenterBox3 = styled.div`
 `;
 
 const AllBox2 = styled.div`
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 30px;
 `;
 
 const StFoot = styled.div`
@@ -284,11 +291,11 @@ const MyBox = styled.div`
   font-family: "Pretendard";
 `;
 const SettingBox = styled.div`
-  width: 1020px;
-  height: 50px;
+  width: 860px;
+  height: 40px;
   margin-top: 20px;
+  padding-left: 30px;
   font-weight: 600;
-  border-bottom: 1px solid #ebebeb;
   font-size: 24px;
   font-family: "Pretendard";
 `;
@@ -296,14 +303,23 @@ const SettingBox = styled.div`
 const SettingItm = styled.div`
   display: flex;
   align-items: center;
-  width: 1020px;
-  height: 70px;
-  margin-top: 10px;
-
+  width: 860px;
+  height: 60px;
+  padding-left: 30px;
   font-weight: 500;
   padding-bottom: 10px;
   font-family: "Pretendard";
   border-bottom: 1px solid #ebebeb;
+  font-size: 16px;
+`;
+
+const SettingItm2 = styled.div`
+  display: flex;
+  align-items: center;
+  width: 860px;
+  height: 60px;
+  font-weight: 500;
+  font-family: "Pretendard";
   font-size: 16px;
 `;
 
@@ -317,16 +333,25 @@ const MypageBox = styled.div`
   font-family: "Pretendard";
 `;
 const MyNickBox = styled.div`
-  width: 920px;
+  float: left;
+  width: 430px;
   height: 100px;
   font-size: 14px;
-  color: #9d9d9d;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: "Pretendard";
+`;
+
+const MyEmailBox = styled.div`
+  float: right;
+  width: 490px;
+  height: 100px;
+  font-size: 14px;
+  font-weight: 500;
   font-family: "Pretendard";
 `;
 
 const AllBox = styled.div`
-  margin-left: 50px;
+  margin-left: 60px;
 `;
 
 const Myprofile = styled.img`
@@ -334,29 +359,26 @@ const Myprofile = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 100px;
-  border: 2px solid black;
   font-family: "Pretendard";
 `;
 const StInput = styled.input`
-  padding-left: 10px;
-  border-radius: 4px;
-  margin-top: 20px;
   background-color: #f5f6f9;
-  border: 1px solid #000000;
-  margin-left: 115px;
-  margin-bottom: 10px;
-  width: 470px;
+  border: 1px solid #cbcbcb;
+  padding-left: 10px;
+  width: 274px;
   height: 48px;
+  margin-top: 15px;
+  border-radius: 4px;
   font-family: "Pretendard";
 `;
 const StEmailInput = styled.input`
   padding-left: 10px;
   border-radius: 4px;
-  margin-top: 20px;
-  border: 1px solid #000000;
-  background-color: #f5f6f9;
-  margin-left: 75px;
-  width: 590px;
+  margin-top: 15px;
+  border: 1px solid #cbcbcb;
+  background-color: #e4e4e4;
+
+  width: 384px;
   height: 48px;
   font-family: "Pretendard";
 `;
@@ -364,10 +386,11 @@ const StEmailInput = styled.input`
 const StButton = styled.button`
   background-color: white;
   font-weight: 500;
-  margin-left: -5px;
+  margin-left: -7px;
   width: 110px;
+  margin-top: 13px;
   font-size: 16px;
-  height: 50px;
+  height: 40px;
   border: 0;
   cursor: pointer;
   font-family: "Pretendard";
@@ -381,7 +404,7 @@ const StProfileButton = styled.button`
   border: 0;
   color: white;
   border-radius: 30px;
-  background-color: #979797;
+  background-color: #cbcbcb;
   cursor: pointer;
   font-family: "Pretendard";
 
@@ -392,17 +415,17 @@ const StProfileButton = styled.button`
   }
 `;
 
-const StDeleteButton = styled.button`
-  font-weight: bold;
-  width: 167px;
+const StDeleteButton = styled.div`
+  font-weight: 500;
+  width: 120px;
+  height: 50px;
   font-size: 16px;
   height: 50px;
+  padding-right: 10px;
+  border: 0;
   display: flex;
-  margin-left: 873px;
   justify-content: center;
   align-items: center;
-  border: 0;
-  background-color: #d9d9d9;
   cursor: pointer;
   font-family: "Pretendard";
 `;
@@ -411,7 +434,7 @@ const StNickButton = styled.button`
   height: 46px;
   margin-top: 8px;
   margin-left: 10px;
-  border: 1px solid black;
+  border: 1px solid #cbcbcb;
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
@@ -441,13 +464,15 @@ const AppStyle = styled.div`
 `;
 
 const StP = styled.div`
+  color: #979797;
   width: 800px;
-  margin-left: 155px;
+  margin-top: 10px;
 `;
 const StP2 = styled.div`
   letter-spacing: 0.1em;
   color: #9d9d9d;
   width: 500px;
+  margin-top: 15px;
   margin-left: 20px;
   font-weight: 500;
 `;

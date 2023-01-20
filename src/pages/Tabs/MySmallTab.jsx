@@ -6,7 +6,7 @@ const MySmallTab = () => {
 
   const menuArr = [
     {
-      name: "내가 쓴 글",
+      name: "내가 쓴 글 120",
       content: (
         <OneBox>
           <CardBox>페이지</CardBox>
@@ -23,7 +23,7 @@ const MySmallTab = () => {
       ),
     },
     {
-      name: "스크랩",
+      name: "스크랩 4",
       content: (
         <OneBox>
           <CardBox>움직임</CardBox>
@@ -68,8 +68,8 @@ const MySmallTab = () => {
 };
 
 const TabMenu = styled.ul`
-  margin-left: 30px;
-  width: 250px;
+  margin-left: 90px;
+  width: 400px;
   height: 42px;
   font-size: 24px;
   font-weight: 600;
@@ -82,10 +82,10 @@ const TabMenu = styled.ul`
 
   .submenu {
     display: flex;
-    width: 126px;
-    height: 42px;
+    width: 170px;
+    height: 36px;
     /* calc(100% / 3); */
-    padding: 10px;
+    padding-left: 10px;
     font-size: 24px;
     transition: 0.5s;
     cursor: pointer;
@@ -103,7 +103,7 @@ const TabMenu = styled.ul`
 `;
 const OneBox = styled.div`
   margin-top: 20px;
-  margin-left: 10px;
+  margin-left: 70px;
   width: 880px;
   height: 800px;
 `;
@@ -117,8 +117,8 @@ const Desc = styled.div`
 const CardBox = styled.div`
   display: flex;
   margin-bottom: 30px;
-  width: 996px;
-  height: 201px;
+  width: 800px;
+  height: 160px;
   border-bottom: 1px solid #979797;
   background-color: white;
 `;
