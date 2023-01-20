@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { redirect, useLocation } from "react-router-dom";
-function SocialLogin() {
+import { useLocation } from "react-router-dom";
+function KakaoLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
   const IP = "tom-jelly.shop";
@@ -16,8 +16,8 @@ function SocialLogin() {
           console.log("RES", res);
           localStorage.setItem("Access_Token", res.headers.authorization);
           localStorage.setItem("nickname", res.data.nickname);
-          // localStorage.setItem("profileImg", res.data.data.profileImg);
-          // localStorage.setItem("email", res.data.email);
+          localStorage.setItem("profileImg", res.data.data.profileImg);
+          localStorage.setItem("email", res.data.email);
         })
         .then((res) => {
           if (res.data.login === true) {
@@ -41,4 +41,4 @@ function SocialLogin() {
   }, []);
   return <></>;
 }
-export default SocialLogin;
+export default KakaoLogin;
