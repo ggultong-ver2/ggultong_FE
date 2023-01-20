@@ -24,8 +24,10 @@ const Idfind = () => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, res.data.loginId, "success");
+      } else {
+        Swal.fire(res.data.msg, "없는 이메일 입니다.", "error");
+        navigate("/login");
       }
-      navigate("/login");
     });
   };
 
