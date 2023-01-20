@@ -15,9 +15,9 @@ function SocialNick() {
   const onSignNickname = (e) => {
     e.preventDefault();
     console.log("nickname--->", nickname);
-    __socialNick(nickname).then((res) => {
-      console.log("res:::::", res);
-      Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
+    __socialNick(nickname).then(() => {
+      // console.log("res:::::", res);
+      Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
       navigate(`/`);
       // if (res.data.statusCode === 200) {
       //   Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
