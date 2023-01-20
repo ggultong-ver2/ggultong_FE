@@ -13,10 +13,10 @@ function KakaoLogin() {
       const data = axios
         .get(`http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`)
         .then((res) => {
-          console.log("RES", res);
+          console.log("RES", res.data);
           localStorage.setItem("Access_Token", res.headers.authorization);
-          localStorage.setItem("nickname", res.data.nickname);
-          localStorage.setItem("profileImg", res.data.data.profileImg);
+          localStorage.setItem("nickname", res.data.data.nickname);
+          localStorage.setItem("profileImg", res.data.profileImg);
           localStorage.setItem("email", res.data.email);
         })
         .then((res) => {
