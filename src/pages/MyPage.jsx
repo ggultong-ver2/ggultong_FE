@@ -67,7 +67,7 @@ function MyPage() {
   };
 
   //회원정보수정
-  const onSubmitPostHandler = (e) => {
+  const onSubmitChangeHandler = (e) => {
     e.preventDefault();
     dispatch(
       __patchPost({
@@ -77,7 +77,13 @@ function MyPage() {
     ).then((res) => {
       console.log("res:::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "정보 수정이 완료되었습니다.", "success");
+        Swal.fire(
+          res.data.msg,
+          "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
+          "success"
+        );
+        localStorage.clear();
+        window.location.assign("/login");
       } else {
         Swal.fire(res.data.msg, "정보 수정 실패!", "error");
       }
@@ -85,10 +91,10 @@ function MyPage() {
   };
 
   return (
-    <StContainer onSubmit={onSubmitPostHandler}>
+    <StContainer onSubmit={onSubmitChangeHandler}>
       <StSubCon>
         <StCenterBox>
-          <div>
+          <AllBox>
             <MyBox>내 정보</MyBox>
             <MypageBox>
               프로필 사진
@@ -139,93 +145,75 @@ function MyPage() {
               가입한 이메일
               <StEmailInput disabled value={localStorage.getItem("email")} />
             </MyNickBox>
-          </div>
+            <StFoot>
+              <StProfileButton>프로필 수정</StProfileButton>
+            </StFoot>
+          </AllBox>
         </StCenterBox>
         <StCenterBox2>
-          <div>
+          <AllBox2>
             <SettingBox>설정</SettingBox>
-            <SettingItm>&nbsp;알림</SettingItm>
+            <SettingItm>알림</SettingItm>
             <SettingItm>
-              <StButton onClick={() => window.location.assign("/myconfirm")}>
+              <StButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.assign("/myconfirm");
+                }}
+              >
                 비밀번호 재설정
               </StButton>
               <StP2>⚠️ 소셜로그인 계정은 비밀번호 재설정이 불가합니다.</StP2>
             </SettingItm>
-            <SettingItm>
-              <StDeleteButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  onDeleteLoginId();
-                }}
-              >
-                회원탈퇴
-              </StDeleteButton>
-            </SettingItm>
-          </div>
+          </AllBox2>
         </StCenterBox2>
+
+        <StCenterBox3>
+          <MySmallTab />
+        </StCenterBox3>
         <div>
-          <StLeftBox>
-            <Icon />
-            <div>
-              <LikeBox>
-                <p>좋아요 한 게시글</p>
-              </LikeBox>
-              <StCount>23</StCount>
-            </div>
-          </StLeftBox>
-          <StRightBox>
-            <Icon />
-            <div>
-              <LikeBox>
-                <p>좋아요 한 게시글</p>
-              </LikeBox>
-              <StCount>32</StCount>
-            </div>
-          </StRightBox>
+          <StDeleteButton
+            onClick={(e) => {
+              e.preventDefault();
+              onDeleteLoginId();
+            }}
+          >
+            회원탈퇴
+          </StDeleteButton>
         </div>
-        <div>
-          <StCenterBox3>
-            <MySmallTab />
-          </StCenterBox3>
-        </div>
-        <StFoot>
-          <StButton>프로필 수정</StButton>
-        </StFoot>
       </StSubCon>
     </StContainer>
   );
 }
 
 const StContainer = styled.form`
-  background-color: gray;
+  background-color: #f3f3f3;
   width: 100%;
-  height: 100vh;
+  height: 4000px;
   display: flex;
-  background-color: white;
   justify-content: center;
   font-family: "Pretendard";
 `;
 
 const StSubCon = styled.div`
-  background-color: gray;
-  width: 1200px;
-  height: 100vh;
+  background-color: #f3f3f3;
+  width: 1080px;
+  height: 2500px;
   font-family: "Pretendard";
-  background-color: white;
 `;
 
 const StCenterBox = styled.div`
   padding-top: 40px;
   padding-left: 40px;
   margin-top: 30px;
-  max-width: 1000px;
-  height: 650px;
+  max-width: 1080px;
+  height: 620px;
   border: 0;
   border-radius: 1px;
   box-sizing: border-box;
   display: flex;
   font-size: 100%;
-  background-color: pink;
+  background-color: white;
   font-family: "Pretendard";
 `;
 
@@ -233,7 +221,7 @@ const StCenterBox2 = styled.div`
   padding-top: 20px;
   padding-left: 40px;
   margin-top: 30px;
-  width: 1000px;
+  width: 1080px;
   height: 320px;
   border: 0;
   border-radius: 1px;
@@ -241,49 +229,35 @@ const StCenterBox2 = styled.div`
   display: flex;
   flex-shrink: 0;
   font-size: 100%;
-  background-color: orange;
+  background-color: white;
   font-family: "Pretendard";
 `;
 
 const StCenterBox3 = styled.div`
   margin-top: 30px;
+
   margin-bottom: 30px;
-  width: 1000px;
-  height: 910px;
+  width: 1080px;
+  height: 2500px;
   border: 0;
+
   border-radius: 1px;
   box-sizing: border-box;
   display: flex;
   flex-shrink: 0;
   font-size: 100%;
-  background-color: red;
+  background-color: white;
   font-family: "Pretendard";
 `;
 
-const StLeftBox = styled.div`
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 490px;
-  height: 225px;
-  float: left;
-  background-color: gray;
-  font-family: Pretendard;
-`;
-
-const StRightBox = styled.div`
-  margin-top: 30px;
-  width: 490px;
-  height: 225px;
-  float: right;
-  margin-right: 200px;
-  background-color: gray;
-  font-family: "Pretendard";
+const AllBox2 = styled.div`
+  margin-top: 20px;
+  margin-left: 20px;
 `;
 
 const StFoot = styled.div`
-  width: 1000px;
+  width: 920px;
   height: 100px;
-  background-color: blue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -292,14 +266,15 @@ const StFoot = styled.div`
 const MyBox = styled.div`
   width: 920px;
   height: 50px;
-  background-color: gray;
   font-size: 24px;
+  font-weight: 600;
   font-family: "Pretendard";
 `;
 const SettingBox = styled.div`
-  width: 920px;
+  width: 1020px;
   height: 50px;
   margin-top: 20px;
+  font-weight: 600;
   border-bottom: 1px solid #ebebeb;
   font-size: 24px;
   font-family: "Pretendard";
@@ -308,11 +283,11 @@ const SettingBox = styled.div`
 const SettingItm = styled.div`
   display: flex;
   align-items: center;
-
-  width: 920px;
-  height: 50px;
+  width: 1020px;
+  height: 70px;
   margin-top: 10px;
-  font-weight: bold;
+
+  font-weight: 500;
   padding-bottom: 10px;
   font-family: "Pretendard";
   border-bottom: 1px solid #ebebeb;
@@ -323,7 +298,7 @@ const MypageBox = styled.div`
   padding-left: 15px;
   width: 450px;
   height: 220px;
-  background-color: orange;
+
   font-size: 14px;
   color: #9d9d9d;
   font-weight: 600;
@@ -333,24 +308,14 @@ const MyNickBox = styled.div`
   padding-left: 15px;
   width: 920px;
   height: 100px;
-  background-color: orange;
   font-size: 14px;
   color: #9d9d9d;
   font-weight: 600;
   font-family: "Pretendard";
 `;
 
-const LikeBox = styled.div`
-  font-weight: bold;
-  float: left;
-  margin-top: 30px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
-  background-color: white;
-  width: 200px;
-  height: 80px;
-  font-family: "Pretendard";
+const AllBox = styled.div`
+  margin-left: 40px;
 `;
 
 const Myprofile = styled.img`
@@ -365,8 +330,8 @@ const StInput = styled.input`
   padding-left: 10px;
   border-radius: 4px;
   margin-top: 20px;
-  border: 1px solid #000000;
   background-color: #f5f6f9;
+  border: 1px solid #000000;
   margin-left: 115px;
   margin-bottom: 10px;
   width: 470px;
@@ -386,23 +351,46 @@ const StEmailInput = styled.input`
 `;
 
 const StButton = styled.button`
-  font-weight: bold;
+  background-color: white;
+  font-weight: 500;
+  margin-left: -5px;
   width: 110px;
   font-size: 16px;
   height: 50px;
   border: 0;
-  background-color: pink;
   cursor: pointer;
   font-family: "Pretendard";
 `;
 
+const StProfileButton = styled.button`
+  font-weight: 500;
+  width: 94px;
+  font-size: 14px;
+  height: 34px;
+  border: 0;
+  color: white;
+  border-radius: 30px;
+  background-color: #474747;
+  cursor: pointer;
+  font-family: "Pretendard";
+
+  &:hover {
+    color: black;
+    background-color: #ffd665;
+  }
+`;
+
 const StDeleteButton = styled.button`
   font-weight: bold;
-  width: 70px;
+  width: 167px;
   font-size: 16px;
   height: 50px;
+  display: flex;
+  margin-left: 873px;
+  justify-content: center;
+  align-items: center;
   border: 0;
-  background-color: pink;
+  background-color: #d9d9d9;
   cursor: pointer;
   font-family: "Pretendard";
 `;
@@ -419,14 +407,6 @@ const StNickButton = styled.button`
     background-color: #dcdcdc;
   }
   font-family: "Pretendard";
-`;
-
-const Icon = styled.img`
-  margin-left: 20px;
-  margin-top: 30px;
-  background-color: white;
-  width: 65px;
-  height: 65px;
 `;
 
 const AppStyle = styled.div`
@@ -467,16 +447,4 @@ const StP2 = styled.div`
   font-weight: 500;
 `;
 
-const StCount = styled.div`
-  margin-top: 35px;
-  margin-right: 30px;
-  font-size: 38px;
-  background-color: white;
-  width: 65px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  float: right;
-`;
 export default MyPage;

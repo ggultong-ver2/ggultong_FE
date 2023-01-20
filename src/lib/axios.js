@@ -18,7 +18,7 @@ const instance = axios.create({
 //
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: "https://tom-jelly.shop/api",
   withCredentials: true,
 
   headers: {
@@ -49,7 +49,7 @@ export const apis = {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     }),
   changePw: (password) =>
-    instance.post(`/mypage/pwChange/${password}`, "", {
+    instance.patch("/mypage/pwChange/", password, {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     }),
   postLogout: () => instance.get("/user/logout"),
