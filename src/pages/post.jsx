@@ -5,6 +5,7 @@ import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
 import "./reset.css";
 import Editor from "../components/editor/Editor";
+import Swal from "sweetalert2";
 
 const Post = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ const Post = () => {
     //}
     // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
     dispatch(__addPost(formdata));
+    Swal.fire("작성이 완료되었습니다!", "", "success");
+    navigate(`/drinkList/drink`);
 
     for (const pair of formdata) {
       console.log(pair[0] + "," + pair[1]);
@@ -130,7 +133,11 @@ const Post = () => {
         </File>
         <Btns>
           <BackButton>취소</BackButton>
-          <EnterButton>확인</EnterButton>
+          <EnterButton
+            onClick={() => window.location.replace("drinkList/drink")}
+          >
+            확인
+          </EnterButton>
         </Btns>
       </Wrap>
     </Form>

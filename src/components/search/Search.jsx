@@ -3,7 +3,9 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 // import SearchPagination from "../pagination/searchpagination";
 import Pagination from "../pagination/pagination";
+
 // import Lists from "../boards/lists/Lists";
+
 import { baseURL } from "../../lib/axios";
 
 function Search() {
@@ -13,13 +15,15 @@ function Search() {
   let [error, setError] = useState("");
   const params = useParams();
   const location = useLocation;
-  console.log(params.keyword)
-  console.log(searchData)
+  console.log(params.keyword);
+  console.log(searchData);
 
   useEffect(() => {
     async function fetchData() {
       // const result = await baseURL.get(`/post/search?keyword=${params.keyword}`);
-      const {data} = await axios.get(`https://sparta-sjl.shop/api/post/search?keyword=${params.keyword}`)
+      const { data } = await axios.get(
+        `https://sparta-sjl.shop/api/post/search?keyword=${params.keyword}`
+      );
       setSearchData(data);
     }
     fetchData();
@@ -35,10 +39,7 @@ function Search() {
             <strong>
               {`총 ${searchData.length}개의 검색 결과가 있습니다`}
               {searchData?.map((post) => (
-                // <Lists content={post.content} />
-                <div>
-                  {post.title}
-                </div>
+                <div>{post.title}</div>
               ))}
             </strong>
           )}

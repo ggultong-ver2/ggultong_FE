@@ -74,12 +74,12 @@ export const __getPost = createAsyncThunk(
 export const __getIdPost = createAsyncThunk(
   "getIdPost",
   async (payload, thunkAPI) => {
-    console.log("payload", payload);
+    // console.log("payload", payload);
     try {
       const data = await apis.getIdPost(payload);
       //const data = await axios.get(`http://localhost:3001/postss/${payload}`);
-      console.log("payload: ", payload);
-      console.log("getIddata:: ", data);
+      // console.log("payload: ", payload);
+      // console.log("getIddata:: ", data);
       // const getId = data.data.filter((recipe) => recipe.id === payload)[0];
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
@@ -193,8 +193,10 @@ export const __getCategoryPost = createAsyncThunk(
     try {
       const { data } = await apis.getCategoryPost(payload);
       console.log("categorydata:", data);
+      console.log(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -303,8 +305,8 @@ export const postSlice = createSlice({
     [__getIdPost.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
       state.details = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-      console.log("action.payload: ", action.payload);
-      console.log("state.details:", state.details);
+      // console.log("action.payload: ", action.payload);
+      // console.log("state.details:", state.details);
       //console.log("state.posts: ", state.posts);
     },
     [__getIdPost.rejected]: (state, action) => {

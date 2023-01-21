@@ -158,6 +158,7 @@ const StContent = styled.div`
   width: 850px;
   font-size: 20px;
   //margin-top: 20px;
+  overflow: hidden;
 `;
 const Etcwrap = styled.div`
   // border: 1px solid grey;
