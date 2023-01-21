@@ -5,22 +5,19 @@ import "./style.css"
 import CheckLogin from "../../hook/CheckLogin";
 import { useEffect } from "react";
 
-const Likes = ({ onClick }) => {
-  const {authToken, isLogin} = CheckLogin();
+const Likes = () => {
+  const {isLogin} = CheckLogin();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const checkPostLike = useSelector(
-    (state) => state.post.checkPostLike
+  const PostLike = useSelector(
+    (state) => state.post.PostLike
   );
-  console.log(checkPostLike)
+  console.log(PostLike)
 
-  const likeCount = useSelector(
-    (state) => state.post.likeCount
+  const likePostSum = useSelector(
+    (state) => state.post.likePostSum
   );
 
-  useEffect(() => {
-
-  }, [likeCount])
 
   const likeToggle = () => {
     if(isLogin){
@@ -32,10 +29,12 @@ const Likes = ({ onClick }) => {
 
   return (
     <div className="like_button">
-        <button onClick={likeToggle}>
-          <div>{checkPostLike === true ? "💛" : "🖤"}</div>
-          <div>{likeCount}</div>
-        </button>
+        <div onClick={likeToggle}>
+          <div>
+            {PostLike === true ? <button>💛</button> : <button>🖤</button>}
+          </div>
+          <div>{likePostSum}</div>
+        </div>
     </div>
   );
 };
