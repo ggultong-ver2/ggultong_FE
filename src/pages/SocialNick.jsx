@@ -18,7 +18,8 @@ function SocialNick() {
     __socialNick(nickname).then(() => {
       // console.log("res:::::", res);
       Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
-      navigate(`/`);
+
+      navigate(`/login`);
       // if (res.data.statusCode === 200) {
       //   Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
       //   navigate("/signcomplete");
