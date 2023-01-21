@@ -27,9 +27,7 @@ const MealList = () => {
           >
             혼술
           </Button1>
-          <Button2 onClick={() => navigate("/mealList/meal")} className="meal">
-            혼밥
-          </Button2>
+          <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
           <Button3
             onClick={() => navigate("/recycleList/recycle")}
             className="recycle"
@@ -43,7 +41,6 @@ const MealList = () => {
               <Card onClick={() => navigate(`detail/${post.id}`)}>
                 <Textwrap>
                   <StTitle>{post.title}</StTitle>
-                  <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
                   <StContent
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   ></StContent>
@@ -138,6 +135,7 @@ const StContent = styled.div`
   width: 850px;
   font-size: 20px;
   //margin-top: 20px;
+  overflow: hidden;
 `;
 const Etcwrap = styled.div`
   // border: 1px solid grey;

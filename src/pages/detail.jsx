@@ -6,23 +6,30 @@ import styled from "styled-components";
 import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
 import Swal from "sweetalert2";
 import Likes from "../components/like/Likes";
-// import Comments from "../components/comment/Comments";
+import { __addComment, __deleteComment } from "../redux/modules/commentSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const param = useParams();
   const { id } = useParams();
-  console.log(param, id);
+  // console.log(param, id);
   const [details, setDetails] = useState({});
+  const [addComment, setAddComment] = useState({
+    content: "",
+  });
+
+  console.log("addComment:", addComment);
 
   const detailList = useSelector((state) => state.details.details);
-  console.log("details:", detailList);
+  // console.log("details:", detailList);
+  const commentList = useSelector((state) => state.details.details.comment);
+  console.log("commentList:", commentList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
 
   useEffect(() => {
-    console.log("param.id:", param.id);
+    // console.log("param.id:", param.id);
     dispatch(__getIdPost(+param.id));
   }, [id, dispatch]);
 
@@ -31,25 +38,44 @@ const Detail = () => {
       setDetails(detailList);
     }
   }, [detailList]);
-  console.log("detailList:", details);
+  // console.log("detailList:", details);
+
+  //코멘트 핸들러
+
+  const onClickAddCommentHandler = () => {
+    dispatch(__addComment([addComment, Number(id)]));
+    Swal.fire("작성이 완료되었습니다!", "", "success");
+    // setAddComment({
+    //   comment: "",
+    // });
+  };
+
+  const onClickDeleteCommentHandler = (commentId) => {
+    dispatch(__deleteComment({ commentId: commentId, postId: id }));
+  };
+
+  //게시글 핸들러
 
   const onClickDeletePostHandler = () => {
     if (localStorage.getItem("nickname") === detailList.nickname) {
       dispatch(__deletePost(id));
-      Swal.fire("삭제 완료", "삭제 완료되었습니다", "success");
+      Swal.fire("삭제 완료", "삭제 완료되었습니다!", "success");
+      navigate(`/drinkList/drink`);
     } else {
-      Swal.fire("Warning", "로그인 후 이용 가능합니다!", "warning");
+      Swal.fire("로그인 후 이용해주세요!", "", "warning");
     }
   };
 
   const onClickEditPostHandler = () => {
     if (detailList.nickname === localStorage.getItem("nickname")) {
       //localStorage.getItem = key(nickname)로부터 data 읽기
+
       navigate(`/editpost/${id}`);
     } else {
       Swal.fire(
-        "로그인 후 이용 가능합니다",
         "타인의 게시물을 수정할 수 없습니다",
+        "",
+
         "warning"
       );
     }
@@ -87,23 +113,38 @@ const Detail = () => {
           <Commentarea>
             <Writecomment>
               <Myprofile />
-              {/* <Comments /> */}
-              <Commentinput placeholder="댓글을 작성할 수 있어요." />
+              <Commentinput
+                placeholder="댓글을 작성할 수 있어요."
+                type="text"
+                value={addComment.comment}
+                onChange={(e) => {
+                  setAddComment({ ...addComment, content: e.target.value });
+                }}
+              />
+              <button onClick={onClickAddCommentHandler}>확인</button>
             </Writecomment>
-            <Commentbox>
-              <Commenttextarea>
-                <Profileimg />
-                <WrapWritten>
-                  <Writtenby>자취왕초보</Writtenby>
-                  <Writtendate>2023.01.12</Writtendate>
-                  <Commentcontent>
-                    국, 카레, 찌개, 볶음 등 국물이 조금이라도 있는 음식을 하루
-                    이상 먹을 분량을 조리했다면 그 날 먹을 예정이 없더라도
-                    한번씩은 불을 켜서 데워줘야 한다.
-                  </Commentcontent>
-                </WrapWritten>
-              </Commenttextarea>
-            </Commentbox>
+            {commentList.map((comment) => {
+              return (
+                <Commentbox>
+                  <Commenttextarea>
+                    <Profileimg />
+                    <WrapWritten>
+                      <Writtenby>{comment.nickname}</Writtenby>
+                      <Writtendate>
+                        {comment.createdAt.slice(0, 10)}
+                      </Writtendate>
+                      <Commentcontent>{comment.content}</Commentcontent>
+                      <button>수정하기</button>
+                      <button
+                        onClick={() => onClickDeleteCommentHandler(comment.id)}
+                      >
+                        삭제하기
+                      </button>
+                    </WrapWritten>
+                  </Commenttextarea>
+                </Commentbox>
+              );
+            })}
           </Commentarea>
         </StDetail>
       </div>

@@ -46,6 +46,8 @@ const Router = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/agree/" element={<SignAgree />} />
           <Route path="drinkList/:category/detail/:id" element={<Detail />} />
+          <Route path="mealList/:category/detail/:id" element={<Detail />} />
+          <Route path="recycleList/:category/detail/:id" element={<Detail />} />
           <Route path="/post" element={<Post />} />
           <Route path="/editor" element={<Editor />} />
           <Route path="/pwfind" element={<Pwfind />} />

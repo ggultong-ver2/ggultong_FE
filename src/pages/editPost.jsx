@@ -5,11 +5,13 @@ import { useParams, useNavigate } from "react-router";
 import "./reset.css";
 import styled from "styled-components";
 import Editor from "../components/editor/Editor";
+import Swal from "sweetalert2";
 
 const EditPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const post = useSelector((state) => state.details.details);
+  console.log(post);
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -30,6 +32,8 @@ const EditPost = () => {
     // for (const pair of formdata) {
     //   console.log(pair[0] + "," + pair[1]);
     // }
+    Swal.fire("수정완료", "수정 완료되었습니다!", "success");
+    navigate(`/drinkList/drink`);
     for (let key of formdata.keys()) {
       console.log(key);
     }
@@ -105,7 +109,6 @@ const EditPost = () => {
             type="text"
             content={content}
             setContent={setContent}
-
             // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
             // onChange={(e, editor) => {
             //   const data = editor.getData();

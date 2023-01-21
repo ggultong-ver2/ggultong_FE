@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// 기본 URL
+// 기본 URL 토큰 담는 인터셉트 없음
 const instance = axios.create({
   baseURL: "https://tom-jelly.shop/api", //상정님
   //https://tom-jelly.shop/api
@@ -16,9 +16,9 @@ const instance = axios.create({
 //13.209.15.249 - 재용님 아이피
 //43.201.7.130 - 종열님 아이피
 //
-// baseURL
+// baseURL 토큰 담는 인터셉트 있음
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: "https://tom-jelly.shop/api",
   withCredentials: true,
 
   headers: {
@@ -58,16 +58,16 @@ export const apis = {
   pwfind: (pwfind) => instance.post("/user/findPw", pwfind),
   idfind: (idfind) => instance.post("/user/findId", idfind),
   // 게시글 관련
-  getPost: () => baseURL.get("/post/postList"),
+  getPost: () => instance.get("/post/postList"),
   getIdPost: (id) => {
-    return baseURL.get(`/post/${id}`);
+    return instance.get(`/post/${id}`);
   },
-  getCategoryPost: (category, pageNum) => {
-    return baseURL.get(`/post/postList/${category}/1`);
+  getCategoryPost: (category) => {
+    return instance.get(`/post/postList/${category}/1`);
   },
 
   createPost: (post) => {
-    console.log("payload::", post);
+    // console.log("payload::", post);
     const data = baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -79,6 +79,14 @@ export const apis = {
     baseURL.put(`/post/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
+
+  //댓글 관련
+  // createComment: (post, postId) => {
+  //   console.log("postid:", postId);
+  //   baseURL.post(`/comment/${postId}`, post);
+  // },
+
+  deleteComment: ({ commentId }) => baseURL.delete(`/comment/${commentId}`),
 
   //마이페이지수정
   patchPost: (post) => {
