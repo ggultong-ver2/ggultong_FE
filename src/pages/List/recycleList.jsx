@@ -19,6 +19,26 @@ const RecycleList = () => {
 
   return (
     <div>
+      <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul>
+            <li>
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/drinklist/drink")}>
+                꿀정보
+              </button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/")}>즐길거리</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
+      </div>
       <Wrapall>
         <Buttons>
           <Button1
@@ -138,6 +158,7 @@ const StContent = styled.div`
   width: 850px;
   font-size: 20px;
   //margin-top: 20px;
+  overflow: hidden;
 `;
 const Etcwrap = styled.div`
   // border: 1px solid grey;

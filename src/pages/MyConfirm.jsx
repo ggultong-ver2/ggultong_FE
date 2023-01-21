@@ -16,8 +16,8 @@ function MyConfirm() {
     }).then((res) => {
       console.log("res:::::", res);
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "반갑습니다!", "success");
-        navigate("/mypage");
+        Swal.fire(res.data.msg, "비밀번호가 확인되었습니다.", "success");
+        navigate("/myconfirm/pwchange");
       } else {
         navigate("/myconfirm");
         Swal.fire(res.data.msg, "비밀번호를 다시 확인해주세요!", "error");
@@ -41,11 +41,18 @@ function MyConfirm() {
           maxLength={15}
         ></StInput>
         <StBtnBox>
-          <StBack onClick={() => navigate("/mypage")}>이전</StBack>
+          <StBack
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/mypage");
+            }}
+          >
+            이전
+          </StBack>
           <StButton
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               onCheckPassword(password);
-              navigate("/pwchange");
             }}
           >
             확인

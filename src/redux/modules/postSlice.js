@@ -73,12 +73,12 @@ export const __getPost = createAsyncThunk(
 export const __getIdPost = createAsyncThunk(
   "getIdPost",
   async (payload, thunkAPI) => {
-    console.log("payload", payload);
+    // console.log("payload", payload);
     try {
       const data = await apis.getIdPost(payload);
       //const data = await axios.get(`http://localhost:3001/postss/${payload}`);
-      console.log("payload: ", payload);
-      console.log("getIddata:: ", data);
+      // console.log("payload: ", payload);
+      // console.log("getIddata:: ", data);
       // const getId = data.data.filter((recipe) => recipe.id === payload)[0];
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
@@ -172,8 +172,10 @@ export const __getCategoryPost = createAsyncThunk(
     try {
       const { data } = await apis.getCategoryPost(payload);
       console.log("categorydata:", data);
+      console.log(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -184,25 +186,20 @@ export const __patchPost = createAsyncThunk(
   "patchPost",
   async (payload, thunkAPI) => {
     try {
-      const { nickname, password, profileImg } = payload;
+      const { nickname, profileImg } = payload;
       const formData = new FormData();
 
       formData.append(
         "profileImg",
         profileImg === "" ? new File([], "") : profileImg
       );
-      formData.append("password", password);
       formData.append("nickname", nickname);
       //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
 
       const data = await apis.patchPost(formData);
-      if (data.request.statusCode === 200) {
-      }
-      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      // Swal.fire("회원정보 수정 실패!", "다시 확인해주세요.", "error");
-      return thunkAPI.rejectWithValue(error);
+      console.log("err", error);
     }
   }
 );
@@ -287,8 +284,8 @@ export const postSlice = createSlice({
     [__getIdPost.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
       state.details = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-      console.log("action.payload: ", action.payload);
-      console.log("state.details:", state.details);
+      // console.log("action.payload: ", action.payload);
+      // console.log("state.details:", state.details);
       //console.log("state.posts: ", state.posts);
     },
     [__getIdPost.rejected]: (state, action) => {

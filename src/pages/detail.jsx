@@ -6,24 +6,30 @@ import styled from "styled-components";
 import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
 import Swal from "sweetalert2";
 import Likes from "../components/like/Likes";
+import { __addComment, __deleteComment } from "../redux/modules/commentSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const param = useParams();
   const { id } = useParams();
-  console.log(param, id);
+  // console.log(param, id);
   const [details, setDetails] = useState({});
+  const [addComment, setAddComment] = useState({
+    content: "",
+  });
+
+  console.log("addComment:", addComment);
 
   const detailList = useSelector((state) => state.details.details);
-  console.log("details:", detailList);
+  // console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
   console.log("commentList:", commentList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
 
   useEffect(() => {
-    console.log("param.id:", param.id);
+    // console.log("param.id:", param.id);
     dispatch(__getIdPost(+param.id));
   }, [id, dispatch]);
 
@@ -32,7 +38,23 @@ const Detail = () => {
       setDetails(detailList);
     }
   }, [detailList]);
-  console.log("detailList:", details);
+  // console.log("detailList:", details);
+
+  //코멘트 핸들러
+
+  const onClickAddCommentHandler = () => {
+    dispatch(__addComment([addComment, Number(id)]));
+    Swal.fire("작성이 완료되었습니다!", "", "success");
+    // setAddComment({
+    //   comment: "",
+    // });
+  };
+
+  const onClickDeleteCommentHandler = (commentId) => {
+    dispatch(__deleteComment({ commentId: commentId, postId: id }));
+  };
+
+  //게시글 핸들러
 
   const onClickDeletePostHandler = () => {
     if (localStorage.getItem("nickname") === detailList.nickname) {
@@ -91,8 +113,15 @@ const Detail = () => {
           <Commentarea>
             <Writecomment>
               <Myprofile />
-              <Commentinput placeholder="댓글을 작성할 수 있어요." />
-              <button>등록하기</button>
+              <Commentinput
+                placeholder="댓글을 작성할 수 있어요."
+                type="text"
+                value={addComment.comment}
+                onChange={(e) => {
+                  setAddComment({ ...addComment, content: e.target.value });
+                }}
+              />
+              <button onClick={onClickAddCommentHandler}>확인</button>
             </Writecomment>
             {commentList.map((comment) => {
               return (
@@ -101,10 +130,16 @@ const Detail = () => {
                     <Profileimg />
                     <WrapWritten>
                       <Writtenby>{comment.nickname}</Writtenby>
-                      <Writtendate>2023.01.12</Writtendate>
+                      <Writtendate>
+                        {comment.createdAt.slice(0, 10)}
+                      </Writtendate>
                       <Commentcontent>{comment.content}</Commentcontent>
                       <button>수정하기</button>
-                      <button>삭제하기</button>
+                      <button
+                        onClick={() => onClickDeleteCommentHandler(comment.id)}
+                      >
+                        삭제하기
+                      </button>
                     </WrapWritten>
                   </Commenttextarea>
                 </Commentbox>

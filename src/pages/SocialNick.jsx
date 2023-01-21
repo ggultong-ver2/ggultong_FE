@@ -15,24 +15,25 @@ function SocialNick() {
   const onSignNickname = (e) => {
     e.preventDefault();
     console.log("nickname--->", nickname);
-    __socialNick(nickname).then((res) => {
-      console.log("res:::::", res);
-      if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
-        //console.log(res.header.access_token);
-        // navigate("/signcomplete");
-      } else {
-        Swal.fire(
-          res.data.msg,
-          "아이디 및 비밀번호를 다시 확인해주세요!",
-          "error"
-        );
-      }
+    __socialNick(nickname).then(() => {
+      // console.log("res:::::", res);
+      Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
+      navigate(`/`);
+      // if (res.data.statusCode === 200) {
+      //   Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
+      //   navigate("/signcomplete");
+      // } else {
+      //   Swal.fire(
+      //     res.data.msg,
+      //     "아이디 및 비밀번호를 다시 확인해주세요!",
+      //     "error"
+      //   );
+      // }
     });
   };
 
   // 닉네임 중복 체크 확인
-  const onCheckNickName = (nickname) => {
+  const onCheckNickName = ({ nickname }) => {
     console.log("nickname---->", nickname);
     __nickCheck(nickname).then((res) => {
       console.log(res);

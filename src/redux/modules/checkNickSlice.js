@@ -8,7 +8,7 @@ const __nickCheck = async (nickname) => {
     console.log("nickname:::", nickname);
     console.log("data: ", data);
     if (data.data.status === 200) {
-      console.log("response", data.response);
+      console.log("res:::", data.response);
       // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
     // useSweet(1000, "success", "회원가입 성공");

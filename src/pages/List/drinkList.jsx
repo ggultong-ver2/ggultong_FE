@@ -26,6 +26,26 @@ const DrinkList = () => {
 
   return (
     <div>
+      <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul>
+            <li>
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/drinklist/drink")}>
+                꿀정보
+              </button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/")}>즐길거리</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
+      </div>
       <Wrapall>
         <Buttons>
           <Button1
@@ -34,9 +54,7 @@ const DrinkList = () => {
           >
             혼술
           </Button1>
-          <Button2 onClick={() => navigate("/mealList/meal")} className="meal">
-            혼밥
-          </Button2>
+          <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
           <Button3
             onClick={() => navigate("/recycleList/recycle")}
             className="recycle"
@@ -54,7 +72,10 @@ const DrinkList = () => {
                   <StContent
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   ></StContent>
-                  <Etcwrap>댓글12 좋아요100 스크랩400 2023.01.10</Etcwrap>
+                  <Etcwrap>
+                    댓글12 좋아요{post.likePostSum} 스크랩400
+                    {post.createdAt.slice(0, 10)}
+                  </Etcwrap>
                 </Textwrap>
                 <StFile src={post.imageFiles}></StFile>
               </Card>
@@ -141,10 +162,12 @@ const StFile = styled.img`
 `;
 const StContent = styled.div`
   // border: 1px solid blue;
+  overflow: hidden;
   height: 120px;
   width: 850px;
   font-size: 20px;
   //margin-top: 20px;
+  overflow: hidden;
 `;
 const Etcwrap = styled.div`
   // border: 1px solid grey;
