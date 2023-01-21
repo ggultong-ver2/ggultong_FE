@@ -107,7 +107,6 @@ export const commentSlice = createSlice({
       state.error = action.payload;
       alert(action.payload.response.data.errorMessage);
     },
-
     // [__getComment.pending]: (state) => {
     //   state.isLoadig = true;
     // },

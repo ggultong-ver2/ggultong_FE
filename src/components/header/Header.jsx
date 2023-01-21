@@ -10,7 +10,6 @@ function Header() {
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
     window.location.href = "/search/" + keyword;
-    //navigate(`/?q=${keyword}`)
   };
 
   const [open, setOpen] = useState(false);
@@ -37,7 +36,7 @@ function Header() {
             />
             <button
               type="button"
-              class="search_button"
+              className="search_button"
               onClick={() => {
                 onSubmit();
               }}

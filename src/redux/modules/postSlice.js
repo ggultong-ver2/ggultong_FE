@@ -11,9 +11,8 @@ const initialState = {
   details: [],
   // patch:[],
   comments: [],
-  // like: [],
   checkPostLike: null,
-  likeCount: null,
+  likePostSum: null,
   isLoading: true,
   error: null,
   post: {},
@@ -151,33 +150,13 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-//좋아요
-// export const __postLike = createAsyncThunk(
-//   "postLike",
-//   async (payload, thunkAPI) => {
-//     try {
-//       console.log(data);
-//       const data = await apis.post(`/api/like/post/${payload}`);
-//       if (data.request.status === 200) {
-//       }
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
 
 export const __postLike = createAsyncThunk(
   "postLike",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.post(
-        `https://sparta-sjl.shop/api/like/post/${payload}`,
-        {},
-        {
-          headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-        }
-      );
+      const { data } = await baseURL.post(`/like/post/${payload}` , {}, {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` }});
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
