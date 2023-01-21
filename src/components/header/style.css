@@ -1,4 +1,4 @@
-.header_container{
+.header_container {
   width: 100%;
   background: #000;
 }
@@ -23,19 +23,21 @@
   font-size: 14px;
 }
 
-.header_left{display: flex;}
-.logo{
-    margin-right: 22px;
-
+.header_left {
+  display: flex;
 }
-.logo a{
-    width: 42px;height: 30px;
-    display: block;
-    background-image: url(../../../public/images/logo_2.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    text-indent: -9999px;
+.logo {
+  margin-right: 22px;
+}
+.logo a {
+  width: 42px;
+  height: 30px;
+  display: block;
+  background-image: url(../../../public/images/logo_2.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  text-indent: -9999px;
 }
 
 .logowrap {
@@ -55,46 +57,47 @@
   font-size: 14px;
   line-height: 32px;
 }
-.search{
+.search {
   position: relative;
 }
-.searchinp{
-    width: 290px;
-    height: 35px;
-    border-radius: 10px;
-    text-indent: 15px;
-    border: 0 none;
-    background: #fafafa;
-    color: #a0a0a0;
+.searchinp {
+  width: 290px;
+  height: 35px;
+  border-radius: 10px;
+  text-indent: 15px;
+  border: 0 none;
+  background: #fafafa;
+  color: #a0a0a0;
 }
-.search_button{
-    position: absolute;
-    bottom: -7.5px;
-    right: 5px;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    border: 0 none;
-    background: url(../../../public/images/search-o.png) center no-repeat;
-    cursor: pointer;
+.search_button {
+  position: absolute;
+  bottom: -7.5px;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: 0 none;
+  background: url(../../../public/images/search-o.png) center no-repeat;
+  cursor: pointer;
 }
-.search_button:hover{
-    background-image: url(../../../public/images/search.png);
+.search_button:hover {
+  background-image: url(../../../public/images/search.png);
 }
 
-.alarm{
-    display: block;
-    width: 24px;height: 24px;
-    background-image: url(../../../public/images/alarm-o.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    text-indent: -9999px;
-    position: relative;
+.alarm {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../public/images/alarm-o.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+  position: relative;
 }
-.alarm:hover{
-    background-image: url(../../../public/images/alarm.png);
+.alarm:hover {
+  background-image: url(../../../public/images/alarm.png);
 }
-.alarm_menu{
+.alarm_menu {
   position: absolute;
   top: 40px;
   margin: 5px 0;
@@ -103,46 +106,46 @@
   width: 300px;
   background: white;
 }
-.alarm_menu li:first-child{
+.alarm_menu li:first-child {
   cursor: default;
 }
-.alarm_menu li:first-child:hover{
+.alarm_menu li:first-child:hover {
   background: none;
 }
-.alarm_menu li:first-child::after{
+.alarm_menu li:first-child::after {
   display: block;
   content: "";
   width: 270px;
   height: 1px;
   background: #000;
 }
-.alarm_menu li{
+.alarm_menu li {
   margin: 0;
   background: white;
   display: block;
 }
-.alarm_menu li:hover{
+.alarm_menu li:hover {
   background: #f2f2f2;
 }
-.mypage{
-    display: block;
-    width: 24px;height: 24px;
-    background-image: url(../../../public/images/mypage-o.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    text-indent: -9999px;
+.mypage {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../public/images/mypage-o.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
 }
-.mypage:hover{
-    background-image: url(../../../public/images/mypage.png);
+.mypage:hover {
+  background-image: url(../../../public/images/mypage.png);
 }
 
-.login{
+.login {
   color: white;
 }
-.category_wrap li{
-    float: left;
-    margin-left: 20px;
-
+.category_wrap li {
+  float: left;
+  margin-left: 20px;
 }
 
 .category_wrap li {

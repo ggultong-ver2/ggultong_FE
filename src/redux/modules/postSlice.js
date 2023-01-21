@@ -207,25 +207,20 @@ export const __patchPost = createAsyncThunk(
   "patchPost",
   async (payload, thunkAPI) => {
     try {
-      const { nickname, password, profileImg } = payload;
+      const { nickname, profileImg } = payload;
       const formData = new FormData();
 
       formData.append(
         "profileImg",
         profileImg === "" ? new File([], "") : profileImg
       );
-      formData.append("password", password);
       formData.append("nickname", nickname);
       //entries
       // appen 키값 file 중요! 백엔드와 맞춰야함!
 
       const data = await apis.patchPost(formData);
-      if (data.request.statusCode === 200) {
-      }
-      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      // Swal.fire("회원정보 수정 실패!", "다시 확인해주세요.", "error");
-      return thunkAPI.rejectWithValue(error);
+      console.log("err", error);
     }
   }
 );

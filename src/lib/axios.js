@@ -49,7 +49,7 @@ export const apis = {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     }),
   changePw: (password) =>
-    instance.post(`/mypage/pwChange/${password}`, "", {
+    instance.patch("/mypage/pwChange/", password, {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     }),
   postLogout: () => instance.get("/user/logout"),
@@ -101,9 +101,13 @@ export const apis = {
   },
 
   signNickname: (nickname) => {
-    baseURL.patch(`/mypage/update/socialSetting/${nickname}`, "", {
-      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-    });
+    baseURL.patch(
+      `/mypage/socialSetting/${nickname}`,
+      {},
+      {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      }
+    );
   },
 
   // 리뷰 관련
