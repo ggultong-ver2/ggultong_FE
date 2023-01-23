@@ -16,7 +16,6 @@ function SocialNick() {
     e.preventDefault();
     console.log("nickname--->", nickname);
     __socialNick(nickname).then(() => {
-      // console.log("res:::::", res);
       Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
 
       navigate(`/login`);
@@ -35,7 +34,6 @@ function SocialNick() {
 
   // 닉네임 중복 체크 확인
   const onCheckNickName = ({ nickname }) => {
-    console.log("nickname---->", nickname);
     __nickCheck(nickname).then((res) => {
       console.log(res);
       if (res.data.statusCode === 200) {
