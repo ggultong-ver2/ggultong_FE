@@ -82,7 +82,7 @@ function Header() {
 
             {!localStorage.getItem("Access_Token") ? (
               <li onClick={() => navigate("/login")} className="login">
-                로그인
+                로그인 / 회원가입
               </li>
             ) : (
               <li

@@ -105,6 +105,7 @@
   border: 1px solid #a0a0a0;
   width: 300px;
   background: white;
+  z-index: 1;
 }
 .alarm_menu li:first-child {
   cursor: default;
@@ -143,6 +144,9 @@
 .login {
   color: white;
 }
+.login:hover{
+  color: #ffd665;
+}
 .category_wrap li {
   float: left;
   margin-left: 20px;
@@ -173,12 +177,3 @@
 .category_wrap .post_button:hover a {
   color: #000;
 }
-
-/* .header_container::after{
-    display: block;
-    content: "";
-    width: 90%;
-    height: 1px;
-    background: #000;
-    margin: 0 auto;
-} */
