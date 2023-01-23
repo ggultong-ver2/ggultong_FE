@@ -1,19 +1,22 @@
+import { useNavigate } from "react-router-dom";
 import "../pages/reset.css";
 import "../pages/style.css";
 
 function Recipe() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="main_recipe">
         <ul className="clearfix">
           <li>
             <h3>
-              혼밥하는 사람들은 <br />
-              어떤 음식 해먹지?
+              자취하면서 <br />
+              만든 음식 모음
             </h3>
 
-            <h4>더 이상 혼자 고민하지마! <br /> 자취방 구하거나 내놓을 수 있어요.</h4>
-            <button><h5>글 구경하기</h5> <div className="btn_arrow"></div></button>
+            <h4>빠르고 간단한 자취 음식 레시피</h4>
+            <button onClick={() => navigate("mealList/meal")}><h5>글 구경하기</h5> <div className="btn_arrow"></div></button>
 
           </li>
           <li>
