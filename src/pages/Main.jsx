@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __getPost } from "../redux/modules/postSlice";
 import Heroside from "../components/heroside/Heroside";
@@ -12,15 +10,8 @@ import WorldCup from "./WorldCup";
 import Recycle from "./Recycle";
 
 
-function Main(props) {
-  const selectedCategory = props.category;
-  const dispatch = useDispatch();
+function Main() {
   const navigate = useNavigate();
-  // const post = useSelector((state) => state.post.posts.list);
-  // useEffect(() => {
-  //   dispatch(__getPost(selectedCategory));
-  // }, [selectedCategory, dispatch]);
-  //console.log(selectedCategory);
 
   return (
     <>
@@ -76,20 +67,11 @@ function Main(props) {
                   <p>남은 음식 활용 및 재료 보관법이 궁금하다면?</p>
                 </div>
               </li>
-              {/* <li>
-                <div className="home_icon"></div>
-                <div className="category_text">
-                  <h3>자취 꿀방</h3>
-                  <p>자취방을 구하거나 내놓을 수 있어요!</p>
-                </div>
-              </li> */}
             </ul>
           </div>
-          {/* <Magazine /> */}
           <Drink />
           <Recipe />
           <Recycle />
-          {/* <QNA /> */}
           <div className="random_recipe_container">
             <div className="random_recipe">
               <div className="random text">
@@ -100,7 +82,6 @@ function Main(props) {
             </div>
           </div>
           <Shorts />
-
           <WorldCup />
         </div>
       </div>
