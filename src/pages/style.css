@@ -314,6 +314,7 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  letter-spacing: -0.04em;
 }
 
 .random_recipe button:hover{
@@ -330,6 +331,7 @@
   width: 1200px;
   margin: 0 auto;
   padding-left: 24px;
+  margin-top: 100px;
 }
 .shorts_slider h2{
   font-size: 22px;
@@ -366,4 +368,7 @@
   height: 470px;
   border: 1px solid #000;
   padding: 25px 30px;
+}
+.likes{
+  width: 60px;margin: 0 auto;
 }
