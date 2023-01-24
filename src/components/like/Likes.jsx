@@ -9,15 +9,14 @@ const Likes = () => {
   const {isLogin} = CheckLogin();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const PostLike = useSelector(
-    (state) => state.post.PostLike
+  const checkPostLike = useSelector(
+    (state) => state.post.checkPostLike
   );
-  console.log(PostLike)
+  console.log(checkPostLike)
 
   const likePostSum = useSelector(
     (state) => state.post.likePostSum
   );
-
 
   const likeToggle = () => {
     if(isLogin){
@@ -27,13 +26,17 @@ const Likes = () => {
     }
   };
 
+  useEffect(() => {
+
+  }, [])
+
   return (
     <div className="like_button">
         <div onClick={likeToggle}>
           <div>
-            {PostLike === true ? <button>💛</button> : <button>🖤</button>}
+            {checkPostLike === true ? <button>💛</button> : <button>🖤</button>}
           </div>
-          <div>{likePostSum}</div>
+          {/* <div>{likePostSum}</div> */}
         </div>
     </div>
   );
