@@ -11,9 +11,9 @@ const initialState = {
   details: [],
   // patch:[],
   comments: [],
-  checkPostLike: null,
-  likePostSum: null,
-  isLoading: true,
+  checkPostLike: false,
+  likePostSum: 0,
+  isLoading: false,
   error: null,
   post: {},
 };
@@ -324,7 +324,7 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
-    // 레시피 수정
+    // 게시글 수정
     [__editPost.pending]: (state) => {
       state.isLoading = true;
     },
@@ -361,7 +361,19 @@ export const postSlice = createSlice({
     },
     [__postLike.fulfilled]: (state, action) => {
       // 액션으로 받은 값 = payload 추가해준다.
-      console.log("action: ", action.payload);
+      // console.log("action: ", action.payload);
+
+      // if(action.payload === true) {
+      //   state.checkPostLike = true;
+      //   state.likePostSum = state.likePostSum+1;
+      // }else{
+      //   state.checkPostLike = false;
+      //   state.likePostSum = state.likePostSum - 1;
+      // }
+
+      state.checkPostLike = action.payload === true? true : false;
+      state.likePostSum = action.payload ===true? state.likePostSum + 1 : state.likePostSum - 1;
+
       state.isLoading = false;
       state.posts = action.payload;
     },

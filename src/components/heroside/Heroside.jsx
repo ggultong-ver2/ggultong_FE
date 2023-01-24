@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import "./reset.css"
+// import "../../pages/reset.css"
 import "./style.css"
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "./slick-theme.css";
+import "./slick.css";
 
 
 export default class Heroside extends Component {
   render() {
     const settings = {
       arrow : true,
-      dots: false,
+      dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: true,
+      // autoplay: true,
       autoplaySpeed: 4000
     };
     return (
@@ -27,10 +27,10 @@ export default class Heroside extends Component {
             </h1>
             <button>글쓰기</button>
           </div>
-          <div className="slide">
+          <div className="slide2">
             <h3>second page</h3>
           </div>
-          <div className="slide">
+          <div className="slide3">
             <h3>third page</h3>
           </div>
         </Slider>

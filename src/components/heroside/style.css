@@ -1,0 +1,75 @@
+.slider{
+  height: 480px;
+  margin: 0 auto;
+  text-align: center;
+  background: #f2f2f2;
+  margin-bottom: 60px;
+  position: relative;
+}
+.slider .slick-prev{
+  position: absolute;
+  left: 211px;
+  z-index: 1;
+  background-image: url(../../../public/images/slider_arrow_default.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+  width: 32px;height: 32px;
+}
+.slider .slick-prev:hover{
+  background-image: url(../../../public/images/slider_arrow_hover.png);
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.slider .slick-next {
+  position: absolute;
+  right: 211px;
+  background-image: url(../../../public/images/slider_arrow_default.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+  width: 32px;height: 32px;
+  transform: scaleX(-1);
+}
+.slider .slick-next:hover{
+  background-image: url(../../../public/images/slider_arrow_hover.png);
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.slider .slick-dots{
+  position: absolute;
+  bottom: 36px;
+}
+.slider .slick-dots li{
+}
+
+.slide1{
+  background: #FFE7A4;
+  height: 480px;
+  background-image: url(../../../public/images/heroside_image1.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+.slide1 h1{
+  margin-top: 139px;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: normal;
+  }
+.slide1 button{
+  margin-top: 36px;
+  width: 83px;
+  height: 32px;
+  border: 1px solid black;
+  border-radius: 40px;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+.slide1 button:hover{
+  background: transparent;
+  color: black;
+}

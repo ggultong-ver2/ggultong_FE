@@ -109,7 +109,10 @@ const Detail = () => {
               <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
             </Btns>
           </Wrap>
-          <Likes />
+          <div className="likes">
+            <Likes />
+            좋아요 {details?.likePostSum}
+          </div>
           <Commentarea>
             <Writecomment>
               <Myprofile />

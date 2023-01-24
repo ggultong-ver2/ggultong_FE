@@ -3,6 +3,7 @@ import { useLocation, useParams, useSearchParams, useNavigate } from "react-rout
 import axios from "axios";
 import "./style.css"
 import { baseURL } from "../../lib/axios";
+import { Link } from "react-router-dom";
 
 function Search() {
   const navigate = useNavigate();
@@ -35,9 +36,9 @@ function Search() {
                 </select>
               </div>
               {searchData?.map((post) => (
-                <li className="search_title">
-                  {post.title}
-                </li>
+                <Link to>
+                  <li className="search_title">{post.title}</li>
+                </Link>
               ))}
             </div>
           )}
