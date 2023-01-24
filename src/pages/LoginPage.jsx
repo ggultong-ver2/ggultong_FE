@@ -10,6 +10,7 @@ import lock from "../assets/images/lock.png";
 import naver from "../assets/images/navericon.png";
 import kakao from "../assets/images/kakaoicon.png";
 import "../pages/reset.css";
+import NaverLogin from "./NaverLogin";
 
 const PostLoginPage = () => {
   // const url1 =
@@ -99,10 +100,7 @@ const PostLoginPage = () => {
             <SocialDiv src={kakao} width="32px" height="32px" />
             카카오톡으로 로그인
           </SocialBtn>
-          <SocialBtn naver>
-            <SocialDiv src={naver} width="32px" height="32px" />
-            네이버로 로그인
-          </SocialBtn>
+          <NaverLogin />
         </StCenterBox>
       </div>
     </StContainer>
