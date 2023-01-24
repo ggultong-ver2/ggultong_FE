@@ -86,18 +86,6 @@ function MyPage() {
       );
       localStorage.clear();
       navigate("/login");
-
-      // if (res.data.statusCode === 200) {
-      //   Swal.fire(
-      //     res.data.msg,
-      //     "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
-      //     "success"
-      //   );
-      //   localStorage.clear();
-      //   window.location.assign("/login");
-      // } else {
-      //   Swal.fire(res.data.msg, "정보 수정 실패!", "error");
-      // }
     });
   };
 

@@ -29,6 +29,7 @@ import SocialNick from "../pages/SocialNick";
 import MyPwChange from "../pages/MyPwChange";
 import MyPage from "../pages/MyPage";
 import KakaolLogin from "../pages/KakaoLogin";
+import NaverLogin from "../pages/NaverLogin";
 
 const Router = () => {
   return (
@@ -52,7 +53,8 @@ const Router = () => {
           <Route path="/idfind" element={<Idfind />} />
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<KakaolLogin />} />
-          {/* <Route path="/mypage" element={<MyTab />} /> */}
+          <Route path="/user/naver/callback" element={<NaverLogin />} />
+
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />

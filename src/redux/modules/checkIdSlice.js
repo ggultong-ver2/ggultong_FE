@@ -5,8 +5,7 @@ import Swal from "sweetalert2";
 const __idcheck = async (loginId) => {
   try {
     const data = await apis.checkUserName(loginId);
-    console.log("loginId:::", loginId);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
       console.log("response", data.response);
       // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
