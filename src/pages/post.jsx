@@ -133,11 +133,7 @@ const Post = () => {
         </File>
         <Btns>
           <BackButton>취소</BackButton>
-          <EnterButton
-            onClick={() => window.location.replace("drinkList/drink")}
-          >
-            확인
-          </EnterButton>
+          <EnterButton>확인</EnterButton>
         </Btns>
       </Wrap>
     </Form>

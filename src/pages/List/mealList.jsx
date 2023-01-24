@@ -58,13 +58,16 @@ const MealList = () => {
         <Wrap>
           {categoryPosts.map((post) => {
             return (
-              <Card onClick={() => navigate(`detail/${post.id}`)}>
+              <Card key={post.id} onClick={() => navigate(`detail/${post.id}`)}>
                 <Textwrap>
                   <StTitle>{post.title}</StTitle>
                   <StContent
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   ></StContent>
-                  <Etcwrap>댓글12 좋아요100 스크랩400 2023.01.10</Etcwrap>
+                  <Etcwrap>
+                    댓글12 좋아요{post.likePostSum} 스크랩400{" "}
+                    {post.createdAt.slice(0, 10)}
+                  </Etcwrap>
                 </Textwrap>
                 <StFile src={post.imageFiles}></StFile>
               </Card>

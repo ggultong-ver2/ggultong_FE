@@ -5,7 +5,9 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^35.4.0",
     "@ckeditor/ckeditor5-dev-utils": "^32.0.2",
+    "@ckeditor/ckeditor5-font": "^35.4.0",
     "@ckeditor/ckeditor5-react": "^5.0.6",
+    "@ckeditor/ckeditor5-upload": "^35.4.0",
     "@lyket/react": "^2.1.0",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.14.1",
