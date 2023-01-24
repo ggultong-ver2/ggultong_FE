@@ -66,7 +66,7 @@ const DrinkList = () => {
           {categoryPosts.map((post) => {
             console.log(post);
             return (
-              <Card onClick={() => navigate(`detail/${post.id}`)}>
+              <Card key={post.id} onClick={() => navigate(`detail/${post.id}`)}>
                 <Textwrap>
                   <StTitle>{post.title}</StTitle>
                   <StContent

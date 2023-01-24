@@ -25,6 +25,7 @@ import PasteFromOffice from "@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import PictureEditing from "@ckeditor/ckeditor5-image/src/pictureediting.js";
 import Table from "@ckeditor/ckeditor5-table/src/table.js";
 import TableToolbar from "@ckeditor/ckeditor5-table/src/tabletoolbar.js";
+import Font from "@ckeditor/ckeditor5-font";
 import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformation.js";
 
 class Editor extends ClassicEditor {}
@@ -54,6 +55,7 @@ Editor.builtinPlugins = [
   Table,
   TableToolbar,
   TextTransformation,
+  Font,
 ];
 
 // Editor configuration.
@@ -78,6 +80,7 @@ Editor.defaultConfig = {
       "undo",
       "redo",
       "ckbox",
+      "fontSize",
     ],
   },
   language: "ko",
@@ -92,6 +95,9 @@ Editor.defaultConfig = {
   },
   table: {
     contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
+  },
+  fontSize: {
+    options: [14, 15, 16],
   },
 };
 
