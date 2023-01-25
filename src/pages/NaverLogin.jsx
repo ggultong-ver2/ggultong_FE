@@ -11,24 +11,24 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
   const { naver } = window;
   const NAVER_CLIENT_ID = "8PCgO32YgjQK0j2o2102";
   const NAVER_CALLBACK_URL =
-    "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=8PCgO32YgjQK0j2o2102&state=state&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback";
+    "https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback";
 
-  // const initializeNaverLogin = () => {
-  //   const naverLogin = new naver.LoginWithNaverId({
-  //     clientId: NAVER_CLIENT_ID,
-  //     callbackUrl: NAVER_CALLBACK_URL,
-  //     // 팝업창으로 로그인을 진행할 것인지?
-  //     isPopup: false,
-  //     // 버튼 타입 ( 색상, 타입, 크기 변경 가능 )
-  //     loginButton: { color: "green", type: 3, height: 58 },
-  //     callbackHandle: true,
-  //   });
-  //   naverLogin.init();
-  // };
+  const initializeNaverLogin = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: NAVER_CLIENT_ID,
+      callbackUrl: NAVER_CALLBACK_URL,
+      // 팝업창으로 로그인을 진행할 것인지?
+      isPopup: false,
+      // 버튼 타입 ( 색상, 타입, 크기 변경 가능 )
+      loginButton: { color: "green", type: 3, height: 58 },
+      callbackHandle: true,
+    });
+    naverLogin.init();
+  };
 
   const userAccessToken = () => {
     window.location.href.includes("code") && getToken();
-    window.location.href.includes("state");
+    window.location.href.includes("state") && getToken();
   };
   //76cd508f-df81-4a2e-b2a2-5819ccdb9423
 
@@ -63,7 +63,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
 
   // 화면 첫 렌더링이후 바로 실행하기 위해 useEffect 를 사용하였다.
   useEffect(() => {
-    // initializeNaverLogin();
+    initializeNaverLogin();
     userAccessToken();
   }, []);
   // AAAAORnIFZeLqsaCl2OOTrvfnCoczc3LuMa2ZQiGj1hVFSfyFNcSvBzRsCx3zzzg5GrPktZqlLqlTurfA6b0t7myy_M
