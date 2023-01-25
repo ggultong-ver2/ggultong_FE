@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useParams, useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css"
@@ -9,7 +10,12 @@ function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
   const params = useParams();
-  const location = useLocation();
+  // const post = useSelector((state) => state.posts);
+
+  // const postRedirect = async () => {
+  //   window.location.href = `/detail/${post.id}`;
+  // };
+
 
   useEffect(() => {
     async function fetchData() {
@@ -36,9 +42,10 @@ function Search() {
                 </select>
               </div>
               {searchData?.map((post) => (
-                <Link to>
+                <div>
+                  {/* <li className="search_title" key={post.id} onClick={() => postRedirect()}>{post.title}</li> */}
                   <li className="search_title">{post.title}</li>
-                </Link>
+                </div>
               ))}
             </div>
           )}
