@@ -27,7 +27,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
   // };
 
   const userAccessToken = () => {
-    window.location.href.includes("access_token") && getToken();
+    window.location.href.includes("code") && getToken();
     window.location.href.includes("state");
   };
   //76cd508f-df81-4a2e-b2a2-5819ccdb9423
