@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NaverLogin = ({ setGetToken, setUserInfo }) => {
-  const IP = "tom-jelly.shop";
+  const IP = "43.201.7.130:8080";
   const navigate = useNavigate();
   const naverRef = useRef();
   const { naver } = window;
   const NAVER_CLIENT_ID = "8PCgO32YgjQK0j2o2102";
-  const NAVER_CALLBACK_URL = "http://localhost:3000/user/naver/callback";
+  const NAVER_CALLBACK_URL =
+    "https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback";
 
   const initializeNaverLogin = () => {
     const naverLogin = new naver.LoginWithNaverId({

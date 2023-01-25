@@ -7,7 +7,7 @@ import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
 
-function Game() {
+function WorldCupGame() {
   const [password, setPassword] = useInput();
   const navigate = useNavigate();
 
@@ -35,7 +35,13 @@ function Game() {
               <br />
               이번 달 우승음식은?
               <StButton>랭킹보기</StButton>
-              <StButton2>시작하기</StButton2>
+              <StButton2
+                onClick={() => {
+                  navigate("/gamelist/worldcupgame");
+                }}
+              >
+                시작하기
+              </StButton2>
             </div>
           </StLeftBox>
           <StRightBox>
@@ -343,4 +349,4 @@ const StButton3 = styled.button`
     font-family: "Pretendard";
   }
 `;
-export default Game;
+export default WorldCupGame;
