@@ -30,6 +30,7 @@ import MyPwChange from "../pages/MyPwChange";
 import MyPage from "../pages/MyPage";
 import KakaolLogin from "../pages/KakaoLogin";
 import NaverLogin from "../pages/NaverLogin";
+import Game from "../pages/Game";
 
 const Router = () => {
   return (
@@ -54,7 +55,7 @@ const Router = () => {
           <Route path="/editpost/:id" element={<EditPost />} />
           <Route path="/user/kakao/callback" element={<KakaolLogin />} />
           <Route path="/user/naver/callback" element={<NaverLogin />} />
-
+          <Route path="/gamelist" element={<Game />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />
