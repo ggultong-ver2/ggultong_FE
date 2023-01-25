@@ -8,7 +8,7 @@
 }
 .slider .slick-prev{
   position: absolute;
-  left: 211px;
+  left: 130px;
   z-index: 1;
   background-image: url(../../../public/images/slider_arrow_default.png);
   background-repeat: no-repeat;
@@ -24,7 +24,7 @@
 }
 .slider .slick-next {
   position: absolute;
-  right: 211px;
+  right: 130px;
   background-image: url(../../../public/images/slider_arrow_default.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -40,12 +40,27 @@
 }
 .slider .slick-dots{
   position: absolute;
-  bottom: 36px;
+  bottom: 30px;
 }
 .slider .slick-dots li{
 }
 
 .slide1{
+  background: #FF9A70;
+  width: 1100px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heroside_1{
+  background-image: url(../../../public/images/heroside_1.png);
+  width: 579px;
+  height: 357px;
+}
+
+.slide2{
   background: #FFE7A4;
   height: 480px;
   background-image: url(../../../public/images/heroside_image1.png);
@@ -53,14 +68,14 @@
   background-repeat: no-repeat;
   background-position: center;
   }
-.slide1 h1{
+.slide2 h1{
   margin-top: 139px;
   font-size: 56px;
   line-height: 72px;
-  font-weight: normal;
+  font-weight: bold;
   }
-.slide1 button{
-  margin-top: 36px;
+.slide2 button{
+  margin-top: 26px;
   width: 83px;
   height: 32px;
   border: 1px solid black;
@@ -69,7 +84,95 @@
   color: white;
   cursor: pointer;
 }
-.slide1 button:hover{
+.slide2 button:hover{
   background: transparent;
   color: black;
+}
+
+.slide3{
+  background: #E7F56D;
+  width: 1100px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.heroside_3{
+  background-image: url(../../../public/images/heroside_3.png);
+  width: 620px;
+  height: 346px;
+}
+
+
+.slide4{
+  background: #B591FB;
+  width: 1100px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heroside_4{
+  background-image: url(../../../public/images/heroside_4.png);
+  width: 537px;
+  height: 342px;
+}
+
+
+.slide5{
+  background: #62BFFE;
+  width: 1100px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heroside_5{
+  background-image: url(../../../public/images/heroside_5.png);
+  width: 451px;
+  height: 367px;
+}
+.slide5 button{
+  width: 186px;
+  height: 48px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.slide5_ranking{
+  background: transparent;
+  border: 1px solid #000;
+}
+.slide5_ranking:hover{
+  background: #000;
+  color: white;
+}
+.slide5_start{
+  background: #000;
+  color: white;
+  border: 0 none;
+  margin-left: 14px;
+}
+.slide5_start:hover{
+  background: transparent;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.heroside_text{
+  text-align: left;
+}
+.heroside_text h1{
+  margin-bottom: 20px;
+  font-size: 52px;
+  line-height: 72px;
+  letter-spacing: -0.06em;
+}
+.heroside_text p{
+  font-size: 16px;
+  line-height: 26px;
 }
