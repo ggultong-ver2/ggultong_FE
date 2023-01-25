@@ -8,22 +8,7 @@ import { useDispatch } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
 
 function GameList() {
-  const [password, setPassword] = useInput();
   const navigate = useNavigate();
-
-  const onCheckPassword = (password) => {
-    __pwcheck({
-      password,
-    }).then((res) => {
-      if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "비밀번호가 확인되었습니다.", "success");
-        navigate("/myconfirm/pwchange");
-      } else {
-        navigate("/myconfirm");
-        Swal.fire(res.data.msg, "비밀번호를 다시 확인해주세요!", "error");
-      }
-    });
-  };
 
   return (
     <StContainer>
