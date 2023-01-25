@@ -100,7 +100,12 @@ const PostLoginPage = () => {
             <SocialDiv src={kakao} width="32px" height="32px" />
             카카오톡으로 로그인
           </SocialBtn>
-          <NaverLogin />
+          {/* <NaverIdLogin ref={naverRef} id="naverIdLogin" /> */}
+          <NaverLoginBtn href="https://nid.naver.com/oauth2.0/authorize?client_id=8PCgO32YgjQK0j2o2102&response_type=code&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback&state=state">
+            <NaverIcon src={require("../assets/images/naver.png")} />
+            <NaverLoginTitle>네이버로 로그인</NaverLoginTitle>
+          </NaverLoginBtn>
+          {/* <NaverLogin /> */}
         </StCenterBox>
       </div>
     </StContainer>
@@ -302,6 +307,47 @@ const StLabel2 = styled.label`
   margin-right: 330px;
   font-weight: 600;
   font-family: "Pretendard";
+`;
+
+const NaverIdLogin = styled.div`
+  display: none;
+`;
+
+const NaverLoginBtn = styled.a`
+  margin-top: 20px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #b5b5b5;
+  align-items: center;
+  width: 384px;
+  height: 48px;
+  font-size: 14px;
+  border-radius: 4px;
+  font-family: "Pretendard";
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+// 로그인 버튼 사용가이드 링크를 들어가면 이미지를 받아 이렇게 적용이 가능하다 !
+const NaverIcon = styled.img`
+  margin-right: 20px;
+  width: 32px;
+  height: 32px;
+  font-family: "Pretendard";
+  background-color: transparent;
+`;
+
+const NaverLoginTitle = styled.span`
+  color: black;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  margin-right: 20px;
+  font-family: "Pretendard";
+  background-color: transparent;
 `;
 
 export default PostLoginPage;
