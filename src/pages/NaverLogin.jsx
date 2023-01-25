@@ -10,8 +10,8 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
   const location = useLocation();
   const getToken = async () => {
     const NAVER_CODE = location.search.split("=")[1];
-    // const state = Math.random().toString(36).substring(3, 14);
-    const state = new URL(window.location.href).searchParams.get("state");
+    const state = Math.random().toString(36).substring(3, 14);
+    // const state = new URL(window.location.href).searchParams.get("state");
     console.log("state:::", state);
 
     //
@@ -29,7 +29,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
           return res;
         })
         .then((res) => {
-          console.log(res.data.nickname);
+          console.log("respone:::", res.data.nickname);
           if (res.data.nickname === "tlsrbrkdlqwk") {
             console.log("nickname", res.data.nickname);
             navigate("/socialnick");
@@ -58,44 +58,4 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
   return <></>;
 };
 
-const NaverIdLogin = styled.div`
-  display: none;
-`;
-
-const NaverLoginBtn = styled.a`
-  margin-top: 20px;
-  padding-right: 15px;
-  display: flex;
-  justify-content: center;
-  border: 1px solid #b5b5b5;
-  align-items: center;
-  width: 384px;
-  height: 48px;
-  font-size: 14px;
-  border-radius: 4px;
-  font-family: "Pretendard";
-  text-decoration: none;
-  color: black;
-  font-weight: 600;
-  cursor: pointer;
-`;
-
-// 로그인 버튼 사용가이드 링크를 들어가면 이미지를 받아 이렇게 적용이 가능하다 !
-const NaverIcon = styled.img`
-  margin-right: 20px;
-  width: 32px;
-  height: 32px;
-  font-family: "Pretendard";
-  background-color: transparent;
-`;
-
-const NaverLoginTitle = styled.span`
-  color: black;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 24px;
-  margin-right: 20px;
-  font-family: "Pretendard";
-  background-color: transparent;
-`;
 export default NaverLogin;
