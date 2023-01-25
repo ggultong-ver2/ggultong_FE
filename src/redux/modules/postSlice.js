@@ -6,16 +6,13 @@ import Swal from "sweetalert2";
 const initialState = {
   login: [],
   signup: [],
-  posts: [],
   categoryPosts: [],
   details: [],
   // patch:[],
-  comments: [],
   checkPostLike: false,
   likePostSum: 0,
   isLoading: false,
   error: null,
-  post: {},
 };
 
 // 데이터 불러오기
@@ -150,13 +147,17 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-
 export const __postLike = createAsyncThunk(
   "postLike",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await baseURL.post(`/like/post/${payload}` , {}, {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` }});
+      const { data } = await baseURL.post(
+        `/like/post/${payload}`,
+        {},
+        {
+          headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+        }
+      );
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -371,8 +372,9 @@ export const postSlice = createSlice({
       //   state.likePostSum = state.likePostSum - 1;
       // }
 
-      state.checkPostLike = action.payload === true? true : false;
-      state.likePostSum = action.payload ===true? state.likePostSum + 1 : state.likePostSum - 1;
+      state.checkPostLike = action.payload === true ? true : false;
+      state.likePostSum =
+        action.payload === true ? state.likePostSum + 1 : state.likePostSum - 1;
 
       state.isLoading = false;
       state.posts = action.payload;
