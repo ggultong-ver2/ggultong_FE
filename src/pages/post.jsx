@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
 import "./reset.css";
-import Editor from "../components/editor/Editor";
+// import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const Post = () => {
   const dispatch = useDispatch();
@@ -105,7 +107,7 @@ const Post = () => {
             setContent({ ...content, content: value });
           }}
         ></Content> */}
-        <Editor
+        {/* <Editor
           type="text"
           content={content}
           setContent={setContent}
@@ -116,8 +118,10 @@ const Post = () => {
           //   console.log({ e, editor, data });
           //   setContent({ ...content, content: data });
           // }}
-        />
-
+        /> */}
+        <br></br>
+        <ReactQuill type="text" onChange={(content) => {}} />
+        {/* <Quill type="text" content={content} setContent={setContent} /> */}
         <File>
           첨부파일
           <FileInput
@@ -131,6 +135,7 @@ const Post = () => {
             }}
           />
         </File>
+
         <Btns>
           <BackButton>취소</BackButton>
           <EnterButton>확인</EnterButton>

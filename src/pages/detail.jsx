@@ -22,9 +22,9 @@ const Detail = () => {
   console.log("addComment:", addComment);
 
   const detailList = useSelector((state) => state.details.details);
-  // console.log("details:", detailList);
+  console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
-  console.log("commentList:", commentList);
+  //console.log("commentList:", commentList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
 
@@ -161,6 +161,7 @@ const StDetail = styled.div`
   height: 1800px;
   margin: auto;
   margin-top: 30px;
+  word-break: break-all;
 `;
 const Wrap = styled.div`
   margin-left: 200px;
