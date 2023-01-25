@@ -5,40 +5,19 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NaverLogin = ({ setGetToken, setUserInfo }) => {
-  const IP = "43.201.7.130:8080";
+  const IP = "tom-jelly.shop";
   const navigate = useNavigate();
   const naverRef = useRef();
-  const { naver } = window;
-  const NAVER_CLIENT_ID = "8PCgO32YgjQK0j2o2102";
-  const NAVER_CALLBACK_URL =
-    "https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback";
 
-  const initializeNaverLogin = () => {
-    const naverLogin = new naver.LoginWithNaverId({
-      clientId: NAVER_CLIENT_ID,
-      callbackUrl: NAVER_CALLBACK_URL,
-      // 팝업창으로 로그인을 진행할 것인지?
-      isPopup: false,
-      // 버튼 타입 ( 색상, 타입, 크기 변경 가능 )
-      loginButton: { color: "green", type: 3, height: 58 },
-      callbackHandle: true,
-    });
-    naverLogin.init();
-  };
-
-  const userAccessToken = () => {
-    window.location.href.includes("code") && getToken();
-    window.location.href.includes("state") && getToken();
-  };
   //76cd508f-df81-4a2e-b2a2-5819ccdb9423
 
   const getToken = async () => {
     const token = window.location.href.split("=")[1].split("&")[0];
-    const state = window.location.href.split("=")[2].split("&")[0];
+    const state = "";
     // const state = new URL(window.location.href).searchParams.get("state");
     console.log("token:::", token);
-    console.log("state:::", state);
 
+    //
     axios
       .get(`http://${IP}/api/user/naver/callback?code=${token}&state=${state}`)
       .then((res) => {
@@ -61,20 +40,22 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
       });
   };
 
-  // 화면 첫 렌더링이후 바로 실행하기 위해 useEffect 를 사용하였다.
   useEffect(() => {
-    initializeNaverLogin();
-    userAccessToken();
+    try {
+      getToken();
+      ////토큰수정////
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
-  // AAAAORnIFZeLqsaCl2OOTrvfnCoczc3LuMa2ZQiGj1hVFSfyFNcSvBzRsCx3zzzg5GrPktZqlLqlTurfA6b0t7myy_M
-  const handleNaverLogin = () => {
-    naverRef.current.children[0].click();
-  };
+  // const naverURL =
+  //   `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URI}&state=` +
+  //   Math.random().toString(36).substring(3, 14);
 
   return (
     <div>
       <NaverIdLogin ref={naverRef} id="naverIdLogin" />
-      <NaverLoginBtn onClick={handleNaverLogin}>
+      <NaverLoginBtn href="https://nid.naver.com/oauth2.0/authorize?client_id=8PCgO32YgjQK0j2o2102&response_type=code&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback&state=state">
         <NaverIcon src={require("../assets/images/naver.png")} />
         <NaverLoginTitle>네이버로 로그인</NaverLoginTitle>
       </NaverLoginBtn>
