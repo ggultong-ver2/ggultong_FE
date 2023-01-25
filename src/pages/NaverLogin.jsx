@@ -58,8 +58,6 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
           navigate("/");
         }
       });
-
-    // setGetToken(token);
   };
 
   // 화면 첫 렌더링이후 바로 실행하기 위해 useEffect 를 사용하였다.

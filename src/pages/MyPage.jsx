@@ -7,7 +7,6 @@ import { useInput } from "../lib/utils/useInput";
 import __nickCheck from "../redux/modules/checkNickSlice";
 import fileinput from "../assets/images/fileinput.png";
 import { __patchPost } from "../redux/modules/postSlice";
-import { apis } from "../lib/axios";
 import MySmallTab from "./Tabs/MySmallTab";
 import __deleteId from "../redux/modules/deleteUserSlice";
 
@@ -18,10 +17,6 @@ function MyPage() {
   const [imgUrl, setImgUrl] = useState("");
   const [post, setPost] = useState([]);
   const [nickname, setNickname] = useInput();
-  const [password, setPassword] = useState("");
-  const [PWPtag, setPWPtag] = useState();
-  const [PWConfirm, setPWConfirm] = useState("");
-  const [PWConfirmP, setPWConfirmP] = useState(false);
 
   const navigate = useNavigate();
 
