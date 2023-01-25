@@ -10,15 +10,12 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
   const location = useLocation();
   const getToken = async () => {
     const NAVER_CODE = location.search.split("=")[1];
-    const state = Math.random().toString(36).substring(3, 14);
-    // const state = new URL(window.location.href).searchParams.get("state");
-    console.log("state:::", state);
+    const STATE = Math.random().toString(36).substring(3, 14);
 
-    //
     try {
       const data = axios
         .get(
-          `http://${IP}/api/user/naver/callback?code=${NAVER_CODE}&state=${state}`
+          `http://${IP}/api/user/naver/callback?code=${NAVER_CODE}&state=${STATE}`
         )
         .then((res) => {
           console.log("RES", res.data);
@@ -29,12 +26,9 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
           return res;
         })
         .then((res) => {
-          console.log("respone:::", res.data.nickname);
           if (res.data.nickname === "tlsrbrkdlqwk") {
-            console.log("nickname", res.data.nickname);
             navigate("/socialnick");
           } else {
-            console.log("else", res.data.nickname);
             navigate("/");
           }
         });
