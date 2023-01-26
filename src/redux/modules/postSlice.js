@@ -7,10 +7,13 @@ const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
-  details: [],
+  details: { comment: [] },
   // patch:[],
   checkPostLike: false,
   likePostSum: 0,
+  isLoading: false,
+  error: null,
+  comment: [],
   isLoading: false,
   error: null,
 };
@@ -32,39 +35,86 @@ export const __getPost = createAsyncThunk(
   }
 );
 
-// 마이페이지 수정
-// export const __patchPost = createAsyncThunk(
-//   "patchPost",
+// export const __addComment = createAsyncThunk(
+//   "addComment",
 //   async (payload, thunkAPI) => {
 //     try {
-//       console.log("payload:::", payload);
-//       const data = await apis.createPost(payload);
-//       // const data = await axios.post("http://localhost:3002/recipes", payload);
-//       // console.log("payload: ", payload);
-//       console.log("addpostdata::: ", data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
+//       const [addComment, postId] = payload;
+//       const newComment = { ...addComment, postId: postId };
+//       //   const data = await apis.createComment(payload);
+//       await baseURL.post(`/comment/${postId}`, newComment);
+//       //   console.log("data:", data);
+//       console.log("newComment:", newComment);
+//       return thunkAPI.fulfillWithValue(newComment);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
 //     }
 //   }
 // );
-// top5 데이터 불러오기
 
-// export const __topPost = createAsyncThunk(
-//   "topPost",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const data = await apis.topPost();
-//       console.log("payload: ", payload);
-//       console.log("data: ", data.data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
+export const __addComment = createAsyncThunk(
+  "addComment",
+  async (payload, thunkAPI) => {
+    const [addComment, postId] = payload;
+
+    const newComment = { ...addComment, postId: postId };
+    // console.log(comment,postId);
+    try {
+      const data = await baseURL.post(`/comment/${postId}`, newComment);
+      console.log("ssss::", data);
+      // thunkAPI.dispatch(__getComment(postId));
+      // 댓글을 추가하고 댓글 데이터를 가져옴
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteComment = createAsyncThunk(
+  "deleteComment",
+  async (payload, thunkAPI) => {
+    try {
+      console.log("payload:", payload);
+      const data = await apis.deleteComment(payload);
+      console.log("deletepayload:", payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __editComment = createAsyncThunk(
+  "editComment",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await baseURL.put(
+        `/api/comment/${payload.postId}/comment/${payload.commentId}`,
+        payload.editComment
+      );
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const __getComment = createAsyncThunk(
+  "getComment",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await apis.getComment();
+      console.log("payload: ", payload);
+      console.log("data: ", data.data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
 
 // 해당 아이디 값 데이터 불러오기 (안먹힘....)
 export const __getIdPost = createAsyncThunk(
@@ -204,23 +254,6 @@ export const __patchPost = createAsyncThunk(
     }
   }
 );
-
-// // id 중복체크
-// export const __checkUserName = createAsyncThunk(
-//   "checkUserName",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const data = await apis.checkUserName(payload);
-//       // const data = await axios.post("http://localhost:3002/recipes", payload);
-//       console.log("payload: ", payload);
-//       console.log("data: ", data.data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
 
 export const postSlice = createSlice({
   name: "post",
@@ -396,27 +429,85 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
-    // // 아이디 중복체크
-    // [__checkUserName.pending]: (state) => {
-    //   state.isLoading = true;
-    //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
-    // },
-    // [__checkUserName.fulfilled]: (state, action) => {
-    //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
-    //   state.isLoading = false;
-    //   state.posts = action.payload;
-    // },
-    // [__checkUserName.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    //   // 에러 발생-> 네트워크 요청은 끝,false
-    //   // catch 된 error 객체를 state.error에 넣습니다.
-    // },
+    [__addComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__addComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log("action.payload:", action.payload);
+      state.details.comment.push(action.payload);
+      console.log("state:", state);
+    },
+    [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__deleteComment.pending]: (state) => {
+      state.isLoadig = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      state.isLoadig = false;
+      state.details.comment.pop(action.payload);
+      // state.details.comment = state.details.comment.filter(
+      //   (comment) => comment.id !== action.payload.id
+      // );
+      console.log("state.details.comment:", state.details.comment);
+      console.log(action.payload);
+    },
+    [__deleteComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      // console.log(action.payload.response.data.errorMessage);
+    },
+
+    [__editComment.pending]: (state, action) => {
+      // state.isLoading = true;
+    },
+    [__editComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const index = state.comment.findIndex(
+        (comment) => comment.commentId === action.payload.commentId
+      );
+      state.comment.splice(index, 1, action.payload);
+    },
+
+    [__editComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      alert(action.payload.response.data.errorMessage);
+    },
+    [__getComment.pending]: (state) => {},
+    [__getComment.fulfilled]: (state, action) => {
+      state.comment = action.payload;
+    },
+    [__getComment.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
   },
+
+  // // 아이디 중복체크
+  // [__checkUserName.pending]: (state) => {
+  //   state.isLoading = true;
+  //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
+  // },
+  // [__checkUserName.fulfilled]: (state, action) => {
+  //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
+  //   state.isLoading = false;
+  //   state.posts = action.payload;
+  // },
+  // [__checkUserName.rejected]: (state, action) => {
+  //   state.isLoading = false;
+  //   state.error = action.payload;
+  //   // 에러 발생-> 네트워크 요청은 끝,false
+  //   // catch 된 error 객체를 state.error에 넣습니다.
+  // },
 });
 
 // export const {} = recipesSlice.actions;
 export default postSlice.reducer;
+
+// export const {} = commentSlice.actions;
 
 // export const __postComment = createAsyncThunk(
 //   "postComment",
