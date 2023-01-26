@@ -128,13 +128,13 @@ const Detail = () => {
             </Writecomment>
             {commentList.map((comment) => {
               return (
-                <Commentbox key={comment}>
+                <Commentbox>
                   <Commenttextarea>
                     <Profileimg />
                     <WrapWritten>
                       <Writtenby>{comment.nickname}</Writtenby>
                       <Writtendate>
-                        {/* {comment.createdAt.slice(0, 10)} */}
+                        {comment.createdAt.slice(0, 10)}
                       </Writtendate>
                       <Commentcontent>{comment.content}</Commentcontent>
                       <button>수정하기</button>

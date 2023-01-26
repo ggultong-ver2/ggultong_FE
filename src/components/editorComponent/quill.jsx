@@ -44,17 +44,17 @@ const Quill = ({ content, setContent, value }) => {
   ];
 
   return (
-    <div>
+    <div style={{ height: "1050px" }}>
       <ReactQuill
-        style={{ height: "800px" }}
+        style={{ height: "1000px" }}
         theme="snow"
-        onChange={(ev) => {
-          const { value } = ev.target;
-          console.log(value);
-          setContent({ ...content, content: value });
-        }}
-        // modules={this.modules}
-        // formats={this.formats}
+        // onChange={(ev) => {
+        //   const { value } = ev.target;
+        //   console.log(value);
+        //   setContent({ ...content, content: value });
+        // }}
+        modules={modules}
+        formats={formats}
         // value={value || ""}
         // onChange={(content, delta, source, editor) =>
         //   onChange(editor.getHTML())
