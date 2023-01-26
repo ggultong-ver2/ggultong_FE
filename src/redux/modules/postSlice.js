@@ -13,6 +13,9 @@ const initialState = {
   likePostSum: 0,
   isLoading: false,
   error: null,
+  comment: [],
+  isLoading: false,
+  error: null,
 };
 
 // 데이터 불러오기
@@ -32,39 +35,87 @@ export const __getPost = createAsyncThunk(
   }
 );
 
-// 마이페이지 수정
-// export const __patchPost = createAsyncThunk(
-//   "patchPost",
+// export const __addComment = createAsyncThunk(
+//   "addComment",
 //   async (payload, thunkAPI) => {
 //     try {
-//       console.log("payload:::", payload);
-//       const data = await apis.createPost(payload);
-//       // const data = await axios.post("http://localhost:3002/recipes", payload);
-//       // console.log("payload: ", payload);
-//       console.log("addpostdata::: ", data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
+//       const [addComment, postId] = payload;
+//       const newComment = { ...addComment, postId: postId };
+//       //   const data = await apis.createComment(payload);
+//       await baseURL.post(`/comment/${postId}`, newComment);
+//       //   console.log("data:", data);
+//       console.log("newComment:", newComment);
+//       return thunkAPI.fulfillWithValue(newComment);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
 //     }
 //   }
 // );
-// top5 데이터 불러오기
 
-// export const __topPost = createAsyncThunk(
-//   "topPost",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const data = await apis.topPost();
-//       console.log("payload: ", payload);
-//       console.log("data: ", data.data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
+export const __addComment = createAsyncThunk(
+  "addComment",
+  async (payload, thunkAPI) => {
+    const [addComment, postId] = payload;
+
+    const newComment = { ...addComment, postId: postId };
+    // console.log(comment,postId);
+    try {
+      const data = await baseURL.post(`/comment/${postId}`, newComment);
+      console.log("ssss::", data);
+      thunkAPI.dispatch(__getComment(postId));
+      // 댓글을 추가하고 댓글 데이터를 가져옴
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteComment = createAsyncThunk(
+  "deleteComment",
+  async (payload, thunkAPI) => {
+    try {
+      console.log("payload:", payload);
+      const data = await apis.deleteComment(payload);
+      console.log(data);
+      console.log("deletepayload:", payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __editComment = createAsyncThunk(
+  "editComment",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await baseURL.put(
+        `/api/comment/${payload.postId}/comment/${payload.commentId}`,
+        payload.editComment
+      );
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const __getComment = createAsyncThunk(
+  "getComment",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await apis.getComment();
+      console.log("payload: ", payload);
+      console.log("data: ", data.data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
 
 // 해당 아이디 값 데이터 불러오기 (안먹힘....)
 export const __getIdPost = createAsyncThunk(
@@ -204,23 +255,6 @@ export const __patchPost = createAsyncThunk(
     }
   }
 );
-
-// // id 중복체크
-// export const __checkUserName = createAsyncThunk(
-//   "checkUserName",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const data = await apis.checkUserName(payload);
-//       // const data = await axios.post("http://localhost:3002/recipes", payload);
-//       console.log("payload: ", payload);
-//       console.log("data: ", data.data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
 
 export const postSlice = createSlice({
   name: "post",
@@ -417,6 +451,70 @@ export const postSlice = createSlice({
 
 // export const {} = recipesSlice.actions;
 export default postSlice.reducer;
+
+export const commentSlice = createSlice({
+  name: "comment",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [__addComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__addComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log("action.payload:", action.payload);
+      state.content.push(action.payload);
+      console.log("state:", state);
+    },
+    [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__deleteComment.pending]: (state) => {
+      state.isLoadig = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      state.isLoadig = false;
+      state.content = state.content.filter(
+        (comment) => comment.id !== action.payload.id
+      );
+      console.log("state.content:", state.content);
+      console.log(action.payload);
+    },
+    [__deleteComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      // console.log(action.payload.response.data.errorMessage);
+      alert(action.payload.response.data.errorMessage);
+    },
+
+    [__editComment.pending]: (state, action) => {
+      // state.isLoading = true;
+    },
+    [__editComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const index = state.comment.findIndex(
+        (comment) => comment.commentId === action.payload.commentId
+      );
+      state.comment.splice(index, 1, action.payload);
+    },
+
+    [__editComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      alert(action.payload.response.data.errorMessage);
+    },
+    [__getComment.pending]: (state) => {},
+    [__getComment.fulfilled]: (state, action) => {
+      state.comment = action.payload;
+    },
+    [__getComment.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
+  },
+});
+// export const {} = commentSlice.actions;
 
 // export const __postComment = createAsyncThunk(
 //   "postComment",

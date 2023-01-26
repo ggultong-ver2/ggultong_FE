@@ -1,14 +1,21 @@
 import "./reset.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { __getIdPost, __deletePost } from "../redux/modules/postSlice";
+import {
+  __getIdPost,
+  __deletePost,
+  __getComment,
+  __editComment,
+} from "../redux/modules/postSlice";
 import Swal from "sweetalert2";
 import Likes from "../components/like/Likes";
-import { __addComment, __deleteComment } from "../redux/modules/commentSlice";
+import { __addComment, __deleteComment } from "../redux/modules/postSlice";
+import { timeCalculator } from "../utils/utils";
 
 const Detail = () => {
+  const location = useLocation;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const param = useParams();
@@ -24,6 +31,9 @@ const Detail = () => {
   const detailList = useSelector((state) => state.details.details);
   console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
+  const commentEditList = useSelector(
+    (state) => state.details.details.commentList
+  );
   //console.log("commentList:", commentList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
@@ -43,15 +53,21 @@ const Detail = () => {
   //코멘트 핸들러
 
   const onClickAddCommentHandler = () => {
-    dispatch(__addComment([addComment, Number(id)]));
-    Swal.fire("작성이 완료되었습니다!", "", "success");
-    // setAddComment({
-    //   comment: "",
-    // });
+    dispatch(__addComment([addComment, Number(id)])).then(() => {
+      // window.location.reload();
+    });
   };
 
   const onClickDeleteCommentHandler = (commentId) => {
-    dispatch(__deleteComment({ commentId: commentId, postId: id }));
+    dispatch(__deleteComment({ commentId: commentId, postId: id })).then(() => {
+      window.location.reload();
+    });
+  };
+
+  const onClickEditCommentHandler = (commentId) => {
+    dispatch(__editComment({ commentId: commentId, postId: id })).then(() => {
+      window.location.reload();
+    });
   };
 
   //게시글 핸들러
@@ -81,7 +97,6 @@ const Detail = () => {
     }
   };
   // console.log(details.createdAt);
-
   if (details.id) {
     return (
       <div>
@@ -95,7 +110,7 @@ const Detail = () => {
                 <Date>{details?.createdAt.slice(0, 10)}</Date>
               </Etc>
               <Etcs>
-                <Countcomment>댓글</Countcomment>
+                <Countcomment>댓글 {details?.comment.length} </Countcomment>
                 <Heart>좋아요 {details?.likePostSum}</Heart>
               </Etcs>
             </Else>
@@ -115,7 +130,7 @@ const Detail = () => {
           </div>
           <Commentarea>
             <Writecomment>
-              <Myprofile />
+              <Myprofile src={localStorage.getItem("profileImg")} />
               <Commentinput
                 placeholder="댓글을 작성할 수 있어요."
                 type="text"
@@ -124,17 +139,18 @@ const Detail = () => {
                   setAddComment({ ...addComment, content: e.target.value });
                 }}
               />
-              <button onClick={onClickAddCommentHandler}>확인</button>
+              <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
             </Writecomment>
             {commentList.map((comment) => {
               return (
                 <Commentbox>
                   <Commenttextarea>
-                    <Profileimg />
+                    <Profileimg src={comment.profileImg} />
                     <WrapWritten>
                       <Writtenby>{comment.nickname}</Writtenby>
                       <Writtendate>
-                        {comment.createdAt.slice(0, 10)}
+                        {timeCalculator(comment.createdAt)}
+                        {/* {comment.createdAt.slice(0, 10)} */}
                       </Writtendate>
                       <Commentcontent>{comment.content}</Commentcontent>
                       <button>수정하기</button>
@@ -235,59 +251,100 @@ const StDeleteBtn = styled.button`
   background-color: transparent;
   font-size: 25px;
 `;
+
+const CommentBtn = styled.button`
+  margin-top: 10px;
+  float: right;
+  width: 68px;
+  height: 32px;
+  background-color: white;
+  border: 1px solid #e4e4e4;
+  border-radius: 15px;
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+    border: 1px solid black;
+  }
+  font-family: "Pretendard";
+`;
+
 const Date = styled.p``;
 const Commentarea = styled.div`
   margin-top: 10px;
 `;
 const Writecomment = styled.div`
+  margin: auto;
   width: 800px;
-  height: 105px;
-  margin-left: 200px;
+  height: 160px;
 `;
 const Myprofile = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: #d9d9d9;
   float: left;
   margin: 10px;
 `;
 const Commentinput = styled.textarea`
-  width: 720px;
-  height: 100px;
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 742px;
+  height: 118px;
   float: left;
   resize: none;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  outline: none;
+`;
+
+const CommentEditinput = styled.textarea`
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 742px;
+  height: 118px;
+  float: left;
+  resize: none;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  outline: none;
 `;
 const Commentbox = styled.div`
   width: 800px;
-  height: 80px;
+  height: 120px;
   margin-left: 200px;
 `;
 const Commenttextarea = styled.div`
   margin-top: 10px;
 `;
 const WrapWritten = styled.div`
+  margin-top: 17px;
   width: 200px;
   height: 25px;
   float: left;
 `;
 const Writtenby = styled.p`
+  font-size: 14px;
+  font-weight: 600;
   float: left;
   margin-right: 10px;
 `;
 const Writtendate = styled.p`
+  font-size: 14px;
+  font-weight: 400;
   float: left;
   color: #979797;
 `;
 const Commentcontent = styled.div`
   // border: 1px solid green;
-  height: 50px;
+  font-size: 14px;
+  font-weight: 400;
   width: 720px;
   margin-top: 25px;
 `;
 const Profileimg = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: #d9d9d9;
   margin: 12px;
