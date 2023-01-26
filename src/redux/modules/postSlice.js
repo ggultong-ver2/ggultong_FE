@@ -7,7 +7,7 @@ const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
-  details: [],
+  details: { comment: [] },
   // patch:[],
   checkPostLike: false,
   likePostSum: 0,
@@ -62,7 +62,7 @@ export const __addComment = createAsyncThunk(
     try {
       const data = await baseURL.post(`/comment/${postId}`, newComment);
       console.log("ssss::", data);
-      thunkAPI.dispatch(__getComment(postId));
+      // thunkAPI.dispatch(__getComment(postId));
       // 댓글을 추가하고 댓글 데이터를 가져옴
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -78,7 +78,6 @@ export const __deleteComment = createAsyncThunk(
     try {
       console.log("payload:", payload);
       const data = await apis.deleteComment(payload);
-      console.log(data);
       console.log("deletepayload:", payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
@@ -430,40 +429,13 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
-    // // 아이디 중복체크
-    // [__checkUserName.pending]: (state) => {
-    //   state.isLoading = true;
-    //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
-    // },
-    // [__checkUserName.fulfilled]: (state, action) => {
-    //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
-    //   state.isLoading = false;
-    //   state.posts = action.payload;
-    // },
-    // [__checkUserName.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    //   // 에러 발생-> 네트워크 요청은 끝,false
-    //   // catch 된 error 객체를 state.error에 넣습니다.
-    // },
-  },
-});
-
-// export const {} = recipesSlice.actions;
-export default postSlice.reducer;
-
-export const commentSlice = createSlice({
-  name: "comment",
-  initialState,
-  reducers: {},
-  extraReducers: {
     [__addComment.pending]: (state) => {
       state.isLoading = true;
     },
     [__addComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log("action.payload:", action.payload);
-      state.content.push(action.payload);
+      state.details.comment.push(action.payload);
       console.log("state:", state);
     },
     [__addComment.rejected]: (state, action) => {
@@ -476,17 +448,17 @@ export const commentSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoadig = false;
-      state.content = state.content.filter(
-        (comment) => comment.id !== action.payload.id
-      );
-      console.log("state.content:", state.content);
+      state.details.comment.pop(action.payload);
+      // state.details.comment = state.details.comment.filter(
+      //   (comment) => comment.id !== action.payload.id
+      // );
+      console.log("state.details.comment:", state.details.comment);
       console.log(action.payload);
     },
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
       // console.log(action.payload.response.data.errorMessage);
-      alert(action.payload.response.data.errorMessage);
     },
 
     [__editComment.pending]: (state, action) => {
@@ -513,7 +485,28 @@ export const commentSlice = createSlice({
       state.error = action.payload;
     },
   },
+
+  // // 아이디 중복체크
+  // [__checkUserName.pending]: (state) => {
+  //   state.isLoading = true;
+  //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
+  // },
+  // [__checkUserName.fulfilled]: (state, action) => {
+  //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
+  //   state.isLoading = false;
+  //   state.posts = action.payload;
+  // },
+  // [__checkUserName.rejected]: (state, action) => {
+  //   state.isLoading = false;
+  //   state.error = action.payload;
+  //   // 에러 발생-> 네트워크 요청은 끝,false
+  //   // catch 된 error 객체를 state.error에 넣습니다.
+  // },
 });
+
+// export const {} = recipesSlice.actions;
+export default postSlice.reducer;
+
 // export const {} = commentSlice.actions;
 
 // export const __postComment = createAsyncThunk(

@@ -4,9 +4,8 @@ import posts from "../modules/postSlice";
 import post from "../modules/postSlice";
 import { __patchPost } from "../modules/postSlice";
 // import comment from "../modules/commentSlice";
-import { commentSlice } from "../modules/postSlice";
 const store = configureStore({
-  reducer: { details, posts, post, __patchPost, commentSlice },
+  reducer: { details, posts, post, __patchPost },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),

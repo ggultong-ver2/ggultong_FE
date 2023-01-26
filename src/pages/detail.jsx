@@ -20,20 +20,18 @@ const Detail = () => {
   const navigate = useNavigate();
   const param = useParams();
   const { id } = useParams();
+  const [text, setText] = useState("");
+  const [render, setRender] = useState("");
   // console.log(param, id);
   const [details, setDetails] = useState({});
   const [addComment, setAddComment] = useState({
     content: "",
   });
 
-  console.log("addComment:", addComment);
-
   const detailList = useSelector((state) => state.details.details);
   console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
-  const commentEditList = useSelector(
-    (state) => state.details.details.commentList
-  );
+
   //console.log("commentList:", commentList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
@@ -53,21 +51,40 @@ const Detail = () => {
   //코멘트 핸들러
 
   const onClickAddCommentHandler = () => {
-    dispatch(__addComment([addComment, Number(id)])).then(() => {
-      // window.location.reload();
-    });
+    dispatch(__addComment([addComment, Number(id)]));
+    Swal.fire("댓글 작성완료!", "", "success");
   };
 
   const onClickDeleteCommentHandler = (commentId) => {
-    dispatch(__deleteComment({ commentId: commentId, postId: id })).then(() => {
-      window.location.reload();
-    });
+    try {
+      dispatch(__deleteComment({ commentId: commentId, postId: id }));
+      if (localStorage.getItem("Access_Token") !== null) {
+        Swal.fire("댓글 삭제완료!", "", "success");
+      } else {
+        Swal.fire(
+          "로그인 후 이용해주세요",
+          "본인 외에 삭제할 수 없습니다.",
+          "error"
+        );
+      }
+    } catch (error) {
+      // Swal.fire("본인만 삭제가능", "본인 외에 삭제할 수 없습니다.", "");
+    }
+
+    // if (res.data.) {
+    //   Swal.fire("댓글 삭제완료!", "", "success");
+    // } else {
+    //   console.log("asdadsad", detailList.comment[2]);
+    //   Swal.fire("본인만 삭제가능", "본인 외에 삭제할 수 없습니다.", "");
+    // } catch{
+
+    // }
   };
 
   const onClickEditCommentHandler = (commentId) => {
-    dispatch(__editComment({ commentId: commentId, postId: id })).then(() => {
-      window.location.reload();
-    });
+    dispatch(__editComment({ commentId: commentId, postId: id })).then(
+      () => {}
+    );
   };
 
   //게시글 핸들러
@@ -96,6 +113,11 @@ const Detail = () => {
       );
     }
   };
+
+  const onChange = (e) => {
+    setAddComment(e.target.value);
+  };
+
   // console.log(details.createdAt);
   if (details.id) {
     return (
