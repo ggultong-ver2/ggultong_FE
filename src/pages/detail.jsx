@@ -24,7 +24,7 @@ const Detail = () => {
   const detailList = useSelector((state) => state.details.details);
   console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
-  //console.log("commentList:", commentList);
+  console.log("commentList:", commentList);
   const [isLogin, setIsLogin] = useState(false);
   // const [likeToggle, setLikeToggle] = useState(false);
 
@@ -128,13 +128,13 @@ const Detail = () => {
             </Writecomment>
             {commentList.map((comment) => {
               return (
-                <Commentbox>
+                <Commentbox key={comment}>
                   <Commenttextarea>
                     <Profileimg />
                     <WrapWritten>
                       <Writtenby>{comment.nickname}</Writtenby>
                       <Writtendate>
-                        {comment.createdAt.slice(0, 10)}
+                        {/* {comment.createdAt.slice(0, 10)} */}
                       </Writtendate>
                       <Commentcontent>{comment.content}</Commentcontent>
                       <button>수정하기</button>
@@ -209,7 +209,8 @@ const StContent = styled.div`
   height: 350px;
   width: 800px;
   padding: 10px;
-  font-size: 18px; ;
+  font-size: 18px;
+  word-break: break-all;
 `;
 const StFiles = styled.img`
   height: 350px;

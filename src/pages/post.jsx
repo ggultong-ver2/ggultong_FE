@@ -6,8 +6,7 @@ import styled from "styled-components";
 import "./reset.css";
 // import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import Quill from "../components/editorComponent/quill";
 
 const Post = () => {
   const dispatch = useDispatch();
@@ -57,8 +56,6 @@ const Post = () => {
       console.log(pair[0] + "," + pair[1]);
     }
   };
-
-  const [viewContent, setViewContent] = useState([]);
 
   return (
     <Form
@@ -120,8 +117,7 @@ const Post = () => {
           // }}
         /> */}
         <br></br>
-        <ReactQuill type="text" onChange={(content) => {}} />
-        {/* <Quill type="text" content={content} setContent={setContent} /> */}
+        <Quill type="text" content={content} setContent={setContent} />
         <File>
           첨부파일
           <FileInput

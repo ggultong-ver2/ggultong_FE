@@ -13,6 +13,7 @@ const initialState = {
   likePostSum: 0,
   isLoading: false,
   error: null,
+  posts: [],
 };
 
 // 데이터 불러오기
