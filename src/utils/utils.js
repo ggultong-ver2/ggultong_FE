@@ -1,19 +1,24 @@
-export const timeCalculator = (writtenAtTime) => {
-  const writtenTime = new Date(writtenAtTime);
-  const now = new Date();
+export const timeCalculator = (value) => {
+  const today = new Date();
+  const timeValue = new Date(value);
 
-  const diffMin = now - writtenTime;
-
-  if (diffMin < 6000000) {
-    return "방금전";
-  } else if (diffMin < 360000000) {
-    const min = Math.floor((diffMin / (1000 * 60)) % 60);
-    return `${min}분 전`;
-  } else if (360000000 < diffMin < 86400000000) {
-    const hour = Math.floor((diffMin / (1000 * 60 * 60)) % 24);
-    return `약 ${hour}시간 전`;
-  } else if (86400000000 < diffMin) {
-    const date = Math.floor(diffMin / (1000 * 60 * 60 * 24));
-    return `${date}일전`;
+  const betweenTime = Math.floor(
+    (today.getTime() - timeValue.getTime()) / 1000 / 60
+  );
+  if (betweenTime < 1) return "방금전";
+  if (betweenTime < 60) {
+    return `${betweenTime}분전`;
   }
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+    return `약 ${betweenTimeHour}시간전`;
+  }
+
+  const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+  if (betweenTimeDay < 365) {
+    return `${betweenTimeDay}일전`;
+  }
+
+  return `${Math.floor(betweenTimeDay / 365)}년전`;
 };

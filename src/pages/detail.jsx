@@ -6,13 +6,13 @@ import styled from "styled-components";
 import {
   __getIdPost,
   __deletePost,
-  __getComment,
   __editComment,
 } from "../redux/modules/postSlice";
 import Swal from "sweetalert2";
 import Likes from "../components/like/Likes";
 import { __addComment, __deleteComment } from "../redux/modules/postSlice";
 import { timeCalculator } from "../utils/utils";
+import EditComment from "./EditComment";
 
 const Detail = () => {
   const location = useLocation;
@@ -20,14 +20,15 @@ const Detail = () => {
   const navigate = useNavigate();
   const param = useParams();
   const { id } = useParams();
-  const [text, setText] = useState("");
-  const [render, setRender] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [modifycomment, setModifyComment] = useState(0);
   // console.log(param, id);
   const [details, setDetails] = useState({});
+  // const [editcomment, setEditComment] = useState({});
   const [addComment, setAddComment] = useState({
     content: "",
   });
-
+  const [text, setText] = useState("");
   const detailList = useSelector((state) => state.details.details);
   console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
@@ -46,20 +47,39 @@ const Detail = () => {
       setDetails(detailList);
     }
   }, [detailList]);
+
+  // useEffect(() => {
+  //   if (commentList) {
+  //     setEditComment(commentList);
+  //   }
+  // }, [commentList]);
+
   // console.log("detailList:", details);
 
   //코멘트 핸들러
 
   const onClickAddCommentHandler = () => {
     dispatch(__addComment([addComment, Number(id)]));
-    Swal.fire("댓글 작성완료!", "", "success");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "댓글 작성완료",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   const onClickDeleteCommentHandler = (commentId) => {
     try {
       dispatch(__deleteComment({ commentId: commentId, postId: id }));
       if (localStorage.getItem("Access_Token") !== null) {
-        Swal.fire("댓글 삭제완료!", "", "success");
+        Swal.fire({
+          position: "top-middle",
+          icon: "success",
+          title: "댓글 삭제완료",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         Swal.fire(
           "로그인 후 이용해주세요",
@@ -79,12 +99,6 @@ const Detail = () => {
     // } catch{
 
     // }
-  };
-
-  const onClickEditCommentHandler = (commentId) => {
-    dispatch(__editComment({ commentId: commentId, postId: id })).then(
-      () => {}
-    );
   };
 
   //게시글 핸들러
@@ -112,10 +126,6 @@ const Detail = () => {
         "warning"
       );
     }
-  };
-
-  const onChange = (e) => {
-    setAddComment(e.target.value);
   };
 
   // console.log(details.createdAt);
@@ -161,31 +171,61 @@ const Detail = () => {
                   setAddComment({ ...addComment, content: e.target.value });
                 }}
               />
-              <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
+              <CommentBtn
+                onClick={() => {
+                  onClickAddCommentHandler();
+                }}
+              >
+                확인
+              </CommentBtn>
             </Writecomment>
-            {commentList.map((comment) => {
-              return (
-                <Commentbox>
-                  <Commenttextarea>
-                    <Profileimg src={comment.profileImg} />
-                    <WrapWritten>
-                      <Writtenby>{comment.nickname}</Writtenby>
-                      <Writtendate>
-                        {timeCalculator(comment.createdAt)}
-                        {/* {comment.createdAt.slice(0, 10)} */}
-                      </Writtendate>
-                      <Commentcontent>{comment.content}</Commentcontent>
-                      <button>수정하기</button>
-                      <button
-                        onClick={() => onClickDeleteCommentHandler(comment.id)}
-                      >
-                        삭제하기
-                      </button>
-                    </WrapWritten>
-                  </Commenttextarea>
-                </Commentbox>
-              );
-            })}
+            <div>
+              {commentList.map((comment) => {
+                return (
+                  <>
+                    {visible && comment.id === modifycomment ? (
+                      <EditComment
+                        commentId={comment.id}
+                        setvisible={setVisible}
+                      />
+                    ) : (
+                      <Commentbox>
+                        <Commenttextarea>
+                          <Profileimg src={comment.profileImg} />
+                          <WrapWritten>
+                            <Writtenby>{comment.nickname}</Writtenby>
+                            <Writtendate>
+                              {timeCalculator(comment.createdAt)}
+                            </Writtendate>
+                            <Commentcontent>{comment.content}</Commentcontent>
+                            {localStorage.getItem("nickname") ===
+                            comment.nickname ? (
+                              <>
+                                <button
+                                  onClick={() => {
+                                    setModifyComment(comment.id);
+                                    setVisible(true);
+                                  }}
+                                >
+                                  수정하기
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    onClickDeleteCommentHandler(comment.id)
+                                  }
+                                >
+                                  삭제하기
+                                </button>
+                              </>
+                            ) : null}
+                          </WrapWritten>
+                        </Commenttextarea>
+                      </Commentbox>
+                    )}
+                  </>
+                );
+              })}
+            </div>
           </Commentarea>
         </StDetail>
       </div>
@@ -320,17 +360,6 @@ const Commentinput = styled.textarea`
   outline: none;
 `;
 
-const CommentEditinput = styled.textarea`
-  padding-top: 10px;
-  padding-left: 10px;
-  width: 742px;
-  height: 118px;
-  float: left;
-  resize: none;
-  border: 1px solid #e4e4e4;
-  border-radius: 4px;
-  outline: none;
-`;
 const Commentbox = styled.div`
   width: 800px;
   height: 120px;

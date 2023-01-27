@@ -7,8 +7,8 @@ const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
-  details: { comment: [] },
-  // patch:[],
+  details: { comment: {} },
+
   checkPostLike: false,
   likePostSum: 0,
   isLoading: false,
@@ -90,16 +90,17 @@ export const __editComment = createAsyncThunk(
   "editComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await baseURL.put(
-        `/api/comment/${payload.postId}/comment/${payload.commentId}`,
-        payload.editComment
-      );
+      console.log("ppp==", payload);
+      const data = await baseURL.put(`comment/${payload.commentId}`, {
+        content: payload.editcomment,
+      });
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
 export const __getComment = createAsyncThunk(
   "getComment",
   async (payload, thunkAPI) => {
@@ -448,12 +449,11 @@ export const postSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoadig = false;
-      state.details.comment.pop(action.payload);
-      // state.details.comment = state.details.comment.filter(
-      //   (comment) => comment.id !== action.payload.id
-      // );
-      console.log("state.details.comment:", state.details.comment);
-      console.log(action.payload);
+      // state.details.comment.pop(action.payload);
+      const newComment = state.details.comment.filter(
+        (comment) => comment.id !== action.payload.commentId
+      );
+      state.details.comment = newComment;
     },
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -462,20 +462,21 @@ export const postSlice = createSlice({
     },
 
     [__editComment.pending]: (state, action) => {
-      // state.isLoading = true;
+      state.isLoading = true;
+      state.error = action.payload;
     },
     [__editComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      const index = state.comment.findIndex(
-        (comment) => comment.commentId === action.payload.commentId
+      const index = state.details.comment.findIndex(
+        (comment) => comment.id === action.payload.commentId
       );
-      state.comment.splice(index, 1, action.payload);
+      state.comment.splice(index, 1, action.payload.content);
+      console.log("index", index);
     },
-
+    // 남은것 : 코멘트 CSS, 수정부분 랜더링, 수정폼 - 확인누르면 visible, 인풋창 초기화
     [__editComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      alert(action.payload.response.data.errorMessage);
     },
     [__getComment.pending]: (state) => {},
     [__getComment.fulfilled]: (state, action) => {

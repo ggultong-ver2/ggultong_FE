@@ -15,7 +15,7 @@ import SignUpPage from "../pages/SignUpPage";
 import SignAgree from "../pages/SignAgree";
 import Detail from "../pages/detail";
 import Post from "../pages/post";
-import EditPost from "../pages/editPost";
+import EditPost from "../pages/EditPost";
 import SignComplete from "../pages/SignComplete";
 import MyConfirm from "../pages/MyConfirm";
 import Search from "../components/search/Search";
@@ -33,6 +33,7 @@ import NaverLogin from "../pages/NaverLogin";
 import Game from "../pages/GameList";
 import GameList from "../pages/GameList";
 import WorldCupGame from "../pages/WorldCupGame";
+import EditComment from "../pages/EditComment";
 
 const Router = () => {
   return (
@@ -50,6 +51,7 @@ const Router = () => {
           <Route path="drinkList/:category/detail/:id" element={<Detail />} />
           <Route path="mealList/:category/detail/:id" element={<Detail />} />
           <Route path="recycleList/:category/detail/:id" element={<Detail />} />
+          <Route path="/editcomment" element={<EditComment />} />
           <Route path="/post" element={<Post />} />
           <Route path="/editor" element={<Editor />} />
           <Route path="/pwfind" element={<Pwfind />} />
