@@ -107,14 +107,9 @@ const PostLoginPage = () => {
   );
 };
 const StContainer = styled.form`
-  width: 100%;
-  height: 100vh;
   display: flex;
-  background-color: #f9fafb;
-  align-items: center;
   justify-content: center;
-  background-size: cover;
-  font-family: "Pretendard";
+  background-color: #f9fafb;
 `;
 
 const StLoginBox = styled.div`
@@ -140,16 +135,14 @@ const StCenterBox = styled.div`
   width: 588px;
   height: 707px;
   align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
   padding-top: 80px;
   border: 0;
   border-radius: 1px;
   box-sizing: border-box;
   display: flex;
-  float: right;
   flex-direction: column;
-  flex-shrink: 0;
-  font-size: 100%;
-  font-family: "Pretendard";
 `;
 
 const StInput = styled.input`

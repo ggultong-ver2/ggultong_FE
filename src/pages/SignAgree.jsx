@@ -217,10 +217,8 @@ function SignAgree() {
 
 const StContainer = styled.form`
   width: 100%;
-  height: 100vh;
   display: flex;
   background-color: #f9fafb;
-  align-items: center;
   justify-content: center;
   background-size: cover;
   font-family: "Pretendard";
@@ -230,6 +228,7 @@ const StCenterBox = styled.div`
   background-color: #ffffff;
   width: 588px;
   height: 707px;
+  margin: 100px 0;
   align-items: center;
   padding-top: 80px;
   border: 0;
