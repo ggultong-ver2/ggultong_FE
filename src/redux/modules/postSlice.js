@@ -8,26 +8,21 @@ const initialState = {
   signup: [],
   posts: [],
   categoryPosts: [],
-  // details: [],
-
-  details:{
+  details: {
     title: "",
     content: "",
     id: 0,
-    comments:[{
-      nickname: "",
-      content: "",
-      id: 0,
-    }],
-    checkPostLike: false,
-    likePostSum: 0
+    comments: [
+      {
+        nickname: "",
+        content: "",
+        id: 0,
+      },
+    ],
+    isLikedPost: false,
+    likePostSum: 0,
   },
-
   // patch:[],
-
-  // comments: [],
-  // checkPostLike: false,
-  // likePostSum: 0,
   isLoading: false,
   error: null,
   post: {},
@@ -165,15 +160,19 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-
 export const __postLike = createAsyncThunk(
   "postLike",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await baseURL.post(`/like/post/${payload}` , {}, {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` }});
+      const { data } = await baseURL.post(
+        `/like/post/${payload}`,
+        {},
+        {
+          headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+        }
+      );
       console.log(data);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data?.status);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -375,19 +374,13 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postLike.fulfilled]: (state, action) => {
-      // 액션으로 받은 값 = payload 추가해준다.
-      // console.log("action: ", action.payload);
-
-      if(action.payload === true) {
-        state.checkPostLike = true;
-        state.likePostSum = state.likePostSum+1;
-      }else{
-        state.checkPostLike = false;
+      if (action.payload === "true") {
+        state.details.isLikedPost = true;
+        state.details.likePostSum = state.details.likePostSum + 1;
+      } else {
+        state.details.isLikedPost = false;
+        state.details.likePostSum = state.details.likePostSum - 1;
       }
-
-      // state.checkPostLike = action.payload === true? true : false;
-      // state.likePostSum = action.payload ===true? state.likePostSum + 1 : state.likePostSum - 1;
-
       state.isLoading = false;
       state.posts = action.payload;
     },

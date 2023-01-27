@@ -1,49 +1,41 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { __postLike } from "../../redux/modules/postSlice";
-import "./style.css"
+import "./style.css";
 import CheckLogin from "../../hook/CheckLogin";
-import { useEffect } from "react";
 
 const Likes = () => {
-  const {isLogin} = CheckLogin();
+  const { isLogin } = CheckLogin();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const checkPostLike = useSelector(
-    (state) => state.post.checkPostLike
-  );
-  console.log(checkPostLike)
-
-  const likePostSum = useSelector(
-    (state) => state.post.likePostSum
-  );
-
-  // useEffect(() => {
-
-  // }, {likePostSum})
+  const post = useSelector((state) => state?.post);
+  const isLikedPost = useSelector((state) => state?.post?.details?.isLikedPost);
+  const likePostSum = useSelector((state) => state?.post?.details?.likePostSum);
+  console.log(isLikedPost);
 
   const likeToggle = () => {
-    if(isLogin){
+    if (isLogin) {
       dispatch(__postLike(id));
-    }else{
+    } else {
       alert("로그인 시 이용가능합니다.");
     }
   };
-
-  useEffect(() => {
-
-  }, [])
-
   return (
-    <div className="like_button">
-      {checkPostLike ? (
-        <span onClick={likeToggle}>💛</span>
-      ) : (
-        <span onClick={likeToggle}>🖤</span>
-      )}
-    </div>
+    <>
+      <div className="like_button">
+        {isLikedPost ? (
+          <div onClick={likeToggle} className="like_onclick_wrap">
+            {likePostSum} <div className="like_onclick"></div>
+          </div>
+        ) : (
+          <div onClick={likeToggle} className="like_default_wrap">
+            {likePostSum}
+            <div className="like_default"></div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
-
 
 export default Likes;
