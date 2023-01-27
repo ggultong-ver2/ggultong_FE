@@ -28,7 +28,7 @@ function Drink() {
           </li>
           <li>
             <div className="room_image"></div>
-            <p>연말 파티를 안가는 당신에게. 누구보다 맛있게 술 마시는 방법</p>
+            <p>연말 파티에 가지 않는 당신에게. 누구보다 맛있게 혼술 즐기는 방법</p>
           </li>
         </ul>
       </div>
