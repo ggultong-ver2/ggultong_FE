@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __getCategoryPost } from "../../redux/modules/postSlice";
+import Pagination from "../../components/pagination/pagination";
 // import { __getPost } from "../../redux/modules/postSlice";
 
 const DrinkList = () => {
@@ -21,7 +22,7 @@ const DrinkList = () => {
     dispatch(__getCategoryPost(id));
   }, [dispatch, id]);
 
-  const categoryPosts = useSelector((state) => state.posts.categoryPosts);
+  const categoryPosts = useSelector((state) => state.details.categoryPosts);
   console.log("categoryPosts:", categoryPosts);
 
   return (
