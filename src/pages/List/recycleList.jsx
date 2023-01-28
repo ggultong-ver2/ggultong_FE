@@ -14,7 +14,7 @@ const RecycleList = () => {
     dispatch(__getCategoryPost(id));
   }, [dispatch, id]);
 
-  const categoryPosts = useSelector((state) => state.posts.categoryPosts);
+  const categoryPosts = useSelector((state) => state.details.categoryPosts);
   console.log("categoryPosts:", categoryPosts);
 
   return (

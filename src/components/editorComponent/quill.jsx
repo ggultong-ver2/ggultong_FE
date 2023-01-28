@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { useMemo, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useMemo } from "react";
-import { useRef } from "react";
 import { baseURL } from "../../lib/axios";
+// import ImageResize from "@looop/quill-image-resize-module-react";
 
+// Quill.register("modules/ImageResize", ImageResize);
 const Quill = ({ content, setContent, value }) => {
   const quillRef = useRef();
 
@@ -101,6 +101,9 @@ const Quill = ({ content, setContent, value }) => {
           image: imageHandler,
         },
       },
+      // ImageResize: {
+      //   modules: ["Resize"],
+      // },
     };
   }, []);
 
