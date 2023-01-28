@@ -45,7 +45,7 @@ const DrinkList = () => {
         </Buttons>
         <Wrap>
           {categoryPosts.map((post) => {
-            console.log(post);
+            // console.log(post);
             return (
               <Card key={post.id} onClick={() => navigate(`detail/${post.id}`)}>
                 <Textwrap>

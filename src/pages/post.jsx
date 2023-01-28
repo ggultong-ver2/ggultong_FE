@@ -49,8 +49,12 @@ const Post = () => {
     //}
     // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
     dispatch(__addPost(formdata));
-    Swal.fire("작성이 완료되었습니다!", "", "success");
-    navigate(`/drinkList/drink`);
+    Swal.fire("작성이 완료되었습니다!", "", "success").then((res) => {
+      console.log(res);
+      if (res.isConfirmed) {
+        navigate(`/drinkList/drink`);
+      }
+    });
 
     for (const pair of formdata) {
       console.log(pair[0] + "," + pair[1]);
@@ -118,6 +122,9 @@ const Post = () => {
           // }}
         /> */}
           <br></br>
+          {/* <h1 style={{ padding: "20px" }}>
+            [#006888 YERIEL] React Quill Image Resize
+          </h1> */}
           <Quill type="text" content={content} setContent={setContent} />
           <File>
             첨부파일

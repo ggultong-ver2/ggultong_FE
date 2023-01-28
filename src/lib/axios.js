@@ -60,9 +60,13 @@ export const apis = {
   // 게시글 관련
   getPost: () => instance.get("/post/postList"),
   getIdPost: (id) => {
-    return instance.get(`/post/${id}`);
-  },
-  getCategoryPost: (category) => {
+    const token = localStorage.getItem("Access_Token");
+    if (token) {
+      return baseURL.get(`/post/${id}`);
+    } else {
+      return instance.get(`/post/${id}`);
+    }
+  },  getCategoryPost: (category) => {
     return instance.get(`/post/postList/${category}/1`);
   },
 

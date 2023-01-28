@@ -9,10 +9,12 @@ const Likes = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const post = useSelector((state) => state?.post);
-  const isLikedPost = useSelector((state) => state?.post?.details?.isLikedPost);
-  const likePostSum = useSelector((state) => state?.post?.details?.likePostSum);
+  const post = useSelector((state) => state?.details);
+  const isLikedPost = useSelector((state) => state?.details?.details?.isLikedPost);
+  const likePostSum = useSelector((state) => state?.details?.details?.likePostSum);
   console.log(isLikedPost);
+  console.log(likePostSum);
+  console.log(post)
 
   const likeToggle = () => {
     if (isLogin) {

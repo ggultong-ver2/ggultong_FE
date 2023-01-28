@@ -103,8 +103,11 @@ const Detail = () => {
   const onClickDeletePostHandler = () => {
     if (localStorage.getItem("nickname") === detailList.nickname) {
       dispatch(__deletePost(id));
-      Swal.fire("삭제 완료", "삭제 완료되었습니다!", "success");
-      // navigate(`/drinkList/drink`);
+      Swal.fire("삭제 완료", "삭제 완료되었습니다!", "success").then((res) => {
+        if (res.isConfirmed) {
+          navigate(`/drinkList/drink`);
+        }
+      });
     } else {
       Swal.fire("로그인 후 이용해주세요!", "", "warning");
     }
@@ -124,6 +127,12 @@ const Detail = () => {
       );
     }
   };
+
+  // useEffect(() => {
+  //   if (details.id) return;
+  //   navigate(`/drinkList/drink`);
+  // }, [details]);
+  // // details가 없으면 실행시키지 않게다.
 
   console.log("visible", visible);
   if (details.id) {

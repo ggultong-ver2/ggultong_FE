@@ -32,8 +32,11 @@ const EditPost = () => {
     // for (const pair of formdata) {
     //   console.log(pair[0] + "," + pair[1]);
     // }
-    Swal.fire("수정완료", "수정 완료되었습니다!", "success");
-    navigate(`/drinkList/drink`);
+    Swal.fire("수정완료", "수정 완료되었습니다!", "success").then((res) => {
+      if (res.isConfirmed) {
+        navigate(`/drinkList/drink`);
+      }
+    });
     for (let key of formdata.keys()) {
       console.log(key);
     }
