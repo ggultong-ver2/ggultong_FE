@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useInput } from "../lib/utils/useInput";
-import __nickCheck from "../redux/modules/checkNickSlice";
+import { __nickCheck } from "../api/submit/Login";
 import fileinput from "../assets/images/fileinput.png";
 import { __patchPost } from "../redux/modules/postSlice";
 import MySmallTab from "./Tabs/MySmallTab";
-import __deleteId from "../redux/modules/deleteUserSlice";
+import { __deleteId } from "../api/submit/Login";
 
 function MyPage() {
   const imgRef = useRef();

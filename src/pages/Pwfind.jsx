@@ -5,7 +5,7 @@ import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
 import "../pages/reset.css";
 
-import __pwfind from "../redux/modules/findPwSlice";
+import { __pwfind } from "../api/submit/Login";
 
 const PostLoginPage = () => {
   // const url1 =

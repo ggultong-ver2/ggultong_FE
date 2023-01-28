@@ -60,6 +60,8 @@ const Detail = () => {
 
   const onClickAddCommentHandler = () => {
     dispatch(__addComment([addComment, Number(id)]));
+    console.log("add", addComment);
+    setAddComment({ ...addComment, content: "" });
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -128,7 +130,7 @@ const Detail = () => {
     }
   };
 
-  // console.log(details.createdAt);
+  console.log("visible", visible);
   if (details.id) {
     return (
       <div>
@@ -171,13 +173,7 @@ const Detail = () => {
                   setAddComment({ ...addComment, content: e.target.value });
                 }}
               />
-              <CommentBtn
-                onClick={() => {
-                  onClickAddCommentHandler();
-                }}
-              >
-                확인
-              </CommentBtn>
+              <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
             </Writecomment>
             <div>
               {commentList.map((comment) => {
@@ -186,7 +182,7 @@ const Detail = () => {
                     {visible && comment.id === modifycomment ? (
                       <EditComment
                         commentId={comment.id}
-                        setvisible={setVisible}
+                        setVisible={setVisible}
                       />
                     ) : (
                       <Commentbox>
@@ -198,26 +194,29 @@ const Detail = () => {
                               {timeCalculator(comment.createdAt)}
                             </Writtendate>
                             <Commentcontent>{comment.content}</Commentcontent>
-                            {localStorage.getItem("nickname") ===
-                            comment.nickname ? (
-                              <>
-                                <button
-                                  onClick={() => {
-                                    setModifyComment(comment.id);
-                                    setVisible(true);
-                                  }}
-                                >
-                                  수정하기
-                                </button>
-                                <button
-                                  onClick={() =>
-                                    onClickDeleteCommentHandler(comment.id)
-                                  }
-                                >
-                                  삭제하기
-                                </button>
-                              </>
-                            ) : null}
+                            <StBox>
+                              {localStorage.getItem("nickname") ===
+                              comment.nickname ? (
+                                <>
+                                  <EditBtn
+                                    onClick={() => {
+                                      setModifyComment(comment.id);
+                                      setVisible(true);
+                                    }}
+                                  >
+                                    수정
+                                  </EditBtn>
+
+                                  <DeleteBtn
+                                    onClick={() =>
+                                      onClickDeleteCommentHandler(comment.id)
+                                    }
+                                  >
+                                    삭제
+                                  </DeleteBtn>
+                                </>
+                              ) : null}
+                            </StBox>
                           </WrapWritten>
                         </Commenttextarea>
                       </Commentbox>
@@ -348,16 +347,50 @@ const Myprofile = styled.img`
   float: left;
   margin: 10px;
 `;
+
+const StBox = styled.div`
+  width: 750px;
+  display: flex;
+  justify-content: right;
+`;
 const Commentinput = styled.textarea`
   padding-top: 10px;
   padding-left: 10px;
-  width: 742px;
+  width: 650px;
   height: 118px;
   float: left;
   resize: none;
   border: 1px solid #e4e4e4;
   border-radius: 4px;
   outline: none;
+`;
+
+const EditBtn = styled.button`
+  margin-bottom: 30px;
+  background-color: white;
+  border: 0;
+  padding-right: 10px;
+  width: 40px;
+  height: 16px;
+  border-right: 1px solid #e4e4e4;
+  color: #a0a0a0;
+  font-size: 14px;
+  font-family: "Pretendard";
+  cursor: pointer;
+`;
+
+const DeleteBtn = styled.button`
+  margin-bottom: 30px;
+  background-color: white;
+  padding-left: 7px;
+  padding-bottom: 4px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  color: #a0a0a0;
+  font-size: 14px;
+  font-family: "Pretendard";
+  cursor: pointer;
 `;
 
 const Commentbox = styled.div`
@@ -390,7 +423,7 @@ const Commentcontent = styled.div`
   // border: 1px solid green;
   font-size: 14px;
   font-weight: 400;
-  width: 720px;
+  width: 650px;
   margin-top: 25px;
 `;
 const Profileimg = styled.img`

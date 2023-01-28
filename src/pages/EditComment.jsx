@@ -33,13 +33,14 @@ function EditComment({ commentId, setVisible }) {
       });
     });
   };
-
+  console.log("visible", setVisible);
   return (
     <>
       <Writecomment
         onSubmit={(e) => {
           e.preventDefault();
           onClickEditCommentHandler(commentId);
+          setVisible(false);
         }}
       >
         <Myprofile src={localStorage.getItem("profileImg")} />
@@ -55,9 +56,9 @@ function EditComment({ commentId, setVisible }) {
           }}
         />
         <CommentBtn
-          onClick={(e) => {
-            setVisible(true);
-          }}
+        // onClick={(e) => {
+        //   setVisible(false);
+        // }}
         >
           확인
         </CommentBtn>

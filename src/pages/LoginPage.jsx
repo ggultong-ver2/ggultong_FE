@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
-import __postLogin from "../redux/modules/loginSlice";
+import { __postLogin } from "../api/submit/Login";
 import Swal from "sweetalert2";
 import orline from "../assets/images/orline.png";
 import loginprofile from "../assets/images/loginprofile.png";

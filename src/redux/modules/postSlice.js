@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -246,8 +246,6 @@ export const __patchPost = createAsyncThunk(
         profileImg === "" ? new File([], "") : profileImg
       );
       formData.append("nickname", nickname);
-      //entries
-      // appen 키값 file 중요! 백엔드와 맞춰야함!
 
       const data = await apis.patchPost(formData);
     } catch (error) {
@@ -395,17 +393,6 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postLike.fulfilled]: (state, action) => {
-      // 액션으로 받은 값 = payload 추가해준다.
-      // console.log("action: ", action.payload);
-
-      // if(action.payload === true) {
-      //   state.checkPostLike = true;
-      //   state.likePostSum = state.likePostSum+1;
-      // }else{
-      //   state.checkPostLike = false;
-      //   state.likePostSum = state.likePostSum - 1;
-      // }
-
       state.checkPostLike = action.payload === true ? true : false;
       state.likePostSum =
         action.payload === true ? state.likePostSum + 1 : state.likePostSum - 1;
@@ -467,10 +454,16 @@ export const postSlice = createSlice({
     },
     [__editComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      const index = state.details.comment.findIndex(
-        (comment) => comment.id === action.payload.commentId
-      );
-      state.comment.splice(index, 1, action.payload.content);
+      console.log("st", action.payload);
+      const index = current(state.details.comment).map((e) => {
+        if (e.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return e;
+        }
+      });
+      state.details.comment = index;
+      // state.comment.splice(index, 1, action.payload.content);
       console.log("index", index);
     },
     // 남은것 : 코멘트 CSS, 수정부분 랜더링, 수정폼 - 확인누르면 visible, 인풋창 초기화
@@ -486,63 +479,6 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
   },
-
-  // // 아이디 중복체크
-  // [__checkUserName.pending]: (state) => {
-  //   state.isLoading = true;
-  //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
-  // },
-  // [__checkUserName.fulfilled]: (state, action) => {
-  //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
-  //   state.isLoading = false;
-  //   state.posts = action.payload;
-  // },
-  // [__checkUserName.rejected]: (state, action) => {
-  //   state.isLoading = false;
-  //   state.error = action.payload;
-  //   // 에러 발생-> 네트워크 요청은 끝,false
-  //   // catch 된 error 객체를 state.error에 넣습니다.
-  // },
 });
 
-// export const {} = recipesSlice.actions;
 export default postSlice.reducer;
-
-// export const {} = commentSlice.actions;
-
-// export const __postComment = createAsyncThunk(
-//   "postComment",
-//   async (payload, thunkAPI) => {
-//     try {
-//       //payload 글번호
-//       // console.log(payload, "댓글 payload");
-//       const content = payload.content;
-//       const postId = payload.postId;
-//       const data = await axios.post(`/api/comment/${postId}`, {
-//         content: content,
-//       });
-//       // const data = await axios.delete(`api/post/${payload}`);
-//       if (data.request.status === 200) {
-//       }
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
-
-// export const __deleteComment = createAsyncThunk(
-//   "deleteComment",
-//   async (payload, thunkAPI) => {
-//     try {
-//       // payload 댓글번호임
-//       console.log(payload, "payload");
-//       const data = await axios.delete(`/api/comment/${payload.commentId}`);
-//       if (data.request.status === 200) {
-//       }
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
-import __postSignup from "../redux/modules/signupSlice";
-import __idcheck from "../redux/modules/checkIdSlice";
-import __emailcode from "../redux/modules/emailcodeSlice";
-import __emailsend from "../redux/modules/sendemailSlice";
-import __nickCheck from "../redux/modules/checkNickSlice";
+import { __postSignup } from "../api/submit/Login";
+import { __idcheck } from "../api/submit/Login";
+import { __emailcode } from "../api/submit/Login";
+import { __emailsend } from "../api/submit/Login";
+import { __nickCheck } from "../api/submit/Login";
 import "../pages/reset.css";
 import Timer from "../components/Timer/Timer";
 
