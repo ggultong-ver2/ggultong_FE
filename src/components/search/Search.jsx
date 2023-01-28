@@ -1,29 +1,39 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useParams, useSearchParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./style.css"
+import { useParams, useNavigate } from "react-router-dom";
+import "./style.css";
 import { baseURL } from "../../lib/axios";
-import { Link } from "react-router-dom";
+
 
 function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
   const params = useParams();
-  // const post = useSelector((state) => state.posts);
-
-  // const postRedirect = async () => {
-  //   window.location.href = `/detail/${post.id}`;
-  // };
-
 
   useEffect(() => {
     async function fetchData() {
-      const {data} = await baseURL.get(`/post/search?keyword=${params.keyword}`)
+      const { data } = await baseURL.get(
+        `/post/search?keyword=${params.keyword}`
+      );
       setSearchData(data);
     }
     fetchData();
   }, []);
+
+  const pageMove = (category, id) => {
+    switch (category) {
+      case "meal":
+        navigate(`/mealList/meal/detail/${id}`);
+        return;
+      case "drink":
+        navigate(`/drinkList/drink/detail/${id}`);
+        return;
+      case "recycle":
+        navigate(`/recycleList/recycle/detail/${id}`);
+        return;
+      default:
+        return;
+    }
+  };
 
   return (
     <>
@@ -34,7 +44,7 @@ function Search() {
           ) : (
             <div className="search_results">
               <div className="search_top">
-                <h3>{`총 ${searchData.length}개의 검색 결과가 있습니다`}</h3>
+                <h3>{`'${params.keyword}'에 대한 총 ${searchData.length}개의 검색 결과가 있습니다`}</h3>
                 <select name="search" id="search" className="search_sort">
                   <option value="">최신순</option>
                   <option value="0">좋아요순</option>
@@ -42,9 +52,25 @@ function Search() {
                 </select>
               </div>
               {searchData?.map((post) => (
-                <div>
-                  {/* <li className="search_title" key={post.id} onClick={() => postRedirect()}>{post.title}</li> */}
-                  <li className="search_title">{post.title}</li>
+                <div
+                  className="search_title"
+                  key={`search-${post.id}`}
+                  onClick={() => {
+                    pageMove(post.category, post.id);
+                  }}
+                >
+                  <div className="search_post_title">{post.title}</div>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                    className="search_post_content"
+                  ></div>
+                  <div className="search_post_wrap">
+                    <ul className="clearfix">
+                      <li className="search_post_nickname">{post.nickname}</li>
+                      <li className="search_post_like">좋아요&nbsp;{post.likePostSum}</li>
+                    </ul>
+                    <div className="search_post_time">{post.createdAt.slice(0, 10)}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -54,4 +80,5 @@ function Search() {
     </>
   );
 }
+
 export default Search;
