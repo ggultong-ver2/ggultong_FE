@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
-import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -194,7 +193,7 @@ export const __editPost = createAsyncThunk(
       //const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
 
       console.log("data: ", data.data);
-      return thunkAPI.fulfillWithValue(payload);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log(err);
       return thunkAPI.rejectWithValue(err.response.data);
@@ -355,10 +354,22 @@ export const postSlice = createSlice({
       // 미들웨어를 통해 받은 action값이 무엇인지 항상 확인한다
       console.log("action: ", action.payload);
       state.isLoading = false;
-      state.details = state.details.filter(
-        (post) => post.id !== action.payload
+      const newList = current(state.categoryPosts).filter(
+        (post) => Number(post.id) !== Number(action.payload)
       );
-      console.log("state------>", state);
+      state.categoryPosts = newList;
+      // state.categoryPosts = state.categoryPosts.filter(
+      //   (post) => post.id !== action.payload
+      // );
+      state.details = {
+        title: "",
+        content: "",
+        id: 0,
+        comment: [],
+        isLikedPost: false,
+        likePostSum: 0,
+      };
+      console.log("state------>", newList);
     },
     [__deletePost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -373,18 +384,36 @@ export const postSlice = createSlice({
       // console.log('state-store값',state.diary)
       console.log("action-서버값", action);
       state.isLoading = false;
-      console.log(action.payload.formdata);
-      state.details = state.details.map((detail) =>
-        detail.id === action.payload.id
-          ? {
-              ...detail,
-              title: action.payload.formdata.title,
-              content: action.payload.formdata.content,
-              file: action.payload.formdata.imagefile,
-              category: action.payload.formdata.category,
-            }
-          : detail
-      );
+      console.log(action.payload);
+      const editList = state.categoryPosts.map((detail) => {
+        if (Number(detail.id) === Number(action.payload.id)) {
+          return {
+            ...detail,
+            title: action.payload.title,
+            content: action.payload.content,
+            file: action.payload.imagefile,
+            category: action.payload.category,
+          };
+        } else {
+          return detail;
+        }
+      });
+
+      state.categoryPosts = editList;
+      // [__editComment.fulfilled]: (state, action) => {
+      //   state.isLoading = false;
+      //   console.log("st", action.payload);
+      //   const index = current(state.details.comment).map((e) => {
+      //     if (e.id === action.payload.id) {
+      //       return action.payload;
+      //     } else {
+      //       return e;
+      //     }
+      //   });
+      //   state.details.comment = index;
+      //   // state.comment.splice(index, 1, action.payload.content);
+      //   console.log("index", index);
+      // },
       // state.recipes = action.payload.recipe
       // const index = state.recipes.findIndex(
       //   (recipe) => recipe.id === action.payload[0]
@@ -401,7 +430,6 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postLike.fulfilled]: (state, action) => {
-
       if (action.payload === "true") {
         state.details.isLikedPost = true;
         state.details.likePostSum = state.details.likePostSum + 1;
@@ -494,6 +522,4 @@ export const postSlice = createSlice({
   },
 });
 
-
 export default postSlice.reducer;
-

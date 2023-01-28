@@ -15,7 +15,7 @@ import SignUpPage from "../pages/SignUpPage";
 import SignAgree from "../pages/SignAgree";
 import Detail from "../pages/detail";
 import Post from "../pages/post";
-import EditPost from "../pages/EditPost";
+import EditPost from "../pages/editPost";
 import SignComplete from "../pages/SignComplete";
 import MyConfirm from "../pages/MyConfirm";
 import Search from "../components/search/Search";
