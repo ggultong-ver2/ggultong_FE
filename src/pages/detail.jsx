@@ -147,7 +147,6 @@ const Detail = () => {
           </Wrap>
           <div className="likes">
             <Likes />
-            좋아요 {details?.likePostSum}
           </div>
           <Commentarea>
             <Writecomment>

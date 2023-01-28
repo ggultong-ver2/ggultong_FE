@@ -212,7 +212,7 @@ export const __postLike = createAsyncThunk(
         }
       );
       console.log(data);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data?.status);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -401,21 +401,13 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postLike.fulfilled]: (state, action) => {
-      // 액션으로 받은 값 = payload 추가해준다.
-      // console.log("action: ", action.payload);
-
-      // if(action.payload === true) {
-      //   state.checkPostLike = true;
-      //   state.likePostSum = state.likePostSum+1;
-      // }else{
-      //   state.checkPostLike = false;
-      //   state.likePostSum = state.likePostSum - 1;
-      // }
-
-      state.checkPostLike = action.payload === true ? true : false;
-      state.likePostSum =
-        action.payload === true ? state.likePostSum + 1 : state.likePostSum - 1;
-
+      if (action.payload === "true") {
+        state.details.isLikedPost = true;
+        state.details.likePostSum = state.details.likePostSum + 1;
+      } else {
+        state.details.isLikedPost = false;
+        state.details.likePostSum = state.details.likePostSum - 1;
+      }
       state.isLoading = false;
       state.posts = action.payload;
     },
@@ -513,42 +505,3 @@ export const postSlice = createSlice({
 
 // export const {} = recipesSlice.actions;
 export default postSlice.reducer;
-
-// export const {} = commentSlice.actions;
-
-// export const __postComment = createAsyncThunk(
-//   "postComment",
-//   async (payload, thunkAPI) => {
-//     try {
-//       //payload 글번호
-//       // console.log(payload, "댓글 payload");
-//       const content = payload.content;
-//       const postId = payload.postId;
-//       const data = await axios.post(`/api/comment/${postId}`, {
-//         content: content,
-//       });
-//       // const data = await axios.delete(`api/post/${payload}`);
-//       if (data.request.status === 200) {
-//       }
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
-
-// export const __deleteComment = createAsyncThunk(
-//   "deleteComment",
-//   async (payload, thunkAPI) => {
-//     try {
-//       // payload 댓글번호임
-//       console.log(payload, "payload");
-//       const data = await axios.delete(`/api/comment/${payload.commentId}`);
-//       if (data.request.status === 200) {
-//       }
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );

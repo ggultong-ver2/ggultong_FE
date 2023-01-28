@@ -42,6 +42,7 @@
 
 .logowrap {
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -52,7 +53,7 @@
 
 .gnb li {
   float: left;
-  margin-left: 40px;
+  margin-left: 15px;
   cursor: pointer;
   font-size: 14px;
   line-height: 32px;
