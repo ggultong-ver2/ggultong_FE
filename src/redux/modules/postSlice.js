@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
+import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -7,13 +8,17 @@ const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
-  details: [],
+  details: {
+    title: "",
+    content: "",
+    id: 0,
+    comment: {},
+    isLikedPost: false,
+    likePostSum: 0,
+  },
   // patch:[],
-  checkPostLike: false,
-  likePostSum: 0,
-  isLoading: false,
   error: null,
-  posts: [],
+  isLoading: false,
 };
 
 // 데이터 불러오기
@@ -115,7 +120,7 @@ export const __deletePost = createAsyncThunk(
       //const data = await axios.delete(
       // `http://localhost:3001/postss/${payload}`
       //);
-      console.log("data: ", data.data.msg);
+      console.log("data: ", data);
       //alert(data.data.msg);
       // if (data.data.statusCode === 400) {
       //   alert(data.data.msg);
@@ -303,7 +308,9 @@ export const postSlice = createSlice({
       // 액션으로 받은 값 = payload 추가해준다.
       console.log("action.payload: ", action.payload);
       state.isLoading = false;
-      state.posts.push(action.payload);
+      console.log(current(state));
+      const newList = [action.payload, ...current(state.categoryPosts)];
+      state.categoryPosts = newList;
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -318,8 +325,10 @@ export const postSlice = createSlice({
       // 미들웨어를 통해 받은 action값이 무엇인지 항상 확인한다
       console.log("action: ", action.payload);
       state.isLoading = false;
-      state.posts = state.posts?.filter((post) => post.id !== action.payload);
-      console.log("state------>", state.posts);
+      state.details = state.details.filter(
+        (post) => post.id !== action.payload
+      );
+      console.log("state------>", state);
     },
     [__deletePost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -334,17 +343,17 @@ export const postSlice = createSlice({
       // console.log('state-store값',state.diary)
       console.log("action-서버값", action);
       state.isLoading = false;
-      console.log(action.payload);
-      state.posts = state.posts.map((post) =>
-        post.id === action.payload.id
+      console.log(action.payload.formdata);
+      state.details = state.details.map((detail) =>
+        detail.id === action.payload.id
           ? {
-              ...post,
+              ...detail,
               title: action.payload.formdata.title,
               content: action.payload.formdata.content,
               file: action.payload.formdata.imagefile,
               category: action.payload.formdata.category,
             }
-          : post
+          : detail
       );
       // state.recipes = action.payload.recipe
       // const index = state.recipes.findIndex(

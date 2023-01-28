@@ -26,7 +26,7 @@ const EditPost = () => {
       formdata.set("file", f);
     }
     formdata.set("title", title);
-    formdata.set("content", content.content);
+    formdata.set("content", content);
     formdata.set("category", category);
     dispatch(__editPost({ id, formdata }));
     // for (const pair of formdata) {

@@ -52,6 +52,7 @@ const Detail = () => {
 
   const onClickDeleteCommentHandler = (commentId) => {
     dispatch(__deleteComment({ commentId: commentId, postId: id }));
+    navigate(`/drinkList/drink`);
   };
 
   //게시글 핸들러
@@ -60,7 +61,7 @@ const Detail = () => {
     if (localStorage.getItem("nickname") === detailList.nickname) {
       dispatch(__deletePost(id));
       Swal.fire("삭제 완료", "삭제 완료되었습니다!", "success");
-      navigate(`/drinkList/drink`);
+      // navigate(`/drinkList/drink`);
     } else {
       Swal.fire("로그인 후 이용해주세요!", "", "warning");
     }
@@ -103,7 +104,6 @@ const Detail = () => {
             <StContent
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
-            <StFiles src={details?.imageFiles[1]} />
             <Btns>
               <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
               <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
@@ -206,17 +206,13 @@ const StFile = styled.img`
 `;
 const StContent = styled.div`
   border: 1px solid yellow;
-  height: 350px;
+  height: 800px;
   width: 800px;
   padding: 10px;
   font-size: 18px;
   word-break: break-all;
 `;
-const StFiles = styled.img`
-  height: 350px;
-  width: 800px;
-  background-color: #d9d9d9;
-`;
+
 const Btns = styled.div`
   margin-left: 270px;
   margin-top: 30px;

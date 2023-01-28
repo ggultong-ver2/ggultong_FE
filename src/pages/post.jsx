@@ -22,7 +22,7 @@ const Post = () => {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
-
+  console.log(content);
   // const getValue = (e) => {
   //   const { value } = e.target;
   //   setContent({
@@ -40,9 +40,9 @@ const Post = () => {
     for (const f of Array.from(file)) {
       formdata.append("file", f);
     }
-    formdata.append("title", title.title);
-    formdata.append("content", content.content);
-    formdata.append("category", category.category);
+    formdata.append("title", title);
+    formdata.append("content", content);
+    formdata.append("category", category);
     console.log(file);
     //for (let value of formdata.values()) {
     //console.log(key);
@@ -73,7 +73,7 @@ const Post = () => {
             id="category"
             onChange={(ev) => {
               const { value } = ev.target;
-              setCategory({ ...category, category: value });
+              setCategory(value);
             }}
           >
             <option value="choose">선택해주세요</option>
@@ -89,7 +89,7 @@ const Post = () => {
               type="text"
               onChange={(ev) => {
                 const { value } = ev.target;
-                setTitle({ ...title, title: value });
+                setTitle(value);
               }}
               //onChange={(e) => {
               //setAddPost({ ...addPost, title: e.target.value });
