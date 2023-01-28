@@ -28,14 +28,9 @@ const Detail = () => {
   const [addComment, setAddComment] = useState({
     content: "",
   });
-  const [text, setText] = useState("");
   const detailList = useSelector((state) => state.details.details);
   console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
-
-  //console.log("commentList:", commentList);
-  const [isLogin, setIsLogin] = useState(false);
-  // const [likeToggle, setLikeToggle] = useState(false);
 
   useEffect(() => {
     // console.log("param.id:", param.id);
@@ -157,7 +152,7 @@ const Detail = () => {
                 <Heart>좋아요 {details?.likePostSum}</Heart>
               </Etcs>
             </Else>
-            <StFile src={details?.imageFiles[0]} />
+            <StFile src={details?.imageFiles} />
             <StContent
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
@@ -292,9 +287,10 @@ const StContent = styled.div`
   border: 1px solid yellow;
   height: 800px;
   width: 800px;
-  padding: 10px;
+
   font-size: 18px;
   word-break: break-all;
+
   img {
     width: 800px;
     height: 600px;

@@ -54,7 +54,8 @@ const DrinkList = () => {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   ></StContent>
                   <Etcwrap>
-                    댓글12 좋아요{post.likePostSum} 스크랩400
+                    댓글&nbsp;{post?.comment.length} 좋아요&nbsp;
+                    {post.likePostSum} 스크랩400&nbsp;&nbsp;
                     {post.createdAt.slice(0, 10)}
                   </Etcwrap>
                 </Textwrap>
