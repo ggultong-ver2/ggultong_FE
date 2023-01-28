@@ -317,10 +317,8 @@ const PostLoginPage = () => {
 };
 const StContainer = styled.form`
   width: 100%;
-  height: 96.6vh;
   display: flex;
   background-color: #f9fafb;
-  align-items: center;
   justify-content: center;
   background-size: cover;
   font-family: "Pretendard";
@@ -359,12 +357,13 @@ const StLabel2 = styled.label`
 const StBox = styled.div`
   width: 380px;
   display: flex;
-  align-items: center;
   font-family: "Pretendard";
 `;
 const StCenterBox = styled.div`
   width: 588px;
   height: 908px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   background-color: #ffffff;
   padding-top: 80px;
   align-items: center;
@@ -373,10 +372,6 @@ const StCenterBox = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Pretendard";
-  /* margin: 5px 0 0px;
-  padding: 30px 0px; */
-  /* position: relative; */
-  /* vertical-align: baseline; */
 `;
 
 const StInput = styled.input`

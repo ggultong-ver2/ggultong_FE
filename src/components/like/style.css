@@ -1,5 +1,40 @@
 .like_button{
-    width: 10px;
+    width: 84px;
+    height: 32px;
     margin: 0 auto;
-    font-size: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.like_default{
+    width: 20px;
+    height: 17px;
+    background-image: url(../../../public/images/like_default.png);
+}
+.like_onclick{
+    width: 20px;
+    height: 17px;
+    background-image: url(../../../public/images/like_onclick.png);
+}
+
+.like_onclick_wrap{
+    width: 84px;
+    height: 32px;
+    border: 2px solid #FFD86A;
+    border-radius: 20px;
+    display: flex;
+    padding: 4px 19px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.like_default_wrap{
+    width: 84px;
+    height: 32px;
+    border: 2px solid #CBCBCB;
+    border-radius: 20px;
+    padding: 4px 19px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

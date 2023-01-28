@@ -6,49 +6,6 @@ import { useDispatch } from "react-redux";
 import "./Editor.css";
 
 const Editor = ({ content, setContent }) => {
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
-
-  //   //const onClickAddPostHandler = () => {
-  //   //dispatch(__addPost(addPost));
-  //   //console.log(addPost);
-  //   //};
-
-  //   const [title, setTitle] = useState("");
-  //   const [content, setContent] = useState("");
-  //   const [category, setCategory] = useState("");
-  //   const [file, setFile] = useState("");
-  //   const [post, setPost] = useState([]);
-
-  //   const onSubmitHandler = (e) => {
-  //     const formdata = new FormData();
-  //     //console.log("addpost::", title, content, category, file);
-
-  //     // formdata.append("file", file);
-  //     for (const f of Array.from(file)) {
-  //       formdata.append("file", f);
-  //     }
-  //     formdata.append("title", title.title);
-  //     formdata.append("content", content.content);
-  //     formdata.append("category", category.category);
-  //     console.log(file);
-  //     //for (let value of formdata.values()) {
-  //     //console.log(key);
-  //     //}
-  //     // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
-  //     dispatch(__addPost(formdata));
-
-  //     for (const pair of formdata) {
-  //       console.log(pair[0] + "," + pair[1]);
-  //     }
-  //   };
-
-  // function MyCustomUploadAdapterPlugin(editor) {
-  //   editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-  //     return new UploadAdapter(loader);
-  //   };
-  // }
-
   return (
     <div className="App">
       <CKEditor

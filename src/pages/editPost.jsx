@@ -4,8 +4,8 @@ import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useParams, useNavigate } from "react-router";
 import "./reset.css";
 import styled from "styled-components";
-import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
+import Quill from "../components/editorComponent/quill";
 
 const EditPost = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const EditPost = () => {
       formdata.set("file", f);
     }
     formdata.set("title", title);
-    formdata.set("content", content.content);
+    formdata.set("content", content);
     formdata.set("category", category);
     dispatch(__editPost({ id, formdata }));
     // for (const pair of formdata) {
@@ -105,7 +105,7 @@ const EditPost = () => {
               console.log("value:", value);
             }}
           ></Content> */}
-          <Editor
+          {/* <Editor
             type="text"
             content={content}
             setContent={setContent}
@@ -115,7 +115,8 @@ const EditPost = () => {
             //   console.log({ e, editor, data });
             //   setContent({ ...content, content: data });
             // }}
-          />
+          /> */}
+          <Quill type="text" content={content} setContent={setContent} />
           <File>
             첨부파일
             <FileInput
