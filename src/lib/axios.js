@@ -101,13 +101,9 @@ export const apis = {
   },
 
   signNickname: (nickname) => {
-    baseURL.patch(
-      `/mypage/socialSetting/${nickname}`,
-      {},
-      {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      }
-    );
+    baseURL.patch(`/mypage/socialSetting/${nickname}`, "", {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    });
   },
 
   // 리뷰 관련

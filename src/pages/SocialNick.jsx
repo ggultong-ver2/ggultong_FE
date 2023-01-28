@@ -33,7 +33,7 @@ function SocialNick() {
   };
 
   // 닉네임 중복 체크 확인
-  const onCheckNickName = ({ nickname }) => {
+  const onCheckNickName = (nickname) => {
     __nickCheck(nickname).then((res) => {
       console.log(res);
       if (res.data.statusCode === 200) {

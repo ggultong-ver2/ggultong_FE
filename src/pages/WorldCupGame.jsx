@@ -7,43 +7,11 @@ import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
 
-function Game() {
-  const [password, setPassword] = useInput();
+function WorldCupGame() {
   const navigate = useNavigate();
-
-  const onCheckPassword = (password) => {
-    __pwcheck({
-      password,
-    }).then((res) => {
-      if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "비밀번호가 확인되었습니다.", "success");
-        navigate("/myconfirm/pwchange");
-      } else {
-        navigate("/myconfirm");
-        Swal.fire(res.data.msg, "비밀번호를 다시 확인해주세요!", "error");
-      }
-    });
-  };
 
   return (
     <StContainer>
-      <StTopBox>
-        <StBannerBox>
-          <StLeftBox>
-            <div>
-              꿀통 음식 월드컵
-              <br />
-              이번 달 우승음식은?
-              <StButton>랭킹보기</StButton>
-              <StButton2>시작하기</StButton2>
-            </div>
-          </StLeftBox>
-          <StRightBox>
-            <StImgBox src={require("../assets/images/trophy.png")} />
-          </StRightBox>
-        </StBannerBox>
-      </StTopBox>
-
       <StListBox>
         <StDiv>이전 월드컵</StDiv>
         <CardBox>
@@ -118,7 +86,7 @@ function Game() {
 const StContainer = styled.form`
   width: 100%;
   height: 1900px;
-  background-color: black;
+  background-color: #0a0909;
   background-size: cover;
   font-family: "Pretendard";
 `;
@@ -135,7 +103,7 @@ const StTopBox = styled.div`
 `;
 const StCenterBox = styled.div`
   width: 1200px;
-  background-color: black;
+  background-color: #0a0909;
   height: 100vh;
   border: 0;
   margin: auto;
@@ -296,13 +264,14 @@ const StP = styled.p`
 `;
 
 const StDiv = styled.div`
-  margin-top: 30px;
+  display: flex;
+  justify-content: center;
   margin-bottom: 30px;
-  width: 1200px;
+  width: 1394px;
   height: 50px;
   font-family: "Pretendard";
   font-weight: 600;
-  font-size: 28px;
+  font-size: 22px;
   padding-top: 20px;
   color: white;
 `;
@@ -343,4 +312,4 @@ const StButton3 = styled.button`
     font-family: "Pretendard";
   }
 `;
-export default Game;
+export default WorldCupGame;
