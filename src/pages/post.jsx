@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
 import "./reset.css";
-import Editor from "../components/editor/Editor";
+// import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
+import Quill from "../components/editorComponent/quill";
 
 const Post = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Post = () => {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
-
+  console.log(content);
   // const getValue = (e) => {
   //   const { value } = e.target;
   //   setContent({
@@ -39,9 +40,9 @@ const Post = () => {
     for (const f of Array.from(file)) {
       formdata.append("file", f);
     }
-    formdata.append("title", title.title);
-    formdata.append("content", content.content);
-    formdata.append("category", category.category);
+    formdata.append("title", title);
+    formdata.append("content", content);
+    formdata.append("category", category);
     console.log(file);
     //for (let value of formdata.values()) {
     //console.log(key);
@@ -56,48 +57,47 @@ const Post = () => {
     }
   };
 
-  const [viewContent, setViewContent] = useState([]);
-
   return (
-    <Form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmitHandler(post);
-      }}
-    >
-      <Category>
-        카테고리
-        <CategorySelect
-          type="select"
-          name="category"
-          id="category"
-          onChange={(ev) => {
-            const { value } = ev.target;
-            setCategory({ ...category, category: value });
-          }}
-        >
-          <option value="choose">선택해주세요</option>
-          <option value="drink">혼술</option>
-          <option value="meal">혼밥</option>
-          <option value="recycle">리사이꿀</option>
-        </CategorySelect>
-      </Category>
-      <Wrap>
-        <Title>
-          제목
-          <TitleInput
-            type="text"
+    <Background>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmitHandler(post);
+        }}
+      >
+        <Category>
+          카테고리
+          <CategorySelect
+            type="select"
+            name="category"
+            id="category"
             onChange={(ev) => {
               const { value } = ev.target;
-              setTitle({ ...title, title: value });
+              setCategory(value);
             }}
-            //onChange={(e) => {
-            //setAddPost({ ...addPost, title: e.target.value });
-            //}}
-          ></TitleInput>
-        </Title>
+          >
+            <option value="choose">선택해주세요</option>
+            <option value="drink">혼술</option>
+            <option value="meal">혼밥</option>
+            <option value="recycle">리사이꿀</option>
+          </CategorySelect>
+        </Category>
+        <Wrap>
+          <Title>
+            제목
+            <TitleInput
+              type="text"
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setTitle(value);
+              }}
+              //onChange={(e) => {
+              //setAddPost({ ...addPost, title: e.target.value });
+              //}}
+            ></TitleInput>
+          </Title>
 
-        {/* <Content
+          {/* <Content
           type="text"
           placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
           onChange={(ev) => {
@@ -105,7 +105,7 @@ const Post = () => {
             setContent({ ...content, content: value });
           }}
         ></Content> */}
-        <Editor
+          {/* <Editor
           type="text"
           content={content}
           setContent={setContent}
@@ -116,37 +116,45 @@ const Post = () => {
           //   console.log({ e, editor, data });
           //   setContent({ ...content, content: data });
           // }}
-        />
+        /> */}
+          <br></br>
+          <Quill type="text" content={content} setContent={setContent} />
+          <File>
+            첨부파일
+            <FileInput
+              type="file"
+              id="fileUpload"
+              multiple={true}
+              width="500px"
+              onChange={(ev) => {
+                const { files } = ev.target;
+                setFile(files);
+              }}
+            />
+          </File>
 
-        <File>
-          첨부파일
-          <FileInput
-            type="file"
-            id="fileUpload"
-            multiple={true}
-            width="500px"
-            onChange={(ev) => {
-              const { files } = ev.target;
-              setFile(files);
-            }}
-          />
-        </File>
-        <Btns>
-          <BackButton>취소</BackButton>
-          <EnterButton>확인</EnterButton>
-        </Btns>
-      </Wrap>
-    </Form>
+          <Btns>
+            <BackButton>취소</BackButton>
+            <EnterButton>확인</EnterButton>
+          </Btns>
+        </Wrap>
+      </Form>
+    </Background>
   );
 };
-
+const Background = styled.div`
+  background-color: #f9fafb;
+  width: 100%;
+  height: 100vh;
+`;
 const Form = styled.form`
   //border: 1px solid black;
   width: 900px;
   height: 1250px;
   margin: auto;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   padding: 10px;
+  background-color: white;
 `;
 const Category = styled.p`
   margin-bottom: 50px;

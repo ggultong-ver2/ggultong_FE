@@ -8,6 +8,7 @@ const Likes = () => {
   const { isLogin } = CheckLogin();
   const dispatch = useDispatch();
   const { id } = useParams();
+
   const post = useSelector((state) => state?.post);
   const isLikedPost = useSelector((state) => state?.post?.details?.isLikedPost);
   const likePostSum = useSelector((state) => state?.post?.details?.likePostSum);
@@ -20,6 +21,7 @@ const Likes = () => {
       alert("로그인 시 이용가능합니다.");
     }
   };
+
   return (
     <>
       <div className="like_button">

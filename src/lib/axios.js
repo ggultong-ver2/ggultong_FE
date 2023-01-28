@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL 토큰 담는 인터셉트 없음
 const instance = axios.create({
-  baseURL: "https://tom-jelly.shop/api", //상정님
+  baseURL: "https://sparta-sjl.shop/api", //상정님
   //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
   //https://sparta-sjl.shop/api
@@ -18,7 +18,7 @@ const instance = axios.create({
 //
 // baseURL 토큰 담는 인터셉트 있음
 export const baseURL = axios.create({
-  baseURL: "https://tom-jelly.shop/api",
+  baseURL: "https://sparta-sjl.shop/api",
   withCredentials: true,
 
   headers: {
@@ -101,13 +101,9 @@ export const apis = {
   },
 
   signNickname: (nickname) => {
-    baseURL.patch(
-      `/mypage/socialSetting/${nickname}`,
-      {},
-      {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      }
-    );
+    baseURL.patch(`/mypage/socialSetting/${nickname}`, "", {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    });
   },
 
   // 리뷰 관련

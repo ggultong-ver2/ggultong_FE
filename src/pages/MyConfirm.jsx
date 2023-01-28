@@ -10,11 +10,9 @@ function MyConfirm() {
   const navigate = useNavigate();
 
   const onCheckPassword = (password) => {
-    console.log("password--->", password);
     __pwcheck({
       password,
     }).then((res) => {
-      console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "비밀번호가 확인되었습니다.", "success");
         navigate("/myconfirm/pwchange");

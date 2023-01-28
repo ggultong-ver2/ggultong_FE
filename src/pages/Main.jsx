@@ -9,32 +9,11 @@ import "./style.css";
 import WorldCup from "./WorldCup";
 import Recycle from "./Recycle";
 
-
 function Main() {
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="top_cat_wrap">
-        <div className="top_cat">
-          <ul>
-            <li>
-              <button onClick={() => navigate("/")}>홈</button>
-            </li>
-            <li>
-              <button onClick={() => navigate("/drinklist/drink")}>
-                꿀정보
-              </button>
-            </li>
-            <li>
-              <button onClick={() => navigate("/")}>즐길거리</button>
-            </li>
-          </ul>
-          <button onClick={() => navigate("/post")} className="top_post_btn">
-            글쓰기
-          </button>
-        </div>
-      </div>
       <Heroside />
       <div className="main_container">
         <div className="sub_container">
@@ -75,7 +54,9 @@ function Main() {
           <div className="random_recipe_container">
             <div className="random_recipe">
               <div className="random text">
-                <h3>오늘 뭐 먹지? <br /> 고민될 땐 꿀통이 골라줄게!</h3>
+                <h3>
+                  오늘 뭐 먹지? <br /> 고민될 땐 꿀통이 골라줄게!
+                </h3>
                 <button>도와줘요 꿀통대장</button>
               </div>
               <div className="random_image"></div>

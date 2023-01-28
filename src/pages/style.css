@@ -1,8 +1,8 @@
-.top_cat_wrap{
+.top_cat_wrap {
   width: 100%;
   background: #000;
 }
-.top_cat{
+.top_cat {
   width: 1200px;
   height: 45px;
   margin: 0 auto;
@@ -33,8 +33,8 @@
   color: white;
 }
 
-.top_cat .top_post_btn{
-  background: #FFD665;
+.top_cat .top_post_btn {
+  background: #ffd665;
   color: #000;
   border: 0 none;
 }
@@ -79,14 +79,14 @@
   box-shadow: 0px 1px 7px rgb(196, 196, 196);
   transition: 0.3s;
 }
-.main_category li:first-child{
+.main_category li:first-child {
   margin-left: 0;
 }
 .main_category li:hover {
   box-shadow: 0px 3px 15px rgb(211, 211, 211);
   transform: scale(1.05);
 }
-.category_title{
+.category_title {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -181,7 +181,7 @@
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 30px;
-  color: #A0A0A0;
+  color: #a0a0a0;
 }
 .main_room button {
   border: 0 none;
@@ -219,40 +219,47 @@
   line-height: 28px;
 }
 
-.main_recipe, .main_recycle {
+.main_recipe,
+.main_recycle {
   margin-top: 50px;
 }
-.main_recipe li, .main_recycle li {
+.main_recipe li,
+.main_recycle li {
   float: left;
   margin-left: 20px;
   width: 280px;
   height: 320px;
   cursor: pointer;
 }
-.main_recipe li:first-child, .main_recycle li:first-child {
+.main_recipe li:first-child,
+.main_recycle li:first-child {
   cursor: default;
   margin-left: 0;
 }
-.main_recipe h3, .main_recycle h3 {
+.main_recipe h3,
+.main_recycle h3 {
   font-size: 24px;
   line-height: 36px;
   margin-top: 26px;
   margin-bottom: 20px;
 }
-.main_recipe h4, .main_recycle h4 {
+.main_recipe h4,
+.main_recycle h4 {
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 30px;
-  color: #A0A0A0;
+  color: #a0a0a0;
 }
-.main_recipe h5, .main_recycle h5 {
+.main_recipe h5,
+.main_recycle h5 {
   width: 74px;
   font-size: 16px;
   line-height: 28px;
 }
 
-.main_recipe button, .main_recycle button {
+.main_recipe button,
+.main_recycle button {
   border: 0 none;
   width: 121px;
   height: 28px;
@@ -264,21 +271,23 @@
   justify-content: space-between;
   background: transparent;
 }
-.recipe_image, .recycle_image {
+.recipe_image,
+.recycle_image {
   height: 230px;
   background-image: url(../../public/images/default_image.jpeg);
   background-size: contain;
   background-position: center;
 }
 
-.main_recipe p, .recycle_image p {
+.main_recipe p,
+.recycle_image p {
   height: 90px;
   background: rgba(0, 0, 0, 0.2);
   padding: 13px 20px;
   font-size: 18px;
 }
 
-.random_recipe_container{
+.random_recipe_container {
   width: 100%;
   height: 236px;
   padding: 28px 0;
@@ -291,7 +300,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.random_recipe{
+.random_recipe {
   display: flex;
   width: 836px;
   height: 180px;
@@ -299,15 +308,15 @@
   justify-content: space-between;
   margin: 0 auto;
 }
-.random_recipe h3{
+.random_recipe h3 {
   font-size: 28px;
   line-height: 42px;
 }
-.random_recipe button{
+.random_recipe button {
   width: 140px;
   height: 32px;
   margin-top: 15px;
-  background: #FFD665;
+  background: #ffd665;
   color: black;
   border: 0 none;
   border-radius: 20px;
@@ -317,31 +326,33 @@
   letter-spacing: -0.04em;
 }
 
-.random_recipe button:hover{
+.random_recipe button:hover {
   background: #000;
-  color: #FFD665;
+  color: #ffd665;
 }
 
-.random_image{
+.random_image {
   width: 180px;
   height: 180px;
   background-image: url(../../public/images/random_image.png);
 }
-.shorts_slider{
+.shorts_slider {
   width: 1200px;
   margin: 0 auto;
   padding-left: 24px;
   margin-top: 100px;
 }
-.shorts_slider h2{
+.shorts_slider h2 {
   font-size: 22px;
   line-height: 36px;
   font-weight: normal;
 }
 
+
 .shorts_slide{
   width: 180px;
   height: 294px;
+
   background: #f2f2f2;
 }
 .shorts_slide p{
@@ -350,7 +361,7 @@
   line-height: 22px;
 }
 
-.cup_container{
+.cup_container {
   width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -358,22 +369,24 @@
   justify-content: space-between;
   margin-top: 90px;
 }
-.cup_playing{
-  width: 760px;height: 470px;
+.cup_playing {
+  width: 760px;
+  height: 470px;
   background: #f5f5f5;
   padding: 43px 57px;
 }
-.play_text{
+.play_text {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.cup_ranking{
+.cup_ranking {
   width: 350px;
   height: 470px;
   border: 1px solid #000;
   padding: 25px 30px;
 }
-.likes{
-  width: 60px;margin: 0 auto;
+.likes {
+  width: 60px;
+  margin: 0 auto;
 }

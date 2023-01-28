@@ -64,9 +64,9 @@ export const commentSlice = createSlice({
     },
     [__addComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action.payload:", action.payload);
-      state.content.push(action.payload);
-      console.log("state:", state);
+      // console.log("action.payload:", action.payload);
+      // console.log("state:", state.comment);
+      state.comment.push(action.payload);
     },
     [__addComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -78,10 +78,10 @@ export const commentSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoadig = false;
-      state.content = state.content.filter(
+      state.comment = state.comment.filter(
         (comment) => comment.id !== action.payload.id
       );
-      console.log("state.content:", state.content);
+      console.log("state.content:", state.comment);
       console.log(action.payload);
     },
     [__deleteComment.rejected]: (state, action) => {
