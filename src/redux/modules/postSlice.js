@@ -6,26 +6,18 @@ import Swal from "sweetalert2";
 const initialState = {
   login: [],
   signup: [],
-  posts: [],
   categoryPosts: [],
   details: {
     title: "",
     content: "",
     id: 0,
-    comments: [
-      {
-        nickname: "",
-        content: "",
-        id: 0,
-      },
-    ],
+    comments: {},
     isLikedPost: false,
     likePostSum: 0,
   },
   // patch:[],
   isLoading: false,
   error: null,
-  post: {},
 };
 
 // 데이터 불러오기
