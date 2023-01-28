@@ -166,7 +166,7 @@ const Detail = () => {
               <Commentinput
                 placeholder="댓글을 작성할 수 있어요."
                 type="text"
-                value={addComment.comment}
+                value={addComment.content}
                 onChange={(e) => {
                   setAddComment({ ...addComment, content: e.target.value });
                 }}

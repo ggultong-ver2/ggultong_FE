@@ -14,7 +14,6 @@ function EditComment({ commentId, setVisible }) {
   const [editcomment, setEditComment] = useState({
     content: "",
   });
-  const [content, setContent] = useState("");
 
   useEffect(() => {
     if (commentList) {

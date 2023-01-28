@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
-import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -401,7 +400,6 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postLike.fulfilled]: (state, action) => {
-
       if (action.payload === "true") {
         state.details.isLikedPost = true;
         state.details.likePostSum = state.details.likePostSum + 1;
@@ -494,6 +492,4 @@ export const postSlice = createSlice({
   },
 });
 
-
 export default postSlice.reducer;
-

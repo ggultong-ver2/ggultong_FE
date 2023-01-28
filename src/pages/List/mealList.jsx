@@ -45,8 +45,8 @@ const MealList = () => {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   ></StContent>
                   <Etcwrap>
-                    댓글12 좋아요{post.likePostSum} 스크랩400{" "}
-                    {post.createdAt.slice(0, 10)}
+                    댓글{post?.comment.length} 좋아요{post.likePostSum}{" "}
+                    스크랩400 {post.createdAt.slice(0, 10)}
                   </Etcwrap>
                 </Textwrap>
                 <StFile src={post.imageFiles}></StFile>
