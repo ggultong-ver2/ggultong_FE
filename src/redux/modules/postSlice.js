@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
-import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import Swal from "sweetalert2";
 
