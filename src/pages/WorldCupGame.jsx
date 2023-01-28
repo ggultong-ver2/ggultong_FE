@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import __pwcheck from "../redux/modules/checkPwSlice";
+import { __pwcheck } from "../api/submit/Login";
 import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";

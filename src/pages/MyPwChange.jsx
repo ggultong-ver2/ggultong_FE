@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
-import __pwchange from "../redux/modules/changePwSlice";
+import { __pwchange } from "../api/submit/Login";
+
 function MyPwChange() {
   const [password, setPassword] = useState("");
   const [PWPtag, setPWPtag] = useState();

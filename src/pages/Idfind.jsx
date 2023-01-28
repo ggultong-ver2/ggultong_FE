@@ -4,8 +4,8 @@ import styled, { css } from "styled-components";
 import { useInput } from "../lib/utils/useInput";
 import Swal from "sweetalert2";
 import "../pages/reset.css";
-import __pwfind from "../redux/modules/findPwSlice";
-import __Idfind from "../redux/modules/findIdSlice";
+import { __pwfind } from "../api/submit/Login";
+import { __Idfind } from "../api/submit/Login";
 
 const Idfind = () => {
   // const url1 =

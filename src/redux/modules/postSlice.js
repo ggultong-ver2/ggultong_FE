@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
 import { current } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -8,6 +8,7 @@ const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
+
   details: {
     title: "",
     content: "",
@@ -93,16 +94,17 @@ export const __editComment = createAsyncThunk(
   "editComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await baseURL.put(
-        `/api/comment/${payload.postId}/comment/${payload.commentId}`,
-        payload.editComment
-      );
+      console.log("ppp==", payload);
+      const data = await baseURL.put(`comment/${payload.commentId}`, {
+        content: payload.editcomment,
+      });
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
 export const __getComment = createAsyncThunk(
   "getComment",
   async (payload, thunkAPI) => {
@@ -248,8 +250,6 @@ export const __patchPost = createAsyncThunk(
         profileImg === "" ? new File([], "") : profileImg
       );
       formData.append("nickname", nickname);
-      //entries
-      // appen 키값 file 중요! 백엔드와 맞춰야함!
 
       const data = await apis.patchPost(formData);
     } catch (error) {
@@ -401,6 +401,7 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postLike.fulfilled]: (state, action) => {
+
       if (action.payload === "true") {
         state.details.isLikedPost = true;
         state.details.likePostSum = state.details.likePostSum + 1;
@@ -408,6 +409,7 @@ export const postSlice = createSlice({
         state.details.isLikedPost = false;
         state.details.likePostSum = state.details.likePostSum - 1;
       }
+
       state.isLoading = false;
       state.posts = action.payload;
     },
@@ -447,12 +449,11 @@ export const postSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoadig = false;
-      state.details.comment.pop(action.payload);
-      // state.details.comment = state.details.comment.filter(
-      //   (comment) => comment.id !== action.payload.id
-      // );
-      console.log("state.details.comment:", state.details.comment);
-      console.log(action.payload);
+      // state.details.comment.pop(action.payload);
+      const newComment = state.details.comment.filter(
+        (comment) => comment.id !== action.payload.commentId
+      );
+      state.details.comment = newComment;
     },
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -461,20 +462,27 @@ export const postSlice = createSlice({
     },
 
     [__editComment.pending]: (state, action) => {
-      // state.isLoading = true;
+      state.isLoading = true;
+      state.error = action.payload;
     },
     [__editComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      const index = state.comment.findIndex(
-        (comment) => comment.commentId === action.payload.commentId
-      );
-      state.comment.splice(index, 1, action.payload);
+      console.log("st", action.payload);
+      const index = current(state.details.comment).map((e) => {
+        if (e.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return e;
+        }
+      });
+      state.details.comment = index;
+      // state.comment.splice(index, 1, action.payload.content);
+      console.log("index", index);
     },
-
+    // 남은것 : 코멘트 CSS, 수정부분 랜더링, 수정폼 - 확인누르면 visible, 인풋창 초기화
     [__editComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      alert(action.payload.response.data.errorMessage);
     },
     [__getComment.pending]: (state) => {},
     [__getComment.fulfilled]: (state, action) => {
@@ -484,24 +492,8 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
   },
-
-  // // 아이디 중복체크
-  // [__checkUserName.pending]: (state) => {
-  //   state.isLoading = true;
-  //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
-  // },
-  // [__checkUserName.fulfilled]: (state, action) => {
-  //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
-  //   state.isLoading = false;
-  //   state.posts = action.payload;
-  // },
-  // [__checkUserName.rejected]: (state, action) => {
-  //   state.isLoading = false;
-  //   state.error = action.payload;
-  //   // 에러 발생-> 네트워크 요청은 끝,false
-  //   // catch 된 error 객체를 state.error에 넣습니다.
-  // },
 });
 
-// export const {} = recipesSlice.actions;
+
 export default postSlice.reducer;
+

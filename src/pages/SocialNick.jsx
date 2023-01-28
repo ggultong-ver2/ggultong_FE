@@ -5,8 +5,8 @@ import Swal from "sweetalert2";
 
 import { useInput } from "../lib/utils/useInput";
 import { useDispatch } from "react-redux";
-import __nickCheck from "../redux/modules/checkNickSlice";
-import __socialNick from "../redux/modules/socialNickSlice";
+import { __nickCheck } from "../api/submit/Login";
+import { __socialNick } from "../api/submit/Login";
 
 function SocialNick() {
   const [nickname, setNickname] = useInput();
