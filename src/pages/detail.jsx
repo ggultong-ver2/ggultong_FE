@@ -145,14 +145,15 @@ const Detail = () => {
             <Else>
               <Etc>
                 <StNickname>{details?.nickname}</StNickname>
-                <div className="detail_date">{details?.createdAt.slice(0, 10)}</div>
+                <div className="detail_date">
+                  {details?.createdAt.slice(0, 10)}
+                </div>
               </Etc>
               <Etcs>
                 <Countcomment>댓글 {details?.comment.length} </Countcomment>
                 <Heart>좋아요 {details?.likePostSum}</Heart>
               </Etcs>
             </Else>
-            <StFile src={details?.imageFiles} />
             <StContent
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
@@ -284,21 +285,18 @@ const Countcomment = styled.p`
   margin-right: 20px;
 `;
 const Heart = styled.p``;
-const StFile = styled.img`
-  height: 500px;
-  width: 800px;
-  background-color: #d9d9d9;
-`;
 const StContent = styled.div`
+  border: 1px solid yellow;
+  height: 800px;
   width: 800px;
-  font-size: 16px;
-  line-height: 26px;
+  padding: 10px;
+  font-size: 18px;
   word-break: break-all;
   margin-bottom: 50px;
 
   img {
-    width: 800px;
-    height: 600px;
+    max-width: 800px;
+    height: auto;
   }
 `;
 

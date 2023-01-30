@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-const Pagination = ({ total, limit, page, setPage }) => {
-  const numPages = Math.ceil(total / limit);
+const Pagination = ({ totalPosts, limit, page, setPage }) => {
+  const numPages = Math.ceil(totalPosts / limit);
+  const firstNum = page - (page % 5) + 1;
+  const lastNum = page - (page % 5) + 5;
 
   return (
     <div>
@@ -9,20 +11,43 @@ const Pagination = ({ total, limit, page, setPage }) => {
         <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
           &lt;
         </Button>
-        {Array(numPages)
+        <Button
+          onClick={() => {
+            setPage(page - 1);
+          }}
+        >
+          {firstNum}
+        </Button>
+        {Array(numPages).map((_, i) => {
+          return (
+            <Button key={i + 1} onClick={() => setPage(i + 1)}>
+              {i + 1}
+            </Button>
+          );
+        })}
+        {/* {Array(numPages)
           .fill()
           .map((_, i) => (
             <Button
-              key={i + 1}
-              onClick={() => setPage(i + 1)}
-              aria-current={page === i + 1 ? "page" : null}
+              key={i + 1 + firstNum}
+              onClick={() => {
+                setPage(i + 1 + firstNum);
+              }}
+              aria-current={page === i + 1 + firstNum ? "page" : null}
             >
-              {i + 1}
+              {i + 1 + first}
             </Button>
-          ))}
+          ))} */}
+        {/* <Button
+          key={i + 1}
+          onClick={() => setPage(lastNum)}
+          aria-current={page === lastNum ? "page" : null}
+        >
+          {lastNum}
+        </Button>
         <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
           &gt;
-        </Button>
+        </Button> */}
       </Nav>
     </div>
   );
