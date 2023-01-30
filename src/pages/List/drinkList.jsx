@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __getCategoryPost } from "../../redux/modules/postSlice";
 import Pagination from "../../components/pagination/pagination";
+import "./style.css";
 // import { __getPost } from "../../redux/modules/postSlice";
 
 const DrinkList = () => {
@@ -26,23 +27,38 @@ const DrinkList = () => {
   console.log("categoryPosts:", categoryPosts);
 
   return (
-    <div>
+    <div className="list_body">
+      <Buttons>
+        <Button1 onClick={() => navigate("/drinkList/drink")} className="drink">
+          혼술
+        </Button1>
+        <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
+        <Button3
+          onClick={() => navigate("/recycleList/recycle")}
+          className="recycle"
+        >
+          리사이꿀
+        </Button3>
+      </Buttons>
+      <div className="postlist_top">
+        <ul className="clearfix">
+          <li>
+            <div className="postlist_top_image1"></div>
+            <h3>
+              맥주 종류 별 40가지 먹어본 사람이
+              <br />
+              추천하는 맥주 탑5
+            </h3>
+            {/* <div className="mask"></div> */}
+          </li>
+          <li>
+            <div className="postlist_top_image2"></div>
+            <h3>칵테일 안주 레시피</h3>
+          </li>
+        </ul>
+      </div>
+
       <Wrapall>
-        <Buttons>
-          <Button1
-            onClick={() => navigate("/drinkList/drink")}
-            className="drink"
-          >
-            혼술
-          </Button1>
-          <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
-          <Button3
-            onClick={() => navigate("/recycleList/recycle")}
-            className="recycle"
-          >
-            리사이꿀
-          </Button3>
-        </Buttons>
         <Wrap>
           {categoryPosts.map((post) => {
             // console.log(post);
@@ -55,7 +71,7 @@ const DrinkList = () => {
                   ></StContent>
                   <Etcwrap>
                     댓글&nbsp;{post?.comment.length} 좋아요&nbsp;
-                    {post.likePostSum} 스크랩400&nbsp;&nbsp;
+                    {post.likePostSum} &nbsp;&nbsp;
                     {post.createdAt.slice(0, 10)}
                   </Etcwrap>
                 </Textwrap>
@@ -70,52 +86,66 @@ const DrinkList = () => {
 };
 
 const Wrapall = styled.div`
-  border: 1px solid red;
-  width: 1200px;
-  height: 2700px;
+  width: 1000px;
   margin: auto;
-  padding: 20px;
-  font-family: "Pretendard";
+  padding: 0 98px;
+  background: white;
+  position: relative;
+  padding-bottom: 104px;
+
 `;
 const Wrap = styled.div`
   margin-left: 30px;
   margin-top: 20px;
 `;
-const Buttons = styled.div``;
+const Buttons = styled.div`
+  width: 1200px;
+  height: 32px;
+  margin: 0 auto;
+  padding-left: 40px;
+  margin-bottom: 34px;
+`;
 const Button1 = styled.button`
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 73px;
+  height: 32px;
   margin-right: 15px;
   border-radius: 20px;
-  background-color: white;
+  background-color: transparent;
   border: 1px solid black;
   color: black;
 `;
 const Button2 = styled.button`
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 73px;
+  height: 32px;
   margin-right: 15px;
   border-radius: 20px;
-  background-color: white;
+  background-color: transparent;
   border: 1px solid grey;
   color: grey;
+  &:hover {
+    border: 1px solid black;
+    color: black;
+  }
 `;
 const Button3 = styled.button`
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 97px;
+  height: 32px;
   margin-right: 15px;
   border-radius: 20px;
-  background-color: white;
+  background-color: transparent;
   border: 1px solid grey;
   color: grey;
+  &:hover {
+    border: 1px solid black;
+    color: black;
+  }
 `;
 const Card = styled.div`
-  //border: 1px solid green;
   border-bottom: 1px solid grey;
-  width: 1100px;
+  width: 800px;
   height: 250px;
   &:hover {
     cursor: pointer;
@@ -126,34 +156,34 @@ const Textwrap = styled.div`
   margin-top: 30px;
 `;
 const StTitle = styled.div`
-  //border: 1px solid green;
   height: 50px;
   width: 850px;
-  font-size: 25px;
+  font-size: 18px;
+  line-height: 28px;
   font-weight: bold;
   margin-top: 20px;
 `;
 const StFile = styled.img`
-  // border: 1px solid yellow;
-  height: 200px;
-  width: 200px;
-  float: left;
-  position: relative;
-  margin: 20px;
+  height: 140px;
+  width: 140px;
   background-color: #d9d9d9;
+  position: absolute;
+  right: 98px;
+  margin-top: 40px;
 `;
 const StContent = styled.div`
-  // border: 1px solid blue;
   overflow: hidden;
   height: 120px;
-  width: 850px;
-  font-size: 20px;
-  //margin-top: 20px;
+  width: 600px;
+  font-size: 14px;
+  line-height: 22px;
   overflow: hidden;
 `;
 const Etcwrap = styled.div`
-  // border: 1px solid grey;
   height: 30px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #A0A0A0;
 `;
 
 export default DrinkList;

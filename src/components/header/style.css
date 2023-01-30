@@ -183,3 +183,50 @@ input:focus {
 .category_wrap .post_button:hover a {
   color: #000;
 }
+
+.top_cat_wrap {
+  width: 100%;
+  height: 35px;
+  background: #000;
+}
+.top_cat {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top_cat li {
+  float: left;
+  margin-left: 30px;
+  font-size: 14px;
+}
+.top_cat li:first-child {
+  margin-left: 0;
+}
+.top_cat li:hover {
+  border-bottom: 2px solid #fff;
+  color: white;
+}
+.top_cat button {
+  height: 32px;
+  border: 0 none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.top_cat .top_post_btn {
+  background: #ffd665;
+  color: #000;
+  border: 0 none;
+  width: 69px;
+  height: 24px;
+  border-radius: 20px;
+}
+.top_post_btn:hover{
+  background: #000;
+  color: #ffd665;
+  border-bottom: 0 none;
+}
