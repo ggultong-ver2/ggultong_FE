@@ -218,6 +218,7 @@ function SignAgree() {
 const StContainer = styled.form`
   width: 100%;
   display: flex;
+  min-height: 90vh;
   background-color: #f9fafb;
   justify-content: center;
   background-size: cover;

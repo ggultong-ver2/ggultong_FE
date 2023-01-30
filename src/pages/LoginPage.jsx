@@ -114,6 +114,7 @@ const PostLoginPage = () => {
 const StContainer = styled.form`
   display: flex;
   justify-content: center;
+  min-height: 90vh;
   background-color: #f9fafb;
 `;
 
