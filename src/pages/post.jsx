@@ -48,13 +48,21 @@ const Post = () => {
     //console.log(key);
     //}
     // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
-    dispatch(__addPost(formdata));
-    Swal.fire("작성이 완료되었습니다!", "", "success").then((res) => {
-      console.log(res);
-      if (res.isConfirmed) {
-        navigate(`/drinkList/drink`);
-      }
-    });
+    if (category === "") {
+      Swal.fire("카테고리를 선택해주세요!", "", "warning");
+    } else if (title === "") {
+      Swal.fire("제목을 입력해주세요!", "", "warning");
+    } else if (content === "") {
+      Swal.fire("내용을 입력해주세요!", "", "warning");
+    } else {
+      dispatch(__addPost(formdata));
+      Swal.fire("작성이 완료되었습니다!", "", "success").then((res) => {
+        console.log(res);
+        if (res.isConfirmed) {
+          navigate(`/drinkList/drink`);
+        }
+      });
+    }
 
     for (const pair of formdata) {
       console.log(pair[0] + "," + pair[1]);
@@ -131,7 +139,7 @@ const Post = () => {
             <FileInput
               type="file"
               id="fileUpload"
-              multiple={true}
+              multiple={false}
               width="500px"
               onChange={(ev) => {
                 const { files } = ev.target;

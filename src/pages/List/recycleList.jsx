@@ -52,7 +52,7 @@ const RecycleList = () => {
                     {post.createdAt.slice(0, 10)}
                   </Etcwrap>
                 </Textwrap>
-                <StFile src={post.imageFiles}></StFile>
+                <StFile src={post.imageFile}></StFile>
               </Card>
             );
           })}

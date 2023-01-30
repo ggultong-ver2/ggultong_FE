@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { __getCategoryPost } from "../../redux/modules/postSlice";
-import Pagination from "../../components/pagination/pagination";
-// import { __getPost } from "../../redux/modules/postSlice";
+// import Pagination from "../../components/pagination/pagination";
 
 const DrinkList = () => {
   const navigate = useNavigate();
@@ -17,6 +16,17 @@ const DrinkList = () => {
 
   // const getPost = useSelector((state) => state.posts.posts);
   // console.log("getPost::", getPost);
+
+  // const [page, setPage] = useState(1);
+  // const limit = 10;
+  // const offset = (page - 1) * limit;
+
+  // const pageData = (page) => {
+  //   if (page) {
+  //     let result = page.slice(offset, offset + limit);
+  //     return result;
+  //   }
+  // };
 
   useEffect(() => {
     dispatch(__getCategoryPost(id));
@@ -47,7 +57,11 @@ const DrinkList = () => {
           {categoryPosts.map((post) => {
             // console.log(post);
             return (
-              <Card key={post.id} onClick={() => navigate(`detail/${post.id}`)}>
+              <Card
+                key={post.id}
+                onClick={() => navigate(`detail/${post.id}`)}
+                // info={pageData()}
+              >
                 <Textwrap>
                   <StTitle>{post.title}</StTitle>
                   <StContent
@@ -58,10 +72,11 @@ const DrinkList = () => {
                     {post.createdAt.slice(0, 10)}
                   </Etcwrap>
                 </Textwrap>
-                <StFile src={post.imageFiles}></StFile>
+                <StFile src={post.imageFile}></StFile>
               </Card>
             );
           })}
+          {/* <Pagination limit={limit} page={page} /> */}
         </Wrap>
       </Wrapall>
     </div>

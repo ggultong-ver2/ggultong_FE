@@ -157,7 +157,6 @@ const Detail = () => {
                 <Heart>좋아요 {details?.likePostSum}</Heart>
               </Etcs>
             </Else>
-            <StFile src={details?.imageFiles[0]} />
             <StContent
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
@@ -282,22 +281,16 @@ const Countcomment = styled.p`
   margin-right: 20px;
 `;
 const Heart = styled.p``;
-const StFile = styled.img`
-  border: 1px solid green;
-  height: 500px;
-  width: 800px;
-  background-color: #d9d9d9;
-`;
 const StContent = styled.div`
   border: 1px solid yellow;
-  height: 800px;
+  min-height: 800px;
   width: 800px;
-  padding: 10px;
+  /* padding: 10px; */
   font-size: 18px;
   word-break: break-all;
   img {
-    width: 800px;
-    height: 600px;
+    max-width: 800px;
+    height: auto;
   }
 `;
 
