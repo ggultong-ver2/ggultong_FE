@@ -100,7 +100,7 @@ function Header() {
       </div>
       <div className="top_cat_wrap">
         <div className="top_cat">
-          <ul>
+          <ul className="clearfix">
             <li>
               <button onClick={() => navigate("/")}>홈</button>
             </li>

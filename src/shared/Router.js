@@ -30,9 +30,8 @@ import MyPwChange from "../pages/MyPwChange";
 import MyPage from "../pages/MyPage";
 import KakaolLogin from "../pages/KakaoLogin";
 import NaverLogin from "../pages/NaverLogin";
-import Game from "../pages/GameList";
+import Game from "../pages/Game";
 import GameList from "../pages/GameList";
-import WorldCupGame from "../pages/WorldCupGame";
 import EditComment from "../pages/EditComment";
 
 const Router = () => {
@@ -41,7 +40,6 @@ const Router = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Main />} />
-          {/* <Route path="/mypage" element={<MyPage />} /> */}
           <Route path="myconfirm/pwchange" element={<MyPwChange />} />
           <Route path="/myconfirm/" element={<MyConfirm />} />
           <Route path="/signup" element={<SignUpPage />} />
@@ -60,7 +58,7 @@ const Router = () => {
           <Route path="/user/kakao/callback" element={<KakaolLogin />} />
           <Route path="/user/naver/callback" element={<NaverLogin />} />
           <Route path="/gamelist" element={<GameList />} />
-          <Route path="/gamelist/worldcupgame" element={<WorldCupGame />} />
+          <Route path="/gamelist/worldcupgame" element={<Game />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/socialnick" element={<SocialNick />} />

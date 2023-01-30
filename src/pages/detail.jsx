@@ -28,14 +28,9 @@ const Detail = () => {
   const [addComment, setAddComment] = useState({
     content: "",
   });
-  const [text, setText] = useState("");
   const detailList = useSelector((state) => state.details.details);
   console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
-
-  //console.log("commentList:", commentList);
-  const [isLogin, setIsLogin] = useState(false);
-  // const [likeToggle, setLikeToggle] = useState(false);
 
   useEffect(() => {
     // console.log("param.id:", param.id);
@@ -142,15 +137,17 @@ const Detail = () => {
   console.log("visible", visible);
   if (details.id) {
     return (
-      <div>
+      <div className="detail_body">
         <StDetail>
-          <p>{details?.id}</p>
+          {/* <p>{details?.id}</p> */}
           <Wrap>
             <StTitle>{details?.title}</StTitle>
             <Else>
               <Etc>
                 <StNickname>{details?.nickname}</StNickname>
-                <Date>{details?.createdAt.slice(0, 10)}</Date>
+                <div className="detail_date">
+                  {details?.createdAt.slice(0, 10)}
+                </div>
               </Etc>
               <Etcs>
                 <Countcomment>댓글 {details?.comment.length} </Countcomment>
@@ -160,13 +157,17 @@ const Detail = () => {
             <StContent
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
-            <Btns>
+            {/* <Btns>
               <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
               <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
-            </Btns>
+            </Btns> */}
           </Wrap>
           <div className="likes">
             <Likes />
+          </div>
+          <div className="comment_top">
+            <div>댓글 {details?.comment.length} </div>
+            <div>게시글 신고</div>
           </div>
           <Commentarea>
             <Writecomment>
@@ -239,22 +240,21 @@ const Detail = () => {
 };
 
 const StDetail = styled.div`
-  border: 1px solid red;
   width: 1200px;
-  height: 1800px;
   margin: auto;
-  margin-top: 30px;
   word-break: break-all;
+  background: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
 `;
 const Wrap = styled.div`
   margin-left: 200px;
-  margin-top: 20px;
 `;
 const StTitle = styled.p`
-  border: 1px solid blue;
   height: 60px;
   width: 800px;
-  font-size: 30px;
+  font-size: 22px;
+  line-height: 32px;
   font-weight: bold;
   text-align: center;
 `;
@@ -265,16 +265,20 @@ const StNickname = styled.p`
   margin-right: 20px;
 `;
 const Etc = styled.div`
-  width: 800px;
+  font-size: 14px;
+  width: 150px;
   display: flex;
   text-align: center;
 `;
 const Etcs = styled.div`
   display: flex;
   text-align: center;
+  font-size: 14px;
+  color: #a0a0a0;
 `;
 const Else = styled.div`
   width: 800px;
+  display: flex;
   justify-content: space-between;
 `;
 const Countcomment = styled.p`
@@ -283,11 +287,13 @@ const Countcomment = styled.p`
 const Heart = styled.p``;
 const StContent = styled.div`
   border: 1px solid yellow;
-  min-height: 800px;
+  height: 800px;
   width: 800px;
-  /* padding: 10px; */
+  padding: 10px;
   font-size: 18px;
   word-break: break-all;
+  margin-bottom: 50px;
+
   img {
     max-width: 800px;
     height: auto;
@@ -396,8 +402,9 @@ const DeleteBtn = styled.button`
 
 const Commentbox = styled.div`
   width: 800px;
-  height: 120px;
+  height: 100px;
   margin-left: 200px;
+  margin-top: 30px;
 `;
 const Commenttextarea = styled.div`
   margin-top: 10px;
@@ -421,7 +428,6 @@ const Writtendate = styled.p`
   color: #979797;
 `;
 const Commentcontent = styled.div`
-  // border: 1px solid green;
   font-size: 14px;
   font-weight: 400;
   width: 650px;

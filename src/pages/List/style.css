@@ -1,0 +1,48 @@
+.list_body{
+    min-height: 100vh;
+    background: #F9FAFB;
+    padding-top: 16px;
+    padding-bottom: 160px;
+}
+
+.postlist_top{
+    width: 1000px;
+    height: 340px;
+    margin: 0 auto;
+    background: white;
+    margin-bottom: 20px;
+    padding-top: 40px;
+    padding-left: 2px;
+}
+.postlist_top li{
+    float: left;
+    position: relative;
+    margin-left: 20px;
+}
+.postlist_top_image1{
+    width: 466px;
+    height: 260px;
+    background-image: url(../../../public/images/list_image1.png);
+}
+/* .mask{
+    top: 0;
+    width: 466px;
+    height: 260px;
+    background-color: rgba(0, 0, 0, 0.259);
+} */
+.postlist_top_image2{
+    width: 466px;
+    height: 260px;
+    background-image: url(../../../public/images/list_image2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.postlist_top h3{
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 28px;
+    line-height: 38px;
+    padding: 24px 20px;
+
+}
