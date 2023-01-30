@@ -20,12 +20,11 @@ function SignComplete() {
 const StContainer = styled.form`
   font-family: "Pretendard";
   width: 100%;
-  height: 100vh;
   display: flex;
   background-color: white;
-  align-items: center;
   justify-content: center;
   background-size: cover;
+  margin: 100px 0;
 `;
 const StCenterBox = styled.div`
   font-family: "Pretendard";
@@ -75,7 +74,7 @@ const StButton = styled.button`
   color: white;
   cursor: pointer;
   &:hover {
-    background-color: #797777;
+    background-color: #FFD86A;
   }
 `;
 export default SignComplete;

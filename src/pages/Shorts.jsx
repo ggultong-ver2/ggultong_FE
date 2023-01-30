@@ -19,13 +19,13 @@ export default class Shorts extends Component {
       <div className="shorts_slider">
         <h2>자취 간단 레시피</h2>
         <Slider {...settings}>
-          <li>
+          <li className="shorts_slide_wrap">
             <div className="shorts_slide"></div>
             <p>
               보기 좋은 자취생 손님 맞이 요리 <br /> 밀푀유나베
             </p>
           </li>
-          <li>
+          <li className="shorts_slide_wrap">
             <div className="shorts_slide"></div>
             <p>shorts2</p>
           </li>

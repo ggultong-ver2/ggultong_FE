@@ -63,7 +63,7 @@ function Main() {
             </div>
           </div>
           <Shorts />
-          <WorldCup />
+          {/* <WorldCup /> */}
         </div>
       </div>
     </>
