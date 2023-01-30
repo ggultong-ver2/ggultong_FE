@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 import { baseURL } from "../../lib/axios";
 
-
 function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
@@ -67,9 +66,16 @@ function Search() {
                   <div className="search_post_wrap">
                     <ul className="clearfix">
                       <li className="search_post_nickname">{post.nickname}</li>
-                      <li className="search_post_like">좋아요&nbsp;{post.likePostSum}</li>
+                      <li className="search_post_comment">
+                        댓글&nbsp;{post.comment.length}
+                      </li>
+                      <li className="search_post_like">
+                        좋아요&nbsp;{post.likePostSum}
+                      </li>
                     </ul>
-                    <div className="search_post_time">{post.createdAt.slice(0, 10)}</div>
+                    <div className="search_post_time">
+                      {post.createdAt.slice(0, 10)}
+                    </div>
                   </div>
                 </div>
               ))}
