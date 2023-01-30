@@ -10,7 +10,7 @@ function WorldCupGame() {
   const [displays, setDisplays] = useState([]);
   const [winners, setWinners] = useState([]);
   const [count, setCount] = useState(1);
-  const [rank, setRank] = useState(16);
+  const [rank, setRank] = useState("16강");
   const [visible, setVisible] = useState(false);
 
   const onIncrease = () => {
@@ -88,7 +88,7 @@ function WorldCupGame() {
       src: require("../../assets/images/sushi.jpg"),
     },
   ];
-
+  console.log(items.length);
   useEffect(() => {
     items.sort(() => Math.random() - 0.5);
     setFoods(items);
@@ -97,7 +97,19 @@ function WorldCupGame() {
 
   const clickHandler = (food) => () => {
     onIncrease();
-    setRank(() => (count >= 4 ? 8 : 16));
+
+    if (count <= 7) {
+      setRank("16강");
+    } else if (count <= 11) {
+      setRank("8강");
+    } else if (count <= 13) {
+      setRank("준결승");
+    } else if (count <= 14) {
+      setRank("결승");
+    } else if (count <= 15) {
+      setRank("우승");
+    }
+
     setVisible(count >= 15 ? <Ranking /> : null);
     if (foods.length <= 2) {
       if (winners.length === 0) {
@@ -123,7 +135,7 @@ function WorldCupGame() {
       </TitleBox>
       <TitleBox>
         <StCount>
-          {count} / 16 {rank}강
+          {count} / 16 {rank}
         </StCount>
       </TitleBox>
       <Container>

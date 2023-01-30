@@ -112,6 +112,7 @@ const PostLoginPage = () => {
   );
 };
 const StContainer = styled.form`
+  height: 100vh;
   display: flex;
   justify-content: center;
   background-color: #f9fafb;
