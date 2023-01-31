@@ -21,7 +21,6 @@ const StContainer = styled.form`
   font-family: "Pretendard";
   width: 100%;
   display: flex;
-  background-color: white;
   justify-content: center;
   background-size: cover;
   margin: 100px 0;
@@ -29,7 +28,6 @@ const StContainer = styled.form`
 const StCenterBox = styled.div`
   font-family: "Pretendard";
   width: 400px;
-  height: 850px;
   align-items: center;
   border: 0;
   border-radius: 1px;
@@ -69,12 +67,14 @@ const StButton = styled.button`
   border: 0;
   font-size: 18px;
   border-radius: 4px;
-  background-color: #b5b5b5;
+  background-color: #FFD86A;
+
   font-family: "Pretendard";
   color: white;
   cursor: pointer;
   &:hover {
-    background-color: #FFD86A;
+    background-color: black;
+    color: white;
   }
 `;
 export default SignComplete;
