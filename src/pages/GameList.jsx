@@ -19,7 +19,13 @@ function GameList() {
               꿀통 음식 월드컵
               <br />
               이번 달 우승음식은?
-              <StButton>랭킹보기</StButton>
+              <StButton
+                onClick={() => {
+                  navigate("/gamelist/gamerank");
+                }}
+              >
+                랭킹보기
+              </StButton>
               <StButton2
                 onClick={() => {
                   navigate("/gamelist/worldcupgame");

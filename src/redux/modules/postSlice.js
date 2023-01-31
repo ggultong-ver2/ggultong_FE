@@ -38,6 +38,23 @@ export const __getPost = createAsyncThunk(
   }
 );
 
+// 월드컵 리스트 불러오기
+export const __getWorldCup = createAsyncThunk(
+  "getWorldCup",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await apis.getWorldCup();
+      console.log("payload: ", payload);
+      console.log("data: ", data.data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 // export const __addComment = createAsyncThunk(
 //   "addComment",
 //   async (payload, thunkAPI) => {
@@ -454,6 +471,18 @@ export const postSlice = createSlice({
       state.categoryPosts = action.payload;
     },
     [__getCategoryPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__getWorldCup.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getWorldCup.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.worldCups = action.payload;
+    },
+    [__getWorldCup.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

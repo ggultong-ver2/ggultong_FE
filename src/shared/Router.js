@@ -33,6 +33,7 @@ import NaverLogin from "../pages/NaverLogin";
 import Game from "../pages/Game";
 import GameList from "../pages/GameList";
 import EditComment from "../pages/EditComment";
+import GameRank from "../pages/GameRank";
 
 const Router = () => {
   return (
@@ -58,6 +59,7 @@ const Router = () => {
           <Route path="/user/kakao/callback" element={<KakaolLogin />} />
           <Route path="/user/naver/callback" element={<NaverLogin />} />
           <Route path="/gamelist" element={<GameList />} />
+          <Route path="/gamelist/gamerank" element={<GameRank />} />
           <Route path="/gamelist/worldcupgame" element={<Game />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/search/:keyword" element={<Search />} />
