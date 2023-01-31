@@ -1,103 +1,71 @@
 import { isVisible } from "@testing-library/user-event/dist/utils";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { baseURL } from "../../lib/axios";
+
 import Ranking from "./Ranking";
 
 function WorldCupGame() {
   const navigate = useNavigate();
   const [foods, setFoods] = useState([]);
-  const [displays, setDisplays] = useState([]);
   const [winners, setWinners] = useState([]);
   const [count, setCount] = useState(1);
-  const [rank, setRank] = useState(16);
+  const [rank, setRank] = useState("16강");
   const [visible, setVisible] = useState(false);
+  const [displays, setDisplays] = useState([]);
+
+  const [inputData, setInputData] = useState([
+    {
+      id: "",
+      title: "",
+      imageUrl: "",
+    },
+  ]);
+  console.log("inputdata", inputData);
 
   const onIncrease = () => {
     setCount((prevCount) => (prevCount === 16 ? 16 : prevCount + 1));
   };
 
-  //   const onRank = () => {
-  //     setRank((prevRank) => (prevRank === 4 ? 16 : 8));
-  //     // setRank((prevRank) => (prevRank >= ? 4 : 8));
-  //   };
-
-  const items = [
+  useEffect(async () => {
     {
-      name: "국밥",
-      src: require("../../assets/images/bab.jpg"),
-    },
-    {
-      name: "햄버거",
-      src: require("../../assets/images/burger.jpg"),
-    },
-    {
-      name: "피자",
-      src: require("../../assets/images/pizza.jpg"),
-    },
-    {
-      name: "초밥",
-      src: require("../../assets/images/sushi.jpg"),
-    },
-    {
-      name: "국밥",
-      src: require("../../assets/images/bab.jpg"),
-    },
-    {
-      name: "햄버거",
-      src: require("../../assets/images/burger.jpg"),
-    },
-    {
-      name: "피자",
-      src: require("../../assets/images/pizza.jpg"),
-    },
-    {
-      name: "초밥",
-      src: require("../../assets/images/sushi.jpg"),
-    },
-    {
-      name: "국밥",
-      src: require("../../assets/images/bab.jpg"),
-    },
-    {
-      name: "햄버거",
-      src: require("../../assets/images/burger.jpg"),
-    },
-    {
-      name: "피자",
-      src: require("../../assets/images/pizza.jpg"),
-    },
-    {
-      name: "초밥",
-      src: require("../../assets/images/sushi.jpg"),
-    },
-    {
-      name: "국밥",
-      src: require("../../assets/images/bab.jpg"),
-    },
-    {
-      name: "햄버거",
-      src: require("../../assets/images/burger.jpg"),
-    },
-    {
-      name: "피자",
-      src: require("../../assets/images/pizza.jpg"),
-    },
-    {
-      name: "초밥",
-      src: require("../../assets/images/sushi.jpg"),
-    },
-  ];
+      // 데이터를 받아오는 동안 시간이 소요됨으로 await 로 대기
+      const res = await baseURL.get("/post/getWorldcupImage");
+      // 받아온 데이터로 다음 작업을 진행하기 위해 await 로 대기
+      console.log("res", res);
+      // 받아온 데이터를 map 해주어 rowData 별로 _inputData 선언
+      const _inputData = await res.data.map((rowData) => ({
+        id: rowData.id,
+        title: rowData.title,
+        imageUrl: rowData.imageUrl,
+      }));
+      console.log("_inputData", _inputData);
+      // 선언된 _inputData 를 최초 선언한 inputData 에 concat 으로 추가
+      setInputData(inputData.concat(_inputData));
+    }
+  });
 
   useEffect(() => {
-    items.sort(() => Math.random() - 0.5);
-    setFoods(items);
-    setDisplays([items[0], items[1]]);
+    inputData.sort(() => Math.random() - 0.5);
+    setFoods(inputData);
+    setDisplays([inputData[0], inputData[1]]);
   }, []);
 
   const clickHandler = (food) => () => {
     onIncrease();
-    setRank(() => (count >= 4 ? 8 : 16));
+    if (count <= 7) {
+      setRank("16강");
+    } else if (count <= 11) {
+      setRank("8강");
+    } else if (count <= 13) {
+      setRank("준결승");
+    } else if (count <= 14) {
+      setRank("결승");
+    } else if (count <= 15) {
+      setRank("우승");
+    }
     setVisible(count >= 15 ? <Ranking /> : null);
     if (foods.length <= 2) {
       if (winners.length === 0) {
@@ -123,18 +91,19 @@ function WorldCupGame() {
       </TitleBox>
       <TitleBox>
         <StCount>
-          {count} / 16 {rank}강
+          {count} / 16 {rank}
         </StCount>
       </TitleBox>
       <Container>
-        {displays.map((e) => {
+        {displays.map((rowData) => {
+          console.log("row", rowData);
           return (
             <div>
               <TitleBox>
-                <StName>{e.name}</StName>
+                <StName>{inputData.title}</StName>
               </TitleBox>
-              <StFlex key={e.name} onClick={clickHandler(e)}>
-                <StImg src={e.src} />
+              <StFlex key={inputData.title} onClick={clickHandler}>
+                <StImg src={inputData.imageUrl} />
               </StFlex>
             </div>
           );

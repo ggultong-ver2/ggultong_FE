@@ -59,6 +59,7 @@ export const apis = {
   idfind: (idfind) => instance.post("/user/findId", idfind),
   // 게시글 관련
   getPost: () => instance.get("/post/postList"),
+
   getIdPost: (id) => {
     const token = localStorage.getItem("Access_Token");
     if (token) {
@@ -67,8 +68,8 @@ export const apis = {
       return instance.get(`/post/${id}`);
     }
   },
-  getCategoryPost: (category) => {
-    return instance.get(`/post/postList/${category}/1`);
+  getCategoryPost: (category, pageNum) => {
+    return instance.get(`/post/postList/${category}/${pageNum}`);
   },
 
   createPost: (post) => {
@@ -86,10 +87,6 @@ export const apis = {
     }),
 
   //댓글 관련
-  // createComment: (post, postId) => {
-  //   console.log("postid:", postId);
-  //   baseURL.post(`/comment/${postId}`, post);
-  // },
 
   deleteComment: ({ commentId }) => baseURL.delete(`/comment/${commentId}`),
 
@@ -111,7 +108,7 @@ export const apis = {
     });
   },
 
-  // 리뷰 관련
-
+  // 월드컵 관련
+  getWorldCup: () => instance.get("post/getWorldcupImage"),
   // 좋아요 관련
 };

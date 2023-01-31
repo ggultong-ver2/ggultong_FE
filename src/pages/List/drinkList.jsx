@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { __getCategoryPost } from "../../redux/modules/postSlice";
-// import Pagination from "../../components/pagination/pagination";
+import Pagination from "../../components/pagination/pagination";
 import "./style.css";
 // import { __getPost } from "../../redux/modules/postSlice";
 
@@ -11,28 +11,25 @@ const DrinkList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id);
-  // useEffect(() => {
-  //   dispatch(__getPost());
-  // }, [dispatch]);
+  const { pageNum } = useParams();
+  console.log(id, pageNum);
 
-  // const getPost = useSelector((state) => state.posts.posts);
-  // console.log("getPost::", getPost);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
 
-  // const [page, setPage] = useState(1);
-  // const limit = 10;
-  // const offset = (page - 1) * limit;
-
-  // const pageData = (page) => {
-  //   if (page) {
-  //     let result = page.slice(offset, offset + limit);
-  //     return result;
-  //   }
-  // };
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (posts) => {
+    let currentPosts = 0;
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
 
   useEffect(() => {
-    dispatch(__getCategoryPost(id));
-  }, [dispatch, id]);
+    dispatch(__getCategoryPost(id, pageNum));
+  }, [dispatch, id, pageNum]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
   console.log("categoryPosts:", categoryPosts);
@@ -71,30 +68,36 @@ const DrinkList = () => {
 
       <Wrapall>
         <Wrap>
-          {categoryPosts.map((post) => {
-            // console.log(post);
-            return (
-              <Card
-                key={post.id}
-                onClick={() => navigate(`detail/${post.id}`)}
-                // info={pageData()}
-              >
-                <Textwrap>
-                  <StTitle>{post.title}</StTitle>
-                  <StContent
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                  ></StContent>
-                  <Etcwrap>
-                    댓글&nbsp;{post?.comment.length} 좋아요&nbsp;
-                    {post.likePostSum} &nbsp;&nbsp;
-                    {post.createdAt.slice(0, 10)}
-                  </Etcwrap>
-                </Textwrap>
-                <StFile src={post.imageFile}></StFile>
-              </Card>
-            );
-          })}
-          {/* <Pagination limit={limit} page={page} /> */}
+          {categoryPosts &&
+            categoryPosts?.map((post) => {
+              console.log(post);
+              return (
+                <Card
+                  key={post.id}
+                  onClick={() => navigate(`detail/${post.id}`)}
+                  posts={currentPosts(posts)}
+                  loading={loading}
+                >
+                  <Textwrap>
+                    <StTitle>{post.title}</StTitle>
+                    <StContent
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    ></StContent>
+                    <Etcwrap>
+                      댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
+                      {post.likePostSum} &nbsp;&nbsp;
+                      {post.createdAt.slice(0, 10)}
+                    </Etcwrap>
+                  </Textwrap>
+                  <StFile src={post.imageFile}></StFile>
+                </Card>
+              );
+            })}
+          <Pagination
+            possPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={setCurrentPage}
+          />
         </Wrap>
       </Wrapall>
     </div>
@@ -129,6 +132,7 @@ const Button1 = styled.button`
   background-color: transparent;
   border: 1px solid black;
   color: black;
+  font-weight: 500;
 `;
 const Button2 = styled.button`
   cursor: pointer;
@@ -143,6 +147,7 @@ const Button2 = styled.button`
     border: 1px solid black;
     color: black;
   }
+  font-weight: 500;
 `;
 const Button3 = styled.button`
   cursor: pointer;
@@ -157,6 +162,7 @@ const Button3 = styled.button`
     border: 1px solid black;
     color: black;
   }
+  font-weight: 500;
 `;
 const Card = styled.div`
   border-bottom: 1px solid grey;

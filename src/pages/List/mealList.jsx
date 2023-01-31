@@ -19,22 +19,19 @@ const MealList = () => {
 
   return (
     <div className="list_body">
-        <Buttons>
-          <Button1
-            onClick={() => navigate("/drinkList/drink")}
-            className="drink"
-          >
-            혼술
-          </Button1>
-          <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
-          <Button3
-            onClick={() => navigate("/recycleList/recycle")}
-            className="recycle"
-          >
-            리사이꿀
-          </Button3>
-        </Buttons>
-        <div className="postlist_top">
+      <Buttons>
+        <Button1 onClick={() => navigate("/drinkList/drink")} className="drink">
+          혼술
+        </Button1>
+        <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
+        <Button3
+          onClick={() => navigate("/recycleList/recycle")}
+          className="recycle"
+        >
+          리사이꿀
+        </Button3>
+      </Buttons>
+      <div className="postlist_top">
         <ul className="clearfix">
           <li>
             <div className="postlist_top_image1"></div>
@@ -85,7 +82,6 @@ const Wrapall = styled.div`
   background: white;
   position: relative;
   padding-bottom: 104px;
-
 `;
 const Wrap = styled.div`
   margin-left: 30px;
@@ -107,6 +103,7 @@ const Button2 = styled.button`
   background-color: transparent;
   border: 1px solid black;
   color: black;
+  font-weight: 500;
 `;
 const Button3 = styled.button`
   cursor: pointer;
@@ -117,10 +114,11 @@ const Button3 = styled.button`
   background-color: transparent;
   border: 1px solid grey;
   color: grey;
-  &:hover{
+  &:hover {
     border: 1px solid black;
     color: black;
   }
+  font-weight: 500;
 `;
 const Button1 = styled.button`
   cursor: pointer;
@@ -131,10 +129,11 @@ const Button1 = styled.button`
   background-color: transparent;
   border: 1px solid grey;
   color: grey;
-  &:hover{
+  &:hover {
     border: 1px solid black;
     color: black;
   }
+  font-weight: 500;
 `;
 const Card = styled.div`
   border-bottom: 1px solid grey;
@@ -175,7 +174,7 @@ const Etcwrap = styled.div`
   height: 30px;
   font-size: 14px;
   line-height: 22px;
-  color: #A0A0A0;
+  color: #a0a0a0;
 `;
 
 export default MealList;

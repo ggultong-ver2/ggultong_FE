@@ -38,6 +38,23 @@ export const __getPost = createAsyncThunk(
   }
 );
 
+// 월드컵 리스트 불러오기
+export const __getWorldCup = createAsyncThunk(
+  "getWorldCup",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await apis.getWorldCup();
+      console.log("payload: ", payload);
+      console.log("data: ", data.data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 
 export const __addComment = createAsyncThunk(
   "addComment",
@@ -339,7 +356,8 @@ export const postSlice = createSlice({
       console.log("action.payload: ", action.payload);
       state.isLoading = false;
       console.log(current(state));
-      const newList = [action.payload, ...current(state.categoryPosts)];
+      const data = { ...action.payload, comment: [] };
+      const newList = [data, ...current(state.categoryPosts)];
       state.categoryPosts = newList;
     },
     [__addPost.rejected]: (state, action) => {
@@ -453,8 +471,21 @@ export const postSlice = createSlice({
     [__getCategoryPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.categoryPosts = action.payload;
+      console.log(action.payload);
     },
     [__getCategoryPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__getWorldCup.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getWorldCup.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.worldCups = action.payload;
+    },
+    [__getWorldCup.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

@@ -1,90 +1,64 @@
 import styled from "styled-components";
+import React from "react";
 
-const Pagination = ({ totalPosts, limit, page, setPage }) => {
-  const numPages = Math.ceil(totalPosts / limit);
-  const firstNum = page - (page % 5) + 1;
-  const lastNum = page - (page % 5) + 5;
+const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div>
-      <Nav>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
-          &lt;
-        </Button>
-        <Button
-          onClick={() => {
-            setPage(page - 1);
-          }}
-        >
-          {firstNum}
-        </Button>
-        {Array(numPages).map((_, i) => {
-          return (
-            <Button key={i + 1} onClick={() => setPage(i + 1)}>
-              {i + 1}
-            </Button>
-          );
-        })}
-        {/* {Array(numPages)
-          .fill()
-          .map((_, i) => (
-            <Button
-              key={i + 1 + firstNum}
-              onClick={() => {
-                setPage(i + 1 + firstNum);
-              }}
-              aria-current={page === i + 1 + firstNum ? "page" : null}
-            >
-              {i + 1 + first}
-            </Button>
-          ))} */}
-        {/* <Button
-          key={i + 1}
-          onClick={() => setPage(lastNum)}
-          aria-current={page === lastNum ? "page" : null}
-        >
-          {lastNum}
-        </Button>
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
-          &gt;
-        </Button> */}
-      </Nav>
+      <nav>
+        <PageUl>
+          {pageNumbers.map((number) => (
+            <PageLi key={number}>
+              <PageSpan onClick={() => paginate(number)}>{number}</PageSpan>
+            </PageLi>
+          ))}
+        </PageUl>
+      </nav>
     </div>
   );
 };
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  margin: 16px;
+const PageUl = styled.ul`
+  float: left;
+  list-style: none;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  padding: 1px;
+  border-top: 3px solid #186ead;
+  border-bottom: 3px solid #186ead;
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
-const Button = styled.button`
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
-  margin: 0;
-  background: black;
-  color: white;
-  font-size: 1rem;
-
+const PageLi = styled.li`
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px;
+  border-radius: 5px;
+  width: 25px;
   &:hover {
-    background: tomato;
     cursor: pointer;
-    transform: translateY(-2px);
+    color: white;
+    background-color: #263a6c;
   }
-  &[disabled] {
-    background: grey;
-    cursor: revert;
-    transform: revert;
+  &:focus::after {
+    color: white;
+    background-color: #263a6c;
   }
-  &[aria-current] {
-    background: deeppink;
-    font-weight: bold;
-    cursor: revert;
-    transform: revert;
+`;
+
+const PageSpan = styled.span`
+  &:hover::after,
+  &:focus::after {
+    border-radius: 100%;
+    color: white;
+    background-color: #263a6c;
   }
 `;
 
