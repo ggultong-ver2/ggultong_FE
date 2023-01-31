@@ -19,7 +19,7 @@ function Main() {
         <div className="sub_container">
           <div className="main_category">
             <ul className="clearfix">
-              <li>
+              <li onClick={() => navigate("/drinkList/drink")}>
                 <div className="category_title">
                   <h3>혼술 꿀팁</h3>
                   <div className="drink_icon"></div>
@@ -28,7 +28,7 @@ function Main() {
                   <p>혼술하는 사람들의 팁이 궁금하다면?</p>
                 </div>
               </li>
-              <li>
+              <li onClick={() => navigate("/mealList/meal")}>
                 <div className="category_title">
                   <h3>혼밥 꿀팁</h3>
                   <div className="rice_icon"></div>
@@ -37,7 +37,7 @@ function Main() {
                   <p>혼밥하는 사람들의 요리 레시피가 궁금하다면?</p>
                 </div>
               </li>
-              <li>
+              <li onClick={() => navigate("/recycleList/recycle")}>
                 <div className="category_title">
                   <h3>푸드 리사이꿀</h3>
                   <div className="tip_icon"></div>

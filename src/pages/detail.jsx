@@ -128,6 +128,11 @@ const Detail = () => {
     }
   };
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
   // useEffect(() => {
   //   if (details.id) return;
   //   navigate(`/drinkList/drink`);
@@ -141,7 +146,24 @@ const Detail = () => {
         <StDetail>
           {/* <p>{details?.id}</p> */}
           <Wrap>
-            <StTitle>{details?.title}</StTitle>
+            <div className="detail_title_wrap">
+              <div className="detail_title">{details?.title}</div>
+              <div onClick={handleOpen} className="detail_toggle"></div>
+            {open ? (
+              <ul className="toggle_item_wrap">
+                <li onClick={onClickEditPostHandler} className="toggle_edit">
+                  수정하기
+                </li>
+                <li
+                  onClick={onClickDeletePostHandler}
+                  className="toggle_delete"
+                >
+                  삭제하기
+                </li>
+              </ul>
+            ) : null}
+            </div>
+
             <Else>
               <Etc>
                 <StNickname>{details?.nickname}</StNickname>
@@ -157,10 +179,6 @@ const Detail = () => {
             <StContent
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
-            {/* <Btns>
-              <StEditBtn onClick={onClickEditPostHandler}>수정</StEditBtn>
-              <StDeleteBtn onClick={onClickDeletePostHandler}>삭제</StDeleteBtn>
-            </Btns> */}
           </Wrap>
           <div className="likes">
             <Likes />
@@ -250,15 +268,6 @@ const StDetail = styled.div`
 const Wrap = styled.div`
   margin-left: 200px;
 `;
-const StTitle = styled.p`
-  height: 60px;
-  width: 800px;
-  font-size: 22px;
-  line-height: 32px;
-  font-weight: bold;
-  text-align: center;
-`;
-
 const StNickname = styled.p`
   margin-bottom: 10px;
   font-weight: bold;
@@ -286,38 +295,18 @@ const Countcomment = styled.p`
 `;
 const Heart = styled.p``;
 const StContent = styled.div`
-  border: 1px solid yellow;
-  height: 800px;
+  /* border: 1px solid yellow; */
   width: 800px;
   padding: 10px;
   font-size: 18px;
   word-break: break-all;
+  margin-top: 30px;
   margin-bottom: 50px;
 
   img {
     max-width: 800px;
     height: auto;
   }
-`;
-
-const Btns = styled.div`
-  margin-left: 270px;
-  margin-top: 30px;
-`;
-const StEditBtn = styled.button`
-  height: 60px;
-  width: 120px;
-  border-radius: 30px;
-  background-color: transparent;
-  font-size: 25px;
-  margin-right: 20px;
-`;
-const StDeleteBtn = styled.button`
-  height: 60px;
-  width: 120px;
-  border-radius: 30px;
-  background-color: transparent;
-  font-size: 25px;
 `;
 
 const CommentBtn = styled.button`
@@ -327,14 +316,14 @@ const CommentBtn = styled.button`
   height: 32px;
   background-color: white;
   border: 1px solid #e4e4e4;
-  border-radius: 15px;
+  border-radius: 20px;
+  color: #CBCBCB;
   cursor: pointer;
 
   &:hover {
     color: black;
     border: 1px solid black;
   }
-  font-family: "Pretendard";
 `;
 
 const Date = styled.p``;

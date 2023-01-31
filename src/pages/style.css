@@ -155,7 +155,7 @@
   background: transparent;
 }
 .main_room h5 {
-  width: 74px;
+  width: 80px;
   font-size: 16px;
   line-height: 28px;
 }
@@ -212,7 +212,7 @@
 }
 .main_recipe h5,
 .main_recycle h5 {
-  width: 74px;
+  width: 80px;
   font-size: 16px;
   line-height: 28px;
 }
@@ -385,4 +385,48 @@
   height: 1px;
   margin: 0 auto;
   background: #A0A0A0;
+}
+.detail_title_wrap{
+  position: relative;
+  width: 800px;
+}
+.detail_title{
+  height: 60px;
+  width: 800px;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+.detail_toggle{
+  width: 24px;
+  height: 24px;
+  background-image: url(../../public/images/detail_more.png);
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.toggle_item_wrap{
+  width: 107px;
+  height: 64px;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background: white;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 7px rgb(196, 196, 196);
+}
+.toggle_item_wrap li{
+  cursor: pointer;
+}
+.toggle_item_wrap li:hover{
+  font-weight: bold;  
+}
+.toggle_delete{
+  margin-top: 7px;
+  color: red;
 }
