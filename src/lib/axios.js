@@ -67,8 +67,8 @@ export const apis = {
       return instance.get(`/post/${id}`);
     }
   },
-  getCategoryPost: (category) => {
-    return instance.get(`/post/postList/${category}/1`);
+  getCategoryPost: (category, pageNum) => {
+    return instance.get(`/post/postList/${category}/${pageNum}`);
   },
 
   createPost: (post) => {

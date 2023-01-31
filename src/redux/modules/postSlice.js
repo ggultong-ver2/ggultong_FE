@@ -338,7 +338,8 @@ export const postSlice = createSlice({
       console.log("action.payload: ", action.payload);
       state.isLoading = false;
       console.log(current(state));
-      const newList = [action.payload, ...current(state.categoryPosts)];
+      const data = { ...action.payload, comment: [] };
+      const newList = [data, ...current(state.categoryPosts)];
       state.categoryPosts = newList;
     },
     [__addPost.rejected]: (state, action) => {
@@ -452,6 +453,7 @@ export const postSlice = createSlice({
     [__getCategoryPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.categoryPosts = action.payload;
+      console.log(action.payload);
     },
     [__getCategoryPost.rejected]: (state, action) => {
       state.isLoading = false;
