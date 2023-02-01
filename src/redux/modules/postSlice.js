@@ -21,6 +21,11 @@ const initialState = {
   // patch:[],
   error: null,
   isLoading: false,
+  // pages: {
+  //   start: 0, // 시작 페이지
+  //   end: 10, // 끝나는 페이지 넘버
+  //   current: 1, // 현재 페이지 넘버(초기값: 1페이지)
+  // },
 };
 
 // 데이터 불러오기
@@ -229,9 +234,12 @@ export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await apis.getCategoryPost(payload);
-      console.log("categorydata:", data);
       console.log(payload);
+      const { data } = await apis.getCategoryPost(
+        payload.id,
+        payload.currentPage
+      );
+      console.log("categorydata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
