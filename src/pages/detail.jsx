@@ -57,13 +57,17 @@ const Detail = () => {
     dispatch(__addComment([addComment, Number(id)]));
     console.log("add", addComment);
     setAddComment({ ...addComment, content: "" });
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "댓글 작성완료",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    if (localStorage.getItem("Access_Token") !== null) {
+      Swal.fire({
+        position: "top-middle",
+        icon: "success",
+        title: "댓글 작성완료",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire("로그인 후 이용해주세요", "", "error");
+    }
   };
 
   const onClickDeleteCommentHandler = (commentId) => {
@@ -149,19 +153,19 @@ const Detail = () => {
             <div className="detail_title_wrap">
               <div className="detail_title">{details?.title}</div>
               <div onClick={handleOpen} className="detail_toggle"></div>
-            {open ? (
-              <ul className="toggle_item_wrap">
-                <li onClick={onClickEditPostHandler} className="toggle_edit">
-                  수정하기
-                </li>
-                <li
-                  onClick={onClickDeletePostHandler}
-                  className="toggle_delete"
-                >
-                  삭제하기
-                </li>
-              </ul>
-            ) : null}
+              {open ? (
+                <ul className="toggle_item_wrap">
+                  <li onClick={onClickEditPostHandler} className="toggle_edit">
+                    수정하기
+                  </li>
+                  <li
+                    onClick={onClickDeletePostHandler}
+                    className="toggle_delete"
+                  >
+                    삭제하기
+                  </li>
+                </ul>
+              ) : null}
             </div>
 
             <Else>
@@ -317,7 +321,7 @@ const CommentBtn = styled.button`
   background-color: white;
   border: 1px solid #e4e4e4;
   border-radius: 20px;
-  color: #CBCBCB;
+  color: #cbcbcb;
   cursor: pointer;
 
   &:hover {

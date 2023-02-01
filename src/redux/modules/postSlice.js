@@ -15,7 +15,9 @@ const initialState = {
     comment: {},
     isLikedPost: false,
     likePostSum: 0,
+    worldCups: [],
   },
+
   // patch:[],
   error: null,
   isLoading: false,
@@ -43,9 +45,11 @@ export const __getWorldCup = createAsyncThunk(
   "getWorldCup",
   async (payload, thunkAPI) => {
     try {
-      const data = await apis.getWorldCup();
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
+      const data = await axios.get(
+        "https://sparta-sjl.shop/api/post/getWorldcupImage"
+      );
+
+      console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log(err);
@@ -54,7 +58,6 @@ export const __getWorldCup = createAsyncThunk(
     }
   }
 );
-
 
 export const __addComment = createAsyncThunk(
   "addComment",
@@ -258,22 +261,18 @@ export const __patchPost = createAsyncThunk(
   }
 );
 
-
-
 // 알림 기능
 export const __getNotification = createAsyncThunk(
-  'getNotification',
-  async (payload, thunkAPI) =>{
+  "getNotification",
+  async (payload, thunkAPI) => {
     try {
-      const data = await baseURL.get()
-      return thunkAPI.fulfillWithValue(data.data)
+      const data = await baseURL.get();
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error)
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
-
-
 
 export const postSlice = createSlice({
   name: "post",
@@ -477,13 +476,14 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
+    //월드컵 리스트
     [__getWorldCup.pending]: (state) => {
       state.isLoading = true;
     },
     [__getWorldCup.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.worldCups = action.payload;
+      state.details.worldCups = action.payload;
+      console.log("action", state.details.worldCups);
     },
     [__getWorldCup.rejected]: (state, action) => {
       state.isLoading = false;
@@ -554,54 +554,61 @@ export const postSlice = createSlice({
   },
 });
 
-
 //알림
 
 export const notificationSlice = createSlice({
-  name: 'getNotification',
-  initialState:{
+  name: "getNotification",
+  initialState: {
     notifications: {
-          data: [{id: 0, content:{}, status: false}],
-          error: null,
-          success: true,
-      },
-      isLoading: false,
+      data: [{ id: 0, content: {}, status: false }],
       error: null,
+      success: true,
+    },
+    isLoading: false,
+    error: null,
   },
   reducers: {
-      _addNotification(state, action) {
-          // console.log(action.payload)
-          state.notifications.data.unshift(action.payload)
-      },
-      _readNotification(state, action) {
-          // console.log(current(state.notifications.data))
-          const a = state.notifications.data.findIndex((v) => v.id === action.payload)
-          state.notifications.data[a].status = true;
-      },
-      _deleteNotification(state, action) {
-          const a = state.notifications.data.findIndex((v) => v.id === action.payload)
-          state.notifications.data.splice(a,1)
-      },
-      _deletNotifications(state, action) {
-          state.notifications.data.splice(0,state.notifications.data.length)
-      }
+    _addNotification(state, action) {
+      // console.log(action.payload)
+      state.notifications.data.unshift(action.payload);
+    },
+    _readNotification(state, action) {
+      // console.log(current(state.notifications.data))
+      const a = state.notifications.data.findIndex(
+        (v) => v.id === action.payload
+      );
+      state.notifications.data[a].status = true;
+    },
+    _deleteNotification(state, action) {
+      const a = state.notifications.data.findIndex(
+        (v) => v.id === action.payload
+      );
+      state.notifications.data.splice(a, 1);
+    },
+    _deletNotifications(state, action) {
+      state.notifications.data.splice(0, state.notifications.data.length);
+    },
   },
   extraReducers: {
-      [__getNotification.pending]: (state) => {
-          state.isLoading = true;
-      },
-      [__getNotification.fulfilled]: (state, action) => {
-          state.isLoading = false;
-          state.notifications = action.payload;
-      },
-      [__getNotification.rejected]: (state, action) => {
-          state.isLoading = false;
-          state.error = action.payload;
-      }
-  }
-})
+    [__getNotification.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getNotification.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.notifications = action.payload;
+    },
+    [__getNotification.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
+});
 
-export const { __addNotification, __readNotification, __deleteNotification, __deleteNotifications } = notificationSlice.actions
-
+export const {
+  __addNotification,
+  __readNotification,
+  __deleteNotification,
+  __deleteNotifications,
+} = notificationSlice.actions;
 
 export default postSlice.reducer;

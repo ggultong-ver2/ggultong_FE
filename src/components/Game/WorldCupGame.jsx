@@ -1,9 +1,11 @@
 import { isVisible } from "@testing-library/user-event/dist/utils";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { baseURL } from "../../lib/axios";
+import { __getWorldCup } from "../../redux/modules/postSlice";
 
 import Ranking from "./Ranking";
 
@@ -15,45 +17,56 @@ function WorldCupGame() {
   const [rank, setRank] = useState("16강");
   const [visible, setVisible] = useState(false);
   const [displays, setDisplays] = useState([]);
+  const dispatch = useDispatch();
 
-  const [inputData, setInputData] = useState([
-    {
-      id: "",
-      title: "",
-      imageUrl: "",
-    },
-  ]);
-  console.log("inputdata", inputData);
+  // const [inputData, setInputData] = useState([]);
+
+  const inputData = useSelector((state) => state.details.details.worldCups);
+  console.log("inputdatas", inputData);
 
   const onIncrease = () => {
     setCount((prevCount) => (prevCount === 16 ? 16 : prevCount + 1));
   };
 
-  useEffect(async () => {
-    {
-      // 데이터를 받아오는 동안 시간이 소요됨으로 await 로 대기
-      const res = await baseURL.get("/post/getWorldcupImage");
-      // 받아온 데이터로 다음 작업을 진행하기 위해 await 로 대기
-      console.log("res", res);
-      // 받아온 데이터를 map 해주어 rowData 별로 _inputData 선언
-      const _inputData = await res.data.map((rowData) => ({
-        id: rowData.id,
-        title: rowData.title,
-        imageUrl: rowData.imageUrl,
-      }));
-      console.log("_inputData", _inputData);
-      // 선언된 _inputData 를 최초 선언한 inputData 에 concat 으로 추가
-      setInputData(inputData.concat(_inputData));
-    }
-  });
+  useEffect(() => {
+    dispatch(__getWorldCup());
+
+    console.log("res", inputData);
+
+    // async function fetchData() {
+    //   try {
+    //     // 데이터를 받아오는 동안 시간이 소요됨으로 await 로 대기
+    //     const res = await baseURL.get("/post/getWorldcupImage");
+    //     // 받아온 데이터로 다음 작업을 진행하기 위해 await 로 대기
+    //     console.log("res", res);
+    //     // 받아온 데이터를 map 해주어 rowData 별로 _inputData 선언
+    //     const _inputData = await res.data.map((rowData) => ({
+    //       id: rowData.id,
+    //       title: rowData.title,
+    //       imageUrl: rowData.imageUrl,
+    //     }));
+    //     console.log("_inputData", _inputData);
+    //     // 선언된 _inputData 를 최초 선언한 inputData 에 concat 으로 추가
+    //     setInputData(inputData.concat(_inputData));
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // }
+    // fetchData();
+  }, [dispatch]);
 
   useEffect(() => {
-    inputData.sort(() => Math.random() - 0.5);
-    setFoods(inputData);
-    setDisplays([inputData[0], inputData[1]]);
-  }, []);
+    const array = [...inputData];
+    console.log("arr", array);
+    const newdata = array.sort(() => Math.random() - 0.5);
 
-  const clickHandler = (food) => () => {
+    console.log("new", newdata);
+    setFoods(newdata);
+    console.log("newdata[0]", newdata.slice(0, 2));
+    setDisplays([newdata[0], newdata[1]]);
+  }, [inputData]);
+
+  const clickHandler = (food) => {
     onIncrease();
     if (count <= 7) {
       setRank("16강");
@@ -80,9 +93,11 @@ function WorldCupGame() {
       setWinners([...winners, food]);
       setDisplays([foods[2], foods[3]]);
       setFoods(foods.slice(2));
+      console.log("winner", foods[2]);
     }
-    // onRank();
+    // onRank(); displays[0].id
   };
+  if (displays.length === 0) return;
 
   return (
     <form>
@@ -96,20 +111,23 @@ function WorldCupGame() {
       </TitleBox>
       <Container>
         {displays.map((rowData) => {
-          console.log("row", rowData);
+          console.log("row", displays);
           return (
-            <div>
+            <div key={rowData?.id}>
               <TitleBox>
-                <StName>{inputData.title}</StName>
+                <StName>{rowData?.title}</StName>
               </TitleBox>
-              <StFlex key={inputData.title} onClick={clickHandler}>
-                <StImg src={inputData.imageUrl} />
+              <StFlex
+                key={rowData?.title}
+                onClick={() => clickHandler(rowData)}
+              >
+                <StImg src={rowData?.imageUrl} />
               </StFlex>
             </div>
           );
         })}
       </Container>
-      <Complete>{visible && <Ranking />}</Complete>
+      <Complete>{visible && <Ranking displays={displays} />}</Complete>
     </form>
   );
 }

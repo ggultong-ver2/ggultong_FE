@@ -1,19 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+import { __worldcupsend } from "../../api/submit/Login";
 
-function Ranking() {
+function Ranking({ displays }) {
   const navigate = useNavigate();
+  const onWorldCupSend = (e) => {
+    e.preventDefault();
+    __worldcupsend(e.target.id);
+    navigate("/gamelist/worldcupgame/gamerank");
+  };
+
+  //
+  console.log("displaysss", displays[0].id);
   return (
     <div>
       <WinnerBox>꿀통 음식 월드컵 우승!</WinnerBox>
       <StCenterBox>
         <BtnBox>
-          <ResetBtn
-            onClick={() => window.location.replace("/gamelist/worldcupgame")}
-          >
+          <ResetBtn onClick={() => navigate("/gamelist/worldcupgame")}>
             다시 시작하기
           </ResetBtn>
-          <ConfirmBtn>랭킹보기</ConfirmBtn>
+          <ConfirmBtn
+            id={displays[0].id}
+            type="submit"
+            onClick={onWorldCupSend}
+          >
+            랭킹보기
+          </ConfirmBtn>
         </BtnBox>
       </StCenterBox>
     </div>
