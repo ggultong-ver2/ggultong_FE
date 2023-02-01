@@ -1,27 +1,45 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WorldCupGame from "../components/Game/WorldCupGame";
+import { __getRankList, __getWorldCup } from "../redux/modules/postSlice";
+import ProgressBar from "../components/Game/ProgressBar";
 
-const GameRank = () => {
+function GameRank() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const state = useLocation();
+  const rankData = useSelector((state) => state.details.details.rankList);
+  const [displays, setDisplays] = useState([]);
+  console.log("state", state.state);
+
+  useEffect(() => {
+    dispatch(__getRankList());
+
+    console.log("res", rankData);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const array = [rankData];
+    console.log("arr", array);
+
+    console.log("newdata[0]", array.slice(0, 2));
+    setDisplays(array[0]);
+  }, [rankData]);
+
   return (
     <Container>
       <div>
         <LeftBox>
           <div>
             <StH>내 최종 우승 음식</StH>
-            <StimageBox></StimageBox>
-            <StP>아침에 먹으면 좋을 계란 후라이 토스트</StP>
-            <StContent>
-              아침식사로 좋고 간단한 브런치로 좋은 계란후라이토스트 함께
-              만들어볼게요~ 식빵과 계란한개를 준비합니다. 후라이팬에 식용유
-              1작은술을 두르고 기름이 뜨거워질때쯤 계란을 깨서 올립니다.
-              중약불로 해서 노른자가 반숙상태가 될때까지 익혀주면 완성이에요.
-              노른자를 완숙으로 하고 싶을때는 흰자가 단단해졌을 때 젓가락으로
-              뒤집어서 노른자가 반숙정도될 때까지 익히면 됩니다.
-            </StContent>
+            <StimageBox src={state.state.imageUrl} />
+            <StP>{state.state.title}</StP>
+            <StContent></StContent>
             <BtnBox>
               <ResetBtn onClick={() => navigate("/gamelist/worldcupgame")}>
                 다시 시작하기
@@ -33,45 +51,31 @@ const GameRank = () => {
         <RightBox>
           <div>
             <StH>꿀통 음식 월드컵 우승</StH>
-            <StBox>
-              <MiniImage />
-              <MiniContent>
-                <StH2>1위 아침에 먹으면 좋을 계란 후라이토스트</StH2>
-              </MiniContent>
-            </StBox>
-            <StBox>
-              <MiniImage />
-              <MiniContent>
-                <StH2>2위 아침에 먹으면 좋을 계란 후라이토스트</StH2>
-              </MiniContent>
-            </StBox>
-            <StBox>
-              <MiniImage />
-              <MiniContent>
-                <StH2>3위 아침에 먹으면 좋을 계란 후라이토스트</StH2>
-              </MiniContent>
-            </StBox>
-            <StBox>
-              <MiniImage />
-              <MiniContent>
-                <StH2>4위 아침에 먹으면 좋을 계란 후라이토스트</StH2>
-              </MiniContent>
-            </StBox>
-            <StBox>
-              <MiniImage />
-              <MiniContent>
-                <StH2>5위 아침에 먹으면 좋을 계란 후라이토스트</StH2>
-              </MiniContent>
-            </StBox>
+            {displays.map((rowData) => {
+              return (
+                <div key={rowData.id}>
+                  <StBox>
+                    <MiniImage src={rowData.imageUrl} />
+                    <ProgressBox>
+                      <div>
+                        <StH2>{rowData.title}</StH2>
+                        <StH3>우승비율&nbsp;&nbsp;{rowData.percent}%</StH3>
+                        <ProgressBar rowdata={rowData} />
+                      </div>
+                    </ProgressBox>
+                  </StBox>
+                </div>
+              );
+            })}
           </div>
         </RightBox>
       </div>
     </Container>
   );
-};
+}
 const StimageBox = styled.img`
   margin-bottom: 30px;
-  float: left;
+
   width: 426px;
   height: 426px;
   background-color: #ffffff;
@@ -84,6 +88,13 @@ const MiniContent = styled.div`
   height: 99px;
 `;
 
+const ProgressBox = styled.div`
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  width: 510px;
+  height: 120px;
+`;
 const MiniImage = styled.img`
   border-radius: 5px;
   outline: none;
@@ -140,7 +151,7 @@ const RightBox = styled.div`
 
 const StH = styled.h2`
   display: flex;
-  justify-content: left;
+  justify-content: center;
   margin-top: 40px;
   margin-bottom: 30px;
   font-size: 22px;
@@ -149,22 +160,39 @@ const StH = styled.h2`
 `;
 
 const StH2 = styled.h2`
+  letter-spacing: 0.1em;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
   font-size: 16px;
   font-weight: 500;
   font-family: "Pretendard";
 `;
 
-const StP = styled.p`
+const StH3 = styled.h3`
+  margin-bottom: 10px;
+  letter-spacing: 0.1em;
+  display: flex;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Pretendard";
+`;
+
+const StP = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 425px;
+  height: 100px;
   margin-top: 30px;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
   font-family: "Pretendard";
 `;
 
 const StContent = styled.div`
   width: 426px;
-  height: 180px;
+  height: 80px;
   margin-bottom: 30px;
   color: #a0a0a0;
   letter-spacing: -0.05em;

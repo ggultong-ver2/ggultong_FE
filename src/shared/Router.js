@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import Home from "../pages/Home";
@@ -36,20 +36,6 @@ import EditComment from "../pages/EditComment";
 import GameRank from "../pages/GameRank";
 
 const Router = () => {
-
-  // useEffect(() => {
-  //   if(loading){
-  //     let eventSource;
-  //     const fetchSse = async () => {
-  //       try{
-  //         eventSource = new EventSource(
-  //           ``
-  //         )
-  //       }
-  //     }
-  //   }
-  // })
-
   return (
     <BrowserRouter>
       <Layout>

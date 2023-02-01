@@ -8,10 +8,16 @@ function Ranking({ displays }) {
   const onWorldCupSend = (e) => {
     e.preventDefault();
     __worldcupsend(e.target.id);
-    navigate("/gamelist/worldcupgame/gamerank");
+    console.log("e", e.target.id);
+    navigate("/gamelist/worldcupgame/gamerank", {
+      state: {
+        title: displays[0].title,
+        imageUrl: displays[0].imageUrl,
+        month: Number(displays[0].month),
+      },
+    });
   };
 
-  //
   console.log("displaysss", displays[0].id);
   return (
     <div>
@@ -22,6 +28,7 @@ function Ranking({ displays }) {
             다시 시작하기
           </ResetBtn>
           <ConfirmBtn
+            ranks={displays[0].id}
             id={displays[0].id}
             type="submit"
             onClick={onWorldCupSend}
