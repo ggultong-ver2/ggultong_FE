@@ -25,17 +25,17 @@ return (
         </div>
       ) : (
         <>
-          <div>읽지 않은 알림</div>
+          <div>읽지 않은 알림 ({notifications?.data.length})</div>
 
           <div>
             {notifications?.data.map((notification) => {
               return (
                 <div key={notification.id}>
                   {!notification.status ? ( // 읽지 않은 알람
-                    <div>
-                      <div>
+                    <div className="notificationn_list">
+                      <div className="notification_content">
                         {/* <span>{notification.content.content}</span> */}
-                        <div>
+                        <div onClick={() => {onclickReadNotification}}>
                           삭제
                         </div>
                       </div>
@@ -48,7 +48,7 @@ return (
                       }}
                     >
                       <div>
-                        <span>{notification.content.content}</span>
+                        {/* <span>{notification.content.content}</span> */}
                         <div>
                           삭제
                         </div>
