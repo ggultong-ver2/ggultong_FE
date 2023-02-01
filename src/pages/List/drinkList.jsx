@@ -11,25 +11,25 @@ const DrinkList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { pageNum } = useParams();
-  console.log(id, pageNum);
+  console.log(id);
 
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [postsPerPage, setPostsPerPage] = useState(10); // 페이지 당 리스트 개수
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = (posts) => {
-    let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
+  // const currentPosts = posts.slice(indexOfFirst, indexOfLast); // 0-10번까지 리스트
+
+  const paginate = (pageNum) => {
+    return setCurrentPage(pageNum);
   };
 
   useEffect(() => {
-    dispatch(__getCategoryPost(id, pageNum));
-  }, [dispatch, id, pageNum]);
+    console.log(currentPage);
+    dispatch(__getCategoryPost({ id, currentPage }));
+  }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
   console.log("categoryPosts:", categoryPosts);
@@ -37,9 +37,7 @@ const DrinkList = () => {
   return (
     <div className="list_body">
       <Buttons>
-        <Button1 onClick={() => navigate("/drinkList/drink")} className="drink">
-          혼술
-        </Button1>
+        <Button1 onClick={() => navigate("/drinkList/drink")}>혼술</Button1>
         <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
         <Button3
           onClick={() => navigate("/recycleList/recycle")}
@@ -68,35 +66,34 @@ const DrinkList = () => {
 
       <Wrapall>
         <Wrap>
-          {categoryPosts &&
-            categoryPosts?.map((post) => {
-              console.log(post);
-              return (
-                <Card
-                  key={post.id}
-                  onClick={() => navigate(`detail/${post.id}`)}
-                  posts={currentPosts(posts)}
-                  loading={loading}
-                >
-                  <Textwrap>
-                    <StTitle>{post.title}</StTitle>
-                    <StContent
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    ></StContent>
-                    <Etcwrap>
-                      댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
-                      {post.likePostSum} &nbsp;&nbsp;
-                      {post.createdAt.slice(0, 10)}
-                    </Etcwrap>
-                  </Textwrap>
-                  <StFile src={post.imageFile}></StFile>
-                </Card>
-              );
-            })}
+          {categoryPosts?.map((post) => {
+            console.log(post);
+            return (
+              <Card
+                key={post.id}
+                onClick={() => navigate(`detail/${post.id}`)}
+                // posts={currentPosts(posts)}
+                isLoading={isLoading}
+              >
+                <Textwrap>
+                  <StTitle>{post.title}</StTitle>
+                  <StContent
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                  ></StContent>
+                  <Etcwrap>
+                    댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
+                    {post.likePostSum} &nbsp;&nbsp;
+                    {post.createdAt.slice(0, 10)}
+                  </Etcwrap>
+                </Textwrap>
+                <StFile src={post.imageFile}></StFile>
+              </Card>
+            );
+          })}
           <Pagination
-            possPerPage={postsPerPage}
+            postsPerPage={postsPerPage}
             totalPosts={posts.length}
-            paginate={setCurrentPage}
+            paginate={paginate}
           />
         </Wrap>
       </Wrapall>
