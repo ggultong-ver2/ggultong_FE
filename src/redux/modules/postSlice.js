@@ -15,7 +15,9 @@ const initialState = {
     comment: {},
     isLikedPost: false,
     likePostSum: 0,
+    worldCups: [],
   },
+
   // patch:[],
   error: null,
   isLoading: false,
@@ -48,9 +50,11 @@ export const __getWorldCup = createAsyncThunk(
   "getWorldCup",
   async (payload, thunkAPI) => {
     try {
-      const data = await apis.getWorldCup();
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
+      const data = await axios.get(
+        "https://sparta-sjl.shop/api/post/getWorldcupImage"
+      );
+
+      console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log(err);
@@ -480,13 +484,14 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
+    //월드컵 리스트
     [__getWorldCup.pending]: (state) => {
       state.isLoading = true;
     },
     [__getWorldCup.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.worldCups = action.payload;
+      state.details.worldCups = action.payload;
+      console.log("action", state.details.worldCups);
     },
     [__getWorldCup.rejected]: (state, action) => {
       state.isLoading = false;

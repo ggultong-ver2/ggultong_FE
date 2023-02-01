@@ -133,6 +133,15 @@ export const __emailsend = async (email) => {
   // useSweet(1000, "error", error.response.data.msg);
 };
 
+//월드컵 데이터 전송
+export const __worldcupsend = async (worldcup) => {
+  try {
+    const data = await apis.worldsend(worldcup);
+    return data;
+  } catch (res) {}
+  // useSweet(1000, "error", error.response.data.msg);
+};
+
 // 인증번호 확인
 export const __emailcode = async (emailcode) => {
   try {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import Home from "../pages/Home";
@@ -36,6 +36,20 @@ import EditComment from "../pages/EditComment";
 import GameRank from "../pages/GameRank";
 
 const Router = () => {
+
+  // useEffect(() => {
+  //   if(loading){
+  //     let eventSource;
+  //     const fetchSse = async () => {
+  //       try{
+  //         eventSource = new EventSource(
+  //           ``
+  //         )
+  //       }
+  //     }
+  //   }
+  // })
+
   return (
     <BrowserRouter>
       <Layout>
@@ -59,7 +73,10 @@ const Router = () => {
           <Route path="/user/kakao/callback" element={<KakaolLogin />} />
           <Route path="/user/naver/callback" element={<NaverLogin />} />
           <Route path="/gamelist" element={<GameList />} />
-          <Route path="/gamelist/gamerank" element={<GameRank />} />
+          <Route
+            path="/gamelist/worldcupgame/gamerank"
+            element={<GameRank />}
+          />
           <Route path="/gamelist/worldcupgame" element={<Game />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/search/:keyword" element={<Search />} />
