@@ -1,9 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import details from "../modules/postSlice";
+import WorldCup from "../../pages/WorldCup";
+import details, { __getWorldCup } from "../modules/postSlice";
 import { __patchPost } from "../modules/postSlice";
 
 const store = configureStore({
-  reducer: { details, __patchPost },
+  reducer: { details, __patchPost, __getWorldCup },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),

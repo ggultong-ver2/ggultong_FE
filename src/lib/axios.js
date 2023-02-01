@@ -109,6 +109,10 @@ export const apis = {
   },
 
   // 월드컵 관련
-  getWorldCup: () => instance.get("post/getWorldcupImage"),
+  getworldcup: () => {
+    baseURL.get("/post/getWorldcupImage");
+  },
+  worldsend: (postId) => instance.post(`post/getWorldcupImage/${postId}`),
+
   // 좋아요 관련
 };
