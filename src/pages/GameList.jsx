@@ -1,15 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { __pwcheck } from "../api/submit/Login";
 import { useInput } from "../lib/utils/useInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
+import { __getRankMonth } from "../redux/modules/postSlice";
 
 function GameList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const MonthData = useSelector((state) => state.details.details.monthList);
+  console.log("MonthData", MonthData);
+  const [displays, setDisplays] = useState([]);
+  useEffect(() => {
+    dispatch(__getRankMonth());
 
+    console.log("res", MonthData);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const array = MonthData;
+    // console.log("arr", array[0]);
+
+    // setDisplays(array[0][0], array[0][1]);
+    // console.log("wwwww", array[0][0]);
+    // console.log("d", displays);
+    if (MonthData) {
+      for (let i = 0; i < array.length; i++) {
+        console.log("a0", array[i][0]);
+        console.log("a1", array[i][1]);
+
+        const img1and2 = {
+          img1: array[i][0].imageUrl,
+          img2: array[i][1].imageUrl,
+          month: array[i][0].month,
+        };
+
+        setDisplays((old) => [...old, img1and2]);
+      }
+    }
+
+    // console.log("newdata[0]", array[0]);
+  }, []);
+  console.log("dis", displays);
   return (
     <StContainer>
       <StTopBox>
@@ -40,60 +75,20 @@ function GameList() {
           </StRightBox>
         </StBannerBox>
       </StTopBox>
-
       <StListBox>
         <StDiv>이전 월드컵</StDiv>
-        <CardBox>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-        </CardBox>
-        <CardBox>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-        </CardBox>
-        <CardBox>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-          <StCard>
-            <StCardImg />
-            <StCardImg2 />
-            <StP>1월 꿀통 음식 월드컵</StP>
-          </StCard>
-        </CardBox>
+        {displays.map((rowdata) => {
+          // console.log("rrr", rowdata);
+          return (
+            <StCard>
+              <div>
+                <StCardImg src={rowdata.img1} />
+                <StCardImg2 src={rowdata.img2} />
+                <StP>1월 꿀통 음식 월드컵</StP>
+              </div>
+            </StCard>
+          );
+        })}
       </StListBox>
       <StFoodBox>
         <StLeftBox2>
@@ -149,6 +144,7 @@ const StBannerBox = styled.div`
 `;
 
 const CardBox = styled.div`
+  display: flex;
   width: 1200px;
   height: 270px;
   font-size: 24px;
@@ -199,12 +195,12 @@ const StRightBox2 = styled.div`
 `;
 
 const StListBox = styled.div`
+  margin: auto;
   /* padding-left: 23px; */
   font-size: 28px;
   font-weight: 600;
-  margin: auto;
   width: 1200px;
-  height: 950px;
+  height: 900px;
 `;
 
 const StFoodBox = styled.div`
@@ -279,12 +275,13 @@ const StCard = styled.div`
   margin-right: 16px;
   width: 384px;
   height: 255px;
-  background-color: orange;
   font-size: 18px;
   font-weight: 500;
   font-family: "Pretendard";
 `;
 const StP = styled.p`
+  background-color: silver;
+  width: 384px;
   font-family: "Pretendard";
   font-weight: 500;
   font-size: 18px;

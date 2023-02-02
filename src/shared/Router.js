@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import Home from "../pages/Home";
@@ -37,6 +37,7 @@ import GameRank from "../pages/GameRank";
 import { QueryClient } from "react-query";
 
 const Router = () => {
+
   // const EventSource = NativeEventSource
   // useEffect(() => {
   //   if(loading){
@@ -67,7 +68,7 @@ const Router = () => {
   //     return() => eventSource.close()
   //   }
   // });
-
+  
   return (
     <BrowserRouter>
       <Layout>
