@@ -274,7 +274,7 @@ export const __getNotification = createAsyncThunk(
   "getNotification",
   async (payload, thunkAPI) => {
     try {
-      const data = await baseURL.get(`/notifications`);
+      const data = await baseURL.get("/notifications");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -576,24 +576,24 @@ export const notificationSlice = createSlice({
     error: null,
   },
   reducers: {
-    _addNotification(state, action) {
+    __addNotification(state, action) {
       // console.log(action.payload)
       state.notifications.data.unshift(action.payload);
     },
-    _readNotification(state, action) {
+    __readNotification(state, action) {
       // console.log(current(state.notifications.data))
       const a = state.notifications.data.findIndex(
         (v) => v.id === action.payload
       );
       state.notifications.data[a].status = true;
     },
-    _deleteNotification(state, action) {
+    __deleteNotification(state, action) {
       const a = state.notifications.data.findIndex(
         (v) => v.id === action.payload
       );
       state.notifications.data.splice(a, 1);
     },
-    _deletNotifications(state, action) {
+    __deletNotifications(state, action) {
       state.notifications.data.splice(0, state.notifications.data.length);
     },
   },
@@ -616,7 +616,7 @@ export const __NreadNotification = createAsyncThunk(
   "NreadNotification",
   async (payload, thunkAPI) => {
     try {
-      const data = await baseURL.get(`notifications`);
+      const data = await baseURL.get("/notifications/count");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

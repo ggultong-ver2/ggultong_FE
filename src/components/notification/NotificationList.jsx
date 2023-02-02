@@ -19,9 +19,9 @@ function NotificationList({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const closeModal = () => {
-    setShowNotification(false);
-  };
+  // const closeModal = () => {
+  //   setShowNotification(false);
+  // };
 
   const onclickReadNotification = (notificationId) => {
     readNotification(notificationId);
@@ -76,7 +76,7 @@ function NotificationList({
                     <div key={notification.id}>
                       {!notification.status ? ( // 읽지 않은 알람
                         <div
-                          className="notificationn_list"
+                          className="notification_list"
                           onClick={() => {
                             onclickReadNotification(notification.id);
                             navigate();
