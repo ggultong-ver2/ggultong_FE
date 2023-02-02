@@ -16,7 +16,8 @@ function GameRank() {
   const rankData = useSelector((state) => state.details.details.rankList);
   const [displays, setDisplays] = useState([]);
   console.log("state", state.state);
-
+  const [nums] = useState("1");
+  const num = nums + 1;
   useEffect(() => {
     dispatch(__getRankList());
 
@@ -50,7 +51,7 @@ function GameRank() {
         </LeftBox>
         <RightBox>
           <div>
-            <StH>꿀통 음식 월드컵 우승</StH>
+            <StH>{num}꿀통 음식 월드컵 우승</StH>
             {displays.map((rowData) => {
               return (
                 <div key={rowData.id}>
@@ -58,7 +59,7 @@ function GameRank() {
                     <MiniImage src={rowData.imageUrl} />
                     <ProgressBox>
                       <div>
-                        <StH2>{rowData.title}</StH2>
+                        <StH2> {rowData.title}</StH2>
                         <StH3>우승비율&nbsp;&nbsp;{rowData.percent}%</StH3>
                         <ProgressBar rowdata={rowData} />
                       </div>

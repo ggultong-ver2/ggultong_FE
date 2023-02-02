@@ -195,12 +195,14 @@ const StRightBox2 = styled.div`
 `;
 
 const StListBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   margin: auto;
   /* padding-left: 23px; */
   font-size: 28px;
   font-weight: 600;
-  width: 1200px;
-  height: 900px;
+  width: 1300px;
+  height: 1300px;
 `;
 
 const StFoodBox = styled.div`
@@ -272,7 +274,7 @@ const StImgBox2 = styled.img`
 `;
 
 const StCard = styled.div`
-  margin-right: 16px;
+  margin-right: 25px;
   width: 384px;
   height: 255px;
   font-size: 18px;
