@@ -59,23 +59,23 @@ function GameRank() {
         <RightBox>
           <div>
             <StH>꿀통 음식 월드컵 우승</StH>
-            {displays.map((rowData, index) => {
+            {displays?.map((rowData, index) => {
               return (
                 <div key={rowData.id}>
                   <StBox
                     onClick={() => {
                       navigate(
-                        `/${rowData.category}List/${rowData.category}/detail/${rowData.id}`
+                        `/${rowData?.category}List/${rowData.category}/detail/${rowData.id}`
                       );
                     }}
                   >
-                    <MiniImage src={rowData.imageUrl} />
+                    <MiniImage src={rowData?.imageUrl} />
                     <ProgressBox>
                       <div>
                         <StH2>
-                          {index + 1}위 {rowData.title}
+                          {index + 1}위 {rowData?.title}
                         </StH2>
-                        <StH3>우승비율&nbsp;&nbsp;{rowData.percent}%</StH3>
+                        <StH3>우승비율&nbsp;&nbsp;{rowData?.percent}%</StH3>
                         <ProgressBar rowdata={rowData} />
                       </div>
                     </ProgressBox>

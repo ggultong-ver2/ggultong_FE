@@ -109,7 +109,7 @@ function GameList() {
 }
 const StContainer = styled.form`
   width: 100%;
-  height: 1900px;
+  height: 2300px;
   background-color: black;
   background-size: cover;
   font-family: "Pretendard";
@@ -203,7 +203,6 @@ const StListBox = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 100px;
-
 `;
 
 const StFoodBox = styled.div`
@@ -275,7 +274,6 @@ const StImgBox2 = styled.img`
 `;
 
 const StCard = styled.div`
-
   width: 384px;
   height: 255px;
   font-size: 18px;
@@ -283,7 +281,6 @@ const StCard = styled.div`
   margin-top: 40px;
 `;
 const StP = styled.p`
-  background-color: silver;
   width: 384px;
   font-family: "Pretendard";
   font-weight: 500;
