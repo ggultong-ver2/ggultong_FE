@@ -17,6 +17,7 @@ const initialState = {
     likePostSum: 0,
     worldCups: [],
     rankList: [],
+    monthList: [],
   },
 
   // patch:[],
@@ -71,6 +72,24 @@ export const __getRankList = createAsyncThunk(
     try {
       const data = await axios.get(
         "https://sparta-sjl.shop/api/post/getWorldcupTop5"
+      );
+
+      console.log("data: ", data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const __getRankMonth = createAsyncThunk(
+  "getRankMonth",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(
+        "https://sparta-sjl.shop/api/post/getWorldcupMonth"
       );
 
       console.log("data: ", data);
@@ -530,6 +549,21 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
+    //월드컵 1,2위 Get
+    [__getRankMonth.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getRankMonth.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details.monthList = action.payload;
+      console.log("action", state.details.monthList);
+    },
+    [__getRankMonth.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    // 댓글 추가
     [__addComment.pending]: (state) => {
       state.isLoading = true;
     },
