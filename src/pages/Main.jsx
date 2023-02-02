@@ -4,7 +4,6 @@ import Heroside from "../components/heroside/Heroside";
 import Recipe from "./Recipe";
 import "./reset.css";
 import Drink from "./Drink";
-import Shorts from "./Shorts";
 import "./style.css";
 import WorldCup from "./WorldCup";
 import Recycle from "./Recycle";
@@ -62,7 +61,6 @@ function Main() {
               <div className="random_image"></div>
             </div>
           </div>
-          <Shorts />
           {/* <WorldCup /> */}
         </div>
       </div>
