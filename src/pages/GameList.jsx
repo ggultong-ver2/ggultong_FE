@@ -196,13 +196,14 @@ const StRightBox2 = styled.div`
 
 const StListBox = styled.div`
   display: flex;
-  flex-wrap: wrap;
   margin: auto;
-  /* padding-left: 23px; */
   font-size: 28px;
   font-weight: 600;
-  width: 1300px;
-  height: 1300px;
+  width: 1200px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 100px;
+
 `;
 
 const StFoodBox = styled.div`
@@ -274,12 +275,12 @@ const StImgBox2 = styled.img`
 `;
 
 const StCard = styled.div`
-  margin-right: 25px;
+
   width: 384px;
   height: 255px;
   font-size: 18px;
   font-weight: 500;
-  font-family: "Pretendard";
+  margin-top: 40px;
 `;
 const StP = styled.p`
   background-color: silver;
@@ -296,7 +297,6 @@ const StDiv = styled.div`
   margin-bottom: 30px;
   width: 1200px;
   height: 50px;
-  font-family: "Pretendard";
   font-weight: 600;
   font-size: 28px;
   padding-top: 20px;

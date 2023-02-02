@@ -68,7 +68,7 @@ function NotificationList({
             </div>
           ) : (
             <>
-              <div>읽지 않은 알림 ({notifications?.data.length})</div>
+              <div>읽지 않은 알림 ({notifications?.data?.length})</div>
               <div>
                 {notifications?.data.map((notification) => {
                   return (
@@ -87,7 +87,7 @@ function NotificationList({
                               onClick={(e) => {
                                 e.stopPropagation();
                                 onclickDeleteNotification(notification.id);
-                              }}
+                              }} 
                             >
                               삭제
                             </div>
