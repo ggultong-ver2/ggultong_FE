@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { __getCategoryPost } from "../../redux/modules/postSlice";
-import Pagination from "../../components/pagination/pagination";
+import Paging from "../../components/pagination/paging";
 import "./style.css";
 // import { __getPost } from "../../redux/modules/postSlice";
 
@@ -13,17 +13,25 @@ const DrinkList = () => {
   const { id } = useParams();
   console.log(id);
 
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-  const [postsPerPage, setPostsPerPage] = useState(10); // 페이지 당 리스트 개수
+  const [count, setCount] = useState(0); // 아이템 총 개수
+  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirst, indexOfLast); // 0-10번까지 리스트
+  console.log(products);
 
-  const paginate = (pageNum) => {
-    return setCurrentPage(pageNum);
+  useEffect(() => {
+    setCount(products.length);
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, products, postPerPage]);
+
+  const setPage = (error) => {
+    setCurrentPage(error);
   };
 
   useEffect(() => {
@@ -66,35 +74,31 @@ const DrinkList = () => {
 
       <Wrapall>
         <Wrap>
-          {categoryPosts?.map((post) => {
-            console.log(post);
-            return (
-              <Card
-                key={post.id}
-                onClick={() => navigate(`detail/${post.id}`)}
-                // posts={currentPosts(posts)}
-                isLoading={isLoading}
-              >
-                <Textwrap>
-                  <StTitle>{post.title}</StTitle>
-                  <StContent
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                  ></StContent>
-                  <Etcwrap>
-                    댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
-                    {post.likePostSum} &nbsp;&nbsp;
-                    {post.createdAt.slice(0, 10)}
-                  </Etcwrap>
-                </Textwrap>
-                <StFile src={post.imageFile}></StFile>
-              </Card>
-            );
-          })}
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={paginate}
-          />
+          <div>
+            {categoryPosts?.map((post) => {
+              // console.log(post);
+              return (
+                <Card
+                  key={post.id}
+                  onClick={() => navigate(`detail/${post.id}`)}
+                >
+                  <Textwrap>
+                    <StTitle>{post.title}</StTitle>
+                    <StContent
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    ></StContent>
+                    <Etcwrap>
+                      댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
+                      {post.likePostSum} &nbsp;&nbsp;
+                      {post.createdAt.slice(0, 10)}
+                    </Etcwrap>
+                  </Textwrap>
+                  <StFile src={post.imageFile}></StFile>
+                </Card>
+              );
+            })}
+          </div>
+          <Paging currentPage={currentPage} count={count} setPage={setPage} />
         </Wrap>
       </Wrapall>
     </div>
