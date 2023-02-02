@@ -77,14 +77,14 @@ function GameList() {
       </StTopBox>
       <StListBox>
         <StDiv>이전 월드컵</StDiv>
-        {displays.map((rowdata) => {
+        {displays.map((rowdata, index) => {
           // console.log("rrr", rowdata);
           return (
             <StCard>
               <div>
                 <StCardImg src={rowdata.img1} />
                 <StCardImg2 src={rowdata.img2} />
-                <StP>1월 꿀통 음식 월드컵</StP>
+                <StP>{index + 1}월 꿀통 음식 월드컵</StP>
               </div>
             </StCard>
           );
@@ -195,14 +195,15 @@ const StRightBox2 = styled.div`
 `;
 
 const StListBox = styled.div`
+  display: flex;
   margin: auto;
   font-size: 28px;
   font-weight: 600;
   width: 1200px;
-  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 100px;
+
 `;
 
 const StFoodBox = styled.div`
@@ -274,6 +275,7 @@ const StImgBox2 = styled.img`
 `;
 
 const StCard = styled.div`
+
   width: 384px;
   height: 255px;
   font-size: 18px;

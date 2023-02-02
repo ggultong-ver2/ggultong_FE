@@ -44,21 +44,37 @@ function GameRank() {
               <ResetBtn onClick={() => navigate("/gamelist/worldcupgame")}>
                 다시 시작하기
               </ResetBtn>
-              <ConfirmBtn>게시글 보기</ConfirmBtn>
+              <ConfirmBtn
+                onClick={() => {
+                  navigate(
+                    `/${state.state.category}List/${state.state.category}/detail/${state.state.id}`
+                  );
+                }}
+              >
+                게시글 보기
+              </ConfirmBtn>
             </BtnBox>
           </div>
         </LeftBox>
         <RightBox>
           <div>
             <StH>꿀통 음식 월드컵 우승</StH>
-            {displays.map((rowData) => {
+            {displays.map((rowData, index) => {
               return (
                 <div key={rowData.id}>
-                  <StBox>
+                  <StBox
+                    onClick={() => {
+                      navigate(
+                        `/${rowData.category}List/${rowData.category}/detail/${rowData.id}`
+                      );
+                    }}
+                  >
                     <MiniImage src={rowData.imageUrl} />
                     <ProgressBox>
                       <div>
-                        <StH2>{rowData.title}</StH2>
+                        <StH2>
+                          {index + 1}위 {rowData.title}
+                        </StH2>
                         <StH3>우승비율&nbsp;&nbsp;{rowData.percent}%</StH3>
                         <ProgressBar rowdata={rowData} />
                       </div>

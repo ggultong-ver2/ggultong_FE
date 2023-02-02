@@ -13,7 +13,9 @@ function Ranking({ displays }) {
       state: {
         title: displays[0].title,
         imageUrl: displays[0].imageUrl,
-        month: Number(displays[0].month),
+        month: displays[0].month,
+        id: displays[0].id,
+        category: displays[0].category,
       },
     });
   };
