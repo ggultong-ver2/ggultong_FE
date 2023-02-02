@@ -77,14 +77,14 @@ function GameList() {
       </StTopBox>
       <StListBox>
         <StDiv>이전 월드컵</StDiv>
-        {displays.map((rowdata) => {
+        {displays.map((rowdata, index) => {
           // console.log("rrr", rowdata);
           return (
             <StCard>
               <div>
                 <StCardImg src={rowdata.img1} />
                 <StCardImg2 src={rowdata.img2} />
-                <StP>1월 꿀통 음식 월드컵</StP>
+                <StP>{index + 1}월 꿀통 음식 월드컵</StP>
               </div>
             </StCard>
           );

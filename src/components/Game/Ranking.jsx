@@ -15,6 +15,7 @@ function Ranking({ displays }) {
         imageUrl: displays[0].imageUrl,
         month: displays[0].month,
         id: displays[0].id,
+        category: displays[0].category,
       },
     });
   };
