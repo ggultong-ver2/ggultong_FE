@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { __getNotification, __readNotification, __deleteNotification, __deleteNotifications, } from "../../redux/modules/postSlice";
+import {
+  __getNotification,
+  __readNotification,
+  __deleteNotification,
+  __deleteNotifications,
+} from "../../redux/modules/postSlice";
 import "./style.css";
 
 const navigate = useNavigate();
@@ -35,7 +40,11 @@ return (
                     <div className="notificationn_list">
                       <div className="notification_content">
                         {/* <span>{notification.content.content}</span> */}
-                        <div onClick={() => {onclickReadNotification}}>
+                        <div
+                          onClick={() => {
+                            onclickReadNotification;
+                          }}
+                        >
                           삭제
                         </div>
                       </div>
@@ -49,9 +58,7 @@ return (
                     >
                       <div>
                         {/* <span>{notification.content.content}</span> */}
-                        <div>
-                          삭제
-                        </div>
+                        <div>삭제</div>
                       </div>
                     </div>
                   )}

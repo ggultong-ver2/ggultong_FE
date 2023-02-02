@@ -32,27 +32,6 @@ function WorldCupGame() {
     dispatch(__getWorldCup());
 
     console.log("res", inputData);
-
-    // async function fetchData() {
-    //   try {
-    //     // 데이터를 받아오는 동안 시간이 소요됨으로 await 로 대기
-    //     const res = await baseURL.get("/post/getWorldcupImage");
-    //     // 받아온 데이터로 다음 작업을 진행하기 위해 await 로 대기
-    //     console.log("res", res);
-    //     // 받아온 데이터를 map 해주어 rowData 별로 _inputData 선언
-    //     const _inputData = await res.data.map((rowData) => ({
-    //       id: rowData.id,
-    //       title: rowData.title,
-    //       imageUrl: rowData.imageUrl,
-    //     }));
-    //     console.log("_inputData", _inputData);
-    //     // 선언된 _inputData 를 최초 선언한 inputData 에 concat 으로 추가
-    //     setInputData(inputData.concat(_inputData));
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
-    // }
-    // fetchData();
   }, [dispatch]);
 
   useEffect(() => {
