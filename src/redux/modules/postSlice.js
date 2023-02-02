@@ -274,7 +274,7 @@ export const __getNotification = createAsyncThunk(
   "getNotification",
   async (payload, thunkAPI) => {
     try {
-      const data = await baseURL.get();
+      const data = await baseURL.get(`/notifications`);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -611,6 +611,55 @@ export const notificationSlice = createSlice({
     },
   },
 });
+
+export const __NreadNotification = createAsyncThunk(
+  "NreadNotification",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await baseURL.get(`notifications`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const NreadNotificationSlice = createSlice({
+  name: "NreadNotification",
+  initialState: {
+    NreadNotifications: {
+      data: { count: 0 },
+      error: null,
+      success: true,
+    },
+    isLoading: false,
+    error: null,
+  },
+  reducers: {
+    __minusNotification(state, action) {
+      state.NreadNotifications.data.count -= action.payload;
+    },
+    __plusNotification(state, action) {
+      state.NreadNotifications.data.count += action.payload;
+    },
+  },
+  extraReducers: {
+    [__NreadNotification.pending]: (state) => {
+      state.isLoading2 = true;
+    },
+    [__NreadNotification.fulfilled]: (state, action) => {
+      state.isLoading2 = false;
+      state.NreadNotifications = action.payload;
+    },
+    [__NreadNotification.rejected]: (state, action) => {
+      state.isLoading2 = false;
+      state.error2 = action.payload;
+    },
+  },
+});
+
+export const { __minusNotification, __plusNotification } =
+  NreadNotificationSlice.actions;
 
 export const {
   __addNotification,

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../pages/reset.css";
+import NotificationList from "../notification/NotificationList";
 import "./style.css";
 
 function Header() {
@@ -50,15 +51,16 @@ function Header() {
               알림
             </li>
             {open ? (
-              <ul className="alarm_menu">
-                <li>읽지 않은 알림 (1)</li>
-                <li className="menu_item">
-                  lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
-                </li>
-                <li className="menu_item">
-                  lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
-                </li>
-              </ul>
+              // <ul className="alarm_menu">
+              //   <li>읽지 않은 알림 (1)</li>
+              //   <li className="menu_item">
+              //     lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
+              //   </li>
+              //   <li className="menu_item">
+              //     lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
+              //   </li>
+              // </ul>
+              <NotificationList />
             ) : null}
             <li
               onClick={(res) => {

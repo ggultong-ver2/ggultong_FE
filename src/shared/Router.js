@@ -34,21 +34,39 @@ import Game from "../pages/Game";
 import GameList from "../pages/GameList";
 import EditComment from "../pages/EditComment";
 import GameRank from "../pages/GameRank";
+import { QueryClient } from "react-query";
 
 const Router = () => {
-
+  // const EventSource = NativeEventSource
   // useEffect(() => {
   //   if(loading){
   //     let eventSource;
   //     const fetchSse = async () => {
   //       try{
   //         eventSource = new EventSource(
-  //           ``
-  //         )
-  //       }
-  //     }
+  //           `https://tom-jelly.shop/api/nofitication`,
+  //           {
+  //             headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+  //           },
+  //         );
+
+  //         eventSource.onmessage = async (event) => {
+  //           const res = await event.data;
+  //           if(!res.includes("EventStream Created.")) setNewNotifications(true);
+  //           QueryClient.invalidateQueries("alertNoti") // 알람 리스트 수 변경
+  //           QueryClient.invalidateQueries("alertLists") // 목록 업데이트
+  //         };
+
+  //         eventSource.onerror = async (event)=>{
+  //           if(!event.error.message.includes("No activity"))
+  //           eventSource.close()
+  //         };
+  //       } catch(error){}
+  //     };
+  //     fetchSse();
+  //     return() => eventSource.close()
   //   }
-  // })
+  // });
 
   return (
     <BrowserRouter>
