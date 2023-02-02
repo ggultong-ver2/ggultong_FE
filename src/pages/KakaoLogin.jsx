@@ -5,7 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 function KakaoLogin() {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1];
-  const IP = "sparta-sjl.shop";
+  const IP = "tom-jelly.shop";
+  //https://tom-jelly.shop/api
   const navigate = useNavigate();
   const getToken = async () => {
     console.log("::::::");
