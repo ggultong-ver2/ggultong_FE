@@ -16,8 +16,7 @@ function GameRank() {
   const rankData = useSelector((state) => state.details.details.rankList);
   const [displays, setDisplays] = useState([]);
   console.log("state", state.state);
-  const [nums] = useState("1");
-  const num = nums + 1;
+
   useEffect(() => {
     dispatch(__getRankList());
 
