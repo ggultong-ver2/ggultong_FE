@@ -196,6 +196,8 @@ const Detail = () => {
               <Myprofile src={localStorage.getItem("profileImg")} />
               <Commentinput
                 placeholder="댓글을 작성할 수 있어요."
+                minLength={1}
+                maxLength={500}
                 type="text"
                 value={addComment.content}
                 onChange={(e) => {
