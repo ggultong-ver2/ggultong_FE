@@ -9,7 +9,7 @@ import WorldCupGame from "../components/Game/WorldCupGame";
 import { __getRankList, __getWorldCup } from "../redux/modules/postSlice";
 import ProgressBar from "../components/Game/ProgressBar";
 
-function GameRank() {
+function GameRankView() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const state = useLocation();
@@ -34,31 +34,9 @@ function GameRank() {
   return (
     <Container>
       <div>
-        <LeftBox>
-          <div>
-            <StH>내 최종 우승 음식</StH>
-            <StimageBox src={state.state.imageUrl} />
-            <StP>{state.state.title}</StP>
-            <StContent></StContent>
-            <BtnBox>
-              <ResetBtn onClick={() => navigate("/gamelist/worldcupgame")}>
-                다시 시작하기
-              </ResetBtn>
-              <ConfirmBtn
-                onClick={() => {
-                  navigate(
-                    `/${state.state.category}List/${state.state.category}/detail/${state.state.id}`
-                  );
-                }}
-              >
-                내 우승 게시글 보기
-              </ConfirmBtn>
-            </BtnBox>
-          </div>
-        </LeftBox>
         <RightBox>
           <div>
-            <StH>꿀통 2월 음식 월드컵 우승</StH>
+            <StH>이번 달 음식 월드컵 우승</StH>
             {displays?.map((rowData, index) => {
               return (
                 <div key={rowData.id}>
@@ -83,6 +61,11 @@ function GameRank() {
                 </div>
               );
             })}
+            <BtnBox>
+              <ResetBtn onClick={() => navigate("/gamelist/worldcupgame")}>
+                게임 시작
+              </ResetBtn>
+            </BtnBox>
           </div>
         </RightBox>
       </div>
@@ -163,7 +146,7 @@ const RightBox = styled.div`
   margin-top: 50px;
   float: right;
   width: 701px;
-  height: 878px;
+  height: 950px;
   background-color: #292a29;
 `;
 
@@ -223,6 +206,7 @@ const StContent = styled.div`
 `;
 
 const BtnBox = styled.div`
+  margin-top: 50px;
   display: flex;
   justify-content: center;
 
@@ -267,4 +251,4 @@ const ConfirmBtn = styled.button`
     border: 1px solid #cbcbcb;
   }
 `;
-export default GameRank;
+export default GameRankView;

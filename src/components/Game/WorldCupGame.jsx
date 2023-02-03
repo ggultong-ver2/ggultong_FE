@@ -35,6 +35,9 @@ function WorldCupGame() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!inputData) {
+      return;
+    }
     const array = [...inputData];
     console.log("arr", array);
     const newdata = array.sort(() => Math.random() - 0.5);

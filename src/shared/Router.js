@@ -35,9 +35,9 @@ import GameList from "../pages/GameList";
 import EditComment from "../pages/EditComment";
 import GameRank from "../pages/GameRank";
 import { QueryClient } from "react-query";
+import GameRankView from "../pages/GameRankView";
 
 const Router = () => {
-
   // const EventSource = NativeEventSource
   // useEffect(() => {
   //   if(loading){
@@ -68,7 +68,7 @@ const Router = () => {
   //     return() => eventSource.close()
   //   }
   // });
-  
+
   return (
     <BrowserRouter>
       <Layout>
@@ -95,6 +95,10 @@ const Router = () => {
           <Route
             path="/gamelist/worldcupgame/gamerank"
             element={<GameRank />}
+          />
+          <Route
+            path="/gamelist/worldcupgame/gamerankview"
+            element={<GameRankView />}
           />
           <Route path="/gamelist/worldcupgame" element={<Game />} />
           <Route path="/mypage" element={<MyPage />} />
