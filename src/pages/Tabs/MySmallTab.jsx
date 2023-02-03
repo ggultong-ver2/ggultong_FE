@@ -1,40 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { __getMyPost } from "../../redux/modules/postSlice";
 
 const MySmallTab = () => {
   const [currentTab, setCurrentTab] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(__getMyPost());
+  }, [dispatch]);
+
+  const myPost = useSelector((state) => state.details.details);
+  console.log("myPost::", myPost);
 
   const menuArr = [
     {
       name: "내가 쓴 글 120",
       content: (
-        <OneBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-        </OneBox>
+        <Card>
+          <Textwrap>
+            <StTitle>제목</StTitle>
+
+            <Etcwrap>댓글10 좋아요&nbsp; 10 &nbsp;&nbsp; 2023.02.03</Etcwrap>
+          </Textwrap>
+          <StFile></StFile>
+        </Card>
       ),
     },
     {
       name: "스크랩 4",
       content: (
-        <OneBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-        </OneBox>
+        <Card>
+          <Textwrap>
+            <StTitle>제목</StTitle>
+
+            <Etcwrap>댓글10 좋아요&nbsp; 10 &nbsp;&nbsp; 2023.02.03</Etcwrap>
+          </Textwrap>
+          <StFile>이미지</StFile>
+        </Card>
       ),
     },
   ];
@@ -42,7 +47,6 @@ const MySmallTab = () => {
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
   };
-  // 머지Test 머지Test 머지Test 머지Test 머지Test
   return (
     <>
       <div>
@@ -101,12 +105,6 @@ const TabMenu = styled.ul`
     text-align: center;
   }
 `;
-const OneBox = styled.div`
-  margin-top: 20px;
-  margin-left: 70px;
-  width: 880px;
-  height: 800px;
-`;
 
 const Desc = styled.div`
   margin-left: 30px;
@@ -114,13 +112,39 @@ const Desc = styled.div`
   height: 800px;
 `;
 
-const CardBox = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  width: 800px;
-  height: 160px;
-  border-bottom: 1px solid #979797;
-  background-color: white;
+const Card = styled.div`
+  /* border: 1px solid red; */
+  border-bottom: 1px solid grey;
+  margin-left: 30px;
+  width: 880px;
+  height: 250px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
-
+const Textwrap = styled.div`
+  float: left;
+  margin-top: 30px;
+`;
+const StTitle = styled.div`
+  height: 50px;
+  width: 850px;
+  font-size: 30px;
+  line-height: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+`;
+const StFile = styled.div`
+  height: 200px;
+  width: 200px;
+  background-color: #d9d9d9;
+  margin-left: 650px;
+  margin-top: 20px;
+`;
+const Etcwrap = styled.div`
+  height: 30px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #a0a0a0;
+`;
 export default MySmallTab;

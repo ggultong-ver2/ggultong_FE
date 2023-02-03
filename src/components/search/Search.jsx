@@ -3,17 +3,37 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
+import Paging from "../pagination/paging";
 
 function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
   const params = useParams();
 
+  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [count, setCount] = useState(0); // 아이템 총 개수
+  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  useEffect(() => {
+    setCount();
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const setPage = (error) => {
+    setCurrentPage(error);
+  };
+
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
         // /post/search?keyword=${params.keyword}`  baseURL
-        `https://sparta-sjl.shop/api/post/search?keyword=${params.keyword}`
+        `https://sparta-sjl.shop/api/post/search/${currentPage}?keyword=${params.keyword}`
       );
       setSearchData(data);
     }
@@ -91,6 +111,11 @@ function Search() {
                     </div>
                   ))}
                 </div>
+                <Paging
+                  currentPage={currentPage}
+                  count={count}
+                  setPage={setPage}
+                />
               </div>
             )}
           </div>

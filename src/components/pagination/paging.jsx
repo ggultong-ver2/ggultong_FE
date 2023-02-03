@@ -3,7 +3,7 @@ import Pagination from "react-js-pagination";
 import "./paging.css";
 
 const Paging = ({ currentPage, count, setPage }) => {
-  console.log(count);
+  // console.log(count);
   return (
     <div>
       <Pagination

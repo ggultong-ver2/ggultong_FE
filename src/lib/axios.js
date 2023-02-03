@@ -71,6 +71,9 @@ export const apis = {
   getCategoryPost: (category, pageNum) => {
     return instance.get(`/post/postList/${category}/${pageNum}`);
   },
+  getCategoryCount: () => {
+    return instance.get(`/post/postList/count`);
+  },
 
   createPost: (post) => {
     // console.log("payload::", post);
@@ -104,6 +107,13 @@ export const apis = {
 
   signNickname: (nickname) => {
     baseURL.patch(`/mypage/socialSetting/${nickname}`, "", {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    });
+  },
+
+  // 마이페이지 내가쓴글
+  getMyPost: () => {
+    baseURL.get(`/mypage/myPost`, "", {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     });
   },
