@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NaverLogin = ({ setGetToken, setUserInfo }) => {
-  const IP = "tom-jelly.shop";
+  const IP = "sparta-sjl.shop";
   const navigate = useNavigate();
   const location = useLocation();
   const getToken = async () => {
@@ -29,7 +29,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
           if (res.data.nickname === "tlsrbrkdlqwk") {
             navigate("/socialnick");
           } else {
-            navigate("/login");
+            navigate("/");
           }
         });
     } catch (error) {
