@@ -103,7 +103,7 @@ input:focus {
 .alarm:hover {
   background-image: url(../../../public/images/alarm.png);
 }
-.alarm_menu {
+/* .alarm_menu {
   position: absolute;
   top: 40px;
   margin: 5px 0;
@@ -112,7 +112,7 @@ input:focus {
   width: 300px;
   background: white;
   z-index: 1;
-}
+} */
 .alarm_menu li:first-child {
   cursor: default;
 }

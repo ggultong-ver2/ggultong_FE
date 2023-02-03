@@ -1,0 +1,10 @@
+.alarm_container{
+  position: absolute;
+  top: 40px;
+  margin: 5px 0;
+  padding: 15px 12px;
+  border: 1px solid #a0a0a0;
+  width: 300px;
+  background: white;
+  z-index: 1;
+}

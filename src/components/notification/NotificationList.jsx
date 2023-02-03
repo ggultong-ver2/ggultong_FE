@@ -8,7 +8,7 @@ import {
   __deleteNotification,
   __deleteNotifications,
   __minusNotification,
-} from "../../redux/modules/postSlice";
+} from "../../redux/modules/notificationSlice";
 import "./style.css";
 
 function NotificationList({
@@ -62,8 +62,8 @@ function NotificationList({
       // <div onClick={closeModal}>
       <div>
         <div onClick={(e) => e.stopPropagation()}>
-          {notifications?.data.length === 0 ? (
-            <div className="alarm_menu">
+          {notifications?.data?.length === 0 ? (
+            <div className="alarm_container">
               <div>알람이 없습니다</div>
             </div>
           ) : (
