@@ -1,40 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { __getMyPost } from "../../redux/modules/postSlice";
+import Paging from "../../components/pagination/paging";
 
 const MySmallTab = () => {
   const [currentTab, setCurrentTab] = useState(0);
+  const dispatch = useDispatch();
+
+  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [count, setCount] = useState(0); // 아이템 총 개수
+  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  useEffect(() => {
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    setCount(myPost.length);
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const setPage = (error) => {
+    setCurrentPage(error);
+  };
+
+  useEffect(() => {
+    dispatch(__getMyPost());
+  }, [dispatch]);
+
+  const myPost = useSelector((state) => state.details.details.myPosts);
+  console.log("myPost::", myPost);
 
   const menuArr = [
     {
-      name: "내가 쓴 글 120",
+      name: "내가 쓴 글",
       content: (
-        <OneBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-          <CardBox>페이지</CardBox>
-        </OneBox>
+        <>
+          {myPost.map((value, index) => {
+            return (
+              <Card>
+                <Textwrap>
+                  <StTitle>{value.title}</StTitle>
+
+                  <Etcwrap>
+                    댓글{value.commentCount} 좋아요&nbsp; {value.likeSum}{" "}
+                    &nbsp;&nbsp;
+                    {value.createdAt.slice(0, 10)}
+                  </Etcwrap>
+                </Textwrap>
+                <StFile src={value.imageFile}></StFile>
+              </Card>
+            );
+          })}
+          <Paging currentPage={currentPage} count={count} setPage={setPage} />
+        </>
       ),
     },
     {
       name: "스크랩 4",
       content: (
-        <OneBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-          <CardBox>움직임</CardBox>
-        </OneBox>
+        <Card>
+          <Textwrap>
+            <StTitle>제목</StTitle>
+
+            <Etcwrap>댓글10 좋아요&nbsp; 10 &nbsp;&nbsp; 2023.02.03</Etcwrap>
+          </Textwrap>
+          <StFile>이미지</StFile>
+        </Card>
       ),
     },
   ];
@@ -42,7 +77,6 @@ const MySmallTab = () => {
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
   };
-  // 머지Test 머지Test 머지Test 머지Test 머지Test
   return (
     <>
       <div>
@@ -101,12 +135,6 @@ const TabMenu = styled.ul`
     text-align: center;
   }
 `;
-const OneBox = styled.div`
-  margin-top: 20px;
-  margin-left: 70px;
-  width: 880px;
-  height: 800px;
-`;
 
 const Desc = styled.div`
   margin-left: 30px;
@@ -114,13 +142,39 @@ const Desc = styled.div`
   height: 800px;
 `;
 
-const CardBox = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  width: 800px;
-  height: 160px;
-  border-bottom: 1px solid #979797;
-  background-color: white;
+const Card = styled.div`
+  /* border: 1px solid red; */
+  border-bottom: 1px solid grey;
+  margin-left: 30px;
+  width: 880px;
+  height: 250px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
-
+const Textwrap = styled.div`
+  float: left;
+  margin-top: 30px;
+`;
+const StTitle = styled.div`
+  height: 50px;
+  width: 850px;
+  font-size: 30px;
+  line-height: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+`;
+const StFile = styled.div`
+  height: 200px;
+  width: 200px;
+  background-color: #d9d9d9;
+  margin-left: 650px;
+  margin-top: 20px;
+`;
+const Etcwrap = styled.div`
+  height: 30px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #a0a0a0;
+`;
 export default MySmallTab;

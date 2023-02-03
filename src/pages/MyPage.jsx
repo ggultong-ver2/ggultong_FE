@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useInput } from "../lib/utils/useInput";
 import { __nickCheck } from "../api/submit/Login";
 import fileinput from "../assets/images/fileinput.png";
-import { __patchPost } from "../redux/modules/postSlice";
+import { __patchPost, __getMyPost } from "../redux/modules/postSlice";
 import MySmallTab from "./Tabs/MySmallTab";
 import { __deleteId } from "../api/submit/Login";
 import Toggle from "../components/Toggle/Toggle";
