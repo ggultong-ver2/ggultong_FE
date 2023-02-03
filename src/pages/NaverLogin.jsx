@@ -29,7 +29,7 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
           if (res.data.nickname === "tlsrbrkdlqwk") {
             navigate("/socialnick");
           } else {
-            navigate("/");
+            navigate("/login");
           }
         });
     } catch (error) {

@@ -17,16 +17,12 @@ function SocialNick() {
     console.log("nickname--->", nickname);
     __socialNick(nickname).then((res) => {
       // Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
-      // navigate(`/login`);
+
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
         navigate("/signcomplete");
       } else {
-        Swal.fire(
-          res.data.msg,
-          "아이디 및 비밀번호를 다시 확인해주세요!",
-          "error"
-        );
+        Swal.fire(res.data.msg, "다시 시도 해주세요!", "error");
       }
     });
   };
