@@ -3,19 +3,41 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
+import Paging from "../pagination/paging";
 
 function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
+  console.log(searchData);
   const params = useParams();
+
+  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [count, setCount] = useState(0); // 아이템 총 개수
+  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  useEffect(() => {
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const setPage = (error) => {
+    setCurrentPage(error);
+  };
 
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
         // /post/search?keyword=${params.keyword}`  baseURL
-        `https://sparta-sjl.shop/api/post/search?keyword=${params.keyword}`
+        `https://tom-jelly.shop/api/post/search/${currentPage}?keyword=${params.keyword}`
       );
       setSearchData(data);
+      setCount(data[0].searchPostSum);
+      console.log(data[0].searchPostSum);
     }
     fetchData();
   }, []);
@@ -43,7 +65,7 @@ function Search() {
           <div>
             {searchData?.length === 0 ? (
               <div className="no_results_wrap">
-                <div>{`'${params.keyword}' 에 대한 총 ${searchData.length}개의 검색 결과가 있습니다.`}</div>
+                <div>{`'${params.keyword}' 에 대한 총 ${count}개의 검색 결과가 있습니다.`}</div>
                 <div className="no_results_body">
                   <div className="no_results_image"></div>
                   <h3>검색 결과가 없습니다</h3>
@@ -52,7 +74,7 @@ function Search() {
               </div>
             ) : (
               <div className="search_results">
-                <div className="search_top">{`'${params.keyword}'에 대한 총 ${searchData.length}개의 검색 결과가 있습니다.`}</div>
+                <div className="search_top">{`'${params.keyword}'에 대한 총 ${count}개의 검색 결과가 있습니다.`}</div>
                 <div className="results_wrap">
                   <select name="search" id="search" className="search_sort">
                     <option value="">최신순</option>
@@ -91,6 +113,11 @@ function Search() {
                     </div>
                   ))}
                 </div>
+                <Paging
+                  currentPage={currentPage}
+                  count={count}
+                  setPage={setPage}
+                />
               </div>
             )}
           </div>
