@@ -83,10 +83,10 @@ const PostLoginPage = () => {
         console.log(isemail, emailCode);
         Swal.fire(res.data.msg, "가입을 완료해주세요!", "success");
       } else {
-        Swal.fire(res.data.msg, "다시 확인해주세요", "error");
+        Swal.fire(res.data.msg, "다시 확인해주세요!", "error");
       }
-      // if (isemail === Number(emailcode)) {
-      //   console.log(isemail, emailcode);
+      // if (res.data.msg === "이메일 인증 완료") {
+
       //   Swal.fire(
       //     "인증번호 확인되었습니다.",
       //     "가입을 완료해주세요!",

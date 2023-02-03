@@ -36,14 +36,16 @@ function GameList() {
           img1: array[i][0].imageUrl,
           img2: array[i][1].imageUrl,
           month: array[i][0].month,
+          id: array[i][0].id,
+          category: array[i][0].category,
         };
-
+        //
         setDisplays((old) => [...old, img1and2]);
       }
     }
 
     // console.log("newdata[0]", array[0]);
-  }, []);
+  }, [MonthData]);
   console.log("dis", displays);
   return (
     <StContainer>
@@ -56,7 +58,7 @@ function GameList() {
               이번 달 우승음식은?
               <StButton
                 onClick={() => {
-                  navigate("/gamelist/gamerank");
+                  navigate("/gamelist/worldcupgame/gamerankview");
                 }}
               >
                 랭킹보기
@@ -76,14 +78,28 @@ function GameList() {
         </StBannerBox>
       </StTopBox>
       <StListBox>
-        <StDiv>이전 월드컵</StDiv>
+        <StDiv>연간 이전 월드컵</StDiv>
         {displays.map((rowdata, index) => {
           // console.log("rrr", rowdata);
           return (
             <StCard>
               <div>
-                <StCardImg src={rowdata.img1} />
-                <StCardImg2 src={rowdata.img2} />
+                <StCardImg
+                  onClick={() => {
+                    navigate(
+                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                    );
+                  }}
+                  src={rowdata.img1}
+                />
+                <StCardImg2
+                  onClick={() => {
+                    navigate(
+                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                    );
+                  }}
+                  src={rowdata.img2}
+                />
                 <StP>{index + 1}월 꿀통 음식 월드컵</StP>
               </div>
             </StCard>
@@ -99,7 +115,6 @@ function GameList() {
             <StButton3>음식 랜덤뽑기</StButton3>
           </div>
         </StLeftBox2>
-
         <StRightBox2>
           <StImgBox2 src={require("../assets/images/food.png")} />
         </StRightBox2>
@@ -307,6 +322,7 @@ const StCardImg = styled.img`
   float: left;
   width: 192px;
   height: 220px;
+  cursor: pointer;
 `;
 const StCardImg2 = styled.img`
   margin-bottom: 5px;
@@ -315,6 +331,7 @@ const StCardImg2 = styled.img`
   float: right;
   width: 192px;
   height: 220px;
+  cursor: pointer;
 `;
 
 const StButton3 = styled.button`

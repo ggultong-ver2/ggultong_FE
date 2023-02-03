@@ -9,6 +9,7 @@ import fileinput from "../assets/images/fileinput.png";
 import { __patchPost } from "../redux/modules/postSlice";
 import MySmallTab from "./Tabs/MySmallTab";
 import { __deleteId } from "../api/submit/Login";
+import Toggle from "../components/Toggle/Toggle";
 
 function MyPage() {
   const imgRef = useRef();
@@ -17,7 +18,6 @@ function MyPage() {
   const [imgUrl, setImgUrl] = useState("");
   const [post, setPost] = useState([]);
   const [nickname, setNickname] = useInput();
-
   const navigate = useNavigate();
 
   const onChangeImage = (event) => {
@@ -149,7 +149,9 @@ function MyPage() {
         <StCenterBox2>
           <AllBox2>
             <SettingBox>설정</SettingBox>
-            <SettingItm>알림</SettingItm>
+            <SettingItm>
+              알림 <Toggle />
+            </SettingItm>
             <SettingItm>
               <StButton
                 onClick={(e) => {
