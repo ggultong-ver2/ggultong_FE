@@ -102,7 +102,7 @@ const PostLoginPage = () => {
           </SocialBtn>
           {/* <NaverIdLogin ref={naverRef} id="naverIdLogin" /> */}
           <NaverLoginBtn
-            href={`"https://nid.naver.com/oauth2.0/authorize?client_id=8PCgO32YgjQK0j2o2102&response_type=code&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback&state=${STATE}"`}
+            href={`https://nid.naver.com/oauth2.0/authorize?client_id=8PCgO32YgjQK0j2o2102&response_type=code&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback&state=${STATE}`}
           >
             <NaverIcon src={require("../assets/images/naver.png")} />
             <NaverLoginTitle>네이버로 로그인</NaverLoginTitle>
