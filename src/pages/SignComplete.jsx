@@ -67,7 +67,7 @@ const StButton = styled.button`
   border: 0;
   font-size: 18px;
   border-radius: 4px;
-  background-color: #FFD86A;
+  background-color: #ffd86a;
 
   font-family: "Pretendard";
   color: white;

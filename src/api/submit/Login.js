@@ -100,7 +100,7 @@ export const __nickCheck = async (nickname) => {
 export const __socialNick = async (nickname) => {
   try {
     const data = await axios.patch(
-      `https://tom-jelly.shop/api/mypage/socialSetting/${nickname}`,
+      `https://sparta-sjl.shop/api/mypage/socialSetting/${nickname}`,
       "",
       {
         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
