@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../lib/axios";
+import axios from "axios";
 import {
   __getNotification,
   __readNotification,
   __deleteNotification,
   __deleteNotifications,
   __minusNotification,
-} from "../../redux/modules/postSlice";
+} from "../../redux/modules/notificationSlice";
 import "./style.css";
 
 function NotificationList({
@@ -19,9 +20,10 @@ function NotificationList({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const closeModal = () => {
-  //   setShowNotification(false);
-  // };
+  const notification = useSelector(
+    (state) => state?.notification?.notifications
+  );
+
 
   const onclickReadNotification = (notificationId) => {
     readNotification(notificationId);
@@ -50,27 +52,32 @@ function NotificationList({
   };
 
   const readNotification = async (notificationId) => {
-    await baseURL.get(`notification/read/${notificationId}`, null)
+    await baseURL
+      .get(`notification/read/${notificationId}`, null)
       .then((res) => {
         // console.log(res)
       })
       .catch((err) => {
         // console.log(err);
       });
+  };
 
-    return (
-      // <div onClick={closeModal}>
+  const [notificationData, setNotificationData] = useState([]);
+
+
+  return (
+    <div>
       <div>
-        <div onClick={(e) => e.stopPropagation()}>
-          {notifications?.data.length === 0 ? (
-            <div className="alarm_menu">
-              <div>알람이 없습니다</div>
-            </div>
-          ) : (
-            <>
-              <div>읽지 않은 알림 ({notifications?.data?.length})</div>
+        {notificationData.length === 0 ? (
+          <div>
+            <div>알림이 없습니다</div>
+          </div>
+        ) : (
+          <>
+            <div>
+              <div>{`읽지 않은 알림 (${notificationData.length})`}</div>
               <div>
-                {notifications?.data.map((notification) => {
+                {notification?.map((notification) => {
                   return (
                     <div key={notification.id}>
                       {!notification.status ? ( // 읽지 않은 알람
@@ -82,12 +89,12 @@ function NotificationList({
                           }}
                         >
                           <div className="notification_content">
-                            <span>{notification.content.content}</span>
+                            <span>{notification?.content}</span>
                             <div
                               onClick={(e) => {
                                 e.stopPropagation();
                                 onclickDeleteNotification(notification.id);
-                              }} 
+                              }}
                             >
                               삭제
                             </div>
@@ -117,21 +124,22 @@ function NotificationList({
                   );
                 })}
               </div>
-            </>
-          )}
-
-          <div
+            </div>
+            <div
             onClick={(e) => {
               e.stopPropagation();
               onclickDeleteNotifications();
             }}
           >
             <div>전체 삭제</div>
-          </div>
         </div>
+          </>
+        )}
+
+        
       </div>
-    );
-  };
+    </div>
+  );
 }
 
 export default NotificationList;

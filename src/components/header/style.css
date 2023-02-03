@@ -103,7 +103,7 @@ input:focus {
 .alarm:hover {
   background-image: url(../../../public/images/alarm.png);
 }
-.alarm_menu {
+.notification_centre {
   position: absolute;
   top: 40px;
   margin: 5px 0;

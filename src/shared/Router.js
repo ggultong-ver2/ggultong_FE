@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 
 // import Home from "../pages/Home";
 import Layout from "../components/layout/Layout";
@@ -38,14 +39,15 @@ import { QueryClient } from "react-query";
 import GameRankView from "../pages/GameRankView";
 
 const Router = () => {
-  // const EventSource = NativeEventSource
+
+  // const EventSource = EventSourcePolyfill || NativeEventSource
   // useEffect(() => {
   //   if(loading){
   //     let eventSource;
   //     const fetchSse = async () => {
   //       try{
   //         eventSource = new EventSource(
-  //           `https://tom-jelly.shop/api/nofitication`,
+  //           `https://tom-jelly.shop/api/nofitications`,
   //           {
   //             headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
   //           },
