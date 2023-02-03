@@ -77,8 +77,18 @@ function Heroside() {
               <h1>
                 꿀통 음식 월드컵 <br /> 이번 달 우승 음식은?
               </h1>
-              <button className="slide5_ranking" onClick={() => navigate("/gamelist")}>랭킹보기</button>
-              <button className="slide5_start" onClick={() => navigate("/gamelist")}>시작하기</button>
+              <button
+                className="slide5_ranking"
+                onClick={() => navigate("/gamelist/worldcupgame/gamerankview")}
+              >
+                랭킹보기
+              </button>
+              <button
+                className="slide5_start"
+                onClick={() => navigate("/gamelist/worldcupgame")}
+              >
+                시작하기
+              </button>
             </div>
             <div className="heroside_5"></div>
           </div>

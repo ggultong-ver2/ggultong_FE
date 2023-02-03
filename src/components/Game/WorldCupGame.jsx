@@ -35,6 +35,9 @@ function WorldCupGame() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!inputData) {
+      return;
+    }
     const array = [...inputData];
     console.log("arr", array);
     const newdata = array.sort(() => Math.random() - 0.5);
@@ -76,7 +79,7 @@ function WorldCupGame() {
     }
     // onRank(); displays[0].id
   };
-  if (displays.length === 0) return;
+  if (displays?.length === 0) return;
 
   return (
     <form>
@@ -89,7 +92,7 @@ function WorldCupGame() {
         </StCount>
       </TitleBox>
       <Container>
-        {displays.map((rowData) => {
+        {displays?.map((rowData) => {
           console.log("row", displays);
           return (
             <div key={rowData?.id}>

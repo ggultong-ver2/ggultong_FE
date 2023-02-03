@@ -1,5 +1,7 @@
 import { apis } from "../../lib/axios";
 import Swal from "sweetalert2";
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // 비밀번호 변경
 export const __pwchange = async (password) => {
@@ -77,21 +79,38 @@ export const __nickCheck = async (nickname) => {
 };
 
 // 소셜로그인 닉네임 Change
+// export const __socialNick = async (nickname) => {
+//   try {
+//     const data = await apis.signNickname(nickname);
+//     console.log("nickname:::", nickname);
+//     console.log("data: ", data);
+//     if (data.data.statusCode === 200) {
+//       console.log("response", data.response);
+//       // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
+//     }
+//     // useSweet(1000, "success", "회원가입 성공");
+//     return data;
+//   } catch (error) {
+//     // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
+//     // alert(error.response.data.msg);
+//     // useSweet(1000, "error", error.response.data.msg);
+//   }
+// };
+
 export const __socialNick = async (nickname) => {
   try {
-    const data = await apis.signNickname(nickname);
-    console.log("nickname:::", nickname);
+    const data = await axios.patch(
+      `https://sparta-sjl.shop/api/mypage/socialSetting/${nickname}`,
+      "",
+      {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      }
+    );
+
     console.log("data: ", data);
-    if (data.data.status === 200) {
-      console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
-    }
-    // useSweet(1000, "success", "회원가입 성공");
     return data;
-  } catch (error) {
-    // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
+  } catch (err) {
+    console.log(err);
   }
 };
 

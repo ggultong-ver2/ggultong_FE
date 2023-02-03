@@ -18,16 +18,11 @@ const initialState = {
     worldCups: [],
     rankList: [],
     monthList: [],
+    categoryCount: {},
+    myPosts: [],
   },
-
-  // patch:[],
   error: null,
   isLoading: false,
-  // pages: {
-  //   start: 0, // 시작 페이지
-  //   end: 10, // 끝나는 페이지 넘버
-  //   current: 1, // 현재 페이지 넘버(초기값: 1페이지)
-  // },
 };
 
 // 데이터 불러오기
@@ -272,16 +267,32 @@ export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      // console.log(payload);
       const { data } = await apis.getCategoryPost(
         payload.id,
         payload.currentPage
       );
-      console.log("categorydata:", data);
+      // console.log("categorydata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getCategoryCount = createAsyncThunk(
+  "getCategoryCount",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await apis.getCategoryCount();
+
+      // console.log("data: ", data.data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -303,6 +314,24 @@ export const __patchPost = createAsyncThunk(
       const data = await apis.patchPost(formData);
     } catch (error) {
       console.log("err", error);
+    }
+  }
+);
+
+// 마이페이지 내가쓴글 가져오기
+export const __getMyPost = createAsyncThunk(
+  "getMyPost",
+  async (payload, thunkAPI) => {
+    try {
+      // console.log(payload);
+      const res = await axios.get("https://tom-jelly.shop/api/mypage/myPost", {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      });
+      // const data = await apis.getMyPost();
+      console.log(res);
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
@@ -343,6 +372,18 @@ export const postSlice = createSlice({
       state.error = action.payload;
       // 에러 발생-> 네트워크 요청은 끝,false
       // catch 된 error 객체를 state.error에 넣습니다.
+    },
+    [__getMyPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getMyPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details.myPosts = action.payload;
+      console.log("action.payload:", action.payload);
+    },
+    [__getMyPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
 
     // top5 데이터 가져오기
@@ -503,9 +544,22 @@ export const postSlice = createSlice({
     [__getCategoryPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.categoryPosts = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
     },
     [__getCategoryPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__getCategoryCount.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getCategoryCount.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details = action.payload;
+      // console.log("action", state.details);
+    },
+    [__getCategoryCount.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

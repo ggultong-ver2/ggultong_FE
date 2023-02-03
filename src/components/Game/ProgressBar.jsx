@@ -5,7 +5,7 @@ function ProgressBar({ rowdata }) {
   const percentData = rowdata;
 
   const testData = [{ bgcolor: "#F4C748", completed: percentData.percent }];
-  console.log("rowDATA", percentData.percent);
+
   return (
     <div className="ProgressBar">
       {testData.map((item, idx) => (
