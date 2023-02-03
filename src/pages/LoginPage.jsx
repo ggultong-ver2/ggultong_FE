@@ -17,7 +17,7 @@ const PostLoginPage = () => {
   //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   // const url2 =
   //   "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
-
+  const STATE = Math.random().toString(36).substring(3, 14);
   const [loginId, setloginId] = useInput();
   const [password, setPassword] = useInput();
 
@@ -101,7 +101,9 @@ const PostLoginPage = () => {
             카카오톡으로 로그인
           </SocialBtn>
           {/* <NaverIdLogin ref={naverRef} id="naverIdLogin" /> */}
-          <NaverLoginBtn href="https://nid.naver.com/oauth2.0/authorize?client_id=8PCgO32YgjQK0j2o2102&response_type=code&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback&state=state">
+          <NaverLoginBtn
+            href={`"https://nid.naver.com/oauth2.0/authorize?client_id=8PCgO32YgjQK0j2o2102&response_type=code&redirect_uri=https://dev.d134m2xe6xydy2.amplifyapp.com/user/naver/callback&state=${STATE}"`}
+          >
             <NaverIcon src={require("../assets/images/naver.png")} />
             <NaverLoginTitle>네이버로 로그인</NaverLoginTitle>
           </NaverLoginBtn>
