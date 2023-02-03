@@ -3,30 +3,60 @@ import styled from "styled-components";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost } from "../../redux/modules/postSlice";
+import Paging from "../../components/pagination/paging";
 
 const MySmallTab = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const dispatch = useDispatch();
 
+  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [count, setCount] = useState(0); // 아이템 총 개수
+  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  useEffect(() => {
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    setCount(myPost.length);
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const setPage = (error) => {
+    setCurrentPage(error);
+  };
+
   useEffect(() => {
     dispatch(__getMyPost());
   }, [dispatch]);
 
-  const myPost = useSelector((state) => state.details.details);
+  const myPost = useSelector((state) => state.details.details.myPosts);
   console.log("myPost::", myPost);
 
   const menuArr = [
     {
-      name: "내가 쓴 글 120",
+      name: "내가 쓴 글",
       content: (
-        <Card>
-          <Textwrap>
-            <StTitle>제목</StTitle>
+        <>
+          {myPost.map((value, index) => {
+            return (
+              <Card>
+                <Textwrap>
+                  <StTitle>{value.title}</StTitle>
 
-            <Etcwrap>댓글10 좋아요&nbsp; 10 &nbsp;&nbsp; 2023.02.03</Etcwrap>
-          </Textwrap>
-          <StFile></StFile>
-        </Card>
+                  <Etcwrap>
+                    댓글{value.commentCount} 좋아요&nbsp; {value.likeSum}{" "}
+                    &nbsp;&nbsp;
+                    {value.createdAt.slice(0, 10)}
+                  </Etcwrap>
+                </Textwrap>
+                <StFile src={value.imageFile}></StFile>
+              </Card>
+            );
+          })}
+          <Paging currentPage={currentPage} count={count} setPage={setPage} />
+        </>
       ),
     },
     {

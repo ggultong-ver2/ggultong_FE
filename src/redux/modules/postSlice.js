@@ -324,9 +324,12 @@ export const __getMyPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // console.log(payload);
-      const data = await apis.getMyPost();
-      console.log(data);
-      return thunkAPI.fulfillWithValue(data.data);
+      const res = await axios.get("https://tom-jelly.shop/api/mypage/myPost", {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      });
+      // const data = await apis.getMyPost();
+      console.log(res);
+      return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
     }

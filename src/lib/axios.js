@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL 토큰 담는 인터셉트 없음
 const instance = axios.create({
-  baseURL: "https://sparta-sjl.shop/api", //상정님
+  baseURL: "https://tom-jelly.shop/api", //상정님
   //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
   //https://sparta-sjl.shop/api
@@ -18,7 +18,7 @@ const instance = axios.create({
 //
 // baseURL 토큰 담는 인터셉트 있음
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: "https://tom-jelly.shop/api",
   withCredentials: true,
 
   headers: {
@@ -112,11 +112,11 @@ export const apis = {
   },
 
   // 마이페이지 내가쓴글
-  getMyPost: () => {
-    baseURL.get(`/mypage/myPost`, "", {
-      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-    });
-  },
+  // getMyPost: () => {
+  //   baseURL.get(`/mypage/myPost`, {
+  //     headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+  //   });
+  // },
 
   // 월드컵 관련
   getworldcup: () => {

@@ -34,10 +34,14 @@ const DrinkList = () => {
   // console.log("categoryDrinkCount:", categoryDrinkCount);
 
   useEffect(() => {
+    if (!categoryDrinkCount) return;
     setCount(categoryDrinkCount);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [categoryDrinkCount]);
+
+  useEffect(() => {
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
   const setPage = (error) => {
