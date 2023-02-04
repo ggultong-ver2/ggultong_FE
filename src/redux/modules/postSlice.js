@@ -2,11 +2,16 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
 import axios from "axios";
 
+import Swal from "sweetalert2";
+import { async } from "q";
+
+
 const IP = process.env.REACT_APP_URL;
 const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
+  mypageCount: [],
 
   details: {
     title: "",
@@ -15,11 +20,14 @@ const initialState = {
     comment: {},
     isLikedPost: false,
     likePostSum: 0,
+    isscrapPost: false,
+    scrapPostSum: 0,
     worldCups: [],
     rankList: [],
     monthList: [],
     categoryCount: {},
     myPosts: [],
+    mainPost: [],
   },
   error: null,
   isLoading: false,
@@ -256,6 +264,26 @@ export const __postLike = createAsyncThunk(
   }
 );
 
+export const __postScrap = createAsyncThunk(
+  "postScrap",
+  async (payload, thunkAPI) => {
+    try {
+      // console.log(payload);
+      const { data } = await baseURL.post(
+        `/post/scrap/${payload}`,
+        {},
+        {
+          headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+        }
+      );
+      console.log(data.isScrapPost);
+      return thunkAPI.fulfillWithValue(data.isScrapPost);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 // 카테고리별 get
 export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
@@ -267,6 +295,21 @@ export const __getCategoryPost = createAsyncThunk(
         payload.currentPage
       );
       // console.log("categorydata:", data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getMainPost = createAsyncThunk(
+  "getMainPost",
+  async (payload, thunkAPI) => {
+    try {
+      // console.log(payload);
+      const { data } = await baseURL.get("/post/likeTop6");
+      console.log("maindata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
@@ -317,18 +360,51 @@ export const __getMyPost = createAsyncThunk(
   "getMyPost",
   async (payload, thunkAPI) => {
     try {
+
       // console.log(payload);
-      const res = await axios.get(`${IP}/mypage/myPost`, {
+      const res = await axios.get(`${IP}/mypage/myPost/${payload}`, {
         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
       });
       // const data = await apis.getMyPost();
-      console.log(res);
+      // console.log(res);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
+
+
+export const __getMypageCount = createAsyncThunk(
+  "getMypageCount",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await apis.getMypageCount();
+
+      console.log("data: ", data.data);
+      console.log("payload:", payload);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+// 알림 기능
+export const __getNotification = createAsyncThunk(
+  "getNotification",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await baseURL.get("/notifications");
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 
 export const postSlice = createSlice({
   name: "post",
@@ -373,7 +449,7 @@ export const postSlice = createSlice({
     [__getMyPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.myPosts = action.payload;
-      console.log("action.payload:", action.payload);
+      // console.log("action.payload:", action.payload);
     },
     [__getMyPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -454,6 +530,8 @@ export const postSlice = createSlice({
         comment: [],
         isLikedPost: false,
         likePostSum: 0,
+        scrapPost: false,
+        scrapPostSum: 0,
       };
       console.log("state------>", newList);
     },
@@ -527,7 +605,45 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.posts = action.payload;
     },
+
     [__postLike.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__getMypageCount]: (state) => {
+      state.isLoading = true;
+    },
+    [__getMypageCount]: (state, action) => {
+      state.isLoading = false;
+      console.log("action", action);
+      state.mypageCount = action.payload;
+      console.log("action::", action);
+    },
+    [__getMypageCount]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    //스크랩
+    [__postScrap.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__postScrap.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details.isScrapPost = action.payload;
+      console.log("state.posts", state.details.isScrapPost);
+      console.log(action.payload);
+
+      if (action.payload === true) {
+        state.details.isScrapPost = true;
+        state.details.scrapPostSum = state.details.scrapPostSum + 1;
+      } else {
+        state.details.isScrapPost = false;
+        state.details.scrapPostSum = state.details.scrapPostSum - 1;
+      }
+    },
+    [__postScrap.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -660,6 +776,21 @@ export const postSlice = createSlice({
     [__getComment.rejected]: (state, action) => {
       state.error = action.payload;
     },
+
+    //메인페이지 포스트 불러오기
+    [__getMainPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getMainPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details.mainPost = action.payload;
+      console.log("main", state.details.mainPost);
+    },
+    [__getMainPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
   },
 });
 

@@ -118,11 +118,21 @@ export const apis = {
   //   });
   // },
 
+  // 내가쓴글, 스크랩 갯수
+  // getMypageCount: () => {
+  //   return baseURL.get(`/mypage/myPostCount`, "", {
+  //     headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+  //   });
+  // },
+
   // 월드컵 관련
   getworldcup: () => {
     baseURL.get("/post/getWorldcupImage");
   },
   worldsend: (postId) => instance.post(`post/getWorldcupImage/${postId}`),
 
-  // 좋아요 관련
+  // 스크랩 관련
+  // postscrap: (postId) => {
+  //   baseURL.post(`/post/scrap/${postId}`);
+  // },
 };
