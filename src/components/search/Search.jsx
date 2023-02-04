@@ -33,7 +33,9 @@ function Search() {
     async function fetchData() {
       const { data } = await axios.get(
         // /post/search?keyword=${params.keyword}`  baseURL
+
         `${IP}/post/search/${currentPage}?keyword=${params.keyword}`
+
       );
       setSearchData(data);
       setCount(data[0].searchPostSum);

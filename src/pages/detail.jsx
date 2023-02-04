@@ -13,6 +13,7 @@ import Likes from "../components/like/Likes";
 import { __addComment, __deleteComment } from "../redux/modules/postSlice";
 import { timeCalculator } from "../utils/utils";
 import EditComment from "./EditComment";
+import Scrap from "../components/scrap/scrap";
 
 const Detail = () => {
   const location = useLocation;
@@ -29,7 +30,7 @@ const Detail = () => {
     content: "",
   });
   const detailList = useSelector((state) => state.details.details);
-  console.log("details:", detailList);
+  // console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.comment);
 
   useEffect(() => {
@@ -143,7 +144,7 @@ const Detail = () => {
   // }, [details]);
   // // details가 없으면 실행시키지 않게다.
 
-  console.log("visible", visible);
+  // console.log("visible", visible);
   if (details.id) {
     return (
       <div className="detail_body">
@@ -187,6 +188,7 @@ const Detail = () => {
           <div className="likes">
             <Likes />
           </div>
+          <Scrap />
           <div className="comment_top">
             <div>댓글 {details?.comment.length} </div>
             <div>게시글 신고</div>
