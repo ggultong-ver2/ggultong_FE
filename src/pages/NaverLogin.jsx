@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NaverLogin = ({ setGetToken, setUserInfo }) => {
-  const IP = "sparta-sjl.shop";
+  const IP = "tom-jelly.shop";
   const navigate = useNavigate();
   const location = useLocation();
   const getToken = async () => {

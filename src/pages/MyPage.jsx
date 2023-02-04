@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -19,6 +19,23 @@ function MyPage() {
   const [post, setPost] = useState([]);
   const [nickname, setNickname] = useInput();
   const navigate = useNavigate();
+
+  // const [myProfile, setMyProfile] = useState([]);
+  // const myPage = useSelector((state) => state.details.details.myPosts);
+  // const [displays, setDisplays] = useState([]);
+  // useEffect(() => {
+  //   dispatch(__getMyPost());
+
+  //   console.log("res", myPage);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   const array = [...myPage];
+  //   console.log("arrsss", array[0][0]);
+
+  //   console.log("newdata[0]", array);
+  //   setDisplays(array);
+  // }, [myPage]);
 
   const onChangeImage = (event) => {
     const file = event.target.files[0];
@@ -83,7 +100,7 @@ function MyPage() {
       navigate("/login");
     });
   };
-
+  // console.log("myProfile.profile", myProfile.profile);
   return (
     <StContainer onSubmit={onSubmitChangeHandler}>
       <StSubCon>

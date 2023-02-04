@@ -20,7 +20,7 @@ const MySmallTab = () => {
   useEffect(() => {
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    setCount(myPost.length);
+    setCount(myPost?.length);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
   const setPage = (error) => {
@@ -41,7 +41,7 @@ const MySmallTab = () => {
         <>
           {myPost.map((value, index) => {
             return (
-              <Card>
+              <Card key={index}>
                 <Textwrap>
                   <StTitle>{value.title}</StTitle>
 

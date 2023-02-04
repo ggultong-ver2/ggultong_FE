@@ -41,7 +41,6 @@ function WorldCupGame() {
     const array = [...inputData];
     console.log("arr", array);
     const newdata = array.sort(() => Math.random() - 0.5);
-
     console.log("new", newdata);
     setFoods(newdata);
     console.log("newdata[0]", newdata.slice(0, 2));
