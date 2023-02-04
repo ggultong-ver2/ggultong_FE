@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL 토큰 담는 인터셉트 없음
 const instance = axios.create({
-  baseURL: "https://sparta-sjl.shop/api", //상정님
+  baseURL: process.env.REACT_APP_URL, //상정님
   //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
   //https://sparta-sjl.shop/api
@@ -18,7 +18,7 @@ const instance = axios.create({
 //
 // baseURL 토큰 담는 인터셉트 있음
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+  baseURL: process.env.REACT_APP_URL,
   withCredentials: true,
 
   headers: {
@@ -118,10 +118,21 @@ export const apis = {
   //   });
   // },
 
+  // 내가쓴글, 스크랩 갯수
+  // getMypageCount: () => {
+  //   return baseURL.get(`/mypage/myPostCount`, "", {
+  //     headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+  //   });
+  // },
+
   // 월드컵 관련
   getworldcup: () => {
     baseURL.get("/post/getWorldcupImage");
   },
   worldsend: (postId) => instance.post(`post/getWorldcupImage/${postId}`),
-  
+
+  // 스크랩 관련
+  // postscrap: (postId) => {
+  //   baseURL.post(`/post/scrap/${postId}`);
+  // },
 };

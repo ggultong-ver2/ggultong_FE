@@ -11,7 +11,6 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
     window.location.href = "/search/" + keyword;
@@ -24,11 +23,11 @@ function Header() {
   //   console.log("open")
   // };
 
-  const getNotification = () =>{
-    dispatch (__getNotification())
-    console.log("열림")
-    setOpen(!open)
-  }
+  const getNotification = () => {
+    dispatch(__getNotification());
+    console.log("열림");
+    setOpen(!open);
+  };
 
   return (
     <div className="header_container">
