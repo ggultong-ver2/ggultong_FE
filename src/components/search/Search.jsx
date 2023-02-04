@@ -33,7 +33,7 @@ function Search() {
     async function fetchData() {
       const { data } = await axios.get(
         // /post/search?keyword=${params.keyword}`  baseURL
-        `https://tom-jelly.shop/api/post/search/${currentPage}?keyword=${params.keyword}`
+        `https://sparta-sjl.shop/api/post/search/${currentPage}?keyword=${params.keyword}`
       );
       setSearchData(data);
       setCount(data[0].searchPostSum);

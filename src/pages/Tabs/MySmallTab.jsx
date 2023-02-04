@@ -4,8 +4,10 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
+import { __getMypageCount } from "../../redux/modules/countSlice";
 
 const MySmallTab = () => {
+  const [displays, setDisplays] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const dispatch = useDispatch();
 
@@ -18,20 +20,37 @@ const MySmallTab = () => {
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   useEffect(() => {
+    setCount(myPost?.length);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    setCount(myPost.length);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
-  const setPage = (error) => {
-    setCurrentPage(error);
+  const setPage = (page) => {
+    setCurrentPage(page);
   };
 
   useEffect(() => {
-    dispatch(__getMyPost());
-  }, [dispatch]);
+    dispatch(__getMyPost(currentPage));
+    dispatch(__getMypageCount());
+  }, [dispatch, currentPage]);
 
-  const myPost = useSelector((state) => state.details.details.myPosts);
+  // useEffect(() => {
+  //   console.log("hi");
+  //   dispatch(__getMypageCount());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   const array = [postCounts];
+  //   console.log("arr", array);
+
+  //   console.log("newdata[0]", array);
+  //   setDisplays(array[0]);
+  // }, [postCounts]);
+
+  const postCounts = useSelector((state) => state);
+  console.log("postcount:", postCounts);
+
+  const myPost = useSelector((state) => state?.details?.details?.myPosts);
   console.log("myPost::", myPost);
 
   const menuArr = [
@@ -39,22 +58,23 @@ const MySmallTab = () => {
       name: "내가 쓴 글",
       content: (
         <>
-          {myPost.map((value, index) => {
-            return (
-              <Card>
-                <Textwrap>
-                  <StTitle>{value.title}</StTitle>
+          {myPost &&
+            myPost?.map((value, index) => {
+              return (
+                <Card key={index}>
+                  <Textwrap>
+                    <StTitle>{value.title}</StTitle>
 
-                  <Etcwrap>
-                    댓글{value.commentCount} 좋아요&nbsp; {value.likeSum}{" "}
-                    &nbsp;&nbsp;
-                    {value.createdAt.slice(0, 10)}
-                  </Etcwrap>
-                </Textwrap>
-                <StFile src={value.imageFile}></StFile>
-              </Card>
-            );
-          })}
+                    <Etcwrap>
+                      댓글{value.commentCount} 좋아요&nbsp; {value.likeSum}{" "}
+                      &nbsp;&nbsp;
+                      {value.createdAt.slice(0, 10)}
+                    </Etcwrap>
+                  </Textwrap>
+                  <StFile src={value.imageFile}></StFile>
+                </Card>
+              );
+            })}
           <Paging currentPage={currentPage} count={count} setPage={setPage} />
         </>
       ),
@@ -68,7 +88,7 @@ const MySmallTab = () => {
 
             <Etcwrap>댓글10 좋아요&nbsp; 10 &nbsp;&nbsp; 2023.02.03</Etcwrap>
           </Textwrap>
-          <StFile>이미지</StFile>
+          <StFile></StFile>
         </Card>
       ),
     },

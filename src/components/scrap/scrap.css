@@ -1,0 +1,40 @@
+.scrap_button {
+  width: 84px;
+  height: 32px;
+  margin: 0 auto;
+  font-size: 16px;
+  cursor: pointer;
+}
+.scrap_default {
+  width: 20px;
+  height: 17px;
+  background-image: url(../../../public/images/scrap-default.png);
+}
+.scrap_onclick {
+  width: 20px;
+  height: 17px;
+  background-image: url(../../../public/images/scrap-onclick.png);
+}
+
+.scrap_onclick_wrap {
+  width: 84px;
+  height: 32px;
+  border: 2px solid #000000;
+  border-radius: 20px;
+  display: flex;
+  padding: 4px 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scrap_default_wrap {
+  width: 84px;
+  height: 32px;
+  border: 2px solid #cbcbcb;
+  border-radius: 20px;
+  padding: 4px 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

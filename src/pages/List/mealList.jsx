@@ -31,10 +31,14 @@ const MealList = () => {
   const categoryMealCount = useSelector((state) => state.details.details.meal);
 
   useEffect(() => {
+    if (!categoryMealCount) return;
     setCount(categoryMealCount);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [categoryMealCount]);
+
+  useEffect(() => {
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
   const setPage = (error) => {
@@ -92,7 +96,7 @@ const MealList = () => {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   ></StContent>
                   <Etcwrap>
-                    댓글&nbsp;{post?.comment.length} 좋아요&nbsp;
+                    댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
                     {post.likePostSum} &nbsp;&nbsp;
                     {post.createdAt.slice(0, 10)}
                   </Etcwrap>

@@ -44,8 +44,8 @@ const DrinkList = () => {
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
-  const setPage = (error) => {
-    setCurrentPage(error);
+  const setPage = (page) => {
+    setCurrentPage(page);
   };
 
   useEffect(() => {
