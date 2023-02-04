@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
 import axios from "axios";
-import Swal from "sweetalert2";
-const IP = process.env.SOCIAL_APP_URL;
+
+const IP = process.env.REACT_APP_URL;
 const initialState = {
   login: [],
   signup: [],

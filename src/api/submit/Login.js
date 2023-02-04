@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const IP = process.env.SOCIAL_APP_URL;
+const IP = process.env.REACT_APP_URL;
 
 // 비밀번호 변경
 export const __pwchange = async (password) => {
@@ -55,7 +55,7 @@ export const __idcheck = async (loginId) => {
     // useSweet(1000, "success", "회원가입 성공");
     return data;
   } catch (error) {
-    Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
+    Swal.fire("잘못된 형식입니다", "특수문자는 불가능합니다.", "error");
     // alert(error.response.data.msg);
     // useSweet(1000, "error", error.response.data.msg);
   }
