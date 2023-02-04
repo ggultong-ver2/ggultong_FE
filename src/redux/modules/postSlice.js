@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+const IP = process.env.SOCIAL_APP_URL;
 const initialState = {
   login: [],
   signup: [],
@@ -47,9 +47,7 @@ export const __getWorldCup = createAsyncThunk(
   "getWorldCup",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://sparta-sjl.shop/api/post/getWorldcupImage"
-      );
+      const data = await axios.get(`${IP}/post/getWorldcupImage`);
 
       console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -65,9 +63,7 @@ export const __getRankList = createAsyncThunk(
   "getTopList",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://sparta-sjl.shop/api/post/getWorldcupTop5"
-      );
+      const data = await axios.get(`${IP}/post/getWorldcupTop5`);
 
       console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -83,9 +79,7 @@ export const __getRankMonth = createAsyncThunk(
   "getRankMonth",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://sparta-sjl.shop/api/post/getWorldcupMonth"
-      );
+      const data = await axios.get(`${IP}/post/getWorldcupMonth`);
 
       console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -324,7 +318,7 @@ export const __getMyPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // console.log(payload);
-      const res = await axios.get("https://sparta-sjl.shop/api/mypage/myPost", {
+      const res = await axios.get(`${IP}/mypage/myPost`, {
         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
       });
       // const data = await apis.getMyPost();
