@@ -15,15 +15,24 @@ const EditPost = () => {
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState("");
   const [content, setContent] = useState("");
   const { id } = useParams();
 
   const onEditPostHandler = (id) => {
     // console.log("content:", content.content);
+
     const formdata = new FormData();
-    for (const f of Array.from(file)) {
-      formdata.set("file", f);
+    // for (const f of Array.from(file)) {
+    if (file === 0) {
+      console.log(file, "file");
+      formdata.set("file", " ");
+    } else {
+      for (const f of Array.from(file)) {
+        formdata.set("file", f);
+      }
+      // formdata.set("file", f === undefined ? new File([], "") : f);
+      // }
     }
     formdata.set("title", title);
     formdata.set("content", content);
@@ -135,7 +144,7 @@ const EditPost = () => {
             />
           </File>
           <Btns>
-            <BackButton>취소</BackButton>
+            <BackButton onClick={() => navigate(-1)}>취소</BackButton>
             <EnterButton>확인</EnterButton>
           </Btns>
         </Wrap>
