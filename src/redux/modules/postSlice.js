@@ -27,6 +27,7 @@ const initialState = {
     monthList: [],
     categoryCount: {},
     myPosts: [],
+    mainPost: [],
   },
   error: null,
   isLoading: false,
@@ -294,6 +295,21 @@ export const __getCategoryPost = createAsyncThunk(
         payload.currentPage
       );
       // console.log("categorydata:", data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getMainPost = createAsyncThunk(
+  "getMainPost",
+  async (payload, thunkAPI) => {
+    try {
+      // console.log(payload);
+      const { data } = await baseURL.get("/post/likeTop6");
+      console.log("maindata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
@@ -760,6 +776,21 @@ export const postSlice = createSlice({
     [__getComment.rejected]: (state, action) => {
       state.error = action.payload;
     },
+
+    //메인페이지 포스트 불러오기
+    [__getMainPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getMainPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details.mainPost = action.payload;
+      console.log("main", state.details.mainPost);
+    },
+    [__getMainPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
   },
 });
 
