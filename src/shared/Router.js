@@ -2,9 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import { EventSourcePolyfill } from "event-source-polyfill";
-import { NativeEventSource } from "event-source-polyfill";
-
+// import { EventSourcePolyfill } from "event-source-polyfill";
+// import { NativeEventSource } from "event-source-polyfill";
 
 // import Home from "../pages/Home";
 import Layout from "../components/layout/Layout";
@@ -43,10 +42,9 @@ import { QueryClient } from "react-query";
 import GameRankView from "../pages/GameRankView";
 
 const Router = () => {
-
   const [loading, setIsLoading] = useState(false);
 
-  const EventSource = EventSourcePolyfill || NativeEventSource
+  // const EventSource = EventSourcePolyfill || NativeEventSource
   // useEffect(() => {
   //   if(loading){
   //     let eventSource;

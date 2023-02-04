@@ -144,7 +144,6 @@ const EditPost = () => {
             />
           </File>
           <Btns>
-
             <BackButton onClick={() => navigate(-1)}>취소</BackButton>
 
             <EnterButton>확인</EnterButton>
