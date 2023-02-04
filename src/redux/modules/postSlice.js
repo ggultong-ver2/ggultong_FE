@@ -1,9 +1,12 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { apis, baseURL } from "../../lib/axios";
 import axios from "axios";
+
 import Swal from "sweetalert2";
 import { async } from "q";
 
+
+const IP = process.env.REACT_APP_URL;
 const initialState = {
   login: [],
   signup: [],
@@ -51,9 +54,7 @@ export const __getWorldCup = createAsyncThunk(
   "getWorldCup",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://sparta-sjl.shop/api/post/getWorldcupImage"
-      );
+      const data = await axios.get(`${IP}/post/getWorldcupImage`);
 
       console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -69,9 +70,7 @@ export const __getRankList = createAsyncThunk(
   "getTopList",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://sparta-sjl.shop/api/post/getWorldcupTop5"
-      );
+      const data = await axios.get(`${IP}/post/getWorldcupTop5`);
 
       console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -87,9 +86,7 @@ export const __getRankMonth = createAsyncThunk(
   "getRankMonth",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://sparta-sjl.shop/api/post/getWorldcupMonth"
-      );
+      const data = await axios.get(`${IP}/post/getWorldcupMonth`);
 
       console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -347,13 +344,11 @@ export const __getMyPost = createAsyncThunk(
   "getMyPost",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
-      const res = await axios.get(
-        `https://sparta-sjl.shop/api/mypage/myPost/${payload}`,
-        {
-          headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-        }
-      );
+
+      // console.log(payload);
+      const res = await axios.get(`${IP}/mypage/myPost/${payload}`, {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      });
       // const data = await apis.getMyPost();
       // console.log(res);
       return thunkAPI.fulfillWithValue(res.data);
@@ -362,6 +357,7 @@ export const __getMyPost = createAsyncThunk(
     }
   }
 );
+
 
 export const __getMypageCount = createAsyncThunk(
   "getMypageCount",
@@ -392,6 +388,7 @@ export const __getNotification = createAsyncThunk(
     }
   }
 );
+
 
 export const postSlice = createSlice({
   name: "post",
@@ -765,111 +762,5 @@ export const postSlice = createSlice({
     },
   },
 });
-
-//알림
-
-export const notificationSlice = createSlice({
-  name: "getNotification",
-  initialState: {
-    notifications: {
-      data: [{ id: 0, content: {}, status: false }],
-      error: null,
-      success: true,
-    },
-    isLoading: false,
-    error: null,
-  },
-  reducers: {
-    __addNotification(state, action) {
-      // console.log(action.payload)
-      state.notifications.data.unshift(action.payload);
-    },
-    __readNotification(state, action) {
-      // console.log(current(state.notifications.data))
-      const a = state.notifications.data.findIndex(
-        (v) => v.id === action.payload
-      );
-      state.notifications.data[a].status = true;
-    },
-    __deleteNotification(state, action) {
-      const a = state.notifications.data.findIndex(
-        (v) => v.id === action.payload
-      );
-      state.notifications.data.splice(a, 1);
-    },
-    __deletNotifications(state, action) {
-      state.notifications.data.splice(0, state.notifications.data.length);
-    },
-  },
-  extraReducers: {
-    [__getNotification.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__getNotification.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.notifications = action.payload;
-    },
-    [__getNotification.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-  },
-});
-
-export const __NreadNotification = createAsyncThunk(
-  "NreadNotification",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await baseURL.get("/notifications/count");
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const NreadNotificationSlice = createSlice({
-  name: "NreadNotification",
-  initialState: {
-    NreadNotifications: {
-      data: { count: 0 },
-      error: null,
-      success: true,
-    },
-    isLoading: false,
-    error: null,
-  },
-  reducers: {
-    __minusNotification(state, action) {
-      state.NreadNotifications.data.count -= action.payload;
-    },
-    __plusNotification(state, action) {
-      state.NreadNotifications.data.count += action.payload;
-    },
-  },
-  extraReducers: {
-    [__NreadNotification.pending]: (state) => {
-      state.isLoading2 = true;
-    },
-    [__NreadNotification.fulfilled]: (state, action) => {
-      state.isLoading2 = false;
-      state.NreadNotifications = action.payload;
-    },
-    [__NreadNotification.rejected]: (state, action) => {
-      state.isLoading2 = false;
-      state.error2 = action.payload;
-    },
-  },
-});
-
-export const { __minusNotification, __plusNotification } =
-  NreadNotificationSlice.actions;
-
-export const {
-  __addNotification,
-  __readNotification,
-  __deleteNotification,
-  __deleteNotifications,
-} = notificationSlice.actions;
 
 export default postSlice.reducer;

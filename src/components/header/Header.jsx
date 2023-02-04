@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import "../../pages/reset.css";
+import { __getNotification } from "../../redux/modules/notificationSlice";
 import NotificationList from "../notification/NotificationList";
 import "./style.css";
 
 function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
@@ -14,7 +17,15 @@ function Header() {
   };
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
+
+  // const handleOpen = () => {
+  //   setOpen(!open);
+  //   console.log("open")
+  // };
+
+  const getNotification = () => {
+    dispatch(__getNotification());
+    console.log("열림");
     setOpen(!open);
   };
 
@@ -47,7 +58,7 @@ function Header() {
         <nav className="gnb">
           <ul className="clearfix">
             <li className="search"></li>
-            <li onClick={handleOpen} className="alarm">
+            <li onClick={getNotification} className="alarm">
               알림
             </li>
             {open ? (
@@ -60,7 +71,9 @@ function Header() {
               //     lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
               //   </li>
               // </ul>
-              <NotificationList />
+              <div className="notification_centre">
+                <NotificationList />
+              </div>
             ) : null}
             <li
               onClick={(res) => {

@@ -23,6 +23,9 @@ const MySmallTab = () => {
     setCount(myPost?.length);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
+
+    setCount(myPost?.length);
+
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
   const setPage = (page) => {
@@ -58,6 +61,7 @@ const MySmallTab = () => {
       name: "내가 쓴 글",
       content: (
         <>
+
           {myPost &&
             myPost?.map((value, index) => {
               return (
@@ -75,6 +79,7 @@ const MySmallTab = () => {
                 </Card>
               );
             })}
+
           <Paging currentPage={currentPage} count={count} setPage={setPage} />
         </>
       ),

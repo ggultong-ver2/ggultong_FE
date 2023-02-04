@@ -2,7 +2,9 @@ import axios from "axios";
 
 // 기본 URL 토큰 담는 인터셉트 없음
 const instance = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+
+  baseURL: process.env.REACT_APP_URL, //상정님
+
   //https://tom-jelly.shop/api
   //process.env.REACT_APP_URL
   //https://sparta-sjl.shop/api
@@ -18,7 +20,9 @@ const instance = axios.create({
 //
 // baseURL 토큰 담는 인터셉트 있음
 export const baseURL = axios.create({
-  baseURL: "https://sparta-sjl.shop/api",
+
+  baseURL: process.env.REACT_APP_URL,
+
   withCredentials: true,
 
   headers: {
