@@ -3,6 +3,8 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+const IP = process.env.SOCIAL_APP_URL;
+
 // 비밀번호 변경
 export const __pwchange = async (password) => {
   try {
@@ -100,7 +102,7 @@ export const __nickCheck = async (nickname) => {
 export const __socialNick = async (nickname) => {
   try {
     const data = await axios.patch(
-      `https://sparta-sjl.shop/api/mypage/socialSetting/${nickname}`,
+      `${IP}/mypage/socialSetting/${nickname}`,
       "",
       {
         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
