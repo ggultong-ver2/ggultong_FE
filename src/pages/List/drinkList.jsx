@@ -57,65 +57,88 @@ const DrinkList = () => {
   // console.log("categoryPosts:", categoryPosts);
 
   return (
-    <div className="list_body">
-      <Buttons>
-        <Button1 onClick={() => navigate("/drinkList/drink")}>혼술</Button1>
-        <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
-        <Button3
-          onClick={() => navigate("/recycleList/recycle")}
-          className="recycle"
-        >
-          리사이꿀
-        </Button3>
-      </Buttons>
-      <div className="postlist_top">
-        <ul className="clearfix">
-          <li>
-            <div className="postlist_top_image1"></div>
-            <h3>
-              맥주 종류 별 40가지 먹어본 사람이
-              <br />
-              추천하는 맥주 탑5
-            </h3>
-            {/* <div className="mask"></div> */}
-          </li>
-          <li>
-            <div className="postlist_top_image2"></div>
-            <h3>칵테일 안주 레시피</h3>
-          </li>
-        </ul>
+    <>
+      <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul className="clearfix">
+            <li>
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li className="list_active">
+              <button onClick={() => navigate("/drinklist/drink")}>
+                꿀정보
+              </button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/gamelist")}>꿀잼</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
       </div>
 
-      <Wrapall>
-        <Wrap>
-          <div>
-            {categoryPosts?.map((post) => {
-              // console.log(post);
-              return (
-                <Card
-                  key={post.id}
-                  onClick={() => navigate(`detail/${post.id}`)}
-                >
-                  <Textwrap>
-                    <StTitle>{post.title}</StTitle>
-                    <StContent
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    ></StContent>
-                    <Etcwrap>
-                      댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
-                      {post.likePostSum} &nbsp;&nbsp;
-                      {post.createdAt.slice(0, 10)}
-                    </Etcwrap>
-                  </Textwrap>
-                  <StFile src={post.imageFile}></StFile>
-                </Card>
-              );
-            })}
-          </div>
-          <Paging currentPage={currentPage} count={count} setPage={setPage} />
-        </Wrap>
-      </Wrapall>
-    </div>
+      <div className="list_body">
+        <Buttons>
+          <Button1 onClick={() => navigate("/drinkList/drink")}>혼술</Button1>
+          <Button2 onClick={() => navigate("/mealList/meal")}>혼밥</Button2>
+          <Button3
+            onClick={() => navigate("/recycleList/recycle")}
+            className="recycle"
+          >
+            리사이꿀
+          </Button3>
+        </Buttons>
+        <div className="postlist_top">
+          <ul className="clearfix">
+            <li>
+              <div className="postlist_top_image1"></div>
+              <h3>
+                맥주 종류 별 40가지 먹어본 사람이
+                <br />
+                추천하는 맥주 탑5
+              </h3>
+              {/* <div className="mask"></div> */}
+            </li>
+            <li>
+              <div className="postlist_top_image2"></div>
+              <h3>칵테일 안주 레시피</h3>
+            </li>
+          </ul>
+        </div>
+
+        <Wrapall>
+          <Wrap>
+            <div>
+              {categoryPosts?.map((post) => {
+                // console.log(post);
+                return (
+                  <Card
+                    key={post.id}
+                    onClick={() => navigate(`detail/${post.id}`)}
+                  >
+                    <Textwrap>
+                      <StTitle>{post.title}</StTitle>
+                      <StContent
+                        dangerouslySetInnerHTML={{ __html: post.content }}
+                      ></StContent>
+                      <Etcwrap>
+                        댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
+                        {post.likePostSum} &nbsp;&nbsp;
+                        {post.createdAt.slice(0, 10)}
+                      </Etcwrap>
+                    </Textwrap>
+                    <StFile src={post.imageFile}></StFile>
+                  </Card>
+                );
+              })}
+            </div>
+            <Paging currentPage={currentPage} count={count} setPage={setPage} />
+          </Wrap>
+        </Wrapall>
+      </div>
+    </>
   );
 };
 

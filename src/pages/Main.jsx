@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { __getPost } from "../redux/modules/postSlice";
 import Heroside from "../components/heroside/Heroside";
 import Recipe from "./Recipe";
-import "./reset.css";
 import Drink from "./Drink";
-import "./style.css";
-import WorldCup from "./WorldCup";
 import Recycle from "./Recycle";
+import "./reset.css";
+import "./style.css";
 import Swal from "sweetalert2";
 
 function Main() {
@@ -14,6 +13,27 @@ function Main() {
 
   return (
     <>
+      <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul className="clearfix">
+            <li className="home_active">
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/drinklist/drink")}>
+                꿀정보
+              </button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/gamelist")}>꿀잼</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
+      </div>
+
       <Heroside />
       <div className="main_container">
         <div className="sub_container">

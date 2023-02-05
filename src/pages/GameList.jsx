@@ -49,47 +49,39 @@ function GameList() {
   }, [MonthData]);
   console.log("dis", displays);
   return (
-    <StContainer>
-      <StTopBox>
-        <StBannerBox>
-          <StLeftBox>
-            <div>
-              꿀통 음식 월드컵
-              <br />
-              이번 달 우승음식은?
-              <StButton
-                onClick={() => {
-                  navigate("/gamelist/worldcupgame/gamerankview");
-                }}
-              >
-                랭킹보기
-              </StButton>
-              <StButton2
-                onClick={() => {
-                  navigate("/gamelist/worldcupgame");
-                }}
-              >
-                시작하기
-              </StButton2>
-            </div>
-          </StLeftBox>
-          <StRightBox>
-            <StImgBox src={require("../assets/images/trophy.png")} />
-          </StRightBox>
-        </StBannerBox>
-      </StTopBox>
-      <StListBox>
-        <StDiv>연간 월드컵 우승작 (1위,2위)</StDiv>
-        {displays.map((rowdata, index) => {
-          // console.log("rrr", rowdata);
-          return (
-            <StCard>
-              <StCardBox>
-                <StCardImg
+    <>
+          <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul className="clearfix">
+            <li>
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/drinklist/drink")}>
+                꿀정보
+              </button>
+            </li>
+            <li className="game_active">
+              <button onClick={() => navigate("/gamelist")}>꿀잼</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
+      </div>
+
+      <StContainer>
+        <StTopBox>
+          <StBannerBox>
+            <StLeftBox>
+              <div>
+                꿀통 음식 월드컵
+                <br />
+                이번 달 우승음식은?
+                <StButton
                   onClick={() => {
-                    navigate(
-                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
-                    );
+                    navigate("/gamelist/worldcupgame/gamerankview");
                   }}
                   src={rowdata.img1}
                 />

@@ -113,39 +113,6 @@ function Header() {
           </ul>
         </nav>
       </div>
-      <div className="top_cat_wrap">
-        <div className="top_cat">
-          <ul className="clearfix">
-            <li>
-              <button onClick={() => navigate("/")}>홈</button>
-            </li>
-            <li>
-              <button onClick={() => navigate("/drinklist/drink")}>
-                꿀정보
-              </button>
-            </li>
-            <li>
-              <button onClick={() => navigate("/gamelist")}>꿀잼</button>
-            </li>
-          </ul>
-          <button
-            className="top_post_btn"
-            onClick={() => {
-              if (localStorage.getItem("Access_Token")) {
-                navigate("/post");
-              } else {
-                Swal.fire(
-                  "로그인 후 이용해주세요!",
-                  "로그인 후 작성가능",
-                  "error"
-                );
-              }
-            }}
-          >
-            글쓰기
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

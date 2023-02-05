@@ -6,6 +6,7 @@
   margin-bottom: 60px;
   position: relative;
 }
+
 .slider .slick-prev{
   position: absolute;
   left: 130px;
@@ -42,9 +43,10 @@
   position: absolute;
   bottom: 30px;
 }
-.slider .slick-dots li{
+.slider .slick-track{
+  width: 100%;
+  overflow: hidden !important;
 }
-
 .slide1{
   background: #FF9A70;
   width: 1100px;
