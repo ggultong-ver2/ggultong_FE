@@ -239,11 +239,11 @@
 }
 
 .main_recipe p,
-.recycle_image p {
-  height: 90px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 13px 20px;
+.main_recycle p {
+  margin-top: 10px;
+  height: 56px;
   font-size: 18px;
+  line-height: 28px;
 }
 
 .random_recipe_container {
@@ -430,18 +430,11 @@
   color: red;
 }
 
-/* .drink_slider{
-  position: relative;
-  right: 0;
-  width: 990px;
-  height: 326px;
-  background: #000;
-} */
 
-
-.drink_slider .slick-prev{
+.list_slider .slick-prev{
   position: absolute;
-  left: 130px;
+  left: -58px;
+  top: 138px;
   z-index: 1;
   background-image: url(../../public/images/slider_arrow_default.png);
   background-repeat: no-repeat;
@@ -449,15 +442,16 @@
   text-indent: -9999px;
   width: 32px;height: 32px;
 }
-.drink_slider .slick-prev:hover{
+.list_slider .slick-prev:hover{
   background-image: url(../../public/images/slider_arrow_hover.png);
   background-repeat: no-repeat;
   background-position: center;
 
 }
-.drink_slider .slick-next {
+.list_slider .slick-next {
   position: absolute;
-  right: 130px;
+  top: 118px;
+  right: -58px;
   background-image: url(../../public/images/slider_arrow_default.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -465,34 +459,46 @@
   width: 32px;height: 32px;
   transform: scaleX(-1);
 }
-.drink_slider .slick-next:hover{
+.list_slider .slick-next:hover{
   background-image: url(../../public/images/slider_arrow_hover.png);
   background-repeat: no-repeat;
   background-position: center;
 
 }
-.drink_slide_container{
+.list_slide_container{
   position: relative;
   right: -244px;
   width: 990px;
   height: 326px;
-  /* background: #000; */
-
 }
-.drink_slide{
+.list_slider{
   width: 282px;
   height: 326px;
-  background: slategrey;
-  margin-right: 24px;
+}
+.slide{
+  width: 894px;
+  height: 326px;
+  margin-left: 55px;
   position: absolute;
-  right: 160px;
 }
-/* .drink_slide_container li{
-  float: left;
-} */
-.drink_slide{
+.list_slide{
   width: 282px;
-  height: 326px;
-  margin-left: 24px;
-  background: white;
+  height: 400px;
+}
+.list_slide_image{
+  width: 282px;height: 260px;
+}
+
+.home_active, .list_active, .game_active{
+  border-bottom: 2px solid #fff;
+  color: white;
+}
+
+.reaction{
+  width: 180px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
 }
