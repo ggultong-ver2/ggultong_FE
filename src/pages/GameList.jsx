@@ -37,6 +37,7 @@ function GameList() {
           img2: array[i][1].imageUrl,
           month: array[i][0].month,
           id: array[i][0].id,
+          id2: array[i][1].id2,
           category: array[i][0].category,
         };
         //
@@ -78,12 +79,12 @@ function GameList() {
         </StBannerBox>
       </StTopBox>
       <StListBox>
-        <StDiv>연간 이전 월드컵</StDiv>
+        <StDiv>연간 월드컵 우승작 (1위,2위)</StDiv>
         {displays.map((rowdata, index) => {
           // console.log("rrr", rowdata);
           return (
             <StCard>
-              <div>
+              <StCardBox>
                 <StCardImg
                   onClick={() => {
                     navigate(
@@ -92,16 +93,18 @@ function GameList() {
                   }}
                   src={rowdata.img1}
                 />
+              </StCardBox>
+              <StCardBox2>
                 <StCardImg2
                   onClick={() => {
                     navigate(
-                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id2}`
                     );
                   }}
                   src={rowdata.img2}
                 />
-                <StP>{index + 1}월 꿀통 음식 월드컵</StP>
-              </div>
+              </StCardBox2>
+              <StP>{index + 1}월 꿀통 음식 월드컵</StP>
             </StCard>
           );
         })}
@@ -112,7 +115,18 @@ function GameList() {
             오늘 뭐먹지?
             <br />
             고민될 땐 꿀통이 골라줄게!
-            <StButton3>음식 랜덤뽑기</StButton3>
+            <StButton3
+              onClick={(e) => {
+                e.preventDefault();
+                Swal.fire(
+                  "현재 구현중입니다",
+                  "조금만 더 기다려주세요~",
+                  "warning"
+                );
+              }}
+            >
+              음식 랜덤뽑기
+            </StButton3>
           </div>
         </StLeftBox2>
         <StRightBox2>
@@ -289,12 +303,29 @@ const StImgBox2 = styled.img`
 `;
 
 const StCard = styled.div`
+  position: relative;
+  overflow: hidden;
   width: 384px;
   height: 255px;
   font-size: 18px;
   font-weight: 500;
   margin-top: 40px;
 `;
+const StCardBox = styled.div`
+  float: left;
+  overflow: hidden;
+  width: 192px;
+  height: 220px;
+  margin-bottom: 10px;
+`;
+const StCardBox2 = styled.div`
+  float: right;
+  overflow: hidden;
+  width: 192px;
+  height: 220px;
+  margin-bottom: 10px;
+`;
+
 const StP = styled.p`
   width: 384px;
   font-family: "Pretendard";
@@ -316,22 +347,33 @@ const StDiv = styled.div`
 `;
 
 const StCardImg = styled.img`
+  transition: 0.4s;
   margin-bottom: 5px;
-  background-color: green;
   border: 0;
   float: left;
   width: 192px;
   height: 220px;
+
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
 `;
 const StCardImg2 = styled.img`
   margin-bottom: 5px;
-  background-color: limegreen;
+  transition: 0.4s;
   border: 0;
   float: right;
   width: 192px;
   height: 220px;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
 `;
 
 const StButton3 = styled.button`

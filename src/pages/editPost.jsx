@@ -15,32 +15,28 @@ const EditPost = () => {
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState("wadf");
   const [content, setContent] = useState("");
   const { id } = useParams();
 
   const onEditPostHandler = (id) => {
     // console.log("content:", content.content);
-
+    console.log("file", file);
     const formdata = new FormData();
     // for (const f of Array.from(file)) {
-    if (file === 0) {
+    if (!file) {
       console.log(file, "file");
-      formdata.set("file", " ");
+      formdata.set(file, "");
     } else {
       for (const f of Array.from(file)) {
         formdata.set("file", f);
       }
-      // formdata.set("file", f === undefined ? new File([], "") : f);
-      // }
     }
     formdata.set("title", title);
     formdata.set("content", content);
     formdata.set("category", category);
     dispatch(__editPost({ id, formdata }));
-    // for (const pair of formdata) {
-    //   console.log(pair[0] + "," + pair[1]);
-    // }
+
     Swal.fire("수정완료", "수정 완료되었습니다!", "success").then((res) => {
       if (res.isConfirmed) {
         navigate(`/drinkList/drink`);
@@ -144,7 +140,14 @@ const EditPost = () => {
             />
           </File>
           <Btns>
-            <BackButton onClick={() => navigate(-1)}>취소</BackButton>
+            <BackButton
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(-1);
+              }}
+            >
+              취소
+            </BackButton>
 
             <EnterButton>확인</EnterButton>
           </Btns>
