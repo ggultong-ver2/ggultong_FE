@@ -128,7 +128,20 @@ function Header() {
               <button onClick={() => navigate("/gamelist")}>꿀잼</button>
             </li>
           </ul>
-          <button onClick={() => navigate("/post")} className="top_post_btn">
+          <button
+            className="top_post_btn"
+            onClick={() => {
+              if (localStorage.getItem("Access_Token")) {
+                navigate("/post");
+              } else {
+                Swal.fire(
+                  "로그인 후 이용해주세요!",
+                  "로그인 후 작성가능",
+                  "error"
+                );
+              }
+            }}
+          >
             글쓰기
           </button>
         </div>
