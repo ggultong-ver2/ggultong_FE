@@ -115,7 +115,7 @@ const Detail = () => {
         }
       });
     } else {
-      Swal.fire("로그인 후 이용해주세요!", "", "warning");
+      Swal.fire("타인의 게시물을 삭제할 수 없습니다.", "", "warning");
     }
   };
 
@@ -126,7 +126,7 @@ const Detail = () => {
       navigate(`/editpost/${id}`);
     } else {
       Swal.fire(
-        "타인의 게시물을 수정할 수 없습니다",
+        "타인의 게시물을 수정할 수 없습니다.",
         "",
 
         "warning"

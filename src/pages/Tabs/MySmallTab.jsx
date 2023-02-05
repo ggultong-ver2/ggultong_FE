@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
@@ -10,6 +10,7 @@ const MySmallTab = () => {
   const [displays, setDisplays] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -45,15 +46,15 @@ const MySmallTab = () => {
     dispatch(__getMyPost(currentPage));
   }, [dispatch, currentPage]);
 
-  const myPost = useSelector((state) => state.details);
-  console.log("myPost::", myPost);
+  const myPost = useSelector((state) => state?.details?.details?.myPosts?.data);
+  // console.log("myPost::", myPost);
 
   // 마이페이지 카운트
   useEffect(() => {
     dispatch(__getMypageCount());
   }, [dispatch]);
 
-  const postCounts = useSelector((state) => state.postCount);
+  const postCounts = useSelector((state) => state);
   console.log("postcount:", postCounts);
 
   // 내 스크랩 가져오기
@@ -61,37 +62,75 @@ const MySmallTab = () => {
     dispatch(__getMyScrap(currentPage));
   }, [dispatch, currentPage]);
 
-  const myScrap = useSelector((state) => state.details.details.myScrap);
-  console.log("myScrap:", myScrap);
+  const myScrap = useSelector((state) => state?.details?.details?.myScrap);
+  // console.log("myScrap:", myScrap);
+
+  const pageMove = (category, id) => {
+    switch (category) {
+      case "meal":
+        navigate(`/mealList/meal/detail/${id}`);
+        return;
+      case "drink":
+        navigate(`/drinkList/drink/detail/${id}`);
+        return;
+      case "recycle":
+        navigate(`/recycleList/recycle/detail/${id}`);
+        return;
+      default:
+        return;
+    }
+  };
 
   const menuArr = [
     {
       name: "내가 쓴 글",
       content: (
         <>
-          <Card>
-            <Textwrap>
-              <StTitle></StTitle>
+          {myPost &&
+            myPost?.map((value, index) => {
+              return (
+                <Card
+                  key={index}
+                  onClick={() => {
+                    pageMove(value.category, value.postId);
+                  }}
+                >
+                  <Textwrap>
+                    <StTitle>{value.title}</StTitle>
+                    <StProfile src={value.profileImage}></StProfile>
+                    <StNickname>{value.nickname}</StNickname>
 
-              <Etcwrap>댓글 좋아요&nbsp; &nbsp;&nbsp;</Etcwrap>
-            </Textwrap>
-            <StFile></StFile>
-          </Card>
-
+                    <Etcwrap>
+                      댓글&nbsp;{value.commentCount} 좋아요&nbsp;
+                      {value.likeSum} &nbsp;&nbsp;
+                      {value.createdAt.slice(0, 10)}
+                    </Etcwrap>
+                  </Textwrap>
+                  <StFile src={value.imageFile}></StFile>
+                </Card>
+              );
+            })}
           <Paging currentPage={currentPage} count={count} setPage={setPage} />
         </>
       ),
     },
     {
-      name: "스크랩 4",
+      name: "스크랩",
       content: (
         <>
           {myScrap &&
             myScrap?.map((value, index) => {
               return (
-                <Card key={index}>
+                <Card
+                  key={index}
+                  onClick={() => {
+                    pageMove(value.category, value.postId);
+                  }}
+                >
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
+                    <StProfile src={value.profileImage}></StProfile>
+                    <StNickname>{value.nickname}</StNickname>
 
                     <Etcwrap>
                       댓글&nbsp;{value.commentCount} 좋아요&nbsp;
@@ -199,7 +238,16 @@ const StTitle = styled.div`
   font-weight: bold;
   margin-top: 20px;
 `;
-const StFile = styled.div`
+const StProfile = styled.img`
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+`;
+const StNickname = styled.div`
+  color: black;
+  font-size: 16px;
+`;
+const StFile = styled.img`
   height: 200px;
   width: 200px;
   background-color: #d9d9d9;
