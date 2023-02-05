@@ -48,78 +48,101 @@ function GameList() {
   }, [MonthData]);
   console.log("dis", displays);
   return (
-    <StContainer>
-      <StTopBox>
-        <StBannerBox>
-          <StLeftBox>
-            <div>
-              꿀통 음식 월드컵
-              <br />
-              이번 달 우승음식은?
-              <StButton
-                onClick={() => {
-                  navigate("/gamelist/worldcupgame/gamerankview");
-                }}
-              >
-                랭킹보기
-              </StButton>
-              <StButton2
-                onClick={() => {
-                  navigate("/gamelist/worldcupgame");
-                }}
-              >
-                시작하기
-              </StButton2>
-            </div>
-          </StLeftBox>
-          <StRightBox>
-            <StImgBox src={require("../assets/images/trophy.png")} />
-          </StRightBox>
-        </StBannerBox>
-      </StTopBox>
-      <StListBox>
-        <StDiv>연간 이전 월드컵</StDiv>
-        {displays.map((rowdata, index) => {
-          // console.log("rrr", rowdata);
-          return (
-            <StCard>
+    <>
+          <div className="top_cat_wrap">
+        <div className="top_cat">
+          <ul className="clearfix">
+            <li>
+              <button onClick={() => navigate("/")}>홈</button>
+            </li>
+            <li>
+              <button onClick={() => navigate("/drinklist/drink")}>
+                꿀정보
+              </button>
+            </li>
+            <li className="game_active">
+              <button onClick={() => navigate("/gamelist")}>꿀잼</button>
+            </li>
+          </ul>
+          <button onClick={() => navigate("/post")} className="top_post_btn">
+            글쓰기
+          </button>
+        </div>
+      </div>
+
+      <StContainer>
+        <StTopBox>
+          <StBannerBox>
+            <StLeftBox>
               <div>
-                <StCardImg
+                꿀통 음식 월드컵
+                <br />
+                이번 달 우승음식은?
+                <StButton
                   onClick={() => {
-                    navigate(
-                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
-                    );
+                    navigate("/gamelist/worldcupgame/gamerankview");
                   }}
-                  src={rowdata.img1}
-                />
-                <StCardImg2
+                >
+                  랭킹보기
+                </StButton>
+                <StButton2
                   onClick={() => {
-                    navigate(
-                      `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
-                    );
+                    navigate("/gamelist/worldcupgame");
                   }}
-                  src={rowdata.img2}
-                />
-                <StP>{index + 1}월 꿀통 음식 월드컵</StP>
+                >
+                  시작하기
+                </StButton2>
               </div>
-            </StCard>
-          );
-        })}
-      </StListBox>
-      <StFoodBox>
-        <StLeftBox2>
-          <div>
-            오늘 뭐먹지?
-            <br />
-            고민될 땐 꿀통이 골라줄게!
-            <StButton3>음식 랜덤뽑기</StButton3>
-          </div>
-        </StLeftBox2>
-        <StRightBox2>
-          <StImgBox2 src={require("../assets/images/food.png")} />
-        </StRightBox2>
-      </StFoodBox>
-    </StContainer>
+            </StLeftBox>
+            <StRightBox>
+              <StImgBox src={require("../assets/images/trophy.png")} />
+            </StRightBox>
+          </StBannerBox>
+        </StTopBox>
+        <StListBox>
+          <StDiv>연간 이전 월드컵</StDiv>
+          {displays.map((rowdata, index) => {
+            // console.log("rrr", rowdata);
+            return (
+              <StCard>
+                <div>
+                  <StCardImg
+                    onClick={() => {
+                      navigate(
+                        `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                      );
+                    }}
+                    src={rowdata.img1}
+                  />
+                  <StCardImg2
+                    onClick={() => {
+                      navigate(
+                        `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                      );
+                    }}
+                    src={rowdata.img2}
+                  />
+                  <StP>{index + 1}월 꿀통 음식 월드컵</StP>
+                </div>
+              </StCard>
+            );
+          })}
+        </StListBox>
+        <StFoodBox>
+          <StLeftBox2>
+            <div>
+              오늘 뭐먹지?
+              <br />
+              고민될 땐 꿀통이 골라줄게!
+              <StButton3>음식 랜덤뽑기</StButton3>
+            </div>
+          </StLeftBox2>
+          <StRightBox2>
+            <StImgBox2 src={require("../assets/images/food.png")} />
+          </StRightBox2>
+        </StFoodBox>
+      </StContainer>
+    </>
   );
 }
 const StContainer = styled.form`
