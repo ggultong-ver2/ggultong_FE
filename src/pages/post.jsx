@@ -48,7 +48,7 @@ const Post = () => {
     //console.log(key);
     //}
     // formdata의 값 확인하는 방법..values 대신 key 넣고 확인도 가능.
-    if (category === "choose") {
+    if (category === "") {
       Swal.fire("카테고리를 선택해주세요!", "", "warning");
     } else if (category === "choose") {
       Swal.fire("카테고리를 선택해주세요!", "", "warning");
@@ -151,7 +151,14 @@ const Post = () => {
           </File>
 
           <Btns>
-            <BackButton onClick={navigate(-1)}>취소</BackButton>
+            <BackButton
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(-1);
+              }}
+            >
+              취소
+            </BackButton>
             <EnterButton>확인</EnterButton>
           </Btns>
         </Wrap>

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { __getMyPost } from "../../redux/modules/postSlice";
+import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
-import { __getMypageCount } from "../../redux/modules/countSlice";
+import { __getMypageCount } from "../../redux/modules/postSlice";
 
 const MySmallTab = () => {
   const [displays, setDisplays] = useState([]);
@@ -19,66 +19,64 @@ const MySmallTab = () => {
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
+  // useEffect(() => {
+  //   setCount(myPost?.length);
+  //   setIndexOfLastPost(currentPage * postPerPage);
+  //   setIndexOfFirstPost(indexOfLastPost - postPerPage);
+  // }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  // useEffect(() => {
+  //   if (!categoryDrinkCount) return;
+  //   setCount(categoryDrinkCount);
+  //   // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  // }, [categoryDrinkCount]);
+
   useEffect(() => {
-    setCount(myPost?.length);
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
-
-    setCount(myPost?.length);
-
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
   const setPage = (page) => {
     setCurrentPage(page);
   };
 
+  // 내 게시글 가져오기
   useEffect(() => {
     dispatch(__getMyPost(currentPage));
-    dispatch(__getMypageCount());
   }, [dispatch, currentPage]);
 
-  // useEffect(() => {
-  //   console.log("hi");
-  //   dispatch(__getMypageCount());
-  // }, [dispatch]);
+  const myPost = useSelector((state) => state.details);
+  console.log("myPost::", myPost);
 
-  // useEffect(() => {
-  //   const array = [postCounts];
-  //   console.log("arr", array);
+  // 마이페이지 카운트
+  useEffect(() => {
+    dispatch(__getMypageCount());
+  }, [dispatch]);
 
-  //   console.log("newdata[0]", array);
-  //   setDisplays(array[0]);
-  // }, [postCounts]);
-
-  const postCounts = useSelector((state) => state);
+  const postCounts = useSelector((state) => state.postCount);
   console.log("postcount:", postCounts);
 
-  const myPost = useSelector((state) => state?.details?.details?.myPosts);
-  console.log("myPost::", myPost);
+  // 내 스크랩 가져오기
+  useEffect(() => {
+    dispatch(__getMyScrap(currentPage));
+  }, [dispatch, currentPage]);
+
+  const myScrap = useSelector((state) => state.details.details.myScrap);
+  console.log("myScrap:", myScrap);
 
   const menuArr = [
     {
       name: "내가 쓴 글",
       content: (
         <>
+          <Card>
+            <Textwrap>
+              <StTitle></StTitle>
 
-          {myPost &&
-            myPost?.map((value, index) => {
-              return (
-                <Card key={index}>
-                  <Textwrap>
-                    <StTitle>{value.title}</StTitle>
-
-                    <Etcwrap>
-                      댓글{value.commentCount} 좋아요&nbsp; {value.likeSum}{" "}
-                      &nbsp;&nbsp;
-                      {value.createdAt.slice(0, 10)}
-                    </Etcwrap>
-                  </Textwrap>
-                  <StFile src={value.imageFile}></StFile>
-                </Card>
-              );
-            })}
+              <Etcwrap>댓글 좋아요&nbsp; &nbsp;&nbsp;</Etcwrap>
+            </Textwrap>
+            <StFile></StFile>
+          </Card>
 
           <Paging currentPage={currentPage} count={count} setPage={setPage} />
         </>
@@ -87,14 +85,26 @@ const MySmallTab = () => {
     {
       name: "스크랩 4",
       content: (
-        <Card>
-          <Textwrap>
-            <StTitle>제목</StTitle>
+        <>
+          {myScrap &&
+            myScrap?.map((value, index) => {
+              return (
+                <Card key={index}>
+                  <Textwrap>
+                    <StTitle>{value.title}</StTitle>
 
-            <Etcwrap>댓글10 좋아요&nbsp; 10 &nbsp;&nbsp; 2023.02.03</Etcwrap>
-          </Textwrap>
-          <StFile></StFile>
-        </Card>
+                    <Etcwrap>
+                      댓글&nbsp;{value.commentCount} 좋아요&nbsp;
+                      {value.likeSum} &nbsp;&nbsp;
+                      {value.createdAt.slice(0, 10)}
+                    </Etcwrap>
+                  </Textwrap>
+                  <StFile src={value.imageFile}></StFile>
+                </Card>
+              );
+            })}
+          <Paging currentPage={currentPage} count={count} setPage={setPage} />
+        </>
       ),
     },
   ];

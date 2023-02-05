@@ -112,18 +112,18 @@ export const apis = {
   },
 
   // 마이페이지 내가쓴글
-  // getMyPost: () => {
-  //   baseURL.get(`/mypage/myPost`, {
-  //     headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-  //   });
-  // },
+  getMyPost: (pageNum) => {
+    return baseURL.get(`/mypage/myPost/${pageNum}`, {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    });
+  },
 
   // 내가쓴글, 스크랩 갯수
-  // getMypageCount: () => {
-  //   return baseURL.get(`/mypage/myPostCount`, "", {
-  //     headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-  //   });
-  // },
+  getMypageCount: () => {
+    return baseURL.get(`/mypage/myPostCount`, "", {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    });
+  },
 
   // 월드컵 관련
   getworldcup: () => {
@@ -132,7 +132,12 @@ export const apis = {
   worldsend: (postId) => instance.post(`post/getWorldcupImage/${postId}`),
 
   // 스크랩 관련
-  // postscrap: (postId) => {
-  //   baseURL.post(`/post/scrap/${postId}`);
-  // },
+  postscrap: (postId) => {
+    baseURL.post(`/post/scrap/${postId}`);
+  },
+  getMyScrap: (pageNum) => {
+    return baseURL.get(`/mypage/myScrap/${pageNum}`, {
+      headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+    });
+  },
 };
