@@ -14,7 +14,7 @@ import { __addComment, __deleteComment } from "../redux/modules/postSlice";
 import { timeCalculator } from "../utils/utils";
 import EditComment from "./EditComment";
 import Scrap from "../components/scrap/scrap";
-import "./style.css"
+import "./style.css";
 
 const Detail = () => {
   const location = useLocation;
@@ -148,120 +148,146 @@ const Detail = () => {
   // console.log("visible", visible);
   if (details.id) {
     return (
-      <div className="detail_body">
-        <StDetail>
-          {/* <p>{details?.id}</p> */}
-          <Wrap>
-            <div className="detail_title_wrap">
-              <div className="detail_title">{details?.title}</div>
-              <div onClick={handleOpen} className="detail_toggle"></div>
-              {open ? (
-                <ul className="toggle_item_wrap">
-                  <li onClick={onClickEditPostHandler} className="toggle_edit">
-                    수정하기
-                  </li>
-                  <li
-                    onClick={onClickDeletePostHandler}
-                    className="toggle_delete"
-                  >
-                    삭제하기
-                  </li>
-                </ul>
-              ) : null}
-            </div>
-
-            <Else>
-              <Etc>
-                <StNickname>{details?.nickname}</StNickname>
-                <div className="detail_date">
-                  {details?.createdAt.slice(0, 10)}
-                </div>
-              </Etc>
-              <Etcs>
-                <Countcomment>댓글 {details?.comment.length} </Countcomment>
-                <Heart>좋아요 {details?.likePostSum}</Heart>
-              </Etcs>
-            </Else>
-            <StContent
-              dangerouslySetInnerHTML={{ __html: details?.content }}
-            ></StContent>
-          </Wrap>
-          <div className="reaction">
-            <Likes />
-            <Scrap />
+      <>
+        <div className="top_cat_wrap">
+          <div className="top_cat">
+            <ul className="clearfix">
+              <li>
+                <button onClick={() => navigate("/")}>홈</button>
+              </li>
+              <li className="list_active">
+                <button onClick={() => navigate("/drinklist/drink")}>
+                  꿀정보
+                </button>
+              </li>
+              <li>
+                <button onClick={() => navigate("/gamelist")}>꿀잼</button>
+              </li>
+            </ul>
+            <button onClick={() => navigate("/post")} className="top_post_btn">
+              글쓰기
+            </button>
           </div>
-          <div className="comment_top">
-            <div>댓글 {details?.comment.length} </div>
-            <div>게시글 신고</div>
-          </div>
-          <Commentarea>
-            <Writecomment>
-              <Myprofile src={localStorage.getItem("profileImg")} />
-              <Commentinput
-                placeholder="댓글을 작성할 수 있어요."
-                minLength={1}
-                maxLength={500}
-                type="text"
-                value={addComment.content}
-                onChange={(e) => {
-                  setAddComment({ ...addComment, content: e.target.value });
-                }}
-              />
-              <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
-            </Writecomment>
-            <div>
-              {commentList.map((comment) => {
-                return (
-                  <>
-                    {visible && comment.id === modifycomment ? (
-                      <EditComment
-                        commentId={comment.id}
-                        setVisible={setVisible}
-                      />
-                    ) : (
-                      <Commentbox>
-                        <Commenttextarea>
-                          <Profileimg src={comment.profileImg} />
-                          <WrapWritten>
-                            <Writtenby>{comment.nickname}</Writtenby>
-                            <Writtendate>
-                              {timeCalculator(comment.createdAt)}
-                            </Writtendate>
-                            <Commentcontent>{comment.content}</Commentcontent>
-                            <StBox>
-                              {localStorage.getItem("nickname") ===
-                              comment.nickname ? (
-                                <>
-                                  <EditBtn
-                                    onClick={() => {
-                                      setModifyComment(comment.id);
-                                      setVisible(true);
-                                    }}
-                                  >
-                                    수정
-                                  </EditBtn>
+        </div>
 
-                                  <DeleteBtn
-                                    onClick={() =>
-                                      onClickDeleteCommentHandler(comment.id)
-                                    }
-                                  >
-                                    삭제
-                                  </DeleteBtn>
-                                </>
-                              ) : null}
-                            </StBox>
-                          </WrapWritten>
-                        </Commenttextarea>
-                      </Commentbox>
-                    )}
-                  </>
-                );
-              })}
+        <div className="detail_body">
+          <StDetail>
+            {/* <p>{details?.id}</p> */}
+            <Wrap>
+              <div className="detail_title_wrap">
+                <div className="detail_title">{details?.title}</div>
+                <div onClick={handleOpen} className="detail_toggle"></div>
+                {open ? (
+                  <ul className="toggle_item_wrap">
+                    <li
+                      onClick={onClickEditPostHandler}
+                      className="toggle_edit"
+                    >
+                      수정하기
+                    </li>
+                    <li
+                      onClick={onClickDeletePostHandler}
+                      className="toggle_delete"
+                    >
+                      삭제하기
+                    </li>
+                  </ul>
+                ) : null}
+              </div>
+
+              <Else>
+                <Etc>
+                  <StNickname>{details?.nickname}</StNickname>
+                  <div className="detail_date">
+                    {details?.createdAt.slice(0, 10)}
+                  </div>
+                </Etc>
+                <Etcs>
+                  <Countcomment>댓글 {details?.comment.length} </Countcomment>
+                  <Heart>좋아요 {details?.likePostSum}</Heart>
+                </Etcs>
+              </Else>
+              <StContent
+                dangerouslySetInnerHTML={{ __html: details?.content }}
+              ></StContent>
+            </Wrap>
+            <div className="reaction">
+              <Likes />
+              <Scrap />
             </div>
-          </Commentarea>
-        </StDetail>
-      </div>
+            <div className="comment_top">
+              <div>댓글 {details?.comment.length} </div>
+              <div>게시글 신고</div>
+            </div>
+            <Commentarea>
+              <Writecomment>
+                <Myprofile src={localStorage.getItem("profileImg")} />
+                <Commentinput
+                  placeholder="댓글을 작성할 수 있어요."
+                  minLength={1}
+                  maxLength={500}
+                  type="text"
+                  value={addComment.content}
+                  onChange={(e) => {
+                    setAddComment({ ...addComment, content: e.target.value });
+                  }}
+                />
+                <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
+              </Writecomment>
+              <div>
+                {commentList.map((comment) => {
+                  return (
+                    <>
+                      {visible && comment.id === modifycomment ? (
+                        <EditComment
+                          commentId={comment.id}
+                          setVisible={setVisible}
+                        />
+                      ) : (
+                        <Commentbox>
+                          <Commenttextarea>
+                            <Profileimg src={comment.profileImg} />
+                            <WrapWritten>
+                              <Writtenby>{comment.nickname}</Writtenby>
+                              <Writtendate>
+                                {timeCalculator(comment.createdAt)}
+                              </Writtendate>
+                              <Commentcontent>{comment.content}</Commentcontent>
+                              <StBox>
+                                {localStorage.getItem("nickname") ===
+                                comment.nickname ? (
+                                  <>
+                                    <EditBtn
+                                      onClick={() => {
+                                        setModifyComment(comment.id);
+                                        setVisible(true);
+                                      }}
+                                    >
+                                      수정
+                                    </EditBtn>
+
+                                    <DeleteBtn
+                                      onClick={() =>
+                                        onClickDeleteCommentHandler(comment.id)
+                                      }
+                                    >
+                                      삭제
+                                    </DeleteBtn>
+                                  </>
+                                ) : null}
+                              </StBox>
+                            </WrapWritten>
+                          </Commenttextarea>
+                        </Commentbox>
+                      )}
+                    </>
+                  );
+                })}
+              </div>
+            </Commentarea>
+          </StDetail>
+        </div>
+      </>
     );
   }
 };
