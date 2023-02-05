@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import "../../pages/reset.css"
 import "./style.css";
 import "./slick-theme.css";
 import "./slick.css";
