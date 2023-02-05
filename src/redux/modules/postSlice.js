@@ -5,7 +5,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { async } from "q";
 
-
 const IP = process.env.REACT_APP_URL;
 const initialState = {
   login: [],
@@ -28,6 +27,8 @@ const initialState = {
     categoryCount: {},
     myPosts: [],
     mainPost: [],
+    myScrap: [],
+    myPageCount: [],
   },
   error: null,
   isLoading: false,
@@ -284,6 +285,28 @@ export const __postScrap = createAsyncThunk(
   }
 );
 
+export const __getMypageCount = createAsyncThunk(
+  "getMypageCount",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await baseURL.get(`/mypage/myPostCount`, "", {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      });
+      console.log("res:", res.data);
+
+      //   const data = await apis.getMypageCount();
+
+      //   console.log("data: ", data.data);
+      // console.log("payload:", payload);
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (err) {
+      console.log(err);
+
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 // 카테고리별 get
 export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
@@ -360,37 +383,60 @@ export const __getMyPost = createAsyncThunk(
   "getMyPost",
   async (payload, thunkAPI) => {
     try {
-
-      // console.log(payload);
-      const res = await axios.get(`${IP}/mypage/myPost/${payload}`, {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      });
+      console.log(payload);
+      const { data } = await apis.getMyPost(payload);
       // const data = await apis.getMyPost();
-      // console.log(res);
-      return thunkAPI.fulfillWithValue(res.data);
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
 
+// export const __getMyPost = createAsyncThunk(
+//   async (state = initialState, action) => {
+//     if (action.type === getMyPost) {
 
-export const __getMypageCount = createAsyncThunk(
-  "getMypageCount",
+//     }
+//   }
+// )
+
+// 마이페이지 내 스크랩 가져오기
+export const __getMyScrap = createAsyncThunk(
+  "getMyPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await apis.getMypageCount();
-
-      console.log("data: ", data.data);
-      console.log("payload:", payload);
+      // console.log(payload);
+      // const res = await axios.get(`${IP}/mypage/myScrap/${payload}`, {
+      //   headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      // });
+      const data = await apis.getMyScrap(payload);
+      // console.log("data::", data);
+      // console.log(res);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
-
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
+
+// export const __getMypageCount = createAsyncThunk(
+//   "getMypageCount",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const data = await apis.getMypageCount();
+
+//       console.log("data: ", data.data);
+//       console.log("payload:", payload);
+//       return thunkAPI.fulfillWithValue(data.data);
+//     } catch (err) {
+//       console.log(err);
+
+//       return thunkAPI.rejectWithValue(err);
+//     }
+//   }
+// );
 
 // 알림 기능
 export const __getNotification = createAsyncThunk(
@@ -404,7 +450,6 @@ export const __getNotification = createAsyncThunk(
     }
   }
 );
-
 
 export const postSlice = createSlice({
   name: "post",
@@ -449,9 +494,34 @@ export const postSlice = createSlice({
     [__getMyPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.myPosts = action.payload;
-      // console.log("action.payload:", action.payload);
+      console.log("action.payload:", action.payload);
     },
     [__getMyPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__getMyScrap.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getMyScrap.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.details.myScrap = action.payload;
+      // console.log(current(state.details));
+      // console.log("action.payload:", action.payload);
+    },
+    [__getMyScrap.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__getMypageCount]: (state) => {
+      state.isLoading = true;
+    },
+    [__getMypageCount]: (state, action) => {
+      state.isLoading = false;
+      state.details.myPageCount = action.payload;
+      console.log(action);
+    },
+    [__getMypageCount]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -611,19 +681,19 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
-    [__getMypageCount]: (state) => {
-      state.isLoading = true;
-    },
-    [__getMypageCount]: (state, action) => {
-      state.isLoading = false;
-      console.log("action", action);
-      state.mypageCount = action.payload;
-      console.log("action::", action);
-    },
-    [__getMypageCount]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // [__getMypageCount]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [__getMypageCount]: (state, action) => {
+    //   state.isLoading = false;
+    //   console.log("action", action);
+    //   state.mypageCount = action.payload;
+    //   console.log("action::", action);
+    // },
+    // [__getMypageCount]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
 
     //스크랩
     [__postScrap.pending]: (state) => {
@@ -790,8 +860,8 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
   },
 });
 
 export default postSlice.reducer;
+export const {} = postSlice.actions;

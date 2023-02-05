@@ -10,7 +10,7 @@ function Search() {
   const [searchData, setSearchData] = useState([]);
   console.log(searchData);
   const params = useParams();
-  const IP = process.env.SOCIAL_APP_URL;
+  const IP = process.env.REACT_APP_URL;
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
@@ -35,7 +35,6 @@ function Search() {
         // /post/search?keyword=${params.keyword}`  baseURL
 
         `${IP}/post/search/${currentPage}?keyword=${params.keyword}`
-
       );
       setSearchData(data);
       setCount(data[0].searchPostSum);
