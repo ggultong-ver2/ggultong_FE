@@ -43,7 +43,6 @@ import { QueryClient } from "react-query";
 import GameRankView from "../pages/GameRankView";
 
 const Router = () => {
-
   const [loading, setIsLoading] = useState(false);
 
   // const EventSource = EventSourcePolyfill || NativeEventSource

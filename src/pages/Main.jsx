@@ -7,6 +7,7 @@ import Drink from "./Drink";
 import "./style.css";
 import WorldCup from "./WorldCup";
 import Recycle from "./Recycle";
+import Swal from "sweetalert2";
 
 function Main() {
   const navigate = useNavigate();
@@ -56,7 +57,17 @@ function Main() {
                 <h3>
                   오늘 뭐 먹지? <br /> 고민될 땐 꿀통이 골라줄게!
                 </h3>
-                <button>도와줘요 꿀통대장</button>
+                <button
+                  onClick={() => {
+                    Swal.fire(
+                      "현재 구현중입니다",
+                      "조금만 더 기다려주세요~",
+                      "warning"
+                    );
+                  }}
+                >
+                  도와줘요 꿀통대장
+                </button>
               </div>
               <div className="random_image"></div>
             </div>
