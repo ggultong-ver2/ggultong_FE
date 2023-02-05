@@ -6,14 +6,16 @@
   cursor: pointer;
 }
 .scrap_default {
-  width: 20px;
-  height: 17px;
+  width: 14px;
+  height: 20px;
   background-image: url(../../../public/images/scrap-default.png);
+  background-size: contain;
 }
 .scrap_onclick {
-  width: 20px;
-  height: 17px;
+  width: 14px;
+  height: 20px;
   background-image: url(../../../public/images/scrap-onclick.png);
+  background-size: contain;
 }
 
 .scrap_onclick_wrap {

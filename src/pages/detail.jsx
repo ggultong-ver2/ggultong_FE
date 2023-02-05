@@ -14,6 +14,7 @@ import { __addComment, __deleteComment } from "../redux/modules/postSlice";
 import { timeCalculator } from "../utils/utils";
 import EditComment from "./EditComment";
 import Scrap from "../components/scrap/scrap";
+import "./style.css"
 
 const Detail = () => {
   const location = useLocation;
@@ -185,10 +186,10 @@ const Detail = () => {
               dangerouslySetInnerHTML={{ __html: details?.content }}
             ></StContent>
           </Wrap>
-          <div className="likes">
+          <div className="reaction">
             <Likes />
+            <Scrap />
           </div>
-          <Scrap />
           <div className="comment_top">
             <div>댓글 {details?.comment.length} </div>
             <div>게시글 신고</div>
