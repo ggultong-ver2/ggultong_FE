@@ -22,12 +22,10 @@ function Recipe() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.details.details.mainPost);
-  console.log("postList", postList);
   const [mainList, setMainList] = useState([]);
 
   useEffect(() => {
     dispatch(__getMainPost());
-    console.log("res", postList);
   }, [dispatch]);
 
   useEffect(() => {
@@ -37,21 +35,15 @@ function Recipe() {
       for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < i * 2; j++) {
           const mainPageList = {
-            postId: array[1][j].id,
+            postId: array[1][j].postId,
             title: array[1][j].title,
             imageUrl: array[1][j].imageUrl,
           };
-          console.log("arr :", array[1][j]);
-
           setMainList((old) => [...old, mainPageList]);
         }
       }
     }
   }, [postList]);
-
-  const topostList = (id) => {
-    navigate(`/mealList/meal/detail/${id}`);
-  };
 
   return (
     <div className="list_slider">
@@ -73,9 +65,9 @@ function Recipe() {
                 {mainList.map((rowData) => (
                   <div
                     className="list_slide"
-                    key={rowData.id}
-                    onClick={() => topostList(rowData.id)}
-                  >
+                    key={`{recipe-rowData}`}
+                    onClick={() => navigate(`/mealList/meal/detail/${rowData.postId}`)}
+                    >
                     <img
                       src={rowData.imageUrl}
                       alt="image"

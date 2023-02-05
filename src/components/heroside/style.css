@@ -1,4 +1,4 @@
-.slider{
+.heroside_slider{
   height: 480px;
   margin: 0 auto;
   text-align: center;
@@ -7,7 +7,11 @@
   position: relative;
 }
 
-.slider .slick-prev{
+/* .heroside_slider .slick-slider{
+  overflow: hidden;
+} */
+
+.heroside_slider .slick-prev{
   position: absolute;
   left: 130px;
   z-index: 1;
@@ -17,13 +21,13 @@
   text-indent: -9999px;
   width: 32px;height: 32px;
 }
-.slider .slick-prev:hover{
+.heroside_slider .slick-prev:hover{
   background-image: url(../../../public/images/slider_arrow_hover.png);
   background-repeat: no-repeat;
   background-position: center;
 
 }
-.slider .slick-next {
+.heroside_slider .slick-next {
   position: absolute;
   right: 130px;
   background-image: url(../../../public/images/slider_arrow_default.png);
@@ -33,17 +37,17 @@
   width: 32px;height: 32px;
   transform: scaleX(-1);
 }
-.slider .slick-next:hover{
+.heroside_slider .slick-next:hover{
   background-image: url(../../../public/images/slider_arrow_hover.png);
   background-repeat: no-repeat;
   background-position: center;
 
 }
-.slider .slick-dots{
+.heroside_slider .slick-dots{
   position: absolute;
   bottom: 30px;
 }
-.slider .slick-track{
+.heroside_slider .slick-track{
   width: 100%;
   overflow: hidden !important;
 }

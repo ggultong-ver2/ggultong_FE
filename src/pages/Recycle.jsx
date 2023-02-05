@@ -22,12 +22,10 @@ function Recycle() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.details.details.mainPost);
-  console.log("postList", postList);
   const [mainList, setMainList] = useState([]);
 
   useEffect(() => {
     dispatch(__getMainPost());
-    console.log("res", postList);
   }, [dispatch]);
 
   useEffect(() => {
@@ -37,21 +35,15 @@ function Recycle() {
       for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < i * 2; j++) {
           const mainPageList = {
-            postId: array[2][j].id,
+            postId: array[2][j].postId,
             title: array[2][j].title,
             imageUrl: array[2][j].imageUrl,
           };
-          console.log("arr :", array[2][j]);
-
           setMainList((old) => [...old, mainPageList]);
         }
       }
     }
   }, [postList]);
-
-  const topostList = (id) => {
-    navigate(`/recycleList/recycle/detail/${id}`);
-  };
 
   return (
     <div className="list_slider">
@@ -76,9 +68,9 @@ function Recycle() {
                 {mainList.map((rowData) => (
                   <div
                     className="list_slide"
-                    key={rowData.id}
-                    onClick={() => topostList(rowData.id)}
-                  >
+                    key={`{recycle-rowData}`}
+                    onClick={() => navigate(`/recycleList/recycle/detail/${rowData.postId}`)}
+                    >
                     <img
                       src={rowData.imageUrl}
                       alt="image"

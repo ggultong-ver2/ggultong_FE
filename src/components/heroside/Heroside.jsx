@@ -22,7 +22,7 @@ function Heroside() {
   const navigate = useNavigate();
 
   return (
-    <div className="slider">
+    <div className="heroside_slider">
       <Slider {...settings}>
         <div className="slide1">
           <div className="slide1">

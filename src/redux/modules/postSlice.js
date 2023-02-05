@@ -257,7 +257,6 @@ export const __postLike = createAsyncThunk(
           headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
         }
       );
-      console.log(data);
       return thunkAPI.fulfillWithValue(data?.status);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -330,12 +329,9 @@ export const __getMainPost = createAsyncThunk(
   "getMainPost",
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
-      const { data } = await baseURL.get("/post/likeTop6");
-      console.log("maindata:", data);
+      const { data } = await axios.get(`${IP}/post/likeTop6`);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -347,7 +343,6 @@ export const __getCategoryCount = createAsyncThunk(
     try {
       const data = await apis.getCategoryCount();
 
-      // console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log(err);
@@ -854,7 +849,6 @@ export const postSlice = createSlice({
     [__getMainPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.mainPost = action.payload;
-      console.log("main", state.details.mainPost);
     },
     [__getMainPost.rejected]: (state, action) => {
       state.isLoading = false;
