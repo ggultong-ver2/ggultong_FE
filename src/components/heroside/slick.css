@@ -16,7 +16,7 @@
     -ms-touch-action: pan-y;
         touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
-    overflow: hidden !important;
+    overflow: hidden;
 }
 
 .slick-list
@@ -58,7 +58,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    overflow: hidden;
+    overflow: hidden !important;
 }
 .slick-track:before,
 .slick-track:after
@@ -66,6 +66,7 @@
     display: table;
 
     content: '';
+    overflow: visible;
 }
 .slick-track:after
 {

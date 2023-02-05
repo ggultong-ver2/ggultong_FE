@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { __getMainPost } from "../redux/modules/postSlice";
 import "./style.css";
-import "../components/heroside/slick-theme.css";
-import "../components/heroside/slick.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Drink() {
   const settings = {
@@ -22,12 +22,10 @@ function Drink() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.details.details.mainPost);
-  console.log("postList", postList);
   const [mainList, setMainList] = useState([]);
 
   useEffect(() => {
     dispatch(__getMainPost());
-    console.log("res", postList);
   }, [dispatch]);
 
   useEffect(() => {
@@ -37,21 +35,16 @@ function Drink() {
       for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < i * 2; j++) {
           const mainPageList = {
-            postId: array[0][j].id,
+            postId: array[0][j].postId,
             title: array[0][j].title,
             imageUrl: array[0][j].imageUrl,
           };
-          console.log("arr :", array[0][j]);
 
           setMainList((old) => [...old, mainPageList]);
         }
       }
     }
   }, [postList]);
-
-  const topostList = (id) => {
-    navigate(`/drinkList/drink/detail/${id}`);
-  };
 
   return (
     <div className="list_slider">
@@ -70,20 +63,22 @@ function Drink() {
             </button>
           </li>
           <div className="list_slide_container">
-            <div className="slide">
+            <div className="slide" >
               <Slider {...settings}>
                 {mainList.map((rowData) => (
-                  <div
-                    className="list_slide"
-                    key={rowData.id}
-                    onClick={() => topostList(rowData.id)}
-                  >
-                    <img
-                      src={rowData.imageUrl}
-                      alt="image"
-                      className="list_slide_image"
-                    />
-                    <p>{rowData.title}</p>
+                  <div className="slide_wrap">
+                    <div
+                      className="list_slide"
+                      key={`{drink-rowData}`}
+                      onClick={() => navigate(`/drinkList/drink/detail/${rowData.postId}`)}
+                    >
+                      <img
+                        src={rowData.imageUrl}
+                        alt="image"
+                        className="list_slide_image"
+                      />
+                      <p>{rowData.title}</p>
+                    </div>
                   </div>
                 ))}
               </Slider>
