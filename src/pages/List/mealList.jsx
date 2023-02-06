@@ -7,6 +7,7 @@ import {
   __getCategoryPost,
   __getCategoryCount,
 } from "../../redux/modules/postSlice";
+import "./style.css";
 
 const MealList = () => {
   const navigate = useNavigate();
@@ -123,11 +124,13 @@ const MealList = () => {
                     <StContent
                       dangerouslySetInnerHTML={{ __html: value.content }}
                     ></StContent>
+
                     <Etcwrap>
                       댓글&nbsp;{value && value?.comment.length} 좋아요&nbsp;
                       {value.likePostSum} &nbsp;&nbsp;
                       {value.createdAt.slice(0, 10)}
                     </Etcwrap>
+
                   </Textwrap>
                   <StFile src={value.imageFile}></StFile>
                 </Card>
@@ -160,6 +163,21 @@ const Buttons = styled.div`
   padding-left: 40px;
   margin-bottom: 34px;
 `;
+const Button1 = styled.button`
+  cursor: pointer;
+  width: 73px;
+  height: 32px;
+  margin-right: 15px;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 1px solid grey;
+  color: grey;
+  &:hover {
+    border: 1px solid black;
+    color: black;
+  }
+  font-weight: 500;
+`;
 const Button2 = styled.button`
   cursor: pointer;
   width: 73px;
@@ -186,25 +204,10 @@ const Button3 = styled.button`
   }
   font-weight: 500;
 `;
-const Button1 = styled.button`
-  cursor: pointer;
-  width: 73px;
-  height: 32px;
-  margin-right: 15px;
-  border-radius: 20px;
-  background-color: transparent;
-  border: 1px solid grey;
-  color: grey;
-  &:hover {
-    border: 1px solid black;
-    color: black;
-  }
-  font-weight: 500;
-`;
 const Card = styled.div`
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #e4e4e4;
   width: 800px;
-  height: 250px;
+  height: 290px;
   &:hover {
     cursor: pointer;
   }
@@ -225,22 +228,17 @@ const StFile = styled.img`
   height: 140px;
   width: 140px;
   background-color: #d9d9d9;
+  background-size: contain;
   position: absolute;
   right: 98px;
   margin-top: 40px;
 `;
 const StContent = styled.div`
+  overflow: hidden;
   height: 120px;
-  width: 850px;
+  width: 600px;
   font-size: 14px;
   line-height: 22px;
   overflow: hidden;
 `;
-const Etcwrap = styled.div`
-  height: 30px;
-  font-size: 14px;
-  line-height: 22px;
-  color: #a0a0a0;
-`;
-
 export default MealList;

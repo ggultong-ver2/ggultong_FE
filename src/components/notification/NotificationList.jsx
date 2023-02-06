@@ -70,7 +70,7 @@ function NotificationList({
       <div>
         {notificationData.length === 0 ? (
           <div>
-            <div>알림이 없습니다</div>
+            <div>알림은 현재 준비 중입니다!🥺</div>
           </div>
         ) : (
           <>

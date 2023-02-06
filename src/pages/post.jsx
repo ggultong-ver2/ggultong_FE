@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
 import fileinput from "../assets/images/fileinput.png";
 import { TiWarningOutline } from "react-icons/ti";
+import "./style.css";
+
 
 const Post = () => {
   const dispatch = useDispatch();
@@ -75,6 +77,7 @@ const Post = () => {
   };
 
   return (
+
     <Background>
       <Form
         onSubmit={(e) => {
@@ -141,26 +144,29 @@ const Post = () => {
             />
           </File>
 
-          <Btns>
-            <BackButton
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(-1);
-              }}
-            >
-              취소
-            </BackButton>
-            <EnterButton>확인</EnterButton>
-          </Btns>
-        </Wrap>
-      </Form>
-    </Background>
+
+            {/* <Btns>
+              <BackButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(-1);
+                }}
+              >
+                취소
+              </BackButton>
+              <EnterButton>확인</EnterButton>
+            </Btns> */}
+          </Wrap>
+        </Form>
+      </Background>
+    </>
   );
 };
 const Background = styled.div`
   background-color: #f9fafb;
   width: 100%;
-  height: 100vh;
+  min-height: 95vh;
+  padding-top: 112px;
 `;
 const Form = styled.form`
   //border: 1px solid black;
@@ -182,6 +188,7 @@ const Wrap = styled.div`
   //border: 1px solid red;
   height: 1200px;
 `;
+
 const Title = styled.p`
   font-size: 30px;
   font-weight: bold;
@@ -197,6 +204,17 @@ const TitleInput = styled.input`
   margin-left: 10px;
   font-size: 30px;
   outline: none;
+`;
+
+
+const Content = styled.textarea`
+  width: 850px;
+  height: 900px;
+  margin-left: 25px;
+  resize: none;
+  outline: none;
+  border: none;
+  font-size: 25px;
 `;
 
 const File = styled.div`
@@ -219,6 +237,7 @@ const File = styled.div`
   }
 `;
 
+
 const Filetext = styled.p`
   float: left;
   font-size: 16px;
@@ -231,6 +250,25 @@ const ThumbnailEx = styled.p`
   /* border: 1px solid yellow; */
   width: 780px;
 `;
+
+const FileInput = styled.input`
+  //border: 1px solid green;
+  margin-left: 10px;
+  cursor: pointer;
+`;
+const Filetext = styled.p`
+  float: left;
+  font-size: 16px;
+  margin-right: 5px;
+`;
+const ThumbnailEx = styled.p`
+  margin-top: -30px;
+  margin-left: 110px;
+  font-size: 14px;
+  /* border: 1px solid yellow; */
+  width: 780px;
+`;
+
 
 const Btns = styled.div`
   margin-left: 350px;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useParams, useNavigate } from "react-router";
 import "./reset.css";
+import "./style.css";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
@@ -66,6 +67,7 @@ const EditPost = () => {
   // console.log(file);
   return (
     <div>
+
       <Form
         onSubmit={(e) => {
           e.preventDefault();
@@ -120,6 +122,7 @@ const EditPost = () => {
             />
           </File>
           <Btns>
+
             <BackButton
               onClick={(e) => {
                 e.preventDefault();
@@ -130,20 +133,28 @@ const EditPost = () => {
             </BackButton>
 
             <EnterButton>확인</EnterButton>
-          </Btns>
-        </Wrap>
-      </Form>
+          </Btns> */}
+          </Wrap>
+        </Form>
+      </Background>
     </div>
   );
 };
 
+const Background = styled.div`
+  background-color: #f9fafb;
+  width: 100%;
+  min-height: 95vh;
+  padding-top: 62px;
+`;
+
 const Form = styled.form`
-  border: 1px solid black;
   width: 900px;
   height: 1250px;
   margin: auto;
   margin-top: 50px;
   padding: 10px;
+  background-color: #fff;
 `;
 const Category = styled.p`
   margin-bottom: 50px;
