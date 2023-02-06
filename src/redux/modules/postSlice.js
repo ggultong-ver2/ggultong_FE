@@ -371,7 +371,7 @@ export const __patchPost = createAsyncThunk(
       );
       formData.append("nickname", nickname);
 
-      const data = apis.patchPost(formData);
+      const data = await apis.patchPost(formData);
       return data;
     } catch (error) {
       console.log("err", error);

@@ -120,11 +120,13 @@ const DrinkList = () => {
                       <div className="list_bottom">
                         <div className="list_bottom_left">
                           {/* <div className="list_profile">{post?.profileImg}&nbsp;</div> */}
-                          {post?.nickname}&nbsp;&nbsp;
-                          댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
+                          {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                          {post && post?.comment.length} 좋아요&nbsp;
                           {post.likePostSum}
                         </div>
-                        <div className="list_bottom_right">{post.createdAt.slice(0, 10)}</div>
+                        <div className="list_bottom_right">
+                          {post.createdAt.slice(0, 10)}
+                        </div>
                       </div>
                     </Textwrap>
                     <StFile src={post.imageFile}></StFile>
@@ -201,7 +203,7 @@ const Button3 = styled.button`
   font-weight: 500;
 `;
 const Card = styled.div`
-  border-bottom: 1px solid #E4E4E4;
+  border-bottom: 1px solid #e4e4e4;
   width: 800px;
   height: 290px;
   &:hover {
