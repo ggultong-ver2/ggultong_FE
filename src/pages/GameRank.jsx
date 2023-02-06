@@ -139,10 +139,11 @@ const StBox = styled.button`
 const Container = styled.div`
   color: white;
   width: 100%;
-  height: 91.85vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   background-color: black;
+  padding-bottom: 50px;
 `;
 
 const LeftBox = styled.div`
