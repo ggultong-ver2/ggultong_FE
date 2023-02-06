@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { baseURL } from "../../lib/axios";
 import { __getWorldCup } from "../../redux/modules/postSlice";
+import "../../pages/style.css";
 
 import Ranking from "./Ranking";
 
@@ -81,7 +82,7 @@ function WorldCupGame() {
   if (displays?.length === 0) return;
 
   return (
-    <form>
+    <StContainer>
       <TitleBox>
         <StTitle>꿀통 음식 월드컵</StTitle>
       </TitleBox>
@@ -90,32 +91,46 @@ function WorldCupGame() {
           {count} / 16 {rank}
         </StCount>
       </TitleBox>
-      <Container>
+      <div className="worldcup_wrap">
         {displays?.map((rowData) => {
           console.log("row", displays);
           return (
-            <div key={rowData?.id}>
-              <TitleBox>
-                <StName>{rowData?.title}</StName>
-              </TitleBox>
-              <StFlex
-                key={rowData?.title}
-                onClick={() => clickHandler(rowData)}
-              >
-                <StImg src={rowData?.imageUrl} />
-              </StFlex>
-            </div>
+            <>
+              <div key={rowData?.id}>
+                <TitleBox>
+                  <StName>{rowData?.title}</StName>
+                </TitleBox>
+                <StFlex
+                  key={rowData?.title}
+                  onClick={() => clickHandler(rowData)}
+                >
+                  <StImg src={rowData?.imageUrl} />
+                </StFlex>
+              </div>
+              <div className="worldcup_image"></div>
+            </>
           );
         })}
-      </Container>
+      </div>
       <Complete>{visible && <Ranking displays={displays} />}</Complete>
-    </form>
+    </StContainer>
   );
 }
+
+const StContainer = styled.form`
+  width: 100%;
+  min-height: 100vh;
+  min-height: 1000px;
+  margin: 0 auto;
+  background-color: black;
+  background-size: cover;
+  font-family: "Pretendard";
+`;
 
 const Container = styled.div`
   width: 1394px;
   height: 800px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
 `;

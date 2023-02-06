@@ -70,7 +70,7 @@
   background: #fafafa;
   color: #a0a0a0;
 }
-input:focus {
+.searchinp:focus {
   outline: none !important;
   border-color: #ffd665;
   box-shadow: 0 0 16px #ffd665;
