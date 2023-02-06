@@ -33,7 +33,7 @@ function Drink() {
 
     if (postList) {
       for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < i * 2; j++) {
+        for (let j = 0; j < 6; j++) {
           const mainPageList = {
             postId: array[0][j].postId,
             title: array[0][j].title,
