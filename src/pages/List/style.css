@@ -24,12 +24,6 @@
   height: 260px;
   background-image: url(../../../public/images/list_image1.png);
 }
-/* .mask{
-    top: 0;
-    width: 466px;
-    height: 260px;
-    background-color: rgba(0, 0, 0, 0.259);
-} */
 .postlist_top_image2 {
   width: 466px;
   height: 260px;
@@ -45,4 +39,18 @@
   font-size: 28px;
   line-height: 38px;
   padding: 24px 20px;
+}
+
+.list_bottom{
+  width: 800px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #a0a0a0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list_profile{
+  width: 20px;height: 20px;
 }

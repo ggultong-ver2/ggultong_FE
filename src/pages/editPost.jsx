@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useParams, useNavigate } from "react-router";
 import "./reset.css";
+import "./style.css";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
@@ -66,47 +67,75 @@ const EditPost = () => {
   // console.log(file);
   return (
     <div>
+      <Background>
       <Form
         onSubmit={(e) => {
           e.preventDefault();
           onEditPostHandler(Number(id));
         }}
       >
-        <Category>
-          카테고리
-          <CategorySelect
-            type="select"
+              <div className="post_top_wrap">
+        <div className="post_top">
+          <select
             name="category"
-            value={category}
             id="category"
+            className="post_top_select"
             onChange={(ev) => {
               const { value } = ev.target;
               setCategory(value);
             }}
           >
-            <option value="choose">선택해주세요</option>
+            <option value="choose">게시판 선택</option>
             <option value="drink">혼술</option>
             <option value="meal">혼밥</option>
             <option value="recycle">리사이꿀</option>
-          </CategorySelect>
-        </Category>
+          </select>
+          <button>저장</button>
+        </div>
+      </div>
+
         <Wrap>
-          <Title>
-            제목
-            <TitleInput
+          <div className="edit_post_input_wrap">
+            <input
               type="text"
               name="title"
+              className="post_searchinp"
               value={title}
               onChange={(ev) => {
                 const { value } = ev.target;
                 setTitle(value);
               }}
+<<<<<<< HEAD
             ></TitleInput>
           </Title>
 
+=======
+            ></input>
+          </div>
+          {/* <Content
+            type="text"
+            placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
+            value={content}
+            onChange={(ev) => {
+              const { value } = ev.target;
+              setContent(value);
+              console.log("value:", value);
+            }}
+          ></Content> */}
+          {/* <Editor
+            type="text"
+            content={content}
+            setContent={setContent}
+            // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
+            // onChange={(e, editor) => {
+            //   const data = editor.getData();
+            //   console.log({ e, editor, data });
+            //   setContent({ ...content, content: data });
+            // }}
+          /> */}
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
           <Quill type="text" content={content} setContent={setContent} />
           <File>
-            첨부파일
             <FileInput
               type="file"
               name="fileUpload"
@@ -119,7 +148,7 @@ const EditPost = () => {
               }}
             />
           </File>
-          <Btns>
+          {/* <Btns>
             <BackButton
               onClick={(e) => {
                 e.preventDefault();
@@ -130,20 +159,29 @@ const EditPost = () => {
             </BackButton>
 
             <EnterButton>확인</EnterButton>
-          </Btns>
+          </Btns> */}
         </Wrap>
       </Form>
+      </Background>
+
     </div>
   );
 };
 
+const Background = styled.div`
+  background-color: #f9fafb;
+  width: 100%;
+  min-height: 95vh;
+  padding-top: 62px;
+`;
+
 const Form = styled.form`
-  border: 1px solid black;
   width: 900px;
   height: 1250px;
   margin: auto;
   margin-top: 50px;
   padding: 10px;
+  background-color: #fff;
 `;
 const Category = styled.p`
   margin-bottom: 50px;

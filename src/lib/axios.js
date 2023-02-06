@@ -3,7 +3,7 @@ import axios from "axios";
 // 기본 URL 토큰 담는 인터셉트 없음
 const instance = axios.create({
   baseURL: process.env.REACT_APP_URL, //상정님
-  //https://tom-jelly.shop/api
+  //"https://tom-jelly.shop/api"
   //process.env.REACT_APP_URL
   //https://sparta-sjl.shop/api
   header: {

@@ -7,6 +7,7 @@ import { useInput } from "../lib/utils/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
 import { __getRankMonth } from "../redux/modules/postSlice";
+import"./style.css"
 
 function GameList() {
   const navigate = useNavigate();
@@ -131,37 +132,39 @@ function GameList() {
             );
           })}
         </StListBox>
-        <StFoodBox>
-          <StLeftBox2>
-            <div>
-              오늘 뭐먹지?
-              <br />
-              고민될 땐 꿀통이 골라줄게!
-              <StButton3
-                onClick={(e) => {
-                  e.preventDefault();
-                  Swal.fire(
-                    "현재 구현중입니다",
-                    "조금만 더 기다려주세요~",
-                    "warning"
-                  );
-                }}
-              >
-                음식 랜덤뽑기
-              </StButton3>
-            </div>
-          </StLeftBox2>
-          <StRightBox2>
-            <StImgBox2 src={require("../assets/images/food.png")} />
-          </StRightBox2>
-        </StFoodBox>
+        <div className="foodbox_wrap">
+          <StFoodBox>
+            <StLeftBox2>
+              <div>
+                오늘 뭐먹지?
+                <br />
+                고민될 땐 꿀통이 골라줄게!
+                <StButton3
+                  onClick={(e) => {
+                    e.preventDefault();
+                    Swal.fire(
+                      "현재 구현중입니다",
+                      "조금만 더 기다려주세요~",
+                      "warning"
+                    );
+                  }}
+                >
+                  음식 랜덤뽑기
+                </StButton3>
+              </div>
+            </StLeftBox2>
+            <StRightBox2>
+              <StImgBox2 src={require("../assets/images/food.png")} />
+            </StRightBox2>
+          </StFoodBox>
+        </div>
       </StContainer>
     </>
   );
 }
 const StContainer = styled.form`
   width: 100%;
-  height: 2300px;
+  min-height: 95vh;
   background-color: black;
   background-size: cover;
   font-family: "Pretendard";

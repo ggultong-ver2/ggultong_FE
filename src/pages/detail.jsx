@@ -176,27 +176,31 @@ const Detail = () => {
             <Wrap>
               <div className="detail_title_wrap">
                 <div className="detail_title">{details?.title}</div>
-                <div onClick={handleOpen} className="detail_toggle"></div>
-                {open ? (
-                  <ul className="toggle_item_wrap">
-                    <li
-                      onClick={onClickEditPostHandler}
-                      className="toggle_edit"
-                    >
-                      수정하기
-                    </li>
-                    <li
-                      onClick={onClickDeletePostHandler}
-                      className="toggle_delete"
-                    >
-                      삭제하기
-                    </li>
-                  </ul>
-                ) : null}
+                {localStorage.getItem("nickname") ===details.nickname ? (
+                <div className="toggle">
+                  <div onClick={handleOpen} className="detail_toggle"></div>
+                  {open ? (
+                    <ul className="toggle_item_wrap">
+                      <li
+                        onClick={onClickEditPostHandler}
+                        className="toggle_edit"
+                      >
+                        수정하기
+                      </li>
+                      <li
+                        onClick={onClickDeletePostHandler}
+                        className="toggle_delete"
+                      >
+                        삭제하기
+                      </li>
+                    </ul>
+                  ) : null}
+                </div>) : null}
               </div>
 
               <Else>
                 <Etc>
+                  <div>{details?.ProfileImg}</div>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
@@ -216,7 +220,7 @@ const Detail = () => {
               <Scrap />
             </div>
             <div className="comment_top">
-              <div>댓글 {details?.comment.length} </div>
+              <div>전체 댓글 {details?.comment.length} </div>
               <div>게시글 신고</div>
             </div>
             <Commentarea>
@@ -254,8 +258,8 @@ const Detail = () => {
                               </Writtendate>
                               <Commentcontent>{comment.content}</Commentcontent>
                               <StBox>
-                                {localStorage.getItem("nickname") ===
-                                comment.nickname ? (
+                                {localStorage.getItem("loginId") ===
+                                comment.loginId ? (
                                   <>
                                     <EditBtn
                                       onClick={() => {
@@ -310,9 +314,9 @@ const StNickname = styled.p`
 `;
 const Etc = styled.div`
   font-size: 14px;
-  width: 150px;
   display: flex;
   text-align: center;
+  margin-top: 10px;
 `;
 const Etcs = styled.div`
   display: flex;
