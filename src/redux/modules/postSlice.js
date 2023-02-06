@@ -331,7 +331,7 @@ export const __getMainPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // console.log(payload);
-      const { data } = await baseURL.get("/post/likeTop6");
+      const { data } = await axios.get(`${IP}/post/likeTop6`);
       console.log("maindata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
