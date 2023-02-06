@@ -105,6 +105,11 @@ const EditPost = () => {
                 const { value } = ev.target;
                 setTitle(value);
               }}
+<<<<<<< HEAD
+            ></TitleInput>
+          </Title>
+
+=======
             ></input>
           </div>
           {/* <Content
@@ -128,6 +133,7 @@ const EditPost = () => {
             //   setContent({ ...content, content: data });
             // }}
           /> */}
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
           <Quill type="text" content={content} setContent={setContent} />
           <File>
             <FileInput

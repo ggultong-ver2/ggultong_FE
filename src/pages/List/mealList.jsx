@@ -114,17 +114,24 @@ const MealList = () => {
 
         <Wrapall>
           <Wrap>
-            {categoryPosts.map((post) => {
+            {categoryPosts.map((value, index) => {
               return (
                 <Card
-                  key={post.id}
-                  onClick={() => navigate(`detail/${post.id}`)}
+                  key={index}
+                  onClick={() => navigate(`detail/${value.id}`)}
                 >
                   <Textwrap>
-                    <StTitle>{post.title}</StTitle>
+                    <StTitle>{value.title}</StTitle>
                     <StContent
-                      dangerouslySetInnerHTML={{ __html: post.content }}
+                      dangerouslySetInnerHTML={{ __html: value.content }}
                     ></StContent>
+<<<<<<< HEAD
+                    <Etcwrap>
+                      댓글&nbsp;{value && value?.comment.length} 좋아요&nbsp;
+                      {value.likePostSum} &nbsp;&nbsp;
+                      {value.createdAt.slice(0, 10)}
+                    </Etcwrap>
+=======
                       <div className="list_bottom">
                         <div className="list_bottom_left">
                           {/* <div className="list_profile">{post?.profileImg}&nbsp;</div> */}
@@ -134,8 +141,9 @@ const MealList = () => {
                         </div>
                         <div className="list_bottom_right">{post.createdAt.slice(0, 10)}</div>
                       </div>
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
                   </Textwrap>
-                  <StFile src={post.imageFile}></StFile>
+                  <StFile src={value.imageFile}></StFile>
                 </Card>
               );
             })}

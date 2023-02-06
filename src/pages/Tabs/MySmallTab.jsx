@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
 import { __getMypageCount } from "../../redux/modules/postSlice";
+import axios from "axios";
 
 const MySmallTab = () => {
   const [displays, setDisplays] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
+  const [countData, setCountData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // 내게시글 페이징
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
@@ -20,22 +23,28 @@ const MySmallTab = () => {
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
-  // useEffect(() => {
-  //   setCount(myPost?.length);
-  //   setIndexOfLastPost(currentPage * postPerPage);
-  //   setIndexOfFirstPost(indexOfLastPost - postPerPage);
-  // }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
-
-  // useEffect(() => {
-  //   if (!categoryDrinkCount) return;
-  //   setCount(categoryDrinkCount);
-  //   // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
-  // }, [categoryDrinkCount]);
-
   useEffect(() => {
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const myPostCounts = useSelector((state) =>
+    state?.postCount?.details?.myPosts?.data === undefined
+      ? []
+      : state?.postCount?.details?.myPosts?.data[0].myPostCount
+  );
+  console.log("postcount:", myPostCounts);
+
+  // const myPostCounts = useSelector(
+  //   (state) => state?.postCount?.details?.myPosts
+  // );
+  // console.log("postcount:", myPostCounts);
+
+  useEffect(() => {
+    if (!myPostCounts) return;
+    setCount(myPostCounts);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [myPostCounts]);
 
   const setPage = (page) => {
     setCurrentPage(page);
@@ -46,16 +55,48 @@ const MySmallTab = () => {
     dispatch(__getMyPost(currentPage));
   }, [dispatch, currentPage]);
 
-  const myPost = useSelector((state) => state?.details?.details?.myPosts?.data);
-  // console.log("myPost::", myPost);
+  // 내스크랩 페이징
+  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [currentPages, setCurrentPages] = useState(1); // 현재 페이지
+  const [counts, setCounts] = useState(0); // 아이템 총 개수
+  const [postPerPages] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPosts, setIndexOfLastPosts] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPosts, setIndexOfFirstPosts] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
-  // 마이페이지 카운트
+  // const myScrapCounts = useSelector((state) =>
+  //   state?.postCount?.details?.myPosts?.data === undefined
+  //     ? []
+  //     : state?.postCount?.details?.myPosts?.data[0].myScrapCount
+  // );
+  // console.log("myScrapCount:", myScrapCounts);
+
   useEffect(() => {
-    dispatch(__getMypageCount());
-  }, [dispatch]);
+    setIndexOfLastPosts(currentPages * postPerPages);
+    setIndexOfFirstPosts(indexOfLastPosts - postPerPages);
+  }, [currentPages, indexOfFirstPosts, indexOfLastPosts, postPerPages]);
 
-  const postCounts = useSelector((state) => state);
-  console.log("postcount:", postCounts);
+  // useEffect(() => {
+  //   if (!myScrapCounts) return;
+  //   setCounts(myScrapCounts);
+  //   // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  // }, [myScrapCounts]);
+
+  const setPages = (page) => {
+    setCurrentPages(page);
+  };
+  useEffect(() => {
+    dispatch(__getMyPost(currentPages));
+  }, [dispatch, currentPages]);
+
+  useEffect(() => {
+    setCount(myPost?.length);
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const myPost = useSelector((state) => state?.details?.details?.myPosts?.data);
+  console.log("myPost::", myPost);
 
   // 내 스크랩 가져오기
   useEffect(() => {
@@ -63,7 +104,7 @@ const MySmallTab = () => {
   }, [dispatch, currentPage]);
 
   const myScrap = useSelector((state) => state?.details?.details?.myScrap);
-  // console.log("myScrap:", myScrap);
+  console.log("myScrap:", myScrap);
 
   const pageMove = (category, id) => {
     switch (category) {
@@ -142,7 +183,11 @@ const MySmallTab = () => {
                 </Card>
               );
             })}
-          <Paging currentPage={currentPage} count={count} setPage={setPage} />
+          <Paging
+            currentPage={currentPages}
+            count={counts}
+            setPage={setPages}
+          />
         </>
       ),
     },

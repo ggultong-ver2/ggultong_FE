@@ -7,11 +7,17 @@ import "./reset.css";
 // import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
+<<<<<<< HEAD
+import fileinput from "../assets/images/fileinput.png";
+import { TiWarningOutline } from "react-icons/ti";
+=======
 import "./style.css";
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
 
 const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const imgRef = useRef();
 
   //const onClickAddPostHandler = () => {
   //dispatch(__addPost(addPost));
@@ -23,7 +29,7 @@ const Post = () => {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
-  console.log(content);
+
   // const getValue = (e) => {
   //   const { value } = e.target;
   //   setContent({
@@ -73,6 +79,73 @@ const Post = () => {
   };
 
   return (
+<<<<<<< HEAD
+    <Background>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmitHandler(post);
+        }}
+      >
+        <Category>
+          카테고리
+          <CategorySelect
+            type="select"
+            name="category"
+            id="category"
+            onChange={(ev) => {
+              const { value } = ev.target;
+              setCategory(value);
+            }}
+          >
+            <option value="choose">선택해주세요</option>
+            <option value="drink">혼술</option>
+            <option value="meal">혼밥</option>
+            <option value="recycle">리사이꿀</option>
+          </CategorySelect>
+        </Category>
+        <Wrap>
+          <Title>
+            제목
+            <TitleInput
+              type="text"
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setTitle(value);
+              }}
+            ></TitleInput>
+          </Title>
+
+          <br></br>
+
+          <Quill type="text" content={content} setContent={setContent} />
+
+          <File>
+            <Filetext>썸네일 사진</Filetext>
+            <TiWarningOutline className="icon" size="28" color="#e9e623" />
+            <ThumbnailEx>
+              썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
+            </ThumbnailEx>
+
+            <label htmlFor="ex_file">
+              <div className="fileinput">
+                <img src={fileinput} alt="fileinput" />
+              </div>
+            </label>
+            <input
+              type="file"
+              id="ex_file"
+              ref={imgRef}
+              multiple={false}
+              onChange={(ev) => {
+                const { files } = ev.target;
+                setFile(files);
+              }}
+              width="92px"
+              height="32px"
+            />
+          </File>
+=======
     <>
       <Background>
         <Form
@@ -154,6 +227,7 @@ const Post = () => {
                 }}
               />
             </File>
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
 
             {/* <Btns>
               <BackButton
@@ -198,6 +272,25 @@ const Wrap = styled.div`
   //border: 1px solid red;
   height: 1200px;
 `;
+<<<<<<< HEAD
+const Title = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
+const TitleInput = styled.input`
+  border-bottom: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 800px;
+  height: 30px;
+  margin-left: 10px;
+  font-size: 30px;
+  outline: none;
+`;
+
+=======
 const Content = styled.textarea`
   width: 850px;
   height: 900px;
@@ -207,15 +300,47 @@ const Content = styled.textarea`
   border: none;
   font-size: 25px;
 `;
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
 const File = styled.div`
+  float: left;
   font-size: 20px;
   margin-top: 10px;
+  label {
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 92px;
+    height: 32px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    background-color: black;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
 `;
+<<<<<<< HEAD
+
+const Filetext = styled.p`
+  float: left;
+  font-size: 16px;
+  margin-right: 5px;
+=======
 const FileInput = styled.input`
   //border: 1px solid green;
   margin-left: 10px;
   cursor: pointer;
+>>>>>>> 96817ebf9b4ee0bf4e3a30bc9eb9a75a2e7a67df
 `;
+const ThumbnailEx = styled.p`
+  margin-top: -30px;
+  margin-left: 110px;
+  font-size: 14px;
+  /* border: 1px solid yellow; */
+  width: 780px;
+`;
+
 const Btns = styled.div`
   margin-left: 350px;
   margin-top: 50px;
