@@ -13,21 +13,52 @@ ul.pagination li {
   display: inline-block;
   width: 30px;
   height: 30px;
-  border: 1px solid #e2e2e2;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
   cursor: pointer;
+  border-radius: 4px;
+
+}
+ul.pagination li:hover{
+  background: #FDF5DC;
 }
 
 ul.pagination li:first-child {
-  border-radius: 5px 0 0 5px;
+  border-radius: 4px;
+  background: #F9FAFB;
+}
+ul.pagination li:first-child:hover{
+  background: trasparent;
+  border: 1px solid #000;
+}
+ul.pagination li:nth-child(2){
+  border-radius: 4px;
+  background: #F9FAFB;
+}
+ul.pagination li:nth-child(2):hover{
+  background: trasparent;
+  border: 1px solid #000;
+}
+ul.pagination li:nth-child(n-1){
+  border-radius: 4px;
+  background: #F9FAFB;
+}
+ul.pagination li:nth-child(n-1):hover{
+  background: trasparent;
+  border: 1px solid #000;
+}
+ul.pagination li:last-child {
+  border-radius: 4px;
+  background: #F9FAFB;
 }
 
-ul.pagination li:last-child {
-  border-radius: 0 5px 5px 0;
+ul.pagination li:last-child:hover{
+  background: trasparent;
+  border: 1px solid #000;
 }
+
 
 ul.pagination li a {
   text-decoration: none;
@@ -36,16 +67,16 @@ ul.pagination li a {
 }
 
 ul.pagination li.active a {
-  color: white;
+  color: black;
 }
 
 ul.pagination li.active {
-  background-color: #18191b;
+  background-color: #ffd86a;
+  border-radius: 4px;
 }
 
 ul.pagination li a:hover,
 ul.pagination li a.active {
-  /* color: blue; */
 }
 
 .page-selection {

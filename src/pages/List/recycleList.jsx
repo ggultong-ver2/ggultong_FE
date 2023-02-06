@@ -7,7 +7,7 @@ import {
   __getCategoryCount,
 } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
-import "./style.css"
+import "./style.css";
 
 const RecycleList = () => {
   const navigate = useNavigate();
@@ -97,14 +97,13 @@ const RecycleList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
-            <li>
+            <li onClick={() => navigate("detail/12")}>
               <div className="postlist_top_image1"></div>
               <h3>
                 맥주 종류 별 40가지 먹어본 사람이
                 <br />
                 추천하는 맥주 탑5
               </h3>
-              {/* <div className="mask"></div> */}
             </li>
             <li>
               <div className="postlist_top_image2"></div>
@@ -123,19 +122,16 @@ const RecycleList = () => {
                 >
                   <Textwrap>
                     <StTitle>{post.title}</StTitle>
-
-                    <StContent
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    ></StContent>
-                      <div className="list_bottom">
-                        <div className="list_bottom_left">
-                          {/* <div className="list_profile">{post?.profileImg}&nbsp;</div> */}
-                          {post?.nickname}&nbsp;&nbsp;
-                          댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
-                          {post.likePostSum}
-                        </div>
-                        <div className="list_bottom_right">{post.createdAt.slice(0, 10)}</div>
+                    <div className="list_bottom">
+                      <div className="list_bottom_left">
+                        {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                        {post && post?.comment.length} 좋아요&nbsp;
+                        {post.likePostSum}
                       </div>
+                      <div className="list_bottom_right">
+                        {post.createdAt.slice(0, 10)}
+                      </div>
+                    </div>
                   </Textwrap>
                   <StFile src={post.imageFile}></StFile>
                 </Card>
@@ -210,9 +206,9 @@ const Button3 = styled.button`
   font-weight: 500;
 `;
 const Card = styled.div`
-  border-bottom: 1px solid #E4E4E4;
+  border-bottom: 1px solid #e4e4e4;
   width: 800px;
-  height: 290px;
+  height: 180px;
   &:hover {
     cursor: pointer;
   }
@@ -230,12 +226,12 @@ const StTitle = styled.div`
   margin-top: 20px;
 `;
 const StFile = styled.img`
-  height: 140px;
-  width: 140px;
+  height: 92px;
+  width: 92px;
   background-color: #d9d9d9;
   background-size: contain;
   position: absolute;
-  right: 98px;
+  right: 73px;
   margin-top: 40px;
 `;
 const StContent = styled.div`
