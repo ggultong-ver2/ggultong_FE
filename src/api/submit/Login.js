@@ -74,7 +74,11 @@ export const __nickCheck = async (nickname) => {
     // useSweet(1000, "success", "회원가입 성공");
     return data;
   } catch (error) {
-    Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
+    Swal.fire(
+      "중복된 nickname 입니다.",
+      "다른 닉네임을 사용 해 주세요!",
+      "error"
+    );
     // alert(error.response.data.msg);
     // useSweet(1000, "error", error.response.data.msg);
   }
