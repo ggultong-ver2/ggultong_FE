@@ -225,7 +225,6 @@ function MyPage() {
             </SettingItm2>
           </AllBox2>
         </StCenterBox2>
-
         <StCenterBox3>
           <MySmallTab />
         </StCenterBox3>

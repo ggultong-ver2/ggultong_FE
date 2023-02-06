@@ -142,18 +142,20 @@ const Post = () => {
             [#006888 YERIEL] React Quill Image Resize
           </h1> */}
             <Quill type="text" content={content} setContent={setContent} />
-            <File>
-              <FileInput
+            <div className="post_file_wrap">
+            <label for="file">썸네일 첨부</label>
+              <input
+                className="post_file_input"
                 type="file"
-                id="fileUpload"
+                id="file"
                 multiple={false}
-                width="500px"
                 onChange={(ev) => {
                   const { files } = ev.target;
                   setFile(files);
                 }}
               />
-            </File>
+              <span>썸네일은 음식 월드컵에 이용됩니다.</span>
+            </div>
 
             {/* <Btns>
               <BackButton
