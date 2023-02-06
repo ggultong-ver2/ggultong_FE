@@ -6,6 +6,7 @@ import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
 import { __getMypageCount } from "../../redux/modules/postSlice";
 import axios from "axios";
+import "./style.css";
 
 const MySmallTab = () => {
   const [displays, setDisplays] = useState([]);
@@ -22,6 +23,25 @@ const MySmallTab = () => {
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  useEffect(() => {
+    setCount();
+    setIndexOfLastPost(currentPage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+
+  const myPostCount = useSelector((state) =>
+    state?.postCount?.details?.myPosts === undefined
+      ? []
+      : state?.postCount?.details?.myPosts[0]?.myPostCount
+  );
+  console.log("postcount:", myPostCount);
+
+  useEffect(() => {
+    if (!myPostCount) return;
+    setCount(myPostCount);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [myPostCount]);
 
   useEffect(() => {
     setIndexOfLastPost(currentPage * postPerPage);
@@ -55,36 +75,11 @@ const MySmallTab = () => {
     dispatch(__getMyPost(currentPage));
   }, [dispatch, currentPage]);
 
-  // 내스크랩 페이징
-  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
-  const [currentPages, setCurrentPages] = useState(1); // 현재 페이지
-  const [counts, setCounts] = useState(0); // 아이템 총 개수
-  const [postPerPages] = useState(10); // 한 페이지에 보여질 아이템
-  const [indexOfLastPosts, setIndexOfLastPosts] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
-  const [indexOfFirstPosts, setIndexOfFirstPosts] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
-
-  // const myScrapCounts = useSelector((state) =>
-  //   state?.postCount?.details?.myPosts?.data === undefined
-  //     ? []
-  //     : state?.postCount?.details?.myPosts?.data[0].myScrapCount
-  // );
-  // console.log("myScrapCount:", myScrapCounts);
-
   useEffect(() => {
     setIndexOfLastPosts(currentPages * postPerPages);
     setIndexOfFirstPosts(indexOfLastPosts - postPerPages);
   }, [currentPages, indexOfFirstPosts, indexOfLastPosts, postPerPages]);
 
-  // useEffect(() => {
-  //   if (!myScrapCounts) return;
-  //   setCounts(myScrapCounts);
-  //   // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
-  // }, [myScrapCounts]);
-
-  const setPages = (page) => {
-    setCurrentPages(page);
-  };
   useEffect(() => {
     dispatch(__getMyPost(currentPages));
   }, [dispatch, currentPages]);
@@ -105,6 +100,31 @@ const MySmallTab = () => {
 
   const myScrap = useSelector((state) => state?.details?.details?.myScrap);
   console.log("myScrap:", myScrap);
+
+  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [currentPages, setCurrentPages] = useState(1); // 현재 페이지
+  const [counts, setCounts] = useState(0); // 아이템 총 개수
+  const [postPerPages] = useState(10); // 한 페이지에 보여질 아이템
+  const [indexOfLastPosts, setIndexOfLastPosts] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPosts, setIndexOfFirstPosts] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
+
+  const myScrapCount = useSelector((state) =>
+    state?.postCount?.details?.myScrap === undefined
+      ? []
+      : state?.postCount?.details?.myScrap[0]?.myScrapCount
+  );
+  console.log("scrapcount:", myScrapCount);
+
+  useEffect(() => {
+    if (!myScrapCount) return;
+    setCount(myScrapCount);
+    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
+  }, [myScrapCount]);
+
+  const setPages = (page) => {
+    setCurrentPage(page);
+  };
 
   const pageMove = (category, id) => {
     switch (category) {
@@ -138,15 +158,18 @@ const MySmallTab = () => {
                 >
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
-                    <StProfile src={value.profileImage}></StProfile>
-                    <StNickname>{value.nickname}</StNickname>
-
-                    <Etcwrap>
-                      댓글&nbsp;{value.commentCount} 좋아요&nbsp;
-                      {value.likeSum} &nbsp;&nbsp;
-                      {value.createdAt.slice(0, 10)}
-                    </Etcwrap>
                   </Textwrap>
+                  <div className="mypage_bottom">
+                    <div className="mypage_bottom_left">
+                      <StProfile src={value.profileImage}></StProfile>
+                      {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                      {value && value?.comment.length} 좋아요&nbsp;
+                      {value.likePostSum}
+                    </div>
+                    <div className="mypage_bottom_right">
+                      {value.createdAt.slice(0, 10)}
+                    </div>
+                  </div>
                   <StFile src={value.imageFile}></StFile>
                 </Card>
               );
@@ -170,15 +193,24 @@ const MySmallTab = () => {
                 >
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
-                    <StProfile src={value.profileImage}></StProfile>
-                    <StNickname>{value.nickname}</StNickname>
-
-                    <Etcwrap>
-                      댓글&nbsp;{value.commentCount} 좋아요&nbsp;
-                      {value.likeSum} &nbsp;&nbsp;
-                      {value.createdAt.slice(0, 10)}
-                    </Etcwrap>
                   </Textwrap>
+                  <div className="mypage_bottom">
+                    <div className="list_bottom">
+                      <div className="list_bottom_left">
+                        <StProfile src={value.profileImage}></StProfile>
+                        &nbsp;&nbsp;
+                        <StNickname>{value.nickname}</StNickname>
+                        &nbsp;&nbsp;&nbsp;
+                        <div className="left_content">
+                          댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
+                          {value.likeSum}
+                        </div>
+                      </div>
+                      <div className="list_bottom_right">
+                        {value.createdAt.slice(0, 10)}
+                      </div>
+                    </div>
+                  </div>
                   <StFile src={value.imageFile}></StFile>
                 </Card>
               );
@@ -258,15 +290,15 @@ const TabMenu = styled.ul`
 const Desc = styled.div`
   margin-left: 30px;
   width: 940px;
-  height: 800px;
+  padding-bottom: 30px;
 `;
 
 const Card = styled.div`
-  /* border: 1px solid red; */
-  border-bottom: 1px solid grey;
+  position: relative;
+  border-bottom: 1px solid #e4e4e4;
   margin-left: 30px;
-  width: 880px;
-  height: 250px;
+  width: 800px;
+  height: 160px;
   &:hover {
     cursor: pointer;
   }
@@ -278,10 +310,10 @@ const Textwrap = styled.div`
 const StTitle = styled.div`
   height: 50px;
   width: 850px;
-  font-size: 30px;
+  font-size: 18px;
   line-height: 28px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-bottom: 40px;
 `;
 const StProfile = styled.img`
   height: 25px;
@@ -290,14 +322,16 @@ const StProfile = styled.img`
 `;
 const StNickname = styled.div`
   color: black;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 22px;
 `;
 const StFile = styled.img`
-  height: 200px;
-  width: 200px;
+  height: 92px;
+  width: 92px;
   background-color: #d9d9d9;
-  margin-left: 650px;
-  margin-top: 20px;
+  position: absolute;
+  top: 20px;
+  right: 0;
 `;
 const Etcwrap = styled.div`
   height: 30px;
@@ -305,4 +339,13 @@ const Etcwrap = styled.div`
   line-height: 22px;
   color: #a0a0a0;
 `;
+const StContent = styled.div`
+  overflow: hidden;
+  height: 44px;
+  width: 590px;
+  font-size: 14px;
+  line-height: 22px;
+  overflow: hidden;
+`;
+
 export default MySmallTab;

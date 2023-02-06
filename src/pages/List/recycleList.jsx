@@ -97,14 +97,13 @@ const RecycleList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
-            <li>
+            <li onClick={() => navigate("detail/12")}>
               <div className="postlist_top_image1"></div>
               <h3>
                 맥주 종류 별 40가지 먹어본 사람이
                 <br />
                 추천하는 맥주 탑5
               </h3>
-              {/* <div className="mask"></div> */}
             </li>
             <li>
               <div className="postlist_top_image2"></div>
@@ -124,18 +123,24 @@ const RecycleList = () => {
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
 
-                    <StContent
-                      dangerouslySetInnerHTML={{ __html: value.content }}
-                    ></StContent>
-
-                    <Etcwrap>
-                      댓글&nbsp;{value && value?.comment.length} 좋아요&nbsp;
-                      {value.likePostSum} &nbsp;&nbsp;
-                      {value.createdAt.slice(0, 10)}
-                    </Etcwrap>
-
+                    <div className="list_bottom">
+                      <div className="list_bottom_left">
+                        {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                        {value && value?.comment.length} 좋아요&nbsp;
+                        {value.likePostSum}
+                      </div>
+                      <div className="list_bottom_right">
+                        {value.createdAt.slice(0, 10)}
+                      </div>
+                    </div>
                   </Textwrap>
-                  <StFile src={value.imageFile}></StFile>
+                  <StFile
+                    src={
+                      value.imageFile === ""
+                        ? "../images/default_image.png"
+                        : value.imageFile
+                    }
+                  ></StFile>
                 </Card>
               );
             })}
@@ -210,7 +215,7 @@ const Button3 = styled.button`
 const Card = styled.div`
   border-bottom: 1px solid #e4e4e4;
   width: 800px;
-  height: 290px;
+  height: 180px;
   &:hover {
     cursor: pointer;
   }
@@ -228,12 +233,12 @@ const StTitle = styled.div`
   margin-top: 20px;
 `;
 const StFile = styled.img`
-  height: 140px;
-  width: 140px;
+  height: 92px;
+  width: 92px;
   background-color: #d9d9d9;
   background-size: contain;
   position: absolute;
-  right: 98px;
+  right: 73px;
   margin-top: 40px;
 `;
 const StContent = styled.div`

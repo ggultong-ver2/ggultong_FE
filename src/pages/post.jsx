@@ -11,7 +11,6 @@ import fileinput from "../assets/images/fileinput.png";
 import { TiWarningOutline } from "react-icons/ti";
 import "./style.css";
 
-
 const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -77,7 +76,6 @@ const Post = () => {
   };
 
   return (
-
     <Background>
       <Form
         onSubmit={(e) => {
@@ -144,8 +142,7 @@ const Post = () => {
             />
           </File>
 
-
-            {/* <Btns>
+          {/* <Btns>
               <BackButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -156,10 +153,9 @@ const Post = () => {
               </BackButton>
               <EnterButton>확인</EnterButton>
             </Btns> */}
-          </Wrap>
-        </Form>
-      </Background>
-    </>
+        </Wrap>
+      </Form>
+    </Background>
   );
 };
 const Background = styled.div`
@@ -206,7 +202,6 @@ const TitleInput = styled.input`
   outline: none;
 `;
 
-
 const Content = styled.textarea`
   width: 850px;
   height: 900px;
@@ -237,20 +232,6 @@ const File = styled.div`
   }
 `;
 
-
-const Filetext = styled.p`
-  float: left;
-  font-size: 16px;
-  margin-right: 5px;
-`;
-const ThumbnailEx = styled.p`
-  margin-top: -30px;
-  margin-left: 110px;
-  font-size: 14px;
-  /* border: 1px solid yellow; */
-  width: 780px;
-`;
-
 const FileInput = styled.input`
   //border: 1px solid green;
   margin-left: 10px;
@@ -268,7 +249,6 @@ const ThumbnailEx = styled.p`
   /* border: 1px solid yellow; */
   width: 780px;
 `;
-
 
 const Btns = styled.div`
   margin-left: 350px;

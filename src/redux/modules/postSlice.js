@@ -285,27 +285,27 @@ export const __postScrap = createAsyncThunk(
   }
 );
 
-export const __getMypageCount = createAsyncThunk(
-  "getMypageCount",
-  async (payload, thunkAPI) => {
-    try {
-      const res = await baseURL.get(`/mypage/myPostCount`, "", {
-        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      });
-      console.log("res:", res.data);
+// export const __getMypageCount = createAsyncThunk(
+//   "getMypageCount",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const res = await baseURL.get(`/mypage/myPostCount`, "", {
+//         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+//       });
+//       console.log("res:", res.data);
 
-      //   const data = await apis.getMypageCount();
+//       //   const data = await apis.getMypageCount();
 
-      //   console.log("data: ", data.data);
-      // console.log("payload:", payload);
-      return thunkAPI.fulfillWithValue(res.data);
-    } catch (err) {
-      console.log(err);
+//       //   console.log("data: ", data.data);
+//       // console.log("payload:", payload);
+//       return thunkAPI.fulfillWithValue(res.data);
+//     } catch (err) {
+//       console.log(err);
 
-      return thunkAPI.rejectWithValue(err);
-    }
-  }
-);
+//       return thunkAPI.rejectWithValue(err);
+//     }
+//   }
+// );
 
 // 카테고리별 get
 export const __getCategoryPost = createAsyncThunk(
@@ -395,17 +395,9 @@ export const __getMyPost = createAsyncThunk(
   }
 );
 
-// export const __getMyPost = createAsyncThunk(
-//   async (state = initialState, action) => {
-//     if (action.type === getMyPost) {
-
-//     }
-//   }
-// )
-
 // 마이페이지 내 스크랩 가져오기
 export const __getMyScrap = createAsyncThunk(
-  "getMyPost",
+  "getMyScrap",
   async (payload, thunkAPI) => {
     try {
       // console.log(payload);
@@ -514,18 +506,18 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [__getMypageCount]: (state) => {
-      state.isLoading = true;
-    },
-    [__getMypageCount]: (state, action) => {
-      state.isLoading = false;
-      state.details.myPageCount = action.payload;
-      console.log(action);
-    },
-    [__getMypageCount]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // [__getMypageCount]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [__getMypageCount]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.details.myPageCount = action.payload;
+    //   console.log(action);
+    // },
+    // [__getMypageCount]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
 
     // top5 데이터 가져오기
 
