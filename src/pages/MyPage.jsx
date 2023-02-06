@@ -98,13 +98,6 @@ function MyPage() {
     //     localStorage.clear();
     //     alert("그 동안 이용해주셔서 감사합니다.");
     //     window.location.assign("/");
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-
-    // ss
     //   });
     // }
   };
@@ -117,21 +110,16 @@ function MyPage() {
         profileImg,
         nickname,
       })
-    )
-      .then((res) => {
-        console.log("res", res);
-        // localStorage.getItem("Access_Token", res.data.profileImg);
-        // localStorage.getItem("nickcname", res.data.nickname);
-      })
-      .then(() => {
-        Swal.fire(
-          "정보수정 완료!",
-          "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
-          "success"
-        );
-
-        window.location.replace("/mypage");
-      });
+    ).then((res) => {
+      console.log("res:::", res);
+      Swal.fire(
+        "정보수정 완료!",
+        "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
+        "success"
+      );
+      localStorage.clear();
+      navigate("/login");
+    });
   };
   // console.log("myProfile.profile", myProfile.profile);
   return (
