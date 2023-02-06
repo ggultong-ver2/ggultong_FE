@@ -237,17 +237,16 @@ function MyPage() {
 const StContainer = styled.form`
   background-color: #f3f3f3;
   width: 100%;
-  height: 4000px;
+  min-height: 100vh;
+  padding-bottom: 50px;
   display: flex;
   justify-content: center;
-  font-family: "Pretendard";
 `;
 
 const StSubCon = styled.div`
   background-color: #f3f3f3;
   width: 996px;
-  height: 2500px;
-  font-family: "Pretendard";
+  padding-bottom: 50px;
 `;
 
 const ProfileBox = styled.div`
@@ -288,16 +287,12 @@ const StCenterBox2 = styled.div`
 
 const StCenterBox3 = styled.div`
   margin-top: 30px;
-
-  margin-bottom: 30px;
   width: 996px;
-  height: 2500px;
+  min-height: 50vh;
   border: 0;
-
   border-radius: 1px;
   box-sizing: border-box;
   display: flex;
-  flex-shrink: 0;
   font-size: 100%;
   background-color: white;
   font-family: "Pretendard";
