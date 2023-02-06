@@ -71,13 +71,35 @@ function MyPage() {
   //회원탈퇴
 
   const onDeleteLoginId = () => {
-    if (window.confirm("확인을 누르면 회원 정보가 삭제됩니다.")) {
-      __deleteId(localStorage.getItem("loginId")).then(() => {
-        localStorage.clear();
-        alert("그 동안 이용해주셔서 감사합니다.");
-        window.location.assign("/");
-      });
-    }
+    Swal.fire({
+      title: "정말 꿀통을 떠나실껀가요? &nbsp;&nbsp;:(",
+      text: "취소 눌러주세요 제발~",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "회원탈퇴",
+      cancelButtonText: "취소",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        __deleteId(localStorage.getItem("loginId")).then(() => {
+          localStorage.clear();
+        });
+        Swal.fire(
+          "탈퇴 되었습니다!",
+          "그동안 저희 서비스를 이용해 주셔서 감사합니다",
+          "success"
+        ).then(() => navigate("/"));
+      }
+    });
+
+    // if (window.confirm("확인을 누르면 회원 정보가 삭제됩니다.")) {
+    //   __deleteId(localStorage.getItem("loginId")).then(() => {
+    //     localStorage.clear();
+    //     alert("그 동안 이용해주셔서 감사합니다.");
+    //     window.location.assign("/");
+    //   });
+    // }
   };
 
   //회원정보수정
@@ -90,7 +112,6 @@ function MyPage() {
       })
     ).then((res) => {
       console.log("res:::", res);
-
       Swal.fire(
         "정보수정 완료!",
         "정보 수정이 완료되었습니다. 다시 로그인해주세요!",

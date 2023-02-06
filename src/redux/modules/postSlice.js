@@ -10,6 +10,7 @@ const initialState = {
   login: [],
   signup: [],
   categoryPosts: [],
+  mypageCount: [],
 
   details: {
     title: "",
@@ -29,7 +30,6 @@ const initialState = {
     myScrap: [],
     myPageCount: [],
   },
-  postCount: [],
   error: null,
   isLoading: false,
 };
@@ -257,6 +257,7 @@ export const __postLike = createAsyncThunk(
           headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
         }
       );
+      console.log(data);
       return thunkAPI.fulfillWithValue(data?.status);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -288,16 +289,16 @@ export const __getMypageCount = createAsyncThunk(
   "getMypageCount",
   async (payload, thunkAPI) => {
     try {
-      // const res = await baseURL.get(`/mypage/myPostCount`, "", {
-      //   headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      // });
-      // console.log("res:", res.data);
+      const res = await baseURL.get(`/mypage/myPostCount`, "", {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      });
+      console.log("res:", res.data);
 
-      const data = await apis.getMypageCount();
+      //   const data = await apis.getMypageCount();
 
-      console.log("data: ", data.data);
+      //   console.log("data: ", data.data);
       // console.log("payload:", payload);
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       console.log(err);
 
@@ -329,9 +330,12 @@ export const __getMainPost = createAsyncThunk(
   "getMainPost",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(`${IP}/post/likeTop6`);
+      // console.log(payload);
+      const { data } = await baseURL.get("/post/likeTop6");
+      console.log("maindata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -343,6 +347,7 @@ export const __getCategoryCount = createAsyncThunk(
     try {
       const data = await apis.getCategoryCount();
 
+      // console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log(err);
@@ -366,7 +371,8 @@ export const __patchPost = createAsyncThunk(
       );
       formData.append("nickname", nickname);
 
-      const data = await apis.patchPost(formData);
+      const data = apis.patchPost(formData);
+      return data;
     } catch (error) {
       console.log("err", error);
     }
@@ -378,10 +384,10 @@ export const __getMyPost = createAsyncThunk(
   "getMyPost",
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
-      const data = await apis.getMyPost(payload);
+      console.log(payload);
+      const { data } = await apis.getMyPost(payload);
       // const data = await apis.getMyPost();
-      // console.log(data);
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -389,9 +395,17 @@ export const __getMyPost = createAsyncThunk(
   }
 );
 
+// export const __getMyPost = createAsyncThunk(
+//   async (state = initialState, action) => {
+//     if (action.type === getMyPost) {
+
+//     }
+//   }
+// )
+
 // 마이페이지 내 스크랩 가져오기
 export const __getMyScrap = createAsyncThunk(
-  "getMyScrap",
+  "getMyPost",
   async (payload, thunkAPI) => {
     try {
       // console.log(payload);
@@ -407,6 +421,23 @@ export const __getMyScrap = createAsyncThunk(
     }
   }
 );
+
+// export const __getMypageCount = createAsyncThunk(
+//   "getMypageCount",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const data = await apis.getMypageCount();
+
+//       console.log("data: ", data.data);
+//       console.log("payload:", payload);
+//       return thunkAPI.fulfillWithValue(data.data);
+//     } catch (err) {
+//       console.log(err);
+
+//       return thunkAPI.rejectWithValue(err);
+//     }
+//   }
+// );
 
 // 알림 기능
 export const __getNotification = createAsyncThunk(
@@ -464,7 +495,7 @@ export const postSlice = createSlice({
     [__getMyPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.myPosts = action.payload;
-      // console.log("action.payload:", action.payload);
+      console.log("action.payload:", action.payload);
     },
     [__getMyPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -488,9 +519,8 @@ export const postSlice = createSlice({
     },
     [__getMypageCount]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
       state.details.myPageCount = action.payload;
-      console.log(state);
+      console.log(action);
     },
     [__getMypageCount]: (state, action) => {
       state.isLoading = false;
@@ -652,6 +682,20 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
+    // [__getMypageCount]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [__getMypageCount]: (state, action) => {
+    //   state.isLoading = false;
+    //   console.log("action", action);
+    //   state.mypageCount = action.payload;
+    //   console.log("action::", action);
+    // },
+    // [__getMypageCount]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
+
     //스크랩
     [__postScrap.pending]: (state) => {
       state.isLoading = true;
@@ -811,6 +855,7 @@ export const postSlice = createSlice({
     [__getMainPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.mainPost = action.payload;
+      console.log("main", state.details.mainPost);
     },
     [__getMainPost.rejected]: (state, action) => {
       state.isLoading = false;
