@@ -119,7 +119,13 @@ const DrinkList = () => {
                         dangerouslySetInnerHTML={{ __html: value.content }}
                       ></StContent>
                     </Textwrap>
-                    <StFile src={value.imageFile}></StFile>
+                    <StFile
+                      src={
+                        value.imageFile === ""
+                          ? "../images/default_image.png"
+                          : value.imageFile
+                      }
+                    ></StFile>
                   </Card>
                 );
               })}

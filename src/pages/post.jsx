@@ -146,15 +146,28 @@ const Post = () => {
           </h1> */}
             <Quill type="text" content={content} setContent={setContent} />
             <File>
-              <FileInput
+              <Filetext>썸네일 사진</Filetext>
+              <TiWarningOutline className="icon" size="28" color="#e9e623" />
+              <ThumbnailEx>
+                썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
+              </ThumbnailEx>
+
+              <label htmlFor="ex_file">
+                <div className="fileinput">
+                  <img src={fileinput} alt="fileinput" />
+                </div>
+              </label>
+              <input
                 type="file"
-                id="fileUpload"
+                id="ex_file"
+                ref={imgRef}
                 multiple={false}
-                width="500px"
                 onChange={(ev) => {
                   const { files } = ev.target;
                   setFile(files);
                 }}
+                width="92px"
+                height="32px"
               />
             </File>
 
@@ -233,6 +246,11 @@ const FileInput = styled.input`
   //border: 1px solid green;
   margin-left: 10px;
   cursor: pointer;
+`;
+const Filetext = styled.p`
+  float: left;
+  font-size: 16px;
+  margin-right: 5px;
 `;
 const ThumbnailEx = styled.p`
   margin-top: -30px;
