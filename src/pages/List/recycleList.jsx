@@ -97,14 +97,13 @@ const RecycleList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
-            <li>
+            <li onClick={() => navigate("detail/12")}>
               <div className="postlist_top_image1"></div>
               <h3>
                 맥주 종류 별 40가지 먹어본 사람이
                 <br />
                 추천하는 맥주 탑5
               </h3>
-              {/* <div className="mask"></div> */}
             </li>
             <li>
               <div className="postlist_top_image2"></div>
@@ -139,7 +138,13 @@ const RecycleList = () => {
                       </div>
                     </div>
                   </Textwrap>
-                  <StFile src={post.imageFile}></StFile>
+                  <StFile
+                    src={
+                      post.imageFile === ""
+                        ? "../images/default_image.png"
+                        : post.imageFile
+                    }
+                  ></StFile>
                 </Card>
               );
             })}
@@ -214,7 +219,7 @@ const Button3 = styled.button`
 const Card = styled.div`
   border-bottom: 1px solid #e4e4e4;
   width: 800px;
-  height: 290px;
+  height: 180px;
   &:hover {
     cursor: pointer;
   }
@@ -232,12 +237,12 @@ const StTitle = styled.div`
   margin-top: 20px;
 `;
 const StFile = styled.img`
-  height: 140px;
-  width: 140px;
+  height: 92px;
+  width: 92px;
   background-color: #d9d9d9;
   background-size: contain;
   position: absolute;
-  right: 98px;
+  right: 73px;
   margin-top: 40px;
 `;
 const StContent = styled.div`
