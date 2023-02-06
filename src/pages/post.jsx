@@ -7,10 +7,13 @@ import "./reset.css";
 // import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
+import fileinput from "../assets/images/fileinput.png";
+import { TiWarningOutline } from "react-icons/ti";
 
 const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const imgRef = useRef();
 
   //const onClickAddPostHandler = () => {
   //dispatch(__addPost(addPost));
@@ -22,7 +25,7 @@ const Post = () => {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
-  console.log(content);
+
   // const getValue = (e) => {
   //   const { value } = e.target;
   //   setContent({
@@ -105,48 +108,36 @@ const Post = () => {
                 const { value } = ev.target;
                 setTitle(value);
               }}
-              //onChange={(e) => {
-              //setAddPost({ ...addPost, title: e.target.value });
-              //}}
             ></TitleInput>
           </Title>
 
-          {/* <Content
-          type="text"
-          placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
-          onChange={(ev) => {
-            const { value } = ev.target;
-            setContent({ ...content, content: value });
-          }}
-        ></Content> */}
-          {/* <Editor
-          type="text"
-          content={content}
-          setContent={setContent}
-
-          // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
-          // onChange={(e, editor) => {
-          //   const data = editor.getData();
-          //   console.log({ e, editor, data });
-          //   setContent({ ...content, content: data });
-          // }}
-        /> */}
           <br></br>
-          {/* <h1 style={{ padding: "20px" }}>
-            [#006888 YERIEL] React Quill Image Resize
-          </h1> */}
+
           <Quill type="text" content={content} setContent={setContent} />
+
           <File>
-            첨부파일
-            <FileInput
+            <Filetext>썸네일 사진</Filetext>
+            <TiWarningOutline className="icon" size="28" color="#e9e623" />
+            <ThumbnailEx>
+              썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
+            </ThumbnailEx>
+
+            <label htmlFor="ex_file">
+              <div className="fileinput">
+                <img src={fileinput} alt="fileinput" />
+              </div>
+            </label>
+            <input
               type="file"
-              id="fileUpload"
+              id="ex_file"
+              ref={imgRef}
               multiple={false}
-              width="500px"
               onChange={(ev) => {
                 const { files } = ev.target;
                 setFile(files);
               }}
+              width="92px"
+              height="32px"
             />
           </File>
 
@@ -207,23 +198,40 @@ const TitleInput = styled.input`
   font-size: 30px;
   outline: none;
 `;
-const Content = styled.textarea`
-  width: 850px;
-  height: 900px;
-  margin-left: 25px;
-  resize: none;
-  outline: none;
-  border: none;
-  font-size: 25px;
-`;
+
 const File = styled.div`
+  float: left;
   font-size: 20px;
   margin-top: 10px;
+  label {
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 92px;
+    height: 32px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    background-color: black;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
 `;
-const FileInput = styled.input`
-  //border: 1px solid green;
-  margin-left: 10px;
+
+const Filetext = styled.p`
+  float: left;
+  font-size: 16px;
+  margin-right: 5px;
 `;
+const ThumbnailEx = styled.p`
+  margin-top: -30px;
+  margin-left: 110px;
+  font-size: 14px;
+  /* border: 1px solid yellow; */
+  width: 780px;
+`;
+
 const Btns = styled.div`
   margin-left: 350px;
   margin-top: 50px;

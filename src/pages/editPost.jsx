@@ -103,27 +103,7 @@ const EditPost = () => {
               }}
             ></TitleInput>
           </Title>
-          {/* <Content
-            type="text"
-            placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
-            value={content}
-            onChange={(ev) => {
-              const { value } = ev.target;
-              setContent(value);
-              console.log("value:", value);
-            }}
-          ></Content> */}
-          {/* <Editor
-            type="text"
-            content={content}
-            setContent={setContent}
-            // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
-            // onChange={(e, editor) => {
-            //   const data = editor.getData();
-            //   console.log({ e, editor, data });
-            //   setContent({ ...content, content: data });
-            // }}
-          /> */}
+
           <Quill type="text" content={content} setContent={setContent} />
           <File>
             첨부파일

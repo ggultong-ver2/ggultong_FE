@@ -63,14 +63,16 @@ function Drink() {
             </button>
           </li>
           <div className="list_slide_container">
-            <div className="slide" >
+            <div className="slide">
               <Slider {...settings}>
                 {mainList.map((rowData) => (
                   <div className="slide_wrap">
                     <div
                       className="list_slide"
                       key={`{drink-rowData}`}
-                      onClick={() => navigate(`/drinkList/drink/detail/${rowData.postId}`)}
+                      onClick={() =>
+                        navigate(`/drinkList/drink/detail/${rowData.postId}`)
+                      }
                     >
                       <img
                         src={rowData.imageUrl}

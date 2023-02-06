@@ -112,24 +112,24 @@ const MealList = () => {
 
         <Wrapall>
           <Wrap>
-            {categoryPosts.map((post) => {
+            {categoryPosts.map((value, index) => {
               return (
                 <Card
-                  key={post.id}
-                  onClick={() => navigate(`detail/${post.id}`)}
+                  key={index}
+                  onClick={() => navigate(`detail/${value.id}`)}
                 >
                   <Textwrap>
-                    <StTitle>{post.title}</StTitle>
+                    <StTitle>{value.title}</StTitle>
                     <StContent
-                      dangerouslySetInnerHTML={{ __html: post.content }}
+                      dangerouslySetInnerHTML={{ __html: value.content }}
                     ></StContent>
                     <Etcwrap>
-                      댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
-                      {post.likePostSum} &nbsp;&nbsp;
-                      {post.createdAt.slice(0, 10)}
+                      댓글&nbsp;{value && value?.comment.length} 좋아요&nbsp;
+                      {value.likePostSum} &nbsp;&nbsp;
+                      {value.createdAt.slice(0, 10)}
                     </Etcwrap>
                   </Textwrap>
-                  <StFile src={post.imageFile}></StFile>
+                  <StFile src={value.imageFile}></StFile>
                 </Card>
               );
             })}
