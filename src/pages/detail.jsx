@@ -314,7 +314,6 @@ const StNickname = styled.p`
 `;
 const Etc = styled.div`
   font-size: 14px;
-  width: 150px;
   display: flex;
   text-align: center;
   margin-top: 10px;
