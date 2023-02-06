@@ -118,19 +118,19 @@ function MyPage() {
         nickname,
       })
     )
-      .then((res) => {
-        console.log("res", res);
-        // localStorage.getItem("Access_Token", res.data.profileImg);
-        // localStorage.getItem("nickcname", res.data.nickname);
-      })
+      // .then((res) => {
+      //   console.log("res", res);
+      //   localStorage.getItem("Access_Token", res.data.profileImg);
+      //   localStorage.getItem("nickcname", res.data.nickname);
+      // })
       .then(() => {
         Swal.fire(
           "정보수정 완료!",
           "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
           "success"
         );
-
-        window.location.replace("/mypage");
+        localStorage.clear();
+        navigate("/login");
       });
   };
   // console.log("myProfile.profile", myProfile.profile);

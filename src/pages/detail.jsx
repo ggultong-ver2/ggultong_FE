@@ -176,26 +176,27 @@ const Detail = () => {
             <Wrap>
               <div className="detail_title_wrap">
                 <div className="detail_title">{details?.title}</div>
-                {localStorage.getItem("nickname") ===details.nickname ? (
-                <div className="toggle">
-                  <div onClick={handleOpen} className="detail_toggle"></div>
-                  {open ? (
-                    <ul className="toggle_item_wrap">
-                      <li
-                        onClick={onClickEditPostHandler}
-                        className="toggle_edit"
-                      >
-                        수정하기
-                      </li>
-                      <li
-                        onClick={onClickDeletePostHandler}
-                        className="toggle_delete"
-                      >
-                        삭제하기
-                      </li>
-                    </ul>
-                  ) : null}
-                </div>) : null}
+                {localStorage.getItem("nickname") === details.nickname ? (
+                  <div className="toggle">
+                    <div onClick={handleOpen} className="detail_toggle"></div>
+                    {open ? (
+                      <ul className="toggle_item_wrap">
+                        <li
+                          onClick={onClickEditPostHandler}
+                          className="toggle_edit"
+                        >
+                          수정하기
+                        </li>
+                        <li
+                          onClick={onClickDeletePostHandler}
+                          className="toggle_delete"
+                        >
+                          삭제하기
+                        </li>
+                      </ul>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
 
               <Else>
@@ -258,8 +259,8 @@ const Detail = () => {
                               </Writtendate>
                               <Commentcontent>{comment.content}</Commentcontent>
                               <StBox>
-                                {localStorage.getItem("loginId") ===
-                                comment.loginId ? (
+                                {localStorage.getItem("nickname") ===
+                                comment.nickname ? (
                                   <>
                                     <EditBtn
                                       onClick={() => {

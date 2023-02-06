@@ -123,8 +123,12 @@ const RecycleList = () => {
                   <Textwrap>
                     <StTitle>{post.title}</StTitle>
 
+                    <StContent
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    ></StContent>
                     <div className="list_bottom">
                       <div className="list_bottom_left">
+                        {/* <div className="list_profile">{post?.profileImg}&nbsp;</div> */}
                         {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                         {post && post?.comment.length} 좋아요&nbsp;
                         {post.likePostSum}
@@ -132,7 +136,6 @@ const RecycleList = () => {
                       <div className="list_bottom_right">
                         {post.createdAt.slice(0, 10)}
                       </div>
-
                     </div>
                   </Textwrap>
                   <StFile

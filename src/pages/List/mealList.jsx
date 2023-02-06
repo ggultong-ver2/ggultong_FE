@@ -124,7 +124,6 @@ const MealList = () => {
 
                     <div className="list_bottom">
                       <div className="list_bottom_left">
-
                         {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                         {post && post?.comment.length} 좋아요&nbsp;
                         {post.likePostSum}
