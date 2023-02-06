@@ -15,8 +15,3 @@ code {
   src: url(./assets/fonts/PretendardVariable.ttf);
 }
 
-input:focus {
-  outline: none !important;
-  border-color: #ffd665;
-  box-shadow: 0 0 16px #ffd665;
-}

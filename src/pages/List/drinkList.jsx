@@ -14,7 +14,6 @@ const DrinkList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  // console.log(id);
 
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -31,7 +30,6 @@ const DrinkList = () => {
   const categoryDrinkCount = useSelector(
     (state) => state.details.details.drink
   );
-  // console.log("categoryDrinkCount:", categoryDrinkCount);
 
   useEffect(() => {
     if (!categoryDrinkCount) return;
@@ -49,12 +47,10 @@ const DrinkList = () => {
   };
 
   useEffect(() => {
-    // console.log(currentPage);
     dispatch(__getCategoryPost({ id, currentPage }));
   }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
-  // console.log("categoryPosts:", categoryPosts);
 
   return (
     <>
@@ -99,7 +95,6 @@ const DrinkList = () => {
                 <br />
                 추천하는 맥주 탑5
               </h3>
-              {/* <div className="mask"></div> */}
             </li>
             <li>
               <div className="postlist_top_image2"></div>
@@ -112,7 +107,6 @@ const DrinkList = () => {
           <Wrap>
             <div>
               {categoryPosts?.map((post) => {
-                // console.log(post);
                 return (
                   <Card
                     key={post.id}
@@ -123,11 +117,15 @@ const DrinkList = () => {
                       <StContent
                         dangerouslySetInnerHTML={{ __html: post.content }}
                       ></StContent>
-                      <Etcwrap>
-                        댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
-                        {post.likePostSum} &nbsp;&nbsp;
-                        {post.createdAt.slice(0, 10)}
-                      </Etcwrap>
+                      <div className="list_bottom">
+                        <div className="list_bottom_left">
+                          {/* <div className="list_profile">{post?.profileImg}&nbsp;</div> */}
+                          {post?.nickname}&nbsp;&nbsp;
+                          댓글&nbsp;{post && post?.comment.length} 좋아요&nbsp;
+                          {post.likePostSum}
+                        </div>
+                        <div className="list_bottom_right">{post.createdAt.slice(0, 10)}</div>
+                      </div>
                     </Textwrap>
                     <StFile src={post.imageFile}></StFile>
                   </Card>
@@ -203,9 +201,9 @@ const Button3 = styled.button`
   font-weight: 500;
 `;
 const Card = styled.div`
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #E4E4E4;
   width: 800px;
-  height: 250px;
+  height: 290px;
   &:hover {
     cursor: pointer;
   }
@@ -226,6 +224,7 @@ const StFile = styled.img`
   height: 140px;
   width: 140px;
   background-color: #d9d9d9;
+  background-size: contain;
   position: absolute;
   right: 98px;
   margin-top: 40px;
@@ -237,12 +236,6 @@ const StContent = styled.div`
   font-size: 14px;
   line-height: 22px;
   overflow: hidden;
-`;
-const Etcwrap = styled.div`
-  height: 30px;
-  font-size: 14px;
-  line-height: 22px;
-  color: #a0a0a0;
 `;
 
 export default DrinkList;
