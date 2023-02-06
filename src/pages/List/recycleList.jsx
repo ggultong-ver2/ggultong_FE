@@ -122,6 +122,7 @@ const RecycleList = () => {
                 >
                   <Textwrap>
                     <StTitle>{post.title}</StTitle>
+
                     <div className="list_bottom">
                       <div className="list_bottom_left">
                         {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
@@ -131,9 +132,16 @@ const RecycleList = () => {
                       <div className="list_bottom_right">
                         {post.createdAt.slice(0, 10)}
                       </div>
+
                     </div>
                   </Textwrap>
-                  <StFile src={post.imageFile}></StFile>
+                  <StFile
+                    src={
+                      post.imageFile === ""
+                        ? "../images/default_image.png"
+                        : post.imageFile
+                    }
+                  ></StFile>
                 </Card>
               );
             })}

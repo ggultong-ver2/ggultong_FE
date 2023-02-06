@@ -119,6 +119,7 @@ const DrinkList = () => {
                       <StTitle>{post.title}</StTitle>
                       <div className="list_bottom">
                         <div className="list_bottom_left">
+
                           {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                           {post && post?.comment.length} 좋아요&nbsp;
                           {post.likePostSum}
@@ -128,7 +129,13 @@ const DrinkList = () => {
                         </div>
                       </div>
                     </Textwrap>
-                    <StFile src={post.imageFile}></StFile>
+                    <StFile
+                      src={
+                        post.imageFile === ""
+                          ? "../images/default_image.png"
+                          : post.imageFile
+                      }
+                    ></StFile>
                   </Card>
                 );
               })}
