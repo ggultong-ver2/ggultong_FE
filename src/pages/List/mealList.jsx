@@ -124,17 +124,13 @@ const MealList = () => {
                     <StContent
                       dangerouslySetInnerHTML={{ __html: value.content }}
                     ></StContent>
-                    <div className="list_bottom">
-                      <div className="list_bottom_left">
-                        {/* <div className="list_profile">{post?.profileImg}&nbsp;</div> */}
-                        {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                        {value && value?.comment.length} 좋아요&nbsp;
-                        {value.likePostSum}
-                      </div>
-                      <div className="list_bottom_right">
-                        {value.createdAt.slice(0, 10)}
-                      </div>
-                    </div>
+
+                    <Etcwrap>
+                      댓글&nbsp;{value && value?.comment.length} 좋아요&nbsp;
+                      {value.likePostSum} &nbsp;&nbsp;
+                      {value.createdAt.slice(0, 10)}
+                    </Etcwrap>
+
                   </Textwrap>
                   <StFile src={value.imageFile}></StFile>
                 </Card>

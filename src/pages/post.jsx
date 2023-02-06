@@ -11,6 +11,7 @@ import fileinput from "../assets/images/fileinput.png";
 import { TiWarningOutline } from "react-icons/ti";
 import "./style.css";
 
+
 const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -76,100 +77,73 @@ const Post = () => {
   };
 
   return (
-    <>
-      <Background>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSubmitHandler(post);
-          }}
-        >
-          <div className="post_top_wrap">
-            <div className="post_top">
-              <select
-                name="category"
-                id="category"
-                className="post_top_select"
-                onChange={(ev) => {
-                  const { value } = ev.target;
-                  setCategory(value);
-                }}
-              >
-                <option value="choose">게시판 선택</option>
-                <option value="drink">혼술</option>
-                <option value="meal">혼밥</option>
-                <option value="recycle">리사이꿀</option>
-              </select>
-              <button>저장</button>
-            </div>
-          </div>
 
-          <Wrap>
-            <div className="post_input_wrap">
-              <input
-                type="text"
-                placeholder="제목을 입력해주세요"
-                onChange={(ev) => {
-                  const { value } = ev.target;
-                  setTitle(value);
-                }}
-                className="post_searchinp"
-                //onChange={(e) => {
-                //setAddPost({ ...addPost, title: e.target.value });
-                //}}
-              ></input>
-            </div>
+    <Background>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmitHandler(post);
+        }}
+      >
+        <Category>
+          카테고리
+          <CategorySelect
+            type="select"
+            name="category"
+            id="category"
+            onChange={(ev) => {
+              const { value } = ev.target;
+              setCategory(value);
+            }}
+          >
+            <option value="choose">선택해주세요</option>
+            <option value="drink">혼술</option>
+            <option value="meal">혼밥</option>
+            <option value="recycle">리사이꿀</option>
+          </CategorySelect>
+        </Category>
+        <Wrap>
+          <Title>
+            제목
+            <TitleInput
+              type="text"
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setTitle(value);
+              }}
+            ></TitleInput>
+          </Title>
 
-            {/* <Content
-          type="text"
-          placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
-          onChange={(ev) => {
-            const { value } = ev.target;
-            setContent({ ...content, content: value });
-          }}
-        ></Content> */}
-            {/* <Editor
-          type="text"
-          content={content}
-          setContent={setContent}
+          <br></br>
 
-          // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
-          // onChange={(e, editor) => {
-          //   const data = editor.getData();
-          //   console.log({ e, editor, data });
-          //   setContent({ ...content, content: data });
-          // }}
-        /> */}
-            <br></br>
-            {/* <h1 style={{ padding: "20px" }}>
-            [#006888 YERIEL] React Quill Image Resize
-          </h1> */}
-            <Quill type="text" content={content} setContent={setContent} />
-            <File>
-              <Filetext>썸네일 사진</Filetext>
-              <TiWarningOutline className="icon" size="28" color="#e9e623" />
-              <ThumbnailEx>
-                썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
-              </ThumbnailEx>
+          <Quill type="text" content={content} setContent={setContent} />
 
-              <label htmlFor="ex_file">
-                <div className="fileinput">
-                  <img src={fileinput} alt="fileinput" />
-                </div>
-              </label>
-              <input
-                type="file"
-                id="ex_file"
-                ref={imgRef}
-                multiple={false}
-                onChange={(ev) => {
-                  const { files } = ev.target;
-                  setFile(files);
-                }}
-                width="92px"
-                height="32px"
-              />
-            </File>
+          <File>
+            <Filetext>썸네일 사진</Filetext>
+            <TiWarningOutline className="icon" size="28" color="#e9e623" />
+            <ThumbnailEx>
+              썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
+            </ThumbnailEx>
+
+            <label htmlFor="ex_file">
+              <div className="fileinput">
+                <img src={fileinput} alt="fileinput" />
+              </div>
+            </label>
+            <input
+              type="file"
+              id="ex_file"
+              ref={imgRef}
+              multiple={false}
+              onChange={(ev) => {
+                const { files } = ev.target;
+                setFile(files);
+              }}
+              width="92px"
+              height="32px"
+            />
+          </File>
+
 
             {/* <Btns>
               <BackButton
@@ -214,6 +188,25 @@ const Wrap = styled.div`
   //border: 1px solid red;
   height: 1200px;
 `;
+
+const Title = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
+const TitleInput = styled.input`
+  border-bottom: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 800px;
+  height: 30px;
+  margin-left: 10px;
+  font-size: 30px;
+  outline: none;
+`;
+
+
 const Content = styled.textarea`
   width: 850px;
   height: 900px;
@@ -223,6 +216,7 @@ const Content = styled.textarea`
   border: none;
   font-size: 25px;
 `;
+
 const File = styled.div`
   float: left;
   font-size: 20px;
@@ -242,6 +236,21 @@ const File = styled.div`
     border: 0;
   }
 `;
+
+
+const Filetext = styled.p`
+  float: left;
+  font-size: 16px;
+  margin-right: 5px;
+`;
+const ThumbnailEx = styled.p`
+  margin-top: -30px;
+  margin-left: 110px;
+  font-size: 14px;
+  /* border: 1px solid yellow; */
+  width: 780px;
+`;
+
 const FileInput = styled.input`
   //border: 1px solid green;
   margin-left: 10px;
@@ -259,6 +268,7 @@ const ThumbnailEx = styled.p`
   /* border: 1px solid yellow; */
   width: 780px;
 `;
+
 
 const Btns = styled.div`
   margin-left: 350px;
