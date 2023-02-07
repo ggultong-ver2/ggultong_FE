@@ -127,7 +127,7 @@ const DrinkList = () => {
                           <Profile src={value.userProfile} />
                           &nbsp;
                           {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                          {value && value?.comment.length} 좋아요&nbsp;
+                          {value && value?.commentCount} 좋아요&nbsp;
                           {value.likePostSum} 스크랩&nbsp; {value.scrapPostSum}
                         </div>
                         <div className="list_bottom_right">
