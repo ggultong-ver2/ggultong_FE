@@ -107,7 +107,7 @@ function WorldCupGame() {
                   <StImg src={rowData?.imageUrl} />
                 </StFlex>
               </div>
-              <div className="worldcup_image"></div>
+              {/* <div className="worldcup_image"></div> */}
             </>
           );
         })}
@@ -120,11 +120,10 @@ function WorldCupGame() {
 const StContainer = styled.form`
   width: 100%;
   min-height: 100vh;
-  min-height: 1000px;
+  height: 1300px;
   margin: 0 auto;
   background-color: black;
   background-size: cover;
-  font-family: "Pretendard";
 `;
 
 const Container = styled.div`
