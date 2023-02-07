@@ -146,7 +146,7 @@ const Post = () => {
               <FileInput
                 type="file"
                 id="fileUpload"
-                multiple={false}
+                multiple={true}
                 width="500px"
                 onChange={(ev) => {
                   const { files } = ev.target;

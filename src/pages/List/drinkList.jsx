@@ -99,7 +99,7 @@ const DrinkList = () => {
                 추천하는 맥주 탑5
               </h3>
             </li>
-            <li>
+            <li onClick={() => navigate("detail/31")}>
               <div className="postlist_top_image2"></div>
               <h3>칵테일 안주 레시피</h3>
             </li>
@@ -119,7 +119,6 @@ const DrinkList = () => {
                       <StTitle>{post.title}</StTitle>
                       <div className="list_bottom">
                         <div className="list_bottom_left">
-
                           {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                           {post && post?.comment.length} 좋아요&nbsp;
                           {post.likePostSum}

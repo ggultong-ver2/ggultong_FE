@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
 import { __getMypageCount } from "../../redux/modules/postSlice";
-import "./style.css";
+import "../style.css";
 
 const MySmallTab = () => {
   const [displays, setDisplays] = useState([]);
@@ -22,7 +22,6 @@ const MySmallTab = () => {
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   useEffect(() => {
-    setCount();
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
@@ -82,7 +81,7 @@ const MySmallTab = () => {
 
   useEffect(() => {
     if (!myScrapCount) return;
-    setCount(myScrapCount);
+    setCounts(myScrapCount);
     // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [myScrapCount]);
 
@@ -123,17 +122,23 @@ const MySmallTab = () => {
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
                   </Textwrap>
-                    <div className="mypage_bottom">
-                      <div className="mypage_bottom_left">
+                  <div className="mypage_bottom">
+                    <div className="list_bottom">
+                      <div className="list_bottom_left">
                         <StProfile src={value.profileImage}></StProfile>
-                        {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                        {value && value?.comment.length} 좋아요&nbsp;
-                        {value.likePostSum}
+                        &nbsp;&nbsp;
+                        <StNickname>{value.nickname}</StNickname>
+                        &nbsp;&nbsp;&nbsp;
+                        <div className="left_content">
+                          댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
+                          {value.likeSum}
+                        </div>
                       </div>
-                      <div className="mypage_bottom_right">
+                      <div className="list_bottom_right">
                         {value.createdAt.slice(0, 10)}
                       </div>
                     </div>
+                  </div>
                   <StFile src={value.imageFile}></StFile>
                 </Card>
               );
@@ -158,19 +163,23 @@ const MySmallTab = () => {
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
                   </Textwrap>
-                    <div className="mypage_bottom">
-                      <div className="list_bottom">
-                        <div className="list_bottom_left">
-                          <StProfile src={value.profileImage}></StProfile>&nbsp;&nbsp;
-                          <StNickname>{value.nickname}</StNickname>&nbsp;&nbsp;&nbsp;
-                          <div className="left_content">
-                            댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
-                            {value.likeSum}
-                          </div>
+                  <div className="mypage_bottom">
+                    <div className="list_bottom">
+                      <div className="list_bottom_left">
+                        <StProfile src={value.profileImage}></StProfile>
+                        &nbsp;&nbsp;
+                        <StNickname>{value.nickname}</StNickname>
+                        &nbsp;&nbsp;&nbsp;
+                        <div className="left_content">
+                          댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
+                          {value.likeSum}
                         </div>
-                        <div className="list_bottom_right">{value.createdAt.slice(0, 10)}</div>
+                      </div>
+                      <div className="list_bottom_right">
+                        {value.createdAt.slice(0, 10)}
                       </div>
                     </div>
+                  </div>
                   <StFile src={value.imageFile}></StFile>
                 </Card>
               );
@@ -289,19 +298,4 @@ const StFile = styled.img`
   top: 20px;
   right: 0;
 `;
-const Etcwrap = styled.div`
-  height: 30px;
-  font-size: 14px;
-  line-height: 22px;
-  color: #a0a0a0;
-`;
-const StContent = styled.div`
-  overflow: hidden;
-  height: 44px;
-  width: 590px;
-  font-size: 14px;
-  line-height: 22px;
-  overflow: hidden;
-`;
-
 export default MySmallTab;
