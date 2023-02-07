@@ -130,14 +130,11 @@ const PostLoginPage = () => {
     var regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     // 형식에 맞는 경우 true 리턴
-    console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
   };
 
   // id 중복 체크 확인
   const onCheckUserName = (loginId) => {
-    console.log("loginID---->", loginId);
     __idcheck(loginId).then((res) => {
-      console.log(res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "다음으로 넘어가주세요!", "success");
       } else {
@@ -147,9 +144,7 @@ const PostLoginPage = () => {
   };
   // 닉네임 중복 체크 확인
   const onCheckNickName = (nickname) => {
-    console.log("nickname---->", nickname);
     __nickCheck(nickname).then((res) => {
-      console.log(res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "좋은 닉네임이군요!", "success");
       } else {

@@ -14,7 +14,6 @@ function MyPwChange() {
   const navigate = useNavigate();
 
   const onCheckPassword = (password) => {
-    console.log("password--->", password);
     __pwchange({ password }).then((res) => {
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "비밀번호가 변경되었습니다!", "success");
