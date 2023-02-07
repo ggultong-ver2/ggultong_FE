@@ -4,6 +4,7 @@ import "./style.css";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
 import Paging from "../pagination/paging";
+import styled from "styled-components";
 
 function Search() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Search() {
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
-
+  console.log(searchData);
   useEffect(() => {
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
@@ -31,8 +32,6 @@ function Search() {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        // /post/search?keyword=${params.keyword}`  baseURL
-
         `${IP}/post/search/${currentPage}?keyword=${params.keyword}`
       );
       setSearchData(data);
@@ -89,12 +88,11 @@ function Search() {
                       }}
                     >
                       <div className="search_post_title">{post.title}</div>
-                      <div
-                        dangerouslySetInnerHTML={{ __html: post.content }}
-                        className="search_post_content"
-                      ></div>
                       <div className="search_post_wrap">
                         <ul className="clearfix">
+                          <li>
+                            <StProfile src={post.userProfile}></StProfile>
+                          </li>
                           <li className="search_post_nickname">
                             {post.nickname}
                           </li>
@@ -103,6 +101,9 @@ function Search() {
                           </li>
                           <li className="search_post_like">
                             좋아요&nbsp;{post.likePostSum}
+                          </li>
+                          <li className="search_post_scrap">
+                            스크랩&nbsp;{post.scrapPostSum}
                           </li>
                         </ul>
                         <div className="search_post_time">
@@ -125,5 +126,11 @@ function Search() {
     </>
   );
 }
+
+const StProfile = styled.img`
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+`;
 
 export default Search;

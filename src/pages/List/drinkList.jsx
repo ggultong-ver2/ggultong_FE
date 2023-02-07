@@ -124,6 +124,8 @@ const DrinkList = () => {
                       <StTitle>{value.title}</StTitle>
                       <div className="list_bottom">
                         <div className="list_bottom_left">
+                          <Profile src={value.userProfile} />
+                          &nbsp;
                           {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                           {value && value?.commentCount} 좋아요&nbsp;
                           {value.likePostSum}
@@ -223,6 +225,11 @@ const Card = styled.div`
 const Textwrap = styled.div`
   float: left;
   margin-top: 30px;
+`;
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 `;
 const StTitle = styled.div`
   height: 50px;

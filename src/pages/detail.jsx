@@ -212,6 +212,7 @@ const Detail = () => {
                     댓글 {details?.commentList.length}{" "}
                   </Countcomment>
                   <Heart>좋아요 {details?.likePostSum}</Heart>
+                  &nbsp;&nbsp;&nbsp;&nbsp;스크랩&nbsp; {details?.scrapPostSum}
                 </Etcs>
               </Else>
               <StContent

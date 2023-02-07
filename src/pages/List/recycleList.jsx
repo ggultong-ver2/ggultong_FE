@@ -97,13 +97,13 @@ const RecycleList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
-            <li onClick={() => navigate("detail/12")}>
+            <li onClick={() => navigate("detail/39")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_recycle"></div>
                 <h3>자취러를 위한 재활용 꿀팁</h3>
               </div>
             </li>
-            <li onClick={() => navigate("detail/31")}>
+            <li onClick={() => navigate("detail/40")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_recycle2"></div>
                 <h3>비닐봉지 보관법</h3>
@@ -124,6 +124,7 @@ const RecycleList = () => {
                     <StTitle>{value.title}</StTitle>
                     <div className="list_bottom">
                       <div className="list_bottom_left">
+                        <Profile src={value.userProfile} />
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                         {value && value?.commentCount} 좋아요&nbsp;
                         {value.likePostSum}
@@ -230,6 +231,11 @@ const StTitle = styled.div`
   line-height: 28px;
   font-weight: bold;
   margin-top: 20px;
+`;
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 `;
 const StFile = styled.img`
   height: 92px;
