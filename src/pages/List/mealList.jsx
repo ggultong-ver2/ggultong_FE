@@ -130,8 +130,8 @@ const MealList = () => {
                       <div className="list_bottom_left">
                         <Profile src={value.userProfile} />
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                        {value && value?.comment.length} 좋아요&nbsp;
-                        {value.likePostSum} 스크랩&nbsp; {value.scrapPostSum}
+                        {value && value?.commentCount} 좋아요&nbsp;
+                        {value.likePostSum}
                       </div>
                       <div className="list_bottom_right">
                         {value.createdAt.slice(0, 10)}

@@ -31,9 +31,9 @@ const Detail = () => {
     content: "",
   });
   const detailList = useSelector((state) => state.details.details);
-  // console.log("details:", detailList);
-  const commentList = useSelector((state) => state.details.details.comment);
-
+  console.log("details:", detailList);
+  const commentList = useSelector((state) => state.details.details.commentList);
+  console.log("comment:", commentList);
   useEffect(() => {
     // console.log("param.id:", param.id);
     dispatch(__getIdPost(+param.id));
@@ -45,7 +45,6 @@ const Detail = () => {
     }
   }, [detailList]);
 
-  console.log(details);
   // useEffect(() => {
   //   if (commentList) {
   //     setEditComment(commentList);
@@ -146,7 +145,7 @@ const Detail = () => {
   // }, [details]);
   // // details가 없으면 실행시키지 않게다.
 
-  // console.log("visible", visible);
+  console.log("----", details);
   if (details.id) {
     return (
       <>
@@ -202,14 +201,16 @@ const Detail = () => {
 
               <Else>
                 <Etc>
-                  <Profile src={details?.userProfile}></Profile>
+                  <Profile>{details?.profileImg}</Profile>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
                   </div>
                 </Etc>
                 <Etcs>
-                  <Countcomment>댓글 {details?.comment.length} </Countcomment>
+                  <Countcomment>
+                    댓글 {details?.commentList.length}{" "}
+                  </Countcomment>
                   <Heart>좋아요 {details?.likePostSum}</Heart>
                   &nbsp;&nbsp;&nbsp;&nbsp;스크랩&nbsp; {details?.scrapPostSum}
                 </Etcs>
@@ -223,7 +224,7 @@ const Detail = () => {
               <Scrap />
             </div>
             <div className="comment_top">
-              <div>전체 댓글 {details?.comment.length} </div>
+              <div>전체 댓글 {details?.commentList.length} </div>
               <div>게시글 신고</div>
             </div>
             <Commentarea>
