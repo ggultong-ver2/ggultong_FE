@@ -9,7 +9,7 @@ function EditComment({ commentId, setVisible }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const detailList = useSelector((state) => state.details.details);
-  const commentList = useSelector((state) => state.details.details.comment);
+  const commentList = useSelector((state) => state.details.details.commentList);
   console.log("commentid", commentId);
   const [editcomment, setEditComment] = useState({
     content: "",
