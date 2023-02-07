@@ -6,7 +6,6 @@ import Main from "./Main";
 import Magazine from "./Magazine";
 import QNA from "./QNA";
 import Recipe from "./Recipe";
-// import "./reset.css";
 import Room from "./Room";
 import "./style.css";
 import styled from "styled-components";

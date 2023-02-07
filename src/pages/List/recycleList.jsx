@@ -13,15 +13,12 @@ const RecycleList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  // console.log(id);
 
-  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   useEffect(() => {
     dispatch(__getCategoryCount());
@@ -34,7 +31,6 @@ const RecycleList = () => {
   useEffect(() => {
     if (!categoryRecycleCount) return;
     setCount(categoryRecycleCount);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [categoryRecycleCount]);
 
   useEffect(() => {
@@ -47,12 +43,10 @@ const RecycleList = () => {
   };
 
   useEffect(() => {
-    // console.log(currentPage);
     dispatch(__getCategoryPost({ id, currentPage }));
   }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
-  console.log("categoryPosts:", categoryPosts);
 
   return (
     <>

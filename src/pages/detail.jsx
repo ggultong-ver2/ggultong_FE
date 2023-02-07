@@ -24,18 +24,14 @@ const Detail = () => {
   const { id } = useParams();
   const [visible, setVisible] = useState(false);
   const [modifycomment, setModifyComment] = useState(0);
-  // console.log(param, id);
+
   const [details, setDetails] = useState({});
-  // const [editcomment, setEditComment] = useState({});
   const [addComment, setAddComment] = useState({
     content: "",
   });
   const detailList = useSelector((state) => state.details.details);
-  console.log("details:", detailList);
   const commentList = useSelector((state) => state.details.details.commentList);
-  console.log("comment:", commentList);
   useEffect(() => {
-    // console.log("param.id:", param.id);
     dispatch(__getIdPost(+param.id));
   }, [id, dispatch]);
 
@@ -45,19 +41,10 @@ const Detail = () => {
     }
   }, [detailList]);
 
-  // useEffect(() => {
-  //   if (commentList) {
-  //     setEditComment(commentList);
-  //   }
-  // }, [commentList]);
-
-  // console.log("detailList:", details);
-
   //코멘트 핸들러
 
   const onClickAddCommentHandler = () => {
     dispatch(__addComment([addComment, Number(id)]));
-    console.log("add", addComment);
     setAddComment({ ...addComment, content: "" });
     if (localStorage.getItem("Access_Token") !== null) {
       Swal.fire({
@@ -90,18 +77,7 @@ const Detail = () => {
           "error"
         );
       }
-    } catch (error) {
-      // Swal.fire("본인만 삭제가능", "본인 외에 삭제할 수 없습니다.", "");
-    }
-
-    // if (res.data.) {
-    //   Swal.fire("댓글 삭제완료!", "", "success");
-    // } else {
-    //   console.log("asdadsad", detailList.comment[2]);
-    //   Swal.fire("본인만 삭제가능", "본인 외에 삭제할 수 없습니다.", "");
-    // } catch{
-
-    // }
+    } catch (error) {}
   };
 
   //게시글 핸들러
@@ -121,8 +97,6 @@ const Detail = () => {
 
   const onClickEditPostHandler = () => {
     if (detailList.nickname === localStorage.getItem("nickname")) {
-      //localStorage.getItem = key(nickname)로부터 data 읽기
-
       navigate(`/editpost/${id}`);
     } else {
       Swal.fire(
@@ -139,13 +113,6 @@ const Detail = () => {
     setOpen(!open);
   };
 
-  // useEffect(() => {
-  //   if (details.id) return;
-  //   navigate(`/drinkList/drink`);
-  // }, [details]);
-  // // details가 없으면 실행시키지 않게다.
-
-  console.log("----", details);
   if (details.id) {
     return (
       <>
@@ -172,7 +139,6 @@ const Detail = () => {
 
         <div className="detail_body">
           <StDetail>
-            {/* <p>{details?.id}</p> */}
             <Wrap>
               <div className="detail_title_wrap">
                 <div className="detail_title">{details?.title}</div>

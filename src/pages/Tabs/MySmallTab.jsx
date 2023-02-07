@@ -13,13 +13,11 @@ const MySmallTab = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   useEffect(() => {
     setCount();
@@ -32,12 +30,10 @@ const MySmallTab = () => {
       ? []
       : state?.postCount?.details?.myPosts[0]?.myPostCount
   );
-  console.log("postcount:", myPostCount);
 
   useEffect(() => {
     if (!myPostCount) return;
     setCount(myPostCount);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [myPostCount]);
 
   useEffect(() => {
@@ -55,7 +51,6 @@ const MySmallTab = () => {
   }, [dispatch, currentPage]);
 
   const myPost = useSelector((state) => state?.details?.details?.myPosts);
-  console.log("myPost::", myPost);
 
   // 내 스크랩 가져오기
   useEffect(() => {
@@ -63,27 +58,22 @@ const MySmallTab = () => {
   }, [dispatch, currentPage]);
 
   const myScrap = useSelector((state) => state?.details?.details?.myScrap);
-  // console.log("myScrap:", myScrap);
 
-  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPages, setCurrentPages] = useState(1); // 현재 페이지
   const [counts, setCounts] = useState(0); // 아이템 총 개수
   const [postPerPages] = useState(10); // 한 페이지에 보여질 아이템
   const [indexOfLastPosts, setIndexOfLastPosts] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPosts, setIndexOfFirstPosts] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   const myScrapCount = useSelector((state) =>
     state?.postCount?.details?.myScrap === undefined
       ? []
       : state?.postCount?.details?.myScrap[0]?.myScrapCount
   );
-  console.log("scrapcount:", myScrapCount);
 
   useEffect(() => {
     if (!myScrapCount) return;
     setCount(myScrapCount);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [myScrapCount]);
 
   const setPages = (page) => {
