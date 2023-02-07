@@ -47,9 +47,6 @@ const Post = () => {
         }
       });
     }
-
-    for (const pair of formdata) {
-    }
   };
 
   return (
