@@ -1,10 +1,10 @@
-
-.list_bottom_left{
-    display: flex;
-    align-items: center;
+.list_bottom_left {
+  display: flex;
+  align-items: center;
 }
-.left_content, .list_bottom_right{
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
+.left_content,
+.list_bottom_right {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
 }
