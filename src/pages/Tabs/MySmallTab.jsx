@@ -124,14 +124,20 @@ const MySmallTab = () => {
                     <StTitle>{value.title}</StTitle>
                   </Textwrap>
                   <div className="mypage_bottom">
-                    <div className="mypage_bottom_left">
-                      <StProfile src={value.profileImage}></StProfile>
-                      {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                      {value && value?.comment.length} 좋아요&nbsp;
-                      {value.likePostSum}
-                    </div>
-                    <div className="mypage_bottom_right">
-                      {value.createdAt.slice(0, 10)}
+                    <div className="list_bottom">
+                      <div className="list_bottom_left">
+                        <StProfile src={value.profileImage}></StProfile>
+                        &nbsp;&nbsp;
+                        <StNickname>{value.nickname}</StNickname>
+                        &nbsp;&nbsp;&nbsp;
+                        <div className="left_content">
+                          댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
+                          {value.likeSum}
+                        </div>
+                      </div>
+                      <div className="list_bottom_right">
+                        {value.createdAt.slice(0, 10)}
+                      </div>
                     </div>
                   </div>
                   <StFile src={value.imageFile}></StFile>
