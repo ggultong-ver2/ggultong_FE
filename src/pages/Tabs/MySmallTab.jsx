@@ -5,17 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
 import { __getMypageCount } from "../../redux/modules/postSlice";
-import axios from "axios";
 import "./style.css";
 
 const MySmallTab = () => {
   const [displays, setDisplays] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
-  const [countData, setCountData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // 내게시글 페이징
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
@@ -25,6 +22,7 @@ const MySmallTab = () => {
   // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   useEffect(() => {
+    setCount();
     setIndexOfLastPost(currentPage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
@@ -47,24 +45,6 @@ const MySmallTab = () => {
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
-  const myPostCounts = useSelector((state) =>
-    state?.postCount?.details?.myPosts?.data === undefined
-      ? []
-      : state?.postCount?.details?.myPosts?.data[0].myPostCount
-  );
-  console.log("postcount:", myPostCounts);
-
-  // const myPostCounts = useSelector(
-  //   (state) => state?.postCount?.details?.myPosts
-  // );
-  // console.log("postcount:", myPostCounts);
-
-  useEffect(() => {
-    if (!myPostCounts) return;
-    setCount(myPostCounts);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
-  }, [myPostCounts]);
-
   const setPage = (page) => {
     setCurrentPage(page);
   };
@@ -74,22 +54,7 @@ const MySmallTab = () => {
     dispatch(__getMyPost(currentPage));
   }, [dispatch, currentPage]);
 
-  useEffect(() => {
-    setIndexOfLastPosts(currentPages * postPerPages);
-    setIndexOfFirstPosts(indexOfLastPosts - postPerPages);
-  }, [currentPages, indexOfFirstPosts, indexOfLastPosts, postPerPages]);
-
-  useEffect(() => {
-    dispatch(__getMyPost(currentPages));
-  }, [dispatch, currentPages]);
-
-  useEffect(() => {
-    setCount(myPost?.length);
-    setIndexOfLastPost(currentPage * postPerPage);
-    setIndexOfFirstPost(indexOfLastPost - postPerPage);
-  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
-
-  const myPost = useSelector((state) => state?.details?.details?.myPosts?.data);
+  const myPost = useSelector((state) => state?.details?.details?.myPosts);
   console.log("myPost::", myPost);
 
   // 내 스크랩 가져오기
@@ -98,7 +63,7 @@ const MySmallTab = () => {
   }, [dispatch, currentPage]);
 
   const myScrap = useSelector((state) => state?.details?.details?.myScrap);
-  console.log("myScrap:", myScrap);
+  // console.log("myScrap:", myScrap);
 
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPages, setCurrentPages] = useState(1); // 현재 페이지
@@ -117,7 +82,7 @@ const MySmallTab = () => {
 
   useEffect(() => {
     if (!myScrapCount) return;
-    setCounts(myScrapCount);
+    setCount(myScrapCount);
     // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [myScrapCount]);
 
@@ -159,20 +124,14 @@ const MySmallTab = () => {
                     <StTitle>{value.title}</StTitle>
                   </Textwrap>
                   <div className="mypage_bottom">
-                    <div className="list_bottom">
-                      <div className="list_bottom_left">
-                        <StProfile src={value.profileImage}></StProfile>
-                        &nbsp;&nbsp;
-                        <StNickname>{value.nickname}</StNickname>
-                        &nbsp;&nbsp;&nbsp;
-                        <div className="left_content">
-                          댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
-                          {value.likeSum}
-                        </div>
-                      </div>
-                      <div className="list_bottom_right">
-                        {value.createdAt.slice(0, 10)}
-                      </div>
+                    <div className="mypage_bottom_left">
+                      <StProfile src={value.profileImage}></StProfile>
+                      {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                      {value && value?.comment.length} 좋아요&nbsp;
+                      {value.likePostSum}
+                    </div>
+                    <div className="mypage_bottom_right">
+                      {value.createdAt.slice(0, 10)}
                     </div>
                   </div>
                   <StFile src={value.imageFile}></StFile>
@@ -220,11 +179,7 @@ const MySmallTab = () => {
                 </Card>
               );
             })}
-          <Paging
-            currentPage={currentPages}
-            count={counts}
-            setPage={setPages}
-          />
+          <Paging currentPage={currentPages} count={counts} setPage={setPage} />
         </>
       ),
     },
@@ -338,4 +293,5 @@ const StFile = styled.img`
   top: 20px;
   right: 0;
 `;
+
 export default MySmallTab;
