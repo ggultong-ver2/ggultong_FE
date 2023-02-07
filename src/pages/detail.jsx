@@ -45,7 +45,6 @@ const Detail = () => {
     }
   }, [detailList]);
 
-  console.log(details);
   // useEffect(() => {
   //   if (commentList) {
   //     setEditComment(commentList);

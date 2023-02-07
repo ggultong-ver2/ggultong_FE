@@ -7,7 +7,7 @@ import { useInput } from "../lib/utils/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
 import { __getRankMonth } from "../redux/modules/postSlice";
-import"./style.css"
+import "./style.css";
 
 function GameList() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ function GameList() {
           img2: array[i][1].imageUrl,
           month: array[i][0].month,
           id: array[i][0].id,
-          id2: array[i][1].id2,
+          id2: array[i][1].id,
           category: array[i][0].category,
         };
         //
