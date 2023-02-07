@@ -101,7 +101,7 @@ const Post = () => {
             </select>
             <button>저장</button>
           </div>
-        </div>{" "}
+        </div>
         <Wrap>
           <div className="post_input_wrap">
             <input
