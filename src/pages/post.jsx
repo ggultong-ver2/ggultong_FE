@@ -114,7 +114,7 @@ const Post = () => {
               className="post_searchinp"
             ></input>
           </div>
-          {/* <Quill type="text" content={content} setContent={setContent} /> */}
+          <Quill type="text" content={content} setContent={setContent} />
 
           {/* // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
           // onChange={(e, editor) => {
@@ -139,7 +139,7 @@ const Post = () => {
                 setFile(files);
               }}
             />
-            <span>썸네일은 음식 월드컵에 이용됩니다.</span>
+            <p>썸네일은 음식 월드컵에 이용됩니다.</p>
           </div>
 
           {/* <Btns>
