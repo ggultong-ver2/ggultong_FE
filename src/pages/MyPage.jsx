@@ -98,6 +98,13 @@ function MyPage() {
     //     localStorage.clear();
     //     alert("그 동안 이용해주셔서 감사합니다.");
     //     window.location.assign("/");
+    //sdasdadadsadsadadwqdq
+    //sdasdadadsadsadadwqdq
+    //sdasdadadsadsadadwqdq
+    //sdasdadadsadsadadwqdq
+    //sdasdadadsadsadadwqdq
+
+    // ss
     //   });
     // }
   };
@@ -111,19 +118,19 @@ function MyPage() {
         nickname,
       })
     )
-      .then((res) => {
-        console.log("res", res);
-        // localStorage.getItem("Access_Token", res.data.profileImg);
-        // localStorage.getItem("nickcname", res.data.nickname);
-      })
+      // .then((res) => {
+      //   console.log("res", res);
+      //   localStorage.getItem("Access_Token", res.data.profileImg);
+      //   localStorage.getItem("nickcname", res.data.nickname);
+      // })
       .then(() => {
         Swal.fire(
           "정보수정 완료!",
           "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
           "success"
         );
-
-        window.location.replace("/mypage");
+        localStorage.clear();
+        navigate("/login");
       });
   };
   // console.log("myProfile.profile", myProfile.profile);
@@ -218,7 +225,6 @@ function MyPage() {
             </SettingItm2>
           </AllBox2>
         </StCenterBox2>
-
         <StCenterBox3>
           <MySmallTab />
         </StCenterBox3>
@@ -230,17 +236,16 @@ function MyPage() {
 const StContainer = styled.form`
   background-color: #f3f3f3;
   width: 100%;
-  height: 4000px;
+  min-height: 100vh;
+  padding-bottom: 50px;
   display: flex;
   justify-content: center;
-  font-family: "Pretendard";
 `;
 
 const StSubCon = styled.div`
   background-color: #f3f3f3;
   width: 996px;
-  height: 2500px;
-  font-family: "Pretendard";
+  padding-bottom: 50px;
 `;
 
 const ProfileBox = styled.div`
@@ -281,16 +286,12 @@ const StCenterBox2 = styled.div`
 
 const StCenterBox3 = styled.div`
   margin-top: 30px;
-
-  margin-bottom: 30px;
   width: 996px;
-  height: 2500px;
+  min-height: 50vh;
   border: 0;
-
   border-radius: 1px;
   box-sizing: border-box;
   display: flex;
-  flex-shrink: 0;
   font-size: 100%;
   background-color: white;
   font-family: "Pretendard";

@@ -66,8 +66,7 @@ const EditPost = () => {
   // console.log(post.imageFiles);
   // console.log(file);
   return (
-    <div>
-
+    <Background>
       <Form
         onSubmit={(e) => {
           e.preventDefault();
@@ -105,7 +104,6 @@ const EditPost = () => {
               }}
             ></TitleInput>
           </Title>
-
           <Quill type="text" content={content} setContent={setContent} />
           <File>
             첨부파일
@@ -122,7 +120,6 @@ const EditPost = () => {
             />
           </File>
           <Btns>
-
             <BackButton
               onClick={(e) => {
                 e.preventDefault();
@@ -133,11 +130,10 @@ const EditPost = () => {
             </BackButton>
 
             <EnterButton>확인</EnterButton>
-          </Btns> */}
-          </Wrap>
-        </Form>
-      </Background>
-    </div>
+          </Btns>{" "}
+        </Wrap>
+      </Form>
+    </Background>
   );
 };
 

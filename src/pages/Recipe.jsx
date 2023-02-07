@@ -33,7 +33,7 @@ function Recipe() {
 
     if (postList) {
       for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < i * 2; j++) {
+        for (let j = 0; j < 6; j++) {
           const mainPageList = {
             postId: array[1][j].postId,
             title: array[1][j].title,
@@ -62,12 +62,14 @@ function Recipe() {
           <div className="list_slide_container">
             <div className="slide">
               <Slider {...settings}>
-                {mainList.map((rowData) => (
+                {mainList.map((rowData, index) => (
                   <div
                     className="list_slide"
-                    key={`{recipe-rowData}`}
-                    onClick={() => navigate(`/mealList/meal/detail/${rowData.postId}`)}
-                    >
+                    key={index}
+                    onClick={() =>
+                      navigate(`/mealList/meal/detail/${rowData.postId}`)
+                    }
+                  >
                     <img
                       src={rowData.imageUrl}
                       alt="image"

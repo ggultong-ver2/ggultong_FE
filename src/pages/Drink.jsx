@@ -33,7 +33,7 @@ function Drink() {
 
     if (postList) {
       for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < i * 2; j++) {
+        for (let j = 0; j < 6; j++) {
           const mainPageList = {
             postId: array[0][j].postId,
             title: array[0][j].title,
@@ -65,11 +65,10 @@ function Drink() {
           <div className="list_slide_container">
             <div className="slide">
               <Slider {...settings}>
-                {mainList.map((rowData) => (
-                  <div className="slide_wrap">
+                {mainList.map((rowData, index) => (
+                  <div className="slide_wrap" key={index}>
                     <div
                       className="list_slide"
-                      key={`{drink-rowData}`}
                       onClick={() =>
                         navigate(`/drinkList/drink/detail/${rowData.postId}`)
                       }

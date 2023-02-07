@@ -11,7 +11,6 @@ import fileinput from "../assets/images/fileinput.png";
 import { TiWarningOutline } from "react-icons/ti";
 import "./style.css";
 
-
 const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -77,7 +76,6 @@ const Post = () => {
   };
 
   return (
-
     <Background>
       <Form
         onSubmit={(e) => {
@@ -118,34 +116,34 @@ const Post = () => {
 
           <Quill type="text" content={content} setContent={setContent} />
 
-          <File>
-            <Filetext>썸네일 사진</Filetext>
-            <TiWarningOutline className="icon" size="28" color="#e9e623" />
-            <ThumbnailEx>
-              썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
-            </ThumbnailEx>
-
-            <label htmlFor="ex_file">
-              <div className="fileinput">
-                <img src={fileinput} alt="fileinput" />
-              </div>
-            </label>
+          {/* // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
+          // onChange={(e, editor) => {
+          //   const data = editor.getData();
+          //   console.log({ e, editor, data });
+          //   setContent({ ...content, content: data });
+          // }}
+        } */}
+          <br></br>
+          {/* <h1 style={{ padding: "20px" }}>
+            [#006888 YERIEL] React Quill Image Resize
+          </h1> */}
+          <Quill type="text" content={content} setContent={setContent} />
+          <div className="post_file_wrap">
+            <label for="file">썸네일 첨부</label>
             <input
+              className="post_file_input"
               type="file"
-              id="ex_file"
-              ref={imgRef}
-              multiple={false}
+              id="file"
+              multiple={true}
               onChange={(ev) => {
                 const { files } = ev.target;
                 setFile(files);
               }}
-              width="92px"
-              height="32px"
             />
-          </File>
+            <span>썸네일은 음식 월드컵에 이용됩니다.</span>
+          </div>
 
-
-            {/* <Btns>
+          {/* <Btns>
               <BackButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -156,10 +154,9 @@ const Post = () => {
               </BackButton>
               <EnterButton>확인</EnterButton>
             </Btns> */}
-          </Wrap>
-        </Form>
-      </Background>
-    </>
+        </Wrap>
+      </Form>
+    </Background>
   );
 };
 const Background = styled.div`
@@ -206,7 +203,6 @@ const TitleInput = styled.input`
   outline: none;
 `;
 
-
 const Content = styled.textarea`
   width: 850px;
   height: 900px;
@@ -237,20 +233,6 @@ const File = styled.div`
   }
 `;
 
-
-const Filetext = styled.p`
-  float: left;
-  font-size: 16px;
-  margin-right: 5px;
-`;
-const ThumbnailEx = styled.p`
-  margin-top: -30px;
-  margin-left: 110px;
-  font-size: 14px;
-  /* border: 1px solid yellow; */
-  width: 780px;
-`;
-
 const FileInput = styled.input`
   //border: 1px solid green;
   margin-left: 10px;
@@ -268,7 +250,6 @@ const ThumbnailEx = styled.p`
   /* border: 1px solid yellow; */
   width: 780px;
 `;
-
 
 const Btns = styled.div`
   margin-left: 350px;

@@ -45,6 +45,7 @@ const Detail = () => {
     }
   }, [detailList]);
 
+  console.log(details);
   // useEffect(() => {
   //   if (commentList) {
   //     setEditComment(commentList);
@@ -176,31 +177,32 @@ const Detail = () => {
             <Wrap>
               <div className="detail_title_wrap">
                 <div className="detail_title">{details?.title}</div>
-                {localStorage.getItem("nickname") ===details.nickname ? (
-                <div className="toggle">
-                  <div onClick={handleOpen} className="detail_toggle"></div>
-                  {open ? (
-                    <ul className="toggle_item_wrap">
-                      <li
-                        onClick={onClickEditPostHandler}
-                        className="toggle_edit"
-                      >
-                        수정하기
-                      </li>
-                      <li
-                        onClick={onClickDeletePostHandler}
-                        className="toggle_delete"
-                      >
-                        삭제하기
-                      </li>
-                    </ul>
-                  ) : null}
-                </div>) : null}
+                {localStorage.getItem("nickname") === details.nickname ? (
+                  <div className="toggle">
+                    <div onClick={handleOpen} className="detail_toggle"></div>
+                    {open ? (
+                      <ul className="toggle_item_wrap">
+                        <li
+                          onClick={onClickEditPostHandler}
+                          className="toggle_edit"
+                        >
+                          수정하기
+                        </li>
+                        <li
+                          onClick={onClickDeletePostHandler}
+                          className="toggle_delete"
+                        >
+                          삭제하기
+                        </li>
+                      </ul>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
 
               <Else>
                 <Etc>
-                  <div>{details?.ProfileImg}</div>
+                  <Profile>{details?.ProfileImg}</Profile>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
@@ -239,16 +241,16 @@ const Detail = () => {
                 <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
               </Writecomment>
               <div>
-                {commentList.map((comment) => {
+                {commentList.map((comment, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       {visible && comment.id === modifycomment ? (
                         <EditComment
                           commentId={comment.id}
                           setVisible={setVisible}
                         />
                       ) : (
-                        <Commentbox>
+                        <Commentbox key={index}>
                           <Commenttextarea>
                             <Profileimg src={comment.profileImg} />
                             <WrapWritten>
@@ -258,8 +260,8 @@ const Detail = () => {
                               </Writtendate>
                               <Commentcontent>{comment.content}</Commentcontent>
                               <StBox>
-                                {localStorage.getItem("loginId") ===
-                                comment.loginId ? (
+                                {localStorage.getItem("nickname") ===
+                                comment.nickname ? (
                                   <>
                                     <EditBtn
                                       onClick={() => {
@@ -284,7 +286,7 @@ const Detail = () => {
                           </Commenttextarea>
                         </Commentbox>
                       )}
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -295,7 +297,11 @@ const Detail = () => {
     );
   }
 };
-
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+`;
 const StDetail = styled.div`
   width: 1200px;
   margin: auto;
