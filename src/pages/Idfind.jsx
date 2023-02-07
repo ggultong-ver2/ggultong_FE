@@ -8,10 +8,6 @@ import { __pwfind } from "../api/submit/Login";
 import { __Idfind } from "../api/submit/Login";
 
 const Idfind = () => {
-  // const url1 =
-  //   "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
-  // const url2 =
-  //   "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
   const [email, setEmail] = useInput();
 
   const navigate = useNavigate();
@@ -21,7 +17,6 @@ const Idfind = () => {
     __Idfind({
       email,
     }).then((res) => {
-      console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, res.data.loginId, "success");
       } else {
@@ -36,7 +31,6 @@ const Idfind = () => {
     var regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     // 형식에 맞는 경우 true 리턴
-    console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
   };
 
   return (
