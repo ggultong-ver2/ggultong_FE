@@ -140,7 +140,7 @@ const Post = () => {
                 setFile(files);
               }}
             />
-            <span>썸네일은 음식 월드컵에 이용됩니다.</span>
+            <p>썸네일은 음식 월드컵에 이용됩니다.</p>
           </div>
 
           {/* <Btns>
@@ -167,11 +167,11 @@ const Background = styled.div`
 `;
 const Form = styled.form`
   //border: 1px solid black;
-  width: 900px;
+  width: 1000px;
   height: 1250px;
   margin: auto;
   /* margin-top: 50px; */
-  padding: 10px;
+  padding: 10px 50px;
   background-color: white;
 `;
 const Category = styled.p`
