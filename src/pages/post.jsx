@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
 import "./reset.css";
-// import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
 import fileinput from "../assets/images/fileinput.png";
