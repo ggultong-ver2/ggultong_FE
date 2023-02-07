@@ -45,6 +45,30 @@
   background-size: cover;
   border-radius: 4px;
 }
+.postlist_top_meal {
+  width: 466px;
+  height: 260px;
+  background-image: url(../../../public/images/meal_2.jpg);
+  background-size: cover;
+}
+.postlist_top_meal2 {
+  width: 466px;
+  height: 260px;
+  background-image: url(../../../public/images/meal_1.jpg);
+  background-size: cover;
+}
+.postlist_top_recycle {
+  width: 466px;
+  height: 260px;
+  background-image: url(../../../public/images/recycle_2.jpg);
+  background-size: cover;
+}
+.postlist_top_recycle2 {
+  width: 466px;
+  height: 260px;
+  background-image: url(../../../public/images/recycle_1.jpg);
+  background-size: cover;
+}
 .postlist_top h3 {
   position: absolute;
   bottom: 0;
@@ -54,7 +78,7 @@
   padding: 24px 20px;
 }
 
-.list_bottom{
+.list_bottom {
   width: 800px;
   height: 30px;
   font-size: 14px;
@@ -65,6 +89,7 @@
   justify-content: space-between;
   margin-top: 40px;
 }
-.list_profile{
-  width: 20px;height: 20px;
+.list_profile {
+  width: 20px;
+  height: 20px;
 }

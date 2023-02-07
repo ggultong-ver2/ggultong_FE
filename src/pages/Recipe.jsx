@@ -62,12 +62,14 @@ function Recipe() {
           <div className="list_slide_container">
             <div className="slide">
               <Slider {...settings}>
-                {mainList.map((rowData) => (
+                {mainList.map((rowData, index) => (
                   <div
                     className="list_slide"
-                    key={`{recipe-rowData}`}
-                    onClick={() => navigate(`/mealList/meal/detail/${rowData.postId}`)}
-                    >
+                    key={index}
+                    onClick={() =>
+                      navigate(`/mealList/meal/detail/${rowData.postId}`)
+                    }
+                  >
                     <img
                       src={rowData.imageUrl}
                       alt="image"

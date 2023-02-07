@@ -134,7 +134,7 @@ const Post = () => {
               className="post_file_input"
               type="file"
               id="file"
-              multiple={false}
+              multiple={true}
               onChange={(ev) => {
                 const { files } = ev.target;
                 setFile(files);
@@ -142,24 +142,6 @@ const Post = () => {
             />
             <span>썸네일은 음식 월드컵에 이용됩니다.</span>
           </div>
-
-          <label htmlFor="ex_file">
-            <div className="fileinput">
-              <img src={fileinput} alt="fileinput" />
-            </div>
-          </label>
-          <input
-            type="file"
-            id="ex_file"
-            ref={imgRef}
-            multiple={false}
-            onChange={(ev) => {
-              const { files } = ev.target;
-              setFile(files);
-            }}
-            width="92px"
-            height="32px"
-          />
 
           {/* <Btns>
               <BackButton

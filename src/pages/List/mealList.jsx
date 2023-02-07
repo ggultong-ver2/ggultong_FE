@@ -96,20 +96,17 @@ const MealList = () => {
         <div className="postlist_top">
           <ul className="clearfix">
             <li onClick={() => navigate("detail/12")}>
-              <div className="post_card_wrap">
-                <div className="postlist_top_image1"></div>
-                <h3>
-                  맥주 종류 별 40가지 먹어본 사람이
-                  <br />
-                  추천하는 맥주 탑5
-                </h3>
-              </div>
+              <div className="postlist_top_meal"></div>
+              <h3>혼밥하는 사람들을 위한 음식 보관 꿀팁</h3>
+              {/* <div className="mask"></div> */}
             </li>
-            <li>
-              <div className="post_card_wrap">
-                <div className="postlist_top_image2"></div>
-                <h3>칵테일 안주 레시피</h3>
-              </div>
+            <li onClick={() => navigate("detail/31")}>
+              <div className="postlist_top_meal2"></div>
+              <h3>
+                집에서 간단히 만들어 먹기 좋은
+                <br />
+                자취러를 위한 요리
+              </h3>
             </li>
           </ul>
         </div>

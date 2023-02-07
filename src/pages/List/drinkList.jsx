@@ -101,11 +101,9 @@ const DrinkList = () => {
                 </h3>
               </div>
             </li>
-            <li>
-              <div className="post_card_wrap">
-                <div className="postlist_top_image2"></div>
-                <h3>칵테일 안주 레시피</h3>
-              </div>
+            <li onClick={() => navigate("detail/31")}>
+              <div className="postlist_top_image2"></div>
+              <h3>칵테일 안주 레시피</h3>
             </li>
           </ul>
         </div>

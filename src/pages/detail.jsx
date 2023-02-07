@@ -45,6 +45,7 @@ const Detail = () => {
     }
   }, [detailList]);
 
+  console.log(details);
   // useEffect(() => {
   //   if (commentList) {
   //     setEditComment(commentList);
@@ -201,7 +202,7 @@ const Detail = () => {
 
               <Else>
                 <Etc>
-                  <div>{details?.ProfileImg}</div>
+                  <Profile>{details?.ProfileImg}</Profile>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
@@ -240,16 +241,16 @@ const Detail = () => {
                 <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
               </Writecomment>
               <div>
-                {commentList.map((comment) => {
+                {commentList.map((comment, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       {visible && comment.id === modifycomment ? (
                         <EditComment
                           commentId={comment.id}
                           setVisible={setVisible}
                         />
                       ) : (
-                        <Commentbox>
+                        <Commentbox key={index}>
                           <Commenttextarea>
                             <Profileimg src={comment.profileImg} />
                             <WrapWritten>
@@ -285,7 +286,7 @@ const Detail = () => {
                           </Commenttextarea>
                         </Commentbox>
                       )}
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -296,7 +297,11 @@ const Detail = () => {
     );
   }
 };
-
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+`;
 const StDetail = styled.div`
   width: 1200px;
   margin: auto;
