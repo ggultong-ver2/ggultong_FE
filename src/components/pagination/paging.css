@@ -19,46 +19,44 @@ ul.pagination li {
   font-size: 1rem;
   cursor: pointer;
   border-radius: 4px;
-
 }
-ul.pagination li:hover{
-  background: #FDF5DC;
+ul.pagination li:hover {
+  background: #fdf5dc;
 }
 
 ul.pagination li:first-child {
   border-radius: 4px;
-  background: #F9FAFB;
+  background: #f9fafb;
 }
-ul.pagination li:first-child:hover{
+ul.pagination li:first-child:hover {
   background: trasparent;
   border: 1px solid #000;
 }
-ul.pagination li:nth-child(2){
+ul.pagination li:nth-child(2) {
   border-radius: 4px;
-  background: #F9FAFB;
+  background: #f9fafb;
 }
-ul.pagination li:nth-child(2):hover{
+ul.pagination li:nth-child(2):hover {
   background: trasparent;
   border: 1px solid #000;
 }
-ul.pagination li:nth-child(n-1){
+ul.pagination li:nth-child(n-1) {
   border-radius: 4px;
-  background: #F9FAFB;
+  background: #f9fafb;
 }
-ul.pagination li:nth-child(n-1):hover{
+ul.pagination li:nth-child(n-1):hover {
   background: trasparent;
   border: 1px solid #000;
 }
 ul.pagination li:last-child {
   border-radius: 4px;
-  background: #F9FAFB;
+  background: #f9fafb;
 }
 
-ul.pagination li:last-child:hover{
+ul.pagination li:last-child:hover {
   background: trasparent;
   border: 1px solid #000;
 }
-
 
 ul.pagination li a {
   text-decoration: none;

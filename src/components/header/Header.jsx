@@ -18,14 +18,9 @@ function Header() {
 
   const [open, setOpen] = useState(false);
 
-  // const handleOpen = () => {
-  //   setOpen(!open);
-  //   console.log("open")
-  // };
-
   const getNotification = () => {
     dispatch(__getNotification());
-    console.log("열림");
+
     setOpen(!open);
   };
 
@@ -62,22 +57,12 @@ function Header() {
               알림
             </li>
             {open ? (
-              // <ul className="alarm_menu">
-              //   <li>읽지 않은 알림 (1)</li>
-              //   <li className="menu_item">
-              //     lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
-              //   </li>
-              //   <li className="menu_item">
-              //     lidiee 님이 '김찌 레시피' 게시글에 댓글을 달았습니다.
-              //   </li>
-              // </ul>
               <div className="notification_centre">
                 <NotificationList />
               </div>
             ) : null}
             <li
               onClick={(res) => {
-                console.log(res.headers);
                 if (
                   localStorage.getItem("Access_Token", res.headers) !== null
                 ) {
