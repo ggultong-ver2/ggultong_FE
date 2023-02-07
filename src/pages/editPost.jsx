@@ -171,11 +171,11 @@ const Background = styled.div`
 `;
 
 const Form = styled.form`
-  width: 900px;
+  width: 1000px;
   height: 1250px;
   margin: auto;
   margin-top: 50px;
-  padding: 10px;
+  padding: 10px 50px;
   background-color: #fff;
 `;
 const Category = styled.p`
