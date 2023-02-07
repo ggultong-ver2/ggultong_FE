@@ -7,7 +7,7 @@ import { useInput } from "../lib/utils/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import foodbox from "../assets/images/foodbox.png";
 import { __getRankMonth } from "../redux/modules/postSlice";
-import"./style.css"
+import "./style.css";
 
 function GameList() {
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ const initialState = {
     title: "",
     content: "",
     id: 0,
-    comment: {},
+    commentList: {},
     isLikedPost: false,
     likePostSum: 0,
     isscrapPost: false,
@@ -784,7 +784,7 @@ export const postSlice = createSlice({
     [__addComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log("action.payload:", action.payload);
-      state.details.comment.push(action.payload);
+      state.details.commentList.push(action.payload);
       console.log("state:", state);
     },
     [__addComment.rejected]: (state, action) => {
@@ -798,10 +798,10 @@ export const postSlice = createSlice({
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoadig = false;
       // state.details.comment.pop(action.payload);
-      const newComment = state.details.comment.filter(
-        (comment) => comment.id !== action.payload.commentId
+      const newComment = state.details.commentList.filter(
+        (commentList) => commentList.id !== action.payload.commentId
       );
-      state.details.comment = newComment;
+      state.details.commentList = newComment;
     },
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -816,14 +816,14 @@ export const postSlice = createSlice({
     [__editComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log("st", action.payload);
-      const index = current(state.details.comment).map((e) => {
+      const index = current(state.details.commentList).map((e) => {
         if (e.id === action.payload.id) {
           return action.payload;
         } else {
           return e;
         }
       });
-      state.details.comment = index;
+      state.details.commentList = index;
       // state.comment.splice(index, 1, action.payload.content);
       console.log("index", index);
     },
@@ -834,7 +834,7 @@ export const postSlice = createSlice({
     },
     [__getComment.pending]: (state) => {},
     [__getComment.fulfilled]: (state, action) => {
-      state.comment = action.payload;
+      state.commentList = action.payload;
     },
     [__getComment.rejected]: (state, action) => {
       state.error = action.payload;
