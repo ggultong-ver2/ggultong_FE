@@ -127,7 +127,7 @@ const MySmallTab = () => {
                     <div className="mypage_bottom_left">
                       <StProfile src={value.profileImage}></StProfile>
                       {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                      {value && value?.comment.length} 좋아요&nbsp;
+                      {value && value?.commentCount} 좋아요&nbsp;
                       {value.likePostSum}
                     </div>
                     <div className="mypage_bottom_right">
