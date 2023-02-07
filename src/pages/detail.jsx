@@ -202,7 +202,7 @@ const Detail = () => {
 
               <Else>
                 <Etc>
-                  <Profile>{details?.ProfileImg}</Profile>
+                  <Profile src={details?.userProfile}></Profile>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
@@ -211,6 +211,7 @@ const Detail = () => {
                 <Etcs>
                   <Countcomment>댓글 {details?.comment.length} </Countcomment>
                   <Heart>좋아요 {details?.likePostSum}</Heart>
+                  &nbsp;&nbsp;&nbsp;&nbsp;스크랩&nbsp; {details?.scrapPostSum}
                 </Etcs>
               </Else>
               <StContent

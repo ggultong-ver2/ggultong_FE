@@ -132,7 +132,7 @@ const MySmallTab = () => {
                         &nbsp;&nbsp;&nbsp;
                         <div className="left_content">
                           댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
-                          {value.likeSum}
+                          {value.likeSum} 스크랩&nbsp; {value.scrapSum}
                         </div>
                       </div>
                       <div className="list_bottom_right">
@@ -140,7 +140,13 @@ const MySmallTab = () => {
                       </div>
                     </div>
                   </div>
-                  <StFile src={value.imageFile}></StFile>
+                  <StFile
+                    src={
+                      value.imageFile === ""
+                        ? "../images/default_image.png"
+                        : value.imageFile
+                    }
+                  ></StFile>
                 </Card>
               );
             })}
@@ -173,7 +179,7 @@ const MySmallTab = () => {
                         &nbsp;&nbsp;&nbsp;
                         <div className="left_content">
                           댓글&nbsp;{value.commentCount} &nbsp;좋아요&nbsp;
-                          {value.likeSum}
+                          {value.likeSum} 스크랩&nbsp; {value.scrapSum}
                         </div>
                       </div>
                       <div className="list_bottom_right">
@@ -181,7 +187,13 @@ const MySmallTab = () => {
                       </div>
                     </div>
                   </div>
-                  <StFile src={value.imageFile}></StFile>
+                  <StFile
+                    src={
+                      value.imageFile === ""
+                        ? "../images/default_image.png"
+                        : value.imageFile
+                    }
+                  ></StFile>
                 </Card>
               );
             })}
