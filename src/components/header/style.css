@@ -150,7 +150,7 @@
 .login {
   color: white;
 }
-.login:hover{
+.login:hover {
   color: #ffd665;
 }
 .category_wrap li {
@@ -224,7 +224,7 @@
   height: 24px;
   border-radius: 20px;
 }
-.top_post_btn:hover{
+.top_post_btn:hover {
   background: #000;
   color: #ffd665;
   border-bottom: 0 none;

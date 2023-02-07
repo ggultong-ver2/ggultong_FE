@@ -20,10 +20,7 @@ function WorldCupGame() {
   const [displays, setDisplays] = useState([]);
   const dispatch = useDispatch();
 
-  // const [inputData, setInputData] = useState([]);
-
   const inputData = useSelector((state) => state.details.details.worldCups);
-  console.log("inputdatas", inputData);
 
   const onIncrease = () => {
     setCount((prevCount) => (prevCount === 16 ? 16 : prevCount + 1));
@@ -31,8 +28,6 @@ function WorldCupGame() {
 
   useEffect(() => {
     dispatch(__getWorldCup());
-
-    console.log("res", inputData);
   }, [dispatch]);
 
   useEffect(() => {
@@ -40,11 +35,11 @@ function WorldCupGame() {
       return;
     }
     const array = [...inputData];
-    console.log("arr", array);
+
     const newdata = array.sort(() => Math.random() - 0.5);
-    console.log("new", newdata);
+
     setFoods(newdata);
-    console.log("newdata[0]", newdata.slice(0, 2));
+
     setDisplays([newdata[0], newdata[1]]);
   }, [inputData]);
 
@@ -75,7 +70,6 @@ function WorldCupGame() {
       setWinners([...winners, food]);
       setDisplays([foods[2], foods[3]]);
       setFoods(foods.slice(2));
-      console.log("winner", foods[2]);
     }
     // onRank(); displays[0].id
   };
@@ -93,7 +87,6 @@ function WorldCupGame() {
       </TitleBox>
       <div className="worldcup_wrap">
         {displays?.map((rowData) => {
-          console.log("row", displays);
           return (
             <>
               <div key={rowData?.id}>
@@ -107,7 +100,6 @@ function WorldCupGame() {
                   <StImg src={rowData?.imageUrl} />
                 </StFlex>
               </div>
-              {/* <div className="worldcup_image"></div> */}
             </>
           );
         })}

@@ -12,7 +12,6 @@ const EditPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const post = useSelector((state) => state.details.details);
-  console.log(post);
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -21,12 +20,9 @@ const EditPost = () => {
   const { id } = useParams();
 
   const onEditPostHandler = (id) => {
-    // console.log("content:", content.content);
-    console.log("file", file);
     const formdata = new FormData();
-    // for (const f of Array.from(file)) {
+
     if (!file) {
-      console.log(file, "file");
       formdata.set(file, "");
     } else {
       for (const f of Array.from(file)) {
@@ -44,10 +40,8 @@ const EditPost = () => {
       }
     });
     for (let key of formdata.keys()) {
-      console.log(key);
     }
     for (let value of formdata.values()) {
-      console.log(value);
     }
   };
   useEffect(() => {
@@ -63,8 +57,6 @@ const EditPost = () => {
     }
   }, [post]);
 
-  // console.log(post.imageFiles);
-  // console.log(file);
   return (
     <div>
       <Background>
@@ -108,27 +100,7 @@ const EditPost = () => {
                 }}
               ></input>
             </div>
-            {/* <Content
-            type="text"
-            placeholder="자취하면서 궁금했던 점이나 나만 아는 꿀팁을 적어봐요!"
-            value={content}
-            onChange={(ev) => {
-              const { value } = ev.target;
-              setContent(value);
-              console.log("value:", value);
-            }}
-          ></Content> */}
-            {/* <Editor
-            type="text"
-            content={content}
-            setContent={setContent}
-            // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
-            // onChange={(e, editor) => {
-            //   const data = editor.getData();
-            //   console.log({ e, editor, data });
-            //   setContent({ ...content, content: data });
-            // }}
-          /> */}
+
             <Quill type="text" content={content} setContent={setContent} />
             <div className="post_file_wrap">
               <label for="file">썸네일 첨부</label>

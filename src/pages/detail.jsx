@@ -24,7 +24,7 @@ const Detail = () => {
   const { id } = useParams();
   const [visible, setVisible] = useState(false);
   const [modifycomment, setModifyComment] = useState(0);
-  // console.log(param, id);
+
   const [details, setDetails] = useState({});
   // const [editcomment, setEditComment] = useState({});
   const [addComment, setAddComment] = useState({

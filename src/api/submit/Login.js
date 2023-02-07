@@ -13,15 +13,10 @@ export const __pwchange = async (password) => {
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
-  } catch (error) {
-    // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
-  }
+  } catch (error) {}
 };
 
 // pw 확인
@@ -32,15 +27,10 @@ export const __pwcheck = async (password) => {
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
-  } catch (error) {
-    // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
-  }
+  } catch (error) {}
 };
 
 // ID 중복확인
@@ -50,14 +40,11 @@ export const __idcheck = async (loginId) => {
 
     if (data.data.status === 200) {
       console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
   } catch (error) {
     Swal.fire("잘못된 형식입니다", "특수문자는 불가능합니다.", "error");
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
   }
 };
 
@@ -69,9 +56,8 @@ export const __nickCheck = async (nickname) => {
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("res:::", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
   } catch (error) {
     Swal.fire(
@@ -79,29 +65,8 @@ export const __nickCheck = async (nickname) => {
       "다른 닉네임을 사용 해 주세요!",
       "error"
     );
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
   }
 };
-
-// 소셜로그인 닉네임 Change
-// export const __socialNick = async (nickname) => {
-//   try {
-//     const data = await apis.signNickname(nickname);
-//     console.log("nickname:::", nickname);
-//     console.log("data: ", data);
-//     if (data.data.statusCode === 200) {
-//       console.log("response", data.response);
-//       // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
-//     }
-//     // useSweet(1000, "success", "회원가입 성공");
-//     return data;
-//   } catch (error) {
-//     // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
-//     // alert(error.response.data.msg);
-//     // useSweet(1000, "error", error.response.data.msg);
-//   }
-// };
 
 export const __socialNick = async (nickname) => {
   try {
@@ -139,14 +104,10 @@ export const __deleteId = async (loginId) => {
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
-  } catch (error) {
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
-  }
+  } catch (error) {}
 };
 
 // 이메일 코드 전송
@@ -155,7 +116,6 @@ export const __emailsend = async (email) => {
     const data = await apis.checkEmail(email);
     return data;
   } catch (res) {}
-  // useSweet(1000, "error", error.response.data.msg);
 };
 
 //월드컵 데이터 전송
@@ -164,7 +124,6 @@ export const __worldcupsend = async (worldcup) => {
     const data = await apis.worldsend(worldcup);
     return data;
   } catch (res) {}
-  // useSweet(1000, "error", error.response.data.msg);
 };
 
 // 인증번호 확인
@@ -174,17 +133,10 @@ export const __emailcode = async (emailcode) => {
     console.log("emailcode:::", emailcode);
     console.log("data: ", data);
     if (data.data.statusCode === 400) {
-      // Swal.fire(
-      //   "인증번호가 일치하지 않습니다.",
-      //   "인증번호를 다시 확인해주세요!",
-      //   "error"
-      // );
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
-  } catch (error) {
-    // useSweet(1000, "error", error.response.data.msg);
-  }
+  } catch (error) {}
 };
 
 // ID 찾기
@@ -195,15 +147,10 @@ export const __Idfind = async (idfind) => {
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
-  } catch (error) {
-    // Swal.fire("dd", "다른 아이디를 사용 해 주세요!", "error");
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
-  }
+  } catch (error) {}
 };
 
 // PW 찾기
@@ -214,14 +161,11 @@ export const __pwfind = async (pwfind) => {
     console.log("data: ", data);
     if (data.data.status === 200) {
       console.log("response", data.response);
-      // alert(Swal.fire("사용가능한 ID", "사용가능합니다!", "success"));
     }
-    // useSweet(1000, "success", "회원가입 성공");
+
     return data;
   } catch (error) {
     Swal.fire(error.data.msg, "정보를 다시 확인해주세요!", "error");
-    // alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
   }
 };
 
@@ -238,15 +182,3 @@ export const __postLogin = async (post) => {
     );
   }
 };
-
-// 로그아웃
-// export const __postLogout = async () => {
-//   try {
-//     await apis.postLogout();
-//     // localStorage.removeItem("username")
-//     // localStorage.removeItem("profileUrl")
-//     alert("로그아웃 성공");
-//   } catch (error) {
-//     alert(error.respose.data.statusMsg);
-//   }
-// };

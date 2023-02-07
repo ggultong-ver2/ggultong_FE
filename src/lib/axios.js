@@ -76,7 +76,6 @@ export const apis = {
   },
 
   createPost: (post) => {
-    // console.log("payload::", post);
     const data = baseURL.post("/post/create", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -84,7 +83,6 @@ export const apis = {
   },
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
-    // console.log("string", id, post);
     baseURL.put(`/post/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
