@@ -98,12 +98,16 @@ const RecycleList = () => {
         <div className="postlist_top">
           <ul className="clearfix">
             <li onClick={() => navigate("detail/12")}>
-              <div className="postlist_top_recycle"></div>
-              <h3>자취러를 위한 재활용 꿀팁</h3>
+              <div className="post_card_wrap">
+                <div className="postlist_top_recycle"></div>
+                <h3>자취러를 위한 재활용 꿀팁</h3>
+              </div>
             </li>
             <li onClick={() => navigate("detail/31")}>
-              <div className="postlist_top_recycle2"></div>
-              <h3>비닐봉지 보관법</h3>
+              <div className="post_card_wrap">
+                <div className="postlist_top_recycle2"></div>
+                <h3>비닐봉지 보관법</h3>
+              </div>
             </li>
           </ul>
         </div>
@@ -118,10 +122,6 @@ const RecycleList = () => {
                 >
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
-
-                    <StContent
-                      dangerouslySetInnerHTML={{ __html: value.content }}
-                    ></StContent>
                     <div className="list_bottom">
                       <div className="list_bottom_left">
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
