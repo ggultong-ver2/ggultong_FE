@@ -52,7 +52,7 @@ const MealList = () => {
   }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
-  // console.log("categoryPosts:", categoryPosts);
+  console.log("categoryPosts:", categoryPosts);
 
   return (
     <>
@@ -95,14 +95,14 @@ const MealList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
-            <li onClick={() => navigate("detail/12")}>
+            <li onClick={() => navigate("detail/38")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_meal"></div>
                 <h3>혼밥하는 사람들을 위한 음식 보관 꿀팁</h3>
               </div>
               {/* <div className="mask"></div> */}
             </li>
-            <li onClick={() => navigate("detail/31")}>
+            <li onClick={() => navigate("detail/37")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_meal2"></div>
                 <h3>
@@ -128,9 +128,10 @@ const MealList = () => {
 
                     <div className="list_bottom">
                       <div className="list_bottom_left">
+                        <Profile src={value.userProfile} />
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                         {value && value?.comment.length} 좋아요&nbsp;
-                        {value.likePostSum}
+                        {value.likePostSum} 스크랩&nbsp; {value.scrapPostSum}
                       </div>
                       <div className="list_bottom_right">
                         {value.createdAt.slice(0, 10)}
@@ -234,6 +235,11 @@ const StTitle = styled.div`
   line-height: 28px;
   font-weight: bold;
   margin-top: 20px;
+`;
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 `;
 const StFile = styled.img`
   height: 92px;

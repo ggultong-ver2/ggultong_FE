@@ -114,7 +114,7 @@ const Post = () => {
               className="post_searchinp"
             ></input>
           </div>
-          {/* <Quill type="text" content={content} setContent={setContent} /> */}
+          <Quill type="text" content={content} setContent={setContent} />
 
           {/* // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
           // onChange={(e, editor) => {
@@ -127,7 +127,6 @@ const Post = () => {
           {/* <h1 style={{ padding: "20px" }}>
             [#006888 YERIEL] React Quill Image Resize
           </h1> */}
-          <Quill type="text" content={content} setContent={setContent} />
           <div className="post_file_wrap">
             <label for="file">썸네일 첨부</label>
             <input
