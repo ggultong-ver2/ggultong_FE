@@ -19,30 +19,10 @@ function MyPage() {
   const [post, setPost] = useState([]);
   const [nickname, setNickname] = useInput();
   const navigate = useNavigate();
-
-  // const [myProfile, setMyProfile] = useState([]);
-  // const myPage = useSelector((state) => state.details.details.myPosts);
-  // const [displays, setDisplays] = useState([]);
-  // useEffect(() => {
-  //   dispatch(__getMyPost());
-
-  //   console.log("res", myPage);
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   const array = [...myPage];
-  //   console.log("arrsss", array[0][0]);
-
-  //   console.log("newdata[0]", array);
-  //   setDisplays(array);
-  // }, [myPage]);
-
   const onChangeImage = (event) => {
     const file = event.target.files[0];
     setProfileImg(file);
     const reader = new FileReader();
-    // const file = imgRef.current.files[0];
-    console.log(file);
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgUrl(reader.result);
@@ -57,9 +37,7 @@ function MyPage() {
 
   // 닉네임 중복 체크 확인
   const onCheckNickName = (nickname) => {
-    console.log("nickname---->", nickname);
     __nickCheck(nickname).then((res) => {
-      console.log(res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "좋은 닉네임이군요!", "success");
       } else {
@@ -111,11 +89,6 @@ function MyPage() {
         nickname,
       })
     )
-      // .then((res) => {
-      //   console.log("res", res);
-      //   localStorage.getItem("Access_Token", res.data.profileImg);
-      //   localStorage.getItem("nickcname", res.data.nickname);
-      // })
       .then(() => {
         Swal.fire(
           "정보수정 완료!",
@@ -126,7 +99,6 @@ function MyPage() {
         navigate("/login");
       });
   };
-  // console.log("myProfile.profile", myProfile.profile);
   return (
     <StContainer onSubmit={onSubmitChangeHandler}>
       <StSubCon>
