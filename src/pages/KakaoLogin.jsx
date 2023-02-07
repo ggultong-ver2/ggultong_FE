@@ -9,7 +9,7 @@ function KakaoLogin() {
   const navigate = useNavigate();
   const getToken = async () => {
     try {
-      const data = await axios
+      const data = axios
         .get(`http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`)
         .then((res) => {
           localStorage.setItem("Access_Token", res.headers.authorization);
@@ -25,9 +25,7 @@ function KakaoLogin() {
             navigate("/");
           }
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
