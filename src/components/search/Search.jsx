@@ -8,7 +8,6 @@ import Paging from "../pagination/paging";
 function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
-  // console.log(searchData);
   const params = useParams();
   const IP = process.env.REACT_APP_URL;
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
@@ -25,8 +24,8 @@ function Search() {
     // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
-  const setPage = (error) => {
-    setCurrentPage(error);
+  const setPage = (page) => {
+    setCurrentPage(page);
   };
 
   useEffect(() => {
@@ -36,10 +35,8 @@ function Search() {
 
         `${IP}/post/search/${currentPage}?keyword=${params.keyword}`
       );
-      console.log("data:", data);
       setSearchData(data);
       setCount(data[0].searchPostSum);
-      console.log(data[0].searchPostSum);
     }
     fetchData();
   }, []);

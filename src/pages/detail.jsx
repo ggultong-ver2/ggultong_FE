@@ -260,8 +260,8 @@ const Detail = () => {
                               </Writtendate>
                               <Commentcontent>{comment.content}</Commentcontent>
                               <StBox>
-                                {localStorage.getItem("loginId") ===
-                                comment.loginId ? (
+                                {localStorage.getItem("nickname") ===
+                                comment.nickname ? (
                                   <>
                                     <EditBtn
                                       onClick={() => {

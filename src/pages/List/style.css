@@ -13,12 +13,24 @@
   margin-bottom: 20px;
   padding-top: 40px;
   padding-left: 2px;
+  overflow: hidden;
 }
 .postlist_top li {
+  width: 466px;
+  height: 260px;
   float: left;
   position: relative;
   margin-left: 20px;
   cursor: pointer;
+  overflow: hidden;
+}
+.post_card_wrap{
+  transition: 300ms;
+}
+.post_card_wrap:hover{
+  transition: 300ms;
+  transform: scale(1.05);
+  opacity: 0.8;
 }
 .postlist_top_image1 {
   width: 466px;
