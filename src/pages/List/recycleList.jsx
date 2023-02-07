@@ -52,7 +52,7 @@ const RecycleList = () => {
   }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
-  // console.log("categoryPosts:", categoryPosts);
+  console.log("categoryPosts:", categoryPosts);
 
   return (
     <>
