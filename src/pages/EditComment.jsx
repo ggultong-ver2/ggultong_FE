@@ -24,7 +24,7 @@ function EditComment({ commentId, setVisible }) {
   const onClickEditCommentHandler = (id) => {
     dispatch(__editComment({ editcomment, commentId })).then(() => {
       Swal.fire({
-        position: "top-end",
+        position: "middle",
         icon: "success",
         title: "댓글 수정완료",
         showConfirmButton: false,

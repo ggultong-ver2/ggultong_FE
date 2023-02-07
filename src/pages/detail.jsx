@@ -201,7 +201,7 @@ const Detail = () => {
 
               <Else>
                 <Etc>
-                  <Profile src={details?.userProfile}></Profile>
+                  <Profile src={details.userProfile}></Profile>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
@@ -300,6 +300,7 @@ const Detail = () => {
   }
 };
 const Profile = styled.img`
+  margin-right: 10px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
