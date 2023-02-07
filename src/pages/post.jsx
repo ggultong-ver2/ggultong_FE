@@ -166,11 +166,11 @@ const Background = styled.div`
 `;
 const Form = styled.form`
   //border: 1px solid black;
-  width: 900px;
+  width: 1000px;
   height: 1250px;
   margin: auto;
   /* margin-top: 50px; */
-  padding: 10px;
+  padding: 10px 50px;
   background-color: white;
 `;
 const Category = styled.p`

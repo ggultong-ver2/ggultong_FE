@@ -78,8 +78,13 @@ const EditPost = () => {
             <div className="post_top">
               <select
                 name="category"
+<<<<<<< HEAD
                 id="category"
                 value={category}
+=======
+                value={category}
+                id="category"
+>>>>>>> 404004cb4e54edad2e23d1864d08424362ee8e55
                 className="post_top_select"
                 onChange={(ev) => {
                   const { value } = ev.target;
@@ -171,11 +176,11 @@ const Background = styled.div`
 `;
 
 const Form = styled.form`
-  width: 900px;
+  width: 1000px;
   height: 1250px;
   margin: auto;
   margin-top: 50px;
-  padding: 10px;
+  padding: 10px 50px;
   background-color: #fff;
 `;
 const Category = styled.p`
