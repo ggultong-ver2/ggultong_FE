@@ -13,17 +13,12 @@ const MealList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  // console.log(id);
 
-  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
-
-  // console.log(products);
 
   useEffect(() => {
     dispatch(__getCategoryCount());
@@ -34,7 +29,6 @@ const MealList = () => {
   useEffect(() => {
     if (!categoryMealCount) return;
     setCount(categoryMealCount);
-    // setCurrentPosts(products.slice(indexOfFirstPost, indexOfLastPost));
   }, [categoryMealCount]);
 
   useEffect(() => {
@@ -47,12 +41,10 @@ const MealList = () => {
   };
 
   useEffect(() => {
-    // console.log(currentPage);
     dispatch(__getCategoryPost({ id, currentPage }));
   }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
-  console.log("categoryPosts:", categoryPosts);
 
   return (
     <>
@@ -100,7 +92,6 @@ const MealList = () => {
                 <div className="postlist_top_meal"></div>
                 <h3>혼밥하는 사람들을 위한 음식 보관 꿀팁</h3>
               </div>
-              {/* <div className="mask"></div> */}
             </li>
             <li onClick={() => navigate("detail/37")}>
               <div className="post_card_wrap">
@@ -131,7 +122,7 @@ const MealList = () => {
                         <Profile src={value.userProfile} />
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                         {value && value?.commentCount} 좋아요&nbsp;
-                        {value.likePostSum}
+                        {value.likePostSum} 스크랩&nbsp; {value.scrapPostSum}
                       </div>
                       <div className="list_bottom_right">
                         {value.createdAt.slice(0, 10)}

@@ -8,7 +8,7 @@ function Ranking({ displays }) {
   const onWorldCupSend = (e) => {
     e.preventDefault();
     __worldcupsend(e.target.id);
-    console.log("e", e.target.id);
+
     navigate("/gamelist/worldcupgame/gamerank", {
       state: {
         title: displays[0].title,
@@ -20,7 +20,6 @@ function Ranking({ displays }) {
     });
   };
 
-  console.log("displaysss", displays[0].id);
   return (
     <div>
       <WinnerBox>꿀통 음식 월드컵 우승!</WinnerBox>

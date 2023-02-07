@@ -19,11 +19,10 @@ const Scrap = () => {
   };
 
   const scrapPost = useSelector((state) => state.details.details.isScrapPost);
-  console.log(scrapPost);
+
   const scrapPostSum = useSelector(
     (state) => state.details.details.scrapPostSum
   );
-  console.log(scrapPostSum);
 
   return (
     <>

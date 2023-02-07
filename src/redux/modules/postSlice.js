@@ -40,12 +40,8 @@ export const __getPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await apis.getPost();
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
-
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -58,11 +54,8 @@ export const __getWorldCup = createAsyncThunk(
     try {
       const data = await axios.get(`${IP}/post/getWorldcupImage`);
 
-      console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
-
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -74,10 +67,8 @@ export const __getRankList = createAsyncThunk(
     try {
       const data = await axios.get(`${IP}/post/getWorldcupTop5`);
 
-      console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
 
       return thunkAPI.rejectWithValue(err);
     }
@@ -90,10 +81,8 @@ export const __getRankMonth = createAsyncThunk(
     try {
       const data = await axios.get(`${IP}/post/getWorldcupMonth`);
 
-      console.log("data: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
 
       return thunkAPI.rejectWithValue(err);
     }
@@ -106,15 +95,11 @@ export const __addComment = createAsyncThunk(
     const [addComment, postId] = payload;
 
     const newComment = { ...addComment, postId: postId };
-    // console.log(comment,postId);
     try {
       const data = await baseURL.post(`/comment/${postId}`, newComment);
-      console.log("ssss::", data);
-      // thunkAPI.dispatch(__getComment(postId));
       // 댓글을 추가하고 댓글 데이터를 가져옴
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -124,9 +109,7 @@ export const __deleteComment = createAsyncThunk(
   "deleteComment",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload:", payload);
       const data = await apis.deleteComment(payload);
-      console.log("deletepayload:", payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -138,7 +121,6 @@ export const __editComment = createAsyncThunk(
   "editComment",
   async (payload, thunkAPI) => {
     try {
-      console.log("ppp==", payload);
       const data = await baseURL.put(`comment/${payload.commentId}`, {
         content: payload.editcomment,
       });
@@ -154,11 +136,8 @@ export const __getComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await apis.getComment();
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
 
       return thunkAPI.rejectWithValue(err);
     }
@@ -169,13 +148,8 @@ export const __getComment = createAsyncThunk(
 export const __getIdPost = createAsyncThunk(
   "getIdPost",
   async (payload, thunkAPI) => {
-    // console.log("payload", payload);
     try {
       const data = await apis.getIdPost(payload);
-      //const data = await axios.get(`http://localhost:3001/postss/${payload}`);
-      // console.log("payload: ", payload);
-      // console.log("getIddata:: ", data);
-      // const getId = data.data.filter((recipe) => recipe.id === payload)[0];
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -188,16 +162,9 @@ export const __addPost = createAsyncThunk(
   "addPost",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload:::", payload);
       const data = await apis.createPost(payload);
-      //const data = await axios.post("http://localhost:3001/postss", payload, {
-      //headers: { "Content-Type": "multipart/form-data" },
-      // });
-      console.log("payload: ", payload);
-      console.log("addpostdata::: ", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
@@ -208,20 +175,9 @@ export const __deletePost = createAsyncThunk(
   "deletePost",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload: ", payload);
       const data = await apis.deletePost(payload);
-      //const data = await axios.delete(
-      // `http://localhost:3001/postss/${payload}`
-      //);
-      console.log("data: ", data);
-      //alert(data.data.msg);
-      // if (data.data.statusCode === 400) {
-      //   alert(data.data.msg);
-      //   return;
-      // }
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
-      console.log(err);
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
@@ -233,14 +189,10 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { id, formdata } = payload;
-      console.log("payload: ", payload);
       const data = await apis.editPost(id, formdata);
-      //const data = await axios.patch(`http://localhost:3001/postss/${payload}`);
 
-      console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
@@ -257,7 +209,6 @@ export const __postLike = createAsyncThunk(
           headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
         }
       );
-      console.log(data);
       return thunkAPI.fulfillWithValue(data?.status);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -269,7 +220,6 @@ export const __postScrap = createAsyncThunk(
   "postScrap",
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
       const { data } = await baseURL.post(
         `/post/scrap/${payload}`,
         {},
@@ -277,7 +227,6 @@ export const __postScrap = createAsyncThunk(
           headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
         }
       );
-      console.log(data.isScrapPost);
       return thunkAPI.fulfillWithValue(data.isScrapPost);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -285,42 +234,17 @@ export const __postScrap = createAsyncThunk(
   }
 );
 
-// export const __getMypageCount = createAsyncThunk(
-//   "getMypageCount",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const res = await baseURL.get(`/mypage/myPostCount`, "", {
-//         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-//       });
-//       console.log("res:", res.data);
-
-//       //   const data = await apis.getMypageCount();
-
-//       //   console.log("data: ", data.data);
-//       // console.log("payload:", payload);
-//       return thunkAPI.fulfillWithValue(res.data);
-//     } catch (err) {
-//       console.log(err);
-
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
-
 // 카테고리별 get
 export const __getCategoryPost = createAsyncThunk(
   "getCategoryPost",
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
       const { data } = await apis.getCategoryPost(
         payload.id,
         payload.currentPage
       );
-      // console.log("categorydata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -330,12 +254,9 @@ export const __getMainPost = createAsyncThunk(
   "getMainPost",
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
       const { data } = await axios.get(`${IP}/post/likeTop6`);
-      console.log("maindata:", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -347,11 +268,8 @@ export const __getCategoryCount = createAsyncThunk(
     try {
       const data = await apis.getCategoryCount();
 
-      // console.log("data: ", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-      console.log(err);
-
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -374,7 +292,6 @@ export const __patchPost = createAsyncThunk(
       const data = await apis.patchPost(formData);
       return data;
     } catch (error) {
-      console.log("err", error);
     }
   }
 );
@@ -384,10 +301,8 @@ export const __getMyPost = createAsyncThunk(
   "getMyPost",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const { data } = await apis.getMyPost(payload);
       // const data = await apis.getMyPost();
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -400,36 +315,13 @@ export const __getMyScrap = createAsyncThunk(
   "getMyScrap",
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
-      // const res = await axios.get(`${IP}/mypage/myScrap/${payload}`, {
-      //   headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      // });
       const data = await apis.getMyScrap(payload);
-      // console.log("data::", data);
-      // console.log(res);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
-
-// export const __getMypageCount = createAsyncThunk(
-//   "getMypageCount",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const data = await apis.getMypageCount();
-
-//       console.log("data: ", data.data);
-//       console.log("payload:", payload);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
 
 // 알림 기능
 export const __getNotification = createAsyncThunk(
@@ -487,7 +379,6 @@ export const postSlice = createSlice({
     [__getMyPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.myPosts = action.payload;
-      console.log("action.payload:", action.payload);
     },
     [__getMyPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -499,43 +390,11 @@ export const postSlice = createSlice({
     [__getMyScrap.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.myScrap = action.payload;
-      // console.log(current(state.details));
-      // console.log("action.payload:", action.payload);
     },
     [__getMyScrap.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    // [__getMypageCount]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [__getMypageCount]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.details.myPageCount = action.payload;
-    //   console.log(action);
-    // },
-    // [__getMypageCount]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
-
-    // top5 데이터 가져오기
-
-    // [__topPost.pending]: (state) => {
-    //   state.isLoading = true;
-    //   // 네트워크 요청 시작-> 로딩 true 변경합니다.
-    // },
-    // [__topPost.fulfilled]: (state, action) => {
-    //   // action으로 받아온 객체를 store에 있는 값에 넣어준다
-    //   state.isLoading = false;
-    //   state.posts = action.payload;
-    // },
-    // [__topPost.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    //   // 에러 발생-> 네트워크 요청은 끝,false
-    //   // catch 된 error 객체를 state.error에 넣습니다.
-    // },
 
     // 해당 id 리스트만 불러오기
     [__getIdPost.pending]: (state) => {
@@ -544,9 +403,6 @@ export const postSlice = createSlice({
     [__getIdPost.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
       state.details = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-      // console.log("action.payload: ", action.payload);
-      // console.log("state.details:", state.details);
-      //console.log("state.posts: ", state.posts);
     },
     [__getIdPost.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
@@ -559,9 +415,7 @@ export const postSlice = createSlice({
     },
     [__addPost.fulfilled]: (state, action) => {
       // 액션으로 받은 값 = payload 추가해준다.
-      console.log("action.payload: ", action.payload);
       state.isLoading = false;
-      console.log(current(state));
       const data = { ...action.payload, comment: [] };
       const newList = [data, ...current(state.categoryPosts)];
       state.categoryPosts = newList;
@@ -577,7 +431,6 @@ export const postSlice = createSlice({
     },
     [__deletePost.fulfilled]: (state, action) => {
       // 미들웨어를 통해 받은 action값이 무엇인지 항상 확인한다
-      console.log("action: ", action.payload);
       state.isLoading = false;
       const newList = current(state.categoryPosts).filter(
         (post) => Number(post.id) !== Number(action.payload)
@@ -596,7 +449,6 @@ export const postSlice = createSlice({
         scrapPost: false,
         scrapPostSum: 0,
       };
-      console.log("state------>", newList);
     },
     [__deletePost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -608,10 +460,7 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__editPost.fulfilled]: (state, action) => {
-      // console.log('state-store값',state.diary)
-      console.log("action-서버값", action);
       state.isLoading = false;
-      console.log(action.payload);
       const editList = state.categoryPosts.map((detail) => {
         if (Number(detail.id) === Number(action.payload.id)) {
           return {
@@ -627,25 +476,6 @@ export const postSlice = createSlice({
       });
 
       state.categoryPosts = editList;
-      // [__editComment.fulfilled]: (state, action) => {
-      //   state.isLoading = false;
-      //   console.log("st", action.payload);
-      //   const index = current(state.details.comment).map((e) => {
-      //     if (e.id === action.payload.id) {
-      //       return action.payload;
-      //     } else {
-      //       return e;
-      //     }
-      //   });
-      //   state.details.comment = index;
-      //   // state.comment.splice(index, 1, action.payload.content);
-      //   console.log("index", index);
-      // },
-      // state.recipes = action.payload.recipe
-      // const index = state.recipes.findIndex(
-      //   (recipe) => recipe.id === action.payload[0]
-      // );
-      // state.recipes.splice(index, 1, action.payload[1]);
     },
     [__editPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -674,20 +504,6 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
-    // [__getMypageCount]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [__getMypageCount]: (state, action) => {
-    //   state.isLoading = false;
-    //   console.log("action", action);
-    //   state.mypageCount = action.payload;
-    //   console.log("action::", action);
-    // },
-    // [__getMypageCount]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
-
     //스크랩
     [__postScrap.pending]: (state) => {
       state.isLoading = true;
@@ -695,8 +511,6 @@ export const postSlice = createSlice({
     [__postScrap.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.isScrapPost = action.payload;
-      console.log("state.posts", state.details.isScrapPost);
-      console.log(action.payload);
 
       if (action.payload === true) {
         state.details.isScrapPost = true;
@@ -717,7 +531,6 @@ export const postSlice = createSlice({
     [__getCategoryPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.categoryPosts = action.payload;
-      // console.log(action.payload);
     },
     [__getCategoryPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -730,7 +543,6 @@ export const postSlice = createSlice({
     [__getCategoryCount.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details = action.payload;
-      // console.log("action", state.details);
     },
     [__getCategoryCount.rejected]: (state, action) => {
       state.isLoading = false;
@@ -743,7 +555,6 @@ export const postSlice = createSlice({
     [__getWorldCup.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.worldCups = action.payload;
-      console.log("action", state.details.worldCups);
     },
     [__getWorldCup.rejected]: (state, action) => {
       state.isLoading = false;
@@ -756,7 +567,6 @@ export const postSlice = createSlice({
     [__getRankList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.rankList = action.payload;
-      console.log("action", state.details.rankList);
     },
     [__getRankList.rejected]: (state, action) => {
       state.isLoading = false;
@@ -770,7 +580,6 @@ export const postSlice = createSlice({
     [__getRankMonth.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.monthList = action.payload;
-      console.log("action", state.details.monthList);
     },
     [__getRankMonth.rejected]: (state, action) => {
       state.isLoading = false;
@@ -783,9 +592,7 @@ export const postSlice = createSlice({
     },
     [__addComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action.payload:", action.payload);
       state.details.commentList.push(action.payload);
-      console.log("state:", state);
     },
     [__addComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -797,7 +604,6 @@ export const postSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoadig = false;
-      // state.details.comment.pop(action.payload);
       const newComment = state.details.commentList.filter(
         (commentList) => commentList.id !== action.payload.commentId
       );
@@ -806,7 +612,6 @@ export const postSlice = createSlice({
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      // console.log(action.payload.response.data.errorMessage);
     },
 
     [__editComment.pending]: (state, action) => {
@@ -815,7 +620,6 @@ export const postSlice = createSlice({
     },
     [__editComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("st", action.payload);
       const index = current(state.details.commentList).map((e) => {
         if (e.id === action.payload.id) {
           return action.payload;
@@ -824,8 +628,6 @@ export const postSlice = createSlice({
         }
       });
       state.details.commentList = index;
-      // state.comment.splice(index, 1, action.payload.content);
-      console.log("index", index);
     },
     // 남은것 : 코멘트 CSS, 수정부분 랜더링, 수정폼 - 확인누르면 visible, 인풋창 초기화
     [__editComment.rejected]: (state, action) => {
@@ -847,7 +649,6 @@ export const postSlice = createSlice({
     [__getMainPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.details.mainPost = action.payload;
-      console.log("main", state.details.mainPost);
     },
     [__getMainPost.rejected]: (state, action) => {
       state.isLoading = false;

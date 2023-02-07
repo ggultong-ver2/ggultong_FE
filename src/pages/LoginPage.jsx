@@ -31,7 +31,6 @@ const PostLoginPage = () => {
     }).then((res) => {
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
-        //console.log(res.header.access_token);
         navigate("/");
       } else {
         Swal.fire(
