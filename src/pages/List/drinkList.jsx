@@ -89,19 +89,23 @@ const DrinkList = () => {
         <div className="postlist_top">
           <ul className="clearfix">
             <li onClick={() => navigate("detail/12")}>
-              <div
-                className="postlist_top_image1"
-                onClick={() => navigate("/drinkList/drink/detail/12")}
-              ></div>
-              <h3>
-                맥주 종류 별 40가지 먹어본 사람이
-                <br />
-                추천하는 맥주 탑5
-              </h3>
+              <div className="post_card_wrap">
+                <div
+                  className="postlist_top_image1"
+                  onClick={() => navigate("/drinkList/drink/detail/12")}
+                ></div>
+                <h3>
+                  맥주 종류 별 40가지 먹어본 사람이
+                  <br />
+                  추천하는 맥주 탑5
+                </h3>
+              </div>
             </li>
             <li>
-              <div className="postlist_top_image2"></div>
-              <h3>칵테일 안주 레시피</h3>
+              <div className="post_card_wrap">
+                <div className="postlist_top_image2"></div>
+                <h3>칵테일 안주 레시피</h3>
+              </div>
             </li>
           </ul>
         </div>

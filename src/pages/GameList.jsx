@@ -164,7 +164,7 @@ function GameList() {
 }
 const StContainer = styled.form`
   width: 100%;
-  min-height: 95vh;
+  min-height: 100vh;
   background-color: black;
   background-size: cover;
   font-family: "Pretendard";

@@ -116,31 +116,50 @@ const Post = () => {
 
           <Quill type="text" content={content} setContent={setContent} />
 
-          <File>
-            <Filetext>썸네일 사진</Filetext>
-            <TiWarningOutline className="icon" size="28" color="#e9e623" />
-            <ThumbnailEx>
-              썸네일 사진을 첨부하지 않으면 음식 월드컵에 참여할 수 없습니다.
-            </ThumbnailEx>
-
-            <label htmlFor="ex_file">
-              <div className="fileinput">
-                <img src={fileinput} alt="fileinput" />
-              </div>
-            </label>
+          {/* // content, setContent를 props로 Editor.jsx에 넘겨주는 방식
+          // onChange={(e, editor) => {
+          //   const data = editor.getData();
+          //   console.log({ e, editor, data });
+          //   setContent({ ...content, content: data });
+          // }}
+        } */}
+          <br></br>
+          {/* <h1 style={{ padding: "20px" }}>
+            [#006888 YERIEL] React Quill Image Resize
+          </h1> */}
+          <Quill type="text" content={content} setContent={setContent} />
+          <div className="post_file_wrap">
+            <label for="file">썸네일 첨부</label>
             <input
+              className="post_file_input"
               type="file"
-              id="ex_file"
-              ref={imgRef}
+              id="file"
               multiple={false}
               onChange={(ev) => {
                 const { files } = ev.target;
                 setFile(files);
               }}
-              width="92px"
-              height="32px"
             />
-          </File>
+            <span>썸네일은 음식 월드컵에 이용됩니다.</span>
+          </div>
+
+          <label htmlFor="ex_file">
+            <div className="fileinput">
+              <img src={fileinput} alt="fileinput" />
+            </div>
+          </label>
+          <input
+            type="file"
+            id="ex_file"
+            ref={imgRef}
+            multiple={false}
+            onChange={(ev) => {
+              const { files } = ev.target;
+              setFile(files);
+            }}
+            width="92px"
+            height="32px"
+          />
 
           {/* <Btns>
               <BackButton
