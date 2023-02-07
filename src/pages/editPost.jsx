@@ -70,40 +70,42 @@ const EditPost = () => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          onEditPostHandler(Number(id));
+          onEditPostHandler(post);
         }}
       >
-        <Category>
-          카테고리
-          <CategorySelect
-            type="select"
-            name="category"
-            value={category}
-            id="category"
-            onChange={(ev) => {
-              const { value } = ev.target;
-              setCategory(value);
-            }}
-          >
-            <option value="choose">선택해주세요</option>
-            <option value="drink">혼술</option>
-            <option value="meal">혼밥</option>
-            <option value="recycle">리사이꿀</option>
-          </CategorySelect>
-        </Category>
+        <div className="post_top_wrap">
+          <div className="post_top">
+            <select
+              name="category"
+              value={category}
+              id="category"
+              className="post_top_select"
+              onChange={(ev) => {
+                const { value } = ev.target;
+                setCategory(value);
+              }}
+            >
+              <option value="choose">게시판 선택</option>
+              <option value="drink">혼술</option>
+              <option value="meal">혼밥</option>
+              <option value="recycle">리사이꿀</option>
+            </select>
+            <button>저장</button>
+          </div>
+        </div>
         <Wrap>
-          <Title>
-            제목
-            <TitleInput
+          <div className="post_input_wrap">
+            <input
               type="text"
-              name="title"
+              placeholder="제목을 입력해주세요"
               value={title}
               onChange={(ev) => {
                 const { value } = ev.target;
                 setTitle(value);
               }}
-            ></TitleInput>
-          </Title>
+              className="post_searchinp"
+            ></input>
+          </div>{" "}
           <Quill type="text" content={content} setContent={setContent} />
           <File>
             첨부파일
