@@ -96,51 +96,48 @@ const MealList = () => {
         <div className="postlist_top">
           <ul className="clearfix">
             <li onClick={() => navigate("detail/12")}>
-              <div className="post_card_wrap">
-                <div className="postlist_top_image1"></div>
-                <h3>
-                  맥주 종류 별 40가지 먹어본 사람이
-                  <br />
-                  추천하는 맥주 탑5
-                </h3>
-              </div>
+              <div className="postlist_top_meal"></div>
+              <h3>혼밥하는 사람들을 위한 음식 보관 꿀팁</h3>
+              {/* <div className="mask"></div> */}
             </li>
-            <li>
-              <div className="post_card_wrap">
-                <div className="postlist_top_image2"></div>
-                <h3>칵테일 안주 레시피</h3>
-              </div>
+            <li onClick={() => navigate("detail/31")}>
+              <div className="postlist_top_meal2"></div>
+              <h3>
+                집에서 간단히 만들어 먹기 좋은
+                <br />
+                자취러를 위한 요리
+              </h3>
             </li>
           </ul>
         </div>
 
         <Wrapall>
           <Wrap>
-            {categoryPosts.map((post) => {
+            {categoryPosts.map((value, index) => {
               return (
                 <Card
-                  key={post.id}
-                  onClick={() => navigate(`detail/${post.id}`)}
+                  key={index}
+                  onClick={() => navigate(`detail/${value.id}`)}
                 >
                   <Textwrap>
-                    <StTitle>{post.title}</StTitle>
+                    <StTitle>{value.title}</StTitle>
 
                     <div className="list_bottom">
                       <div className="list_bottom_left">
-                        {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                        {post && post?.comment.length} 좋아요&nbsp;
-                        {post.likePostSum}
+                        {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                        {value && value?.comment.length} 좋아요&nbsp;
+                        {value.likePostSum}
                       </div>
                       <div className="list_bottom_right">
-                        {post.createdAt.slice(0, 10)}
+                        {value.createdAt.slice(0, 10)}
                       </div>
                     </div>
                   </Textwrap>
                   <StFile
                     src={
-                      post.imageFile === ""
+                      value.imageFile === ""
                         ? "../images/default_image.png"
-                        : post.imageFile
+                        : value.imageFile
                     }
                   ></StFile>
                 </Card>

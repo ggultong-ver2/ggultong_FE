@@ -101,11 +101,9 @@ const DrinkList = () => {
                 </h3>
               </div>
             </li>
-            <li>
-              <div className="post_card_wrap">
-                <div className="postlist_top_image2"></div>
-                <h3>칵테일 안주 레시피</h3>
-              </div>
+            <li onClick={() => navigate("detail/31")}>
+              <div className="postlist_top_image2"></div>
+              <h3>칵테일 안주 레시피</h3>
             </li>
           </ul>
         </div>
@@ -113,30 +111,31 @@ const DrinkList = () => {
         <Wrapall>
           <Wrap>
             <div>
-              {categoryPosts?.map((post) => {
+              {categoryPosts?.map((value, index) => {
+                // console.log(post);
                 return (
                   <Card
-                    key={post.id}
-                    onClick={() => navigate(`detail/${post.id}`)}
+                    key={index}
+                    onClick={() => navigate(`detail/${value.id}`)}
                   >
                     <Textwrap>
-                      <StTitle>{post.title}</StTitle>
+                      <StTitle>{value.title}</StTitle>
                       <div className="list_bottom">
                         <div className="list_bottom_left">
-                          {post?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                          {post && post?.comment.length} 좋아요&nbsp;
-                          {post.likePostSum}
+                          {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                          {value && value?.comment.length} 좋아요&nbsp;
+                          {value.likePostSum}
                         </div>
                         <div className="list_bottom_right">
-                          {post.createdAt.slice(0, 10)}
+                          {value.createdAt.slice(0, 10)}
                         </div>
                       </div>
                     </Textwrap>
                     <StFile
                       src={
-                        post.imageFile === ""
+                        value.imageFile === ""
                           ? "../images/default_image.png"
-                          : post.imageFile
+                          : value.imageFile
                       }
                     ></StFile>
                   </Card>
