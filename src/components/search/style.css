@@ -72,7 +72,7 @@
 }
 .search_title{
     cursor: pointer;
-    height: 160px;
+    height: 110px;
     margin: 0 auto;
     position: relative;
     margin-top: 40px;
@@ -80,8 +80,11 @@
 .search_title li{float: left;margin-right: 20px;}
 .search_post_title{
     font-size: 18px;
-    line-height: 28px;
+    line-height:28px;
     font-weight: bold;
+}
+.search_post_wrap{
+    display: flex;
 }
 .search_post_wrap::after{
     position: absolute;
@@ -107,6 +110,9 @@
     line-height: 20px;
 }
 
-.search_post_like, .search_post_time, .search_post_comment{
+.search_post_like, .search_post_time, .search_post_comment, .search_post_scrap{
     color: #A0A0A0;
+}
+.search_post_wrap li:first-child{
+    margin-right: 5px;
 }

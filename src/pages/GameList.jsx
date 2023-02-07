@@ -38,7 +38,7 @@ function GameList() {
           img2: array[i][1].imageUrl,
           month: array[i][0].month,
           id: array[i][0].id,
-          id2: array[i][1].id2,
+          id2: array[i][1].id,
           category: array[i][0].category,
         };
         //
