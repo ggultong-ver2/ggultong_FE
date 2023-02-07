@@ -124,7 +124,7 @@ const RecycleList = () => {
                     <StTitle>{value.title}</StTitle>
 
                     <StContent
-                      dangerouslySetInnerHTML={{ __html: post.content }}
+                      dangerouslySetInnerHTML={{ __html: value.content }}
                     ></StContent>
                     <div className="list_bottom">
                       <div className="list_bottom_left">
