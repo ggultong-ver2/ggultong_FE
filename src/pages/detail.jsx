@@ -201,7 +201,7 @@ const Detail = () => {
 
               <Else>
                 <Etc>
-                  <Profile>{details?.profileImg}</Profile>
+                  <Profile src={details?.userProfile}></Profile>
                   <StNickname>{details?.nickname}</StNickname>
                   <div className="detail_date">
                     {details?.createdAt.slice(0, 10)}
