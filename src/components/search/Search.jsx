@@ -89,10 +89,6 @@ function Search() {
                       }}
                     >
                       <div className="search_post_title">{post.title}</div>
-                      <div
-                        dangerouslySetInnerHTML={{ __html: post.content }}
-                        className="search_post_content"
-                      ></div>
                       <div className="search_post_wrap">
                         <ul className="clearfix">
                           <li className="search_post_nickname">
