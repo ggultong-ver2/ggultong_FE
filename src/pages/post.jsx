@@ -140,7 +140,7 @@ const Post = () => {
                 setFile(files);
               }}
             />
-            <span>썸네일은 음식 월드컵에 이용됩니다.</span>
+            <p>썸네일은 음식 월드컵에 이용됩니다.</p>
           </div>
 
           {/* <Btns>
