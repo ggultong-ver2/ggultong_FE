@@ -648,10 +648,9 @@
 input[type="file"]::file-selector-button {
   display: none;
 }
-.post_file_wrap span {
-  position: absolute;
+.post_file_wrap p {
+  margin-top: 5px;
   font-size: 14px;
   line-height: 28px;
-  left: 220px;
   color: #a0a0a0;
 }

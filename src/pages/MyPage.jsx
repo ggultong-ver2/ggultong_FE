@@ -98,13 +98,6 @@ function MyPage() {
     //     localStorage.clear();
     //     alert("그 동안 이용해주셔서 감사합니다.");
     //     window.location.assign("/");
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-    //sdasdadadsadsadadwqdq
-
-    // ss
     //   });
     // }
   };
