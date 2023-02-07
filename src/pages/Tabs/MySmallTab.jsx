@@ -289,19 +289,5 @@ const StFile = styled.img`
   top: 20px;
   right: 0;
 `;
-const Etcwrap = styled.div`
-  height: 30px;
-  font-size: 14px;
-  line-height: 22px;
-  color: #a0a0a0;
-`;
-const StContent = styled.div`
-  overflow: hidden;
-  height: 44px;
-  width: 590px;
-  font-size: 14px;
-  line-height: 22px;
-  overflow: hidden;
-`;
 
 export default MySmallTab;
