@@ -123,6 +123,9 @@ const RecycleList = () => {
                   <Textwrap>
                     <StTitle>{value.title}</StTitle>
 
+                    <StContent
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    ></StContent>
                     <div className="list_bottom">
                       <div className="list_bottom_left">
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
