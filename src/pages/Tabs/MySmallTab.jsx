@@ -32,7 +32,6 @@ const MySmallTab = () => {
       ? []
       : state?.postCount?.details?.myPosts[0]?.myPostCount
   );
-  console.log("postcount:", myPostCount);
 
   useEffect(() => {
     if (!myPostCount) return;
@@ -55,7 +54,6 @@ const MySmallTab = () => {
   }, [dispatch, currentPage]);
 
   const myPost = useSelector((state) => state?.details?.details?.myPosts);
-  console.log("myPost::", myPost);
 
   // 내 스크랩 가져오기
   useEffect(() => {
@@ -63,7 +61,6 @@ const MySmallTab = () => {
   }, [dispatch, currentPage]);
 
   const myScrap = useSelector((state) => state?.details?.details?.myScrap);
-  // console.log("myScrap:", myScrap);
 
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPages, setCurrentPages] = useState(1); // 현재 페이지

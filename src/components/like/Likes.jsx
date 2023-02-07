@@ -16,9 +16,6 @@ const Likes = () => {
   const likePostSum = useSelector(
     (state) => state?.details?.details?.likePostSum
   );
-  // console.log(isLikedPost);
-  // console.log(likePostSum);
-  // console.log(post)
 
   const likeToggle = () => {
     if (isLogin) {

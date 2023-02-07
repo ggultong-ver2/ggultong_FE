@@ -13,26 +13,17 @@ function GameList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const MonthData = useSelector((state) => state.details.details.monthList);
-  console.log("MonthData", MonthData);
+
   const [displays, setDisplays] = useState([]);
   useEffect(() => {
     dispatch(__getRankMonth());
-
-    console.log("res", MonthData);
   }, [dispatch]);
 
   useEffect(() => {
     const array = MonthData;
-    // console.log("arr", array[0]);
 
-    // setDisplays(array[0][0], array[0][1]);
-    // console.log("wwwww", array[0][0]);
-    // console.log("d", displays);
     if (MonthData) {
       for (let i = 0; i < array.length; i++) {
-        console.log("a0", array[i][0]);
-        console.log("a1", array[i][1]);
-
         const img1and2 = {
           img1: array[i][0].imageUrl,
           img2: array[i][1].imageUrl,
@@ -45,10 +36,8 @@ function GameList() {
         setDisplays((old) => [...old, img1and2]);
       }
     }
-
-    // console.log("newdata[0]", array[0]);
   }, [MonthData]);
-  console.log("dis", displays);
+
   return (
     <>
       <div className="top_cat_wrap">
@@ -104,7 +93,6 @@ function GameList() {
         <StListBox>
           <StDiv>연간 월드컵 우승작 (1위,2위)</StDiv>
           {displays.map((rowdata, index) => {
-            // console.log("rrr", rowdata);
             return (
               <StCard>
                 <StCardBox>

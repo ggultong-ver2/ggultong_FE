@@ -10,7 +10,7 @@ function EditComment({ commentId, setVisible }) {
   const dispatch = useDispatch();
   // const detailList = useSelector((state) => state.details.details);
   const commentList = useSelector((state) => state.details.details.commentList);
-  console.log("commentid", commentId);
+
   const [editcomment, setEditComment] = useState({
     content: "",
   });
@@ -32,7 +32,7 @@ function EditComment({ commentId, setVisible }) {
       });
     });
   };
-  console.log("visible", setVisible);
+
   return (
     <>
       <Writecomment
@@ -54,13 +54,7 @@ function EditComment({ commentId, setVisible }) {
             setEditComment(value);
           }}
         />
-        <CommentBtn
-        // onClick={(e) => {
-        //   setVisible(false);
-        // }}
-        >
-          확인
-        </CommentBtn>
+        <CommentBtn>확인</CommentBtn>
       </Writecomment>
     </>
   );
