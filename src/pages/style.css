@@ -654,3 +654,6 @@ input[type="file"]::file-selector-button {
   line-height: 28px;
   color: #a0a0a0;
 }
+.post_input_wrap{
+  margin-bottom: 20px;
+}
