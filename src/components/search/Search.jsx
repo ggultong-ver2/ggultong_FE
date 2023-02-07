@@ -4,6 +4,7 @@ import "./style.css";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
 import Paging from "../pagination/paging";
+import styled from "styled-components";
 
 function Search() {
   const navigate = useNavigate();
@@ -31,8 +32,6 @@ function Search() {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        // /post/search?keyword=${params.keyword}`  baseURL
-
         `${IP}/post/search/${currentPage}?keyword=${params.keyword}`
       );
       setSearchData(data);
@@ -91,6 +90,9 @@ function Search() {
                       <div className="search_post_title">{post.title}</div>
                       <div className="search_post_wrap">
                         <ul className="clearfix">
+                          <li>
+                            <StProfile src={post.userProfile}></StProfile>
+                          </li>
                           <li className="search_post_nickname">
                             {post.nickname}
                           </li>
@@ -99,6 +101,9 @@ function Search() {
                           </li>
                           <li className="search_post_like">
                             좋아요&nbsp;{post.likePostSum}
+                          </li>
+                          <li className="search_post_scrap">
+                            스크랩&nbsp;{post.scrapPostSum}
                           </li>
                         </ul>
                         <div className="search_post_time">
@@ -121,5 +126,11 @@ function Search() {
     </>
   );
 }
+
+const StProfile = styled.img`
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+`;
 
 export default Search;
