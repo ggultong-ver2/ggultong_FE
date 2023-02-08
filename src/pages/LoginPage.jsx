@@ -21,6 +21,10 @@ const PostLoginPage = () => {
   const [loginId, setloginId] = useInput();
   const [password, setPassword] = useInput();
 
+  // 로그인 후 뒤로가기 막기
+  if (localStorage.getItem("Access_Token") !== null) {
+    window.history.forward();
+  }
   const navigate = useNavigate();
   // 로그인 관련
   const onSubmitLogin = (e) => {
@@ -39,6 +43,7 @@ const PostLoginPage = () => {
           "error"
         );
       }
+
       localStorage.setItem("Access_Token", res.headers.authorization);
       localStorage.setItem("nickname", res.data.nickname);
       localStorage.setItem("profileImg", res.data.profileImg);

@@ -150,6 +150,7 @@ const MySmallTab = () => {
         <>
           {myScrap &&
             myScrap?.map((value, index) => {
+              console.log(value);
               return (
                 <Card
                   key={index}

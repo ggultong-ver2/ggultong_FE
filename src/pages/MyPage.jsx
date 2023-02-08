@@ -88,16 +88,16 @@ function MyPage() {
         profileImg,
         nickname,
       })
-    )
-      .then(() => {
-        Swal.fire(
-          "정보수정 완료!",
-          "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
-          "success"
-        );
-        localStorage.clear();
-        navigate("/login");
-      });
+    ).then((res) => {
+      console.log("res", res);
+      Swal.fire(
+        "정보수정 완료!",
+        "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
+        "success"
+      );
+      localStorage.clear();
+      navigate("/login");
+    });
   };
   return (
     <StContainer onSubmit={onSubmitChangeHandler}>
@@ -140,6 +140,8 @@ function MyPage() {
                 <StInput
                   type="text"
                   id="nickname"
+                  minLength={2}
+                  maxLength={8}
                   value={nickname}
                   onChange={setNickname}
                 />
@@ -388,6 +390,10 @@ const StButton = styled.button`
   border: 0;
   cursor: pointer;
   font-family: "Pretendard";
+
+  &:hover {
+    color: #9d9d9d;
+  }
 `;
 
 const StProfileButton = styled.button`
@@ -422,6 +428,10 @@ const StDeleteButton = styled.div`
   align-items: center;
   cursor: pointer;
   font-family: "Pretendard";
+
+  &:hover {
+    color: #9d9d9d;
+  }
 `;
 const StNickButton = styled.button`
   width: 110px;
