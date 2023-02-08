@@ -5,7 +5,6 @@ import { useState } from "react";
 // import { EventSourcePolyfill } from "event-source-polyfill";
 // import { NativeEventSource } from "event-source-polyfill";
 
-
 // import Home from "../pages/Home";
 import Layout from "../components/layout/Layout";
 // import Detailtest from "../components/recipe/Recipe";
@@ -98,7 +97,7 @@ const Router = () => {
           <Route path="/pwfind" element={<Pwfind />} />
           <Route path="/idfind" element={<Idfind />} />
           <Route path="/editpost/:id" element={<EditPost />} />
-          <Route path="/user/kakao/callback" element={<KakaolLogin />} />
+          <Route path="/api/user/kakao/callback" element={<KakaolLogin />} />
           <Route path="/user/naver/callback" element={<NaverLogin />} />
           <Route path="/gamelist" element={<GameList />} />
           <Route
