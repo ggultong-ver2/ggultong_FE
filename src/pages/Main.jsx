@@ -7,9 +7,20 @@ import Recycle from "./Recycle";
 import "./reset.css";
 import "./style.css";
 import Swal from "sweetalert2";
+import CheckLogin from "../hook/CheckLogin";
 
 function Main() {
+  const { isLogin } = CheckLogin();
   const navigate = useNavigate();
+
+  const postBtn = () => {
+    if (isLogin) {
+      navigate("/post");
+    } else {
+      Swal.fire("로그인 후 이용해주세요!", "", "warning");
+      navigate("/login")
+    }
+  };
 
   return (
     <>
@@ -28,7 +39,7 @@ function Main() {
               <button onClick={() => navigate("/gamelist")}>꿀잼</button>
             </li>
           </ul>
-          <button onClick={() => navigate("/post")} className="top_post_btn">
+          <button onClick={postBtn} className="top_post_btn">
             글쓰기
           </button>
         </div>

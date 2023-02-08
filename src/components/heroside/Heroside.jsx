@@ -5,6 +5,7 @@ import "../../pages/reset.css";
 import "./style.css";
 import "./slick-theme.css";
 import "./slick.css";
+import CheckLogin from "../../hook/CheckLogin";
 
 function Heroside() {
   const settings = {
@@ -15,7 +16,17 @@ function Heroside() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
+  };
+
+  const { isLogin } = CheckLogin();
+
+  const postBtn = () => {
+    if (isLogin) {
+      navigate("/post");
+    } else {
+      alert("로그인 시 이용가능합니다.");
+    }
   };
 
   const navigate = useNavigate();
@@ -41,7 +52,7 @@ function Heroside() {
           <h1>
             혼술 / 혼밥하는 당신의 <br /> 특별한 요리를 공유해봐요!
           </h1>
-          <button onClick={() => navigate("/post")}>글쓰기</button>
+          <button onClick={postBtn}>글쓰기</button>
         </div>
         <div className="slide3">
           <div className="slide3">

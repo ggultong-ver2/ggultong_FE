@@ -50,7 +50,7 @@ function MyPage() {
 
   const onDeleteLoginId = () => {
     Swal.fire({
-      title: "정말 꿀통을 떠나실껀가요? &nbsp;&nbsp;:(",
+      title: "정말 꿀통을 떠나실 거예요? &nbsp;&nbsp;:(",
       text: "취소 눌러주세요 제발~",
       icon: "warning",
       showCancelButton: true,
