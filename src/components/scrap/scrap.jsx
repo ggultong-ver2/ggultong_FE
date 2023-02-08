@@ -4,17 +4,20 @@ import { useParams } from "react-router";
 import CheckLogin from "../../hook/CheckLogin";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const Scrap = () => {
   const { isLogin } = CheckLogin();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate()
 
   const scrapToggle = () => {
     if (isLogin) {
       dispatch(__postScrap(id));
     } else {
       Swal.fire("로그인 후 이용해주세요!", "", "warning");
+      navigate("/login")
     }
   };
 
