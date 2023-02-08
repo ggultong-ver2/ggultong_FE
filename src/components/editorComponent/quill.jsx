@@ -78,9 +78,9 @@ const Quill = ({ content, setContent, value }) => {
   ];
 
   return (
-    <div style={{ height: "1050px" }}>
+    <div style={{ height: "750px" }}>
       <ReactQuill
-        style={{ height: "1000px" }}
+        style={{ height: "700px" }}
         theme="snow"
         modules={modules}
         formats={formats}

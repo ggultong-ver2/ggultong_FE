@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { __getMyPost, __getMyScrap } from "../../redux/modules/postSlice";
 import Paging from "../../components/pagination/paging";
-import { __getMypageCount } from "../../redux/modules/postSlice";
 import "./style.css";
 
 const MySmallTab = () => {
-  const [displays, setDisplays] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
-  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
-  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
-  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-
-  useEffect(() => {
-    setCount();
-    setIndexOfLastPost(currentPage * postPerPage);
-    setIndexOfFirstPost(indexOfLastPost - postPerPage);
-  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
 
   const myPostCount = useSelector((state) =>
     state?.postCount?.details?.myPosts === undefined
@@ -36,11 +25,6 @@ const MySmallTab = () => {
     setCount(myPostCount);
   }, [myPostCount]);
 
-  useEffect(() => {
-    setIndexOfLastPost(currentPage * postPerPage);
-    setIndexOfFirstPost(indexOfLastPost - postPerPage);
-  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
-
   const setPage = (page) => {
     setCurrentPage(page);
   };
@@ -48,22 +32,19 @@ const MySmallTab = () => {
   // 내 게시글 가져오기
   useEffect(() => {
     dispatch(__getMyPost(currentPage));
-  }, [dispatch, currentPage]);
+  }, [dispatch, currentPage, currentTab]);
 
   const myPost = useSelector((state) => state?.details?.details?.myPosts);
 
   // 내 스크랩 가져오기
-  useEffect(() => {
-    dispatch(__getMyScrap(currentPage));
-  }, [dispatch, currentPage]);
-
   const myScrap = useSelector((state) => state?.details?.details?.myScrap);
 
   const [currentPages, setCurrentPages] = useState(1); // 현재 페이지
   const [counts, setCounts] = useState(0); // 아이템 총 개수
-  const [postPerPages] = useState(10); // 한 페이지에 보여질 아이템
-  const [indexOfLastPosts, setIndexOfLastPosts] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
-  const [indexOfFirstPosts, setIndexOfFirstPosts] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+
+  useEffect(() => {
+    dispatch(__getMyScrap(currentPages));
+  }, [dispatch, currentPages, currentTab]);
 
   const myScrapCount = useSelector((state) =>
     state?.postCount?.details?.myScrap === undefined
@@ -73,11 +54,11 @@ const MySmallTab = () => {
 
   useEffect(() => {
     if (!myScrapCount) return;
-    setCount(myScrapCount);
+    setCounts(myScrapCount);
   }, [myScrapCount]);
 
-  const setPages = (page) => {
-    setCurrentPage(page);
+  const setPages = (pages) => {
+    setCurrentPages(pages);
   };
 
   const pageMove = (category, id) => {
@@ -187,7 +168,11 @@ const MySmallTab = () => {
                 </Card>
               );
             })}
-          <Paging currentPage={currentPages} count={counts} setPage={setPage} />
+          <Paging
+            currentPage={currentPages}
+            count={counts}
+            setPage={setPages}
+          />
         </>
       ),
     },
@@ -195,6 +180,8 @@ const MySmallTab = () => {
 
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
+    setCurrentPage(1);
+    setCurrentPages(1);
   };
   return (
     <>

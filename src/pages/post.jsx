@@ -22,8 +22,6 @@ const Post = () => {
   const [post, setPost] = useState([]);
   const [imageFile, setImageFile] = useState("");
 
-  console.log(file);
-
   const onSubmitHandler = (e) => {
     const formdata = new FormData();
     for (const f of Array.from(file)) {
@@ -51,15 +49,15 @@ const Post = () => {
     }
   };
 
-  // const onChangeImage = () => {
-  //   const file = imgRef.current.files[0];
-  //   const reader = new FileReader();
-  //   console.log(reader);
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setImageFile(reader.result);
-  //   };
-  // };
+  const onChangeImage = (e) => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    console.log(reader);
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImageFile(reader.result);
+    };
+  };
 
   return (
     <Background>
@@ -99,10 +97,18 @@ const Post = () => {
               onChange={(ev) => {
                 const { value } = ev.target;
                 setTitle(value);
+                const file = imgRef.current.files[0];
+                const reader = new FileReader();
+                console.log(reader);
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                  setImageFile(reader.result);
+                };
               }}
               className="post_searchinp"
             ></input>
           </div>
+          <Quill type="text" content={content} setContent={setContent} />
           <div className="post_file_wrap">
             <label htmlFor="file">썸네일 첨부</label>
             <input
@@ -113,15 +119,13 @@ const Post = () => {
               onChange={(ev) => {
                 const { files } = ev.target;
                 setFile(files);
+                onChangeImage();
               }}
-              // ref={imgRef}
+              ref={imgRef}
             />
-            <img src={imageFile} width="100px" height="100px"></img>
+            <Thumbnail src={imageFile} />
             <p>썸네일은 음식 월드컵에 이용됩니다.</p>
           </div>
-
-          <Quill type="text" content={content} setContent={setContent} />
-
         </Wrap>
       </Form>
     </Background>
@@ -133,6 +137,11 @@ const Background = styled.div`
   min-height: 100vh;
   padding-top: 112px;
   padding-bottom: 50px;
+`;
+const Thumbnail = styled.img`
+  margin-top: 20px;
+  width: 300px;
+  height: 300px;
 `;
 const Form = styled.form`
   //border: 1px solid black;
