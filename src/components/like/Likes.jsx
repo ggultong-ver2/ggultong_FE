@@ -3,11 +3,14 @@ import { useParams } from "react-router-dom";
 import { __postLike } from "../../redux/modules/postSlice";
 import "./style.css";
 import CheckLogin from "../../hook/CheckLogin";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Likes = () => {
   const { isLogin } = CheckLogin();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const post = useSelector((state) => state?.details);
   const isLikedPost = useSelector(
@@ -21,7 +24,8 @@ const Likes = () => {
     if (isLogin) {
       dispatch(__postLike(id));
     } else {
-      alert("로그인 시 이용가능합니다.");
+      Swal.fire("로그인 후 이용해주세요!", "", "warning");
+      navigate("/login")
     }
   };
 

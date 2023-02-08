@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import styled from "styled-components";
 import "./reset.css";
-// import Editor from "../components/editor/Editor";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
 import fileinput from "../assets/images/fileinput.png";
@@ -45,7 +44,7 @@ const Post = () => {
       dispatch(__addPost(formdata));
       Swal.fire("작성이 완료되었습니다!", "", "success").then((res) => {
         if (res.isConfirmed) {
-          navigate(`/drinkList/drink`);
+          navigate(`/${category}List/${category}`);
         }
       });
     }
@@ -100,6 +99,7 @@ const Post = () => {
           <div className="post_input_wrap">
             <input
               type="text"
+              maxLength={30}
               placeholder="제목을 입력해주세요"
               onChange={(ev) => {
                 const { value } = ev.target;

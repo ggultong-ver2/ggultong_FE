@@ -7,6 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 // 주석 풀고 사용
 import store from "./redux/config/configStore";
 import { Provider } from "react-redux";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+export default function ScrollTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

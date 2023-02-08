@@ -69,7 +69,6 @@ export const __getRankList = createAsyncThunk(
 
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -83,7 +82,6 @@ export const __getRankMonth = createAsyncThunk(
 
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -138,7 +136,6 @@ export const __getComment = createAsyncThunk(
       const data = await apis.getComment();
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
-
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -291,8 +288,7 @@ export const __patchPost = createAsyncThunk(
 
       const data = await apis.patchPost(formData);
       return data;
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 );
 
@@ -443,7 +439,7 @@ export const postSlice = createSlice({
         title: "",
         content: "",
         id: 0,
-        comment: [],
+        commentList: [],
         isLikedPost: false,
         likePostSum: 0,
         scrapPost: false,

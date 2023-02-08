@@ -5,7 +5,6 @@ import { useState } from "react";
 // import { EventSourcePolyfill } from "event-source-polyfill";
 // import { NativeEventSource } from "event-source-polyfill";
 
-
 // import Home from "../pages/Home";
 import Layout from "../components/layout/Layout";
 // import Detailtest from "../components/recipe/Recipe";
@@ -41,6 +40,7 @@ import EditComment from "../pages/EditComment";
 import GameRank from "../pages/GameRank";
 import { QueryClient } from "react-query";
 import GameRankView from "../pages/GameRankView";
+import ScrollTop from "..";
 
 const Router = () => {
   const [loading, setIsLoading] = useState(false);
@@ -78,6 +78,7 @@ const Router = () => {
 
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Main />} />
