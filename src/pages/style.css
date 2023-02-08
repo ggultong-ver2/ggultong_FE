@@ -628,9 +628,10 @@
 
 .post_file_wrap {
   font-size: 20px;
-  margin-top: 10px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 20px;
+  padding-top: 10px;
 }
 .post_file_wrap label {
   border: 1px solid #000;
