@@ -61,14 +61,18 @@ const Post = () => {
 
   return (
     <Background>
-      <Form
+      <form
+        className="post_top_container"
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(post);
         }}
       >
-        <div className="post_top_container">
-          <div className="post_top_wrap">
+        <div className="post_top_wrap">
+          <div className="post_header">
+            <div className="logo">
+              <a href="/">LOGO</a>
+            </div>
             <div className="post_top">
               <select
                 name="category"
@@ -88,6 +92,14 @@ const Post = () => {
             </div>
           </div>
         </div>
+      </form>
+
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmitHandler(post);
+        }}
+      >
         <Wrap>
           <div className="post_input_wrap">
             <input
@@ -135,7 +147,7 @@ const Background = styled.div`
   background-color: #f9fafb;
   width: 100%;
   min-height: 100vh;
-  padding-top: 112px;
+  padding-top: 132px;
   padding-bottom: 50px;
 `;
 const Thumbnail = styled.img`
