@@ -47,6 +47,7 @@ const DrinkList = () => {
   }, [dispatch, id, currentPage]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
+  console.log(categoryPosts);
 
   return (
     <>
