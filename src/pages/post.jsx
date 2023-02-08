@@ -20,6 +20,9 @@ const Post = () => {
   const [category, setCategory] = useState("");
   const [file, setFile] = useState("");
   const [post, setPost] = useState([]);
+  const [imageFile, setImageFile] = useState("");
+
+  console.log(file);
 
   const onSubmitHandler = (e) => {
     const formdata = new FormData();
@@ -47,6 +50,16 @@ const Post = () => {
       });
     }
   };
+
+  // const onChangeImage = () => {
+  //   const file = imgRef.current.files[0];
+  //   const reader = new FileReader();
+  //   console.log(reader);
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setImageFile(reader.result);
+  //   };
+  // };
 
   return (
     <Background>
@@ -91,7 +104,7 @@ const Post = () => {
             ></input>
           </div>
           <div className="post_file_wrap">
-            <label for="file">썸네일 첨부</label>
+            <label htmlFor="file">썸네일 첨부</label>
             <input
               className="post_file_input"
               type="file"
@@ -101,7 +114,9 @@ const Post = () => {
                 const { files } = ev.target;
                 setFile(files);
               }}
+              // ref={imgRef}
             />
+            <img src={imageFile} width="100px" height="100px"></img>
             <p>썸네일은 음식 월드컵에 이용됩니다.</p>
           </div>
 
