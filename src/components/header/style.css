@@ -196,10 +196,12 @@
   display: flex;
   justify-content: space-between;
 }
-.top_cat li {
+.top_cat li{
   float: left;
   margin-left: 30px;
-  font-size: 14px;
+}
+.top_cat li button{
+  font-size: 16px;
 }
 .top_cat li:first-child {
   margin-left: 0;
@@ -220,12 +222,14 @@
   background: #ffd665;
   color: #000;
   border: 0 none;
-  width: 69px;
-  height: 24px;
+  width: 80px;
+  height: 28px;
   border-radius: 20px;
+  font-size: 16px;
 }
 .top_post_btn:hover {
   background: #000;
   color: #ffd665;
   border-bottom: 0 none;
+  border: 1px solid #ffd665;
 }
