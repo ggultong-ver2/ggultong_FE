@@ -17,7 +17,8 @@ function Main() {
     if (isLogin) {
       navigate("/post");
     } else {
-      alert("로그인 시 이용가능합니다.");
+      Swal.fire("로그인 후 이용해주세요!", "", "warning");
+      navigate("/login")
     }
   };
 
