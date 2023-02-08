@@ -89,13 +89,18 @@ function MyPage() {
         nickname,
       })
     ).then((res) => {
-      console.log("res", res);
-      Swal.fire(
-        "정보수정 완료!",
-        "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
-        "success"
-      );
-      localStorage.clear();
+      console.log("res", res.payload.data);
+      if (res.payload.data.statusCode === 200) {
+        Swal.fire(
+          res.payload.data.msg,
+          "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
+          "success"
+        );
+      } else {
+        Swal.fire(res.payload.data.msg, "다시 확인해주세요", "error");
+      }
+
+      // localStorage.clear();
       // navigate("/login");
     });
   };
