@@ -669,10 +669,10 @@ input[type="file"]::file-selector-button {
 }
 .post_file_wrap p {
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 28px;
   color: #a0a0a0;
 }
-.post_input_wrap{
+.post_input_wrap {
   margin-bottom: 20px;
 }

@@ -10,13 +10,14 @@ function KakaoLogin() {
   const getToken = async () => {
     try {
       const data = axios
-        .get(`http://${IP}/user/kakao/callback?code=${KAKAO_CODE}`)
+        .get(`http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`)
         .then((res) => {
+          console.log("social", res);
           localStorage.setItem("Access_Token", res.headers.authorization);
           localStorage.setItem("nickname", res.data.nickname);
           localStorage.setItem("profileImg", res.data.profileImg);
           localStorage.setItem("email", res.data.email);
-          return data;
+          return res;
         })
         .then((res) => {
           if (res.data.nickname === "tlsrbrkdlqwk") {

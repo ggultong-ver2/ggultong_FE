@@ -32,7 +32,7 @@ function GameList() {
           id2: array[i][1].id,
           category: array[i][0].category,
         };
-        //
+
         setDisplays((old) => [...old, img1and2]);
       }
     }
@@ -94,7 +94,7 @@ function GameList() {
           <StDiv>연간 월드컵 우승작 (1위,2위)</StDiv>
           {displays.map((rowdata, index) => {
             return (
-              <StCard>
+              <StCard key={rowdata.id}>
                 <StCardBox>
                   <StCardImg
                     onClick={() => {

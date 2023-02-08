@@ -286,7 +286,17 @@ export const __patchPost = createAsyncThunk(
       );
       formData.append("nickname", nickname);
 
-      const data = await apis.patchPost(formData);
+      const data = await axios.patch(
+        "https://sparta-sjl.shop/api/mypage/update",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Access_Token: `${localStorage.getItem("Access_Token")}`,
+          },
+        }
+      );
+      console.log("data", data);
       return data;
     } catch (error) {}
   }

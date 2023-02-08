@@ -56,6 +56,7 @@ const Detail = () => {
       });
     } else {
       Swal.fire("로그인 후 이용해주세요", "", "error");
+      navigate("/login");
     }
   };
 
@@ -118,6 +119,7 @@ const Detail = () => {
   };
 
   if (details.id) {
+    console.log("dd", details);
     return (
       <>
         <div className="top_cat_wrap">
@@ -227,13 +229,16 @@ const Detail = () => {
                         <EditComment
                           commentId={comment.id}
                           setVisible={setVisible}
+                          nicks={comment.nickname}
                         />
                       ) : (
                         <Commentbox key={index}>
                           <Commenttextarea>
                             <Profileimg src={comment.profileImg} />
                             <WrapWritten>
-                              <Writtenby>{comment.nickname}</Writtenby>
+                              <Writtenby nick={comment.nickname}>
+                                {comment.nickname}
+                              </Writtenby>
                               <Writtendate>
                                 {timeCalculator(comment.createdAt)}
                               </Writtendate>
