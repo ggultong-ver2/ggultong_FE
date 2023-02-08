@@ -92,6 +92,7 @@ const EditPost = () => {
               <input
                 type="text"
                 name="title"
+                maxLength={30}
                 className="post_searchinp"
                 value={title}
                 onChange={(ev) => {

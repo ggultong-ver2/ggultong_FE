@@ -79,6 +79,7 @@ const Post = () => {
           <div className="post_input_wrap">
             <input
               type="text"
+              maxLength={30}
               placeholder="제목을 입력해주세요"
               onChange={(ev) => {
                 const { value } = ev.target;
