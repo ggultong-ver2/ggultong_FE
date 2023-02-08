@@ -10,7 +10,7 @@ function KakaoLogin() {
   const getToken = async () => {
     try {
       const data = axios
-        .get(`http://${IP}/user/kakao/callback?code=${KAKAO_CODE}`)
+        .get(`http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`)
         .then((res) => {
           localStorage.setItem("Access_Token", res.headers.authorization);
           localStorage.setItem("nickname", res.data.nickname);
