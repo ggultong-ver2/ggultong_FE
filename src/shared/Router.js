@@ -97,7 +97,7 @@ const Router = () => {
           <Route path="/pwfind" element={<Pwfind />} />
           <Route path="/idfind" element={<Idfind />} />
           <Route path="/editpost/:id" element={<EditPost />} />
-          <Route path="/api/user/kakao/callback" element={<KakaolLogin />} />
+          <Route path="/user/kakao/callback" element={<KakaolLogin />} />
           <Route path="/user/naver/callback" element={<NaverLogin />} />
           <Route path="/gamelist" element={<GameList />} />
           <Route
