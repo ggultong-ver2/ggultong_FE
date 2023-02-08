@@ -23,6 +23,7 @@ const PostLoginPage = () => {
   const [nickname, setNickname] = useInput();
   const [disable, setDisable] = useState(false);
   const [PWPtag, setPWPtag] = useState();
+  const [Idtag, setIdtag] = useState();
   const [PWConfirm, setPWConfirm] = useState("");
   const [PWConfirmP, setPWConfirmP] = useState(false);
   const [isemail, setIsemail] = useState();
@@ -42,6 +43,19 @@ const PostLoginPage = () => {
       );
     } else {
       setPWPtag(<StPs2>사용가능한 비밀번호 입니다</StPs2>);
+    }
+  };
+
+  function isId(asValue) {
+    const regExp = /^[a-zA-Z0-9]*$/;
+    return regExp.test(asValue);
+  }
+
+  const IdChk = () => {
+    if (!isId(loginId)) {
+      setIdtag(<StPs>사용 불가. 영문/숫자를 모두 포함한, 6-12자</StPs>);
+    } else {
+      setIdtag(<StPs2>올바른 형식입니다. 중복확인을 진행 해주세요!</StPs2>);
     }
   };
 
@@ -172,8 +186,9 @@ const PostLoginPage = () => {
               type="text"
               id="loginId"
               value={loginId}
+              onBlur={IdChk}
               onChange={setloginId}
-              placeholder="아이디를 입력해주세요."
+              placeholder="최소6~12자, 영문/숫자 포함"
               required
               minLength={6}
               maxLength={10}
@@ -188,6 +203,7 @@ const PostLoginPage = () => {
               ID 중복확인
             </StButton>
           </StBox>
+          <StP>{<p className="ptag">{Idtag}</p>}</StP>
           <br></br>
           <StLabel2 htmlFor="password">비밀번호</StLabel2>
           <StBox>
@@ -235,7 +251,7 @@ const PostLoginPage = () => {
               id="nickname"
               value={nickname}
               onChange={setNickname}
-              placeholder="닉네임을 입력해주세요."
+              placeholder="닉네임을 입력해주세요. 최소2~8자"
               required
               minLength={2}
               maxLength={8}
@@ -305,7 +321,7 @@ const PostLoginPage = () => {
           <StTimer>{visible && <Timer />}</StTimer>
           <StBtnBox>
             <StBack onClick={() => navigate("/agree")}>이전</StBack>
-            <StButton log>다음</StButton>
+            <StButton log>가입</StButton>
           </StBtnBox>
         </StCenterBox>
       </div>

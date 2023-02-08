@@ -19,9 +19,9 @@ const Idfind = () => {
     }).then((res) => {
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, res.data.loginId, "success");
+        navigate("/login");
       } else {
         Swal.fire(res.data.msg, "없는 이메일 입니다.", "error");
-        navigate("/login");
       }
     });
   };
@@ -45,9 +45,10 @@ const Idfind = () => {
             <StEmailInput
               type="email"
               id="email"
+              onBlur={checkEmail}
               value={email}
               onChange={setEmail}
-              onClick={checkEmail}
+              // onClick={checkEmail}
               placeholder="이메일을 입력해주세요."
               required
               minLength={5}
