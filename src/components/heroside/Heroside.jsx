@@ -6,6 +6,7 @@ import "./style.css";
 import "./slick-theme.css";
 import "./slick.css";
 import CheckLogin from "../../hook/CheckLogin";
+import Swal from "sweetalert2";
 
 function Heroside() {
   const settings = {
@@ -25,7 +26,8 @@ function Heroside() {
     if (isLogin) {
       navigate("/post");
     } else {
-      alert("로그인 시 이용가능합니다.");
+      Swal.fire("로그인 후 이용해주세요!", "", "warning");
+      navigate("/login")
     }
   };
 

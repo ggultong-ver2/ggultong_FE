@@ -56,23 +56,25 @@ const Post = () => {
           onSubmitHandler(post);
         }}
       >
-        <div className="post_top_wrap">
-          <div className="post_top">
-            <select
-              name="category"
-              id="category"
-              className="post_top_select"
-              onChange={(ev) => {
-                const { value } = ev.target;
-                setCategory(value);
-              }}
-            >
-              <option value="choose">게시판 선택</option>
-              <option value="drink">혼술</option>
-              <option value="meal">혼밥</option>
-              <option value="recycle">리사이꿀</option>
-            </select>
-            <button>저장</button>
+        <div className="post_top_container">
+          <div className="post_top_wrap">
+            <div className="post_top">
+              <select
+                name="category"
+                id="category"
+                className="post_top_select"
+                onChange={(ev) => {
+                  const { value } = ev.target;
+                  setCategory(value);
+                }}
+              >
+                <option value="choose">게시판 선택</option>
+                <option value="drink">혼술</option>
+                <option value="meal">혼밥</option>
+                <option value="recycle">리사이꿀</option>
+              </select>
+              <button>저장</button>
+            </div>
           </div>
         </div>
         <Wrap>
@@ -88,8 +90,6 @@ const Post = () => {
               className="post_searchinp"
             ></input>
           </div>
-          <Quill type="text" content={content} setContent={setContent} />
-
           <div className="post_file_wrap">
             <label for="file">썸네일 첨부</label>
             <input
@@ -104,6 +104,9 @@ const Post = () => {
             />
             <p>썸네일은 음식 월드컵에 이용됩니다.</p>
           </div>
+
+          <Quill type="text" content={content} setContent={setContent} />
+
         </Wrap>
       </Form>
     </Background>
@@ -112,13 +115,14 @@ const Post = () => {
 const Background = styled.div`
   background-color: #f9fafb;
   width: 100%;
-  min-height: 95vh;
+  min-height: 100vh;
   padding-top: 112px;
+  padding-bottom: 50px;
 `;
 const Form = styled.form`
   //border: 1px solid black;
   width: 1000px;
-  height: 1250px;
+  height: 1330px;
   margin: auto;
   /* margin-top: 50px; */
   padding: 10px 50px;

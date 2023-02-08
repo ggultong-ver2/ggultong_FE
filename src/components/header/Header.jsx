@@ -24,6 +24,12 @@ function Header() {
     setOpen(!open);
   };
 
+  const OnKeyPress = e => {
+    if (e.key === 'Enter') {
+      onSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <div className="header_container">
       <div className="headerwrap">
@@ -40,6 +46,7 @@ function Header() {
               onChange={(e) => {
                 setKeyWord(e.target.value);
               }}
+              onKeyPress={OnKeyPress}
             />
             <button
               type="button"
