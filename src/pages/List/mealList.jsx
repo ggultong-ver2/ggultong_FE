@@ -16,10 +16,6 @@ const MealList = () => {
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
-  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
-  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
-  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-
   useEffect(() => {
     dispatch(__getCategoryCount());
   }, [dispatch]);
@@ -31,13 +27,8 @@ const MealList = () => {
     setCount(categoryMealCount);
   }, [categoryMealCount]);
 
-  useEffect(() => {
-    setIndexOfLastPost(currentPage * postPerPage);
-    setIndexOfFirstPost(indexOfLastPost - postPerPage);
-  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
-
-  const setPage = (error) => {
-    setCurrentPage(error);
+  const setPage = (page) => {
+    setCurrentPage(page);
   };
 
   useEffect(() => {
