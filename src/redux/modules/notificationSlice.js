@@ -7,7 +7,7 @@ export const __getNotification = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await baseURL.get("/notifications");
-      // console.log(data.data)
+      console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -48,8 +48,8 @@ export const notification = createSlice({
     },
     [__getNotification.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log("action.payload", action.payload);
       state.notifications = action.payload;
-      // console.log("action.payload", action.payload)
     },
     [__getNotification.rejected]: (state, action) => {
       state.isLoading = false;
@@ -64,9 +64,6 @@ export const {
   __deleteNotification,
   __deleteNotifications,
 } = notification.actions;
-
-
-
 
 export const __NreadNotification = createAsyncThunk(
   "NreadNotification",
