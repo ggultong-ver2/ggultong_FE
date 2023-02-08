@@ -17,6 +17,7 @@ function KakaoLogin() {
           localStorage.setItem("nickname", res.data.nickname);
           localStorage.setItem("profileImg", res.data.profileImg);
           localStorage.setItem("email", res.data.email);
+          return res;
         })
         .then((res) => {
           if (res.data.nickname === "tlsrbrkdlqwk") {
@@ -25,7 +26,6 @@ function KakaoLogin() {
             navigate("/");
           }
         });
-      return data;
     } catch (error) {}
   };
 
