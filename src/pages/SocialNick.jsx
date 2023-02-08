@@ -18,8 +18,8 @@ function SocialNick() {
       // Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
 
       if (res.data.statusCode === 200) {
-        Swal.fire(res.data.msg, "꿀통에 오신것을 환영합니다!", "success");
-        navigate("/signcomplete");
+        Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
+        navigate("/");
       } else {
         Swal.fire(res.data.msg, "다시 시도 해주세요!", "error");
       }
