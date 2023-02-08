@@ -48,7 +48,7 @@ const Detail = () => {
     setAddComment({ ...addComment, content: "" });
     if (localStorage.getItem("Access_Token") !== null) {
       Swal.fire({
-        position: "top-middle",
+        position: "bottom",
         icon: "success",
         title: "댓글 작성완료",
         showConfirmButton: false,
@@ -64,7 +64,7 @@ const Detail = () => {
       dispatch(__deleteComment({ commentId: commentId, postId: id }));
       if (localStorage.getItem("Access_Token") !== null) {
         Swal.fire({
-          position: "top-middle",
+          position: "bottom",
           icon: "success",
           title: "댓글 삭제완료",
           showConfirmButton: false,
@@ -111,6 +111,10 @@ const Detail = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
+  };
+
+  const goToBottom = () => {
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   if (details.id) {
@@ -199,14 +203,21 @@ const Detail = () => {
                 <Commentinput
                   placeholder="댓글을 작성할 수 있어요."
                   minLength={1}
-                  maxLength={500}
+                  maxLength={300}
                   type="text"
                   value={addComment.content}
                   onChange={(e) => {
                     setAddComment({ ...addComment, content: e.target.value });
                   }}
                 />
-                <CommentBtn onClick={onClickAddCommentHandler}>확인</CommentBtn>
+                <CommentBtn
+                  onClick={() => {
+                    goToBottom();
+                    onClickAddCommentHandler();
+                  }}
+                >
+                  확인
+                </CommentBtn>
               </Writecomment>
               <div>
                 {commentList.map((comment, index) => {

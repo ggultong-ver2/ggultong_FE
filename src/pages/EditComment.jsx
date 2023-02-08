@@ -24,13 +24,18 @@ function EditComment({ commentId, setVisible }) {
   const onClickEditCommentHandler = (id) => {
     dispatch(__editComment({ editcomment, commentId })).then(() => {
       Swal.fire({
-        position: "middle",
+        className: "swal-wide",
+        position: "bottom",
         icon: "success",
         title: "댓글 수정완료",
         showConfirmButton: false,
         timer: 1500,
       });
     });
+  };
+
+  const goToBottom = () => {
+    window.scrollTo({ bottom: 0, behavior: "smooth" });
   };
 
   return (

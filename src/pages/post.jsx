@@ -43,7 +43,7 @@ const Post = () => {
       dispatch(__addPost(formdata));
       Swal.fire("작성이 완료되었습니다!", "", "success").then((res) => {
         if (res.isConfirmed) {
-          navigate(`/drinkList/drink`);
+          navigate(`/${category}List/${category}`);
         }
       });
     }
