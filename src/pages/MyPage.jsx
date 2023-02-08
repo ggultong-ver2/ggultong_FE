@@ -96,7 +96,7 @@ function MyPage() {
         "success"
       );
       localStorage.clear();
-      navigate("/login");
+      // navigate("/login");
     });
   };
   return (
