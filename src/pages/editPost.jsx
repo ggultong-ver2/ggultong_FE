@@ -18,6 +18,8 @@ const EditPost = () => {
   const [file, setFile] = useState("wadf");
   const [content, setContent] = useState("");
   const { id } = useParams();
+  const [imageFile, setImageFile] = useState("");
+
 
   const onEditPostHandler = (id) => {
     const formdata = new FormData();
@@ -60,17 +62,21 @@ const EditPost = () => {
   return (
     <div>
       <Background>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onEditPostHandler(Number(id));
-          }}
-        >
-          <div className="post_top_wrap">
+      <form
+        className="post_top_container"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onEditPostHandler(post);
+        }}
+      >
+        <div className="post_top_wrap">
+          <div className="post_header">
+            <div className="logo">
+              <a href="/">LOGO</a>
+            </div>
             <div className="post_top">
               <select
                 name="category"
-                value={category}
                 id="category"
                 className="post_top_select"
                 onChange={(ev) => {
@@ -86,8 +92,18 @@ const EditPost = () => {
               <button>저장</button>
             </div>
           </div>
+        </div>
+      </form>
 
+
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onEditPostHandler(Number(id));
+          }}
+        >
           <Wrap>
+            
             <div className="edit_post_input_wrap">
               <input
                 type="text"
@@ -101,34 +117,31 @@ const EditPost = () => {
                 }}
               ></input>
             </div>
+            <div className="thumbnail_wrap">
+              <div className="post_file_wrap">
+                <label htmlFor="file">썸네일 첨부</label>
+                <input
+                  className="post_file_input"
+                  type="file"
+                  id="file"
+                  multiple={true}
+                  onChange={(ev) => {
+                    const { files } = ev.target;
+                    setFile(files);
+                  }}
+                  // ref={imgRef}
+                />
+                <p>썸네일은 음식 월드컵에 이용됩니다.</p>
+              </div>
+              <img
+                src={imageFile}
+                width="100px"
+                height="100px"
+                className="thumbmail"
+              ></img>
+            </div>
 
             <Quill type="text" content={content} setContent={setContent} />
-            <div className="post_file_wrap">
-              <label for="file">썸네일 첨부</label>
-              <input
-                className="post_file_input"
-                type="file"
-                id="file"
-                multiple={true}
-                onChange={(ev) => {
-                  const { files } = ev.target;
-                  setFile(files);
-                }}
-              />
-              <p>썸네일은 음식 월드컵에 이용됩니다.</p>
-            </div>
-            {/* <Btns>
-            <BackButton
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(-1);
-              }}
-            >
-              취소
-            </BackButton>
-
-            <EnterButton>확인</EnterButton>
-          </Btns> */}
           </Wrap>
         </Form>
       </Background>
@@ -139,84 +152,22 @@ const EditPost = () => {
 const Background = styled.div`
   background-color: #f9fafb;
   width: 100%;
-  min-height: 95vh;
-  padding-top: 62px;
+  min-height: 100vh;
+  padding-top: 12px;
+  padding-bottom: 50px;
 `;
 
 const Form = styled.form`
   width: 1000px;
-  height: 1250px;
+  height: 1330px;
   margin: auto;
   margin-top: 50px;
   padding: 10px 50px;
   background-color: #fff;
 `;
-const Category = styled.p`
-  margin-bottom: 50px;
-  font-size: 20px;
-`;
-const CategorySelect = styled.select`
-  margin-left: 10px;
-`;
 const Wrap = styled.div`
   //border: 1px solid red;
   height: 1200px;
-`;
-const Title = styled.p`
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-`;
-const TitleInput = styled.input`
-  border-bottom: 1px solid black;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  width: 800px;
-  height: 30px;
-  margin-left: 10px;
-  font-size: 30px;
-  outline: none;
-`;
-const Content = styled.textarea`
-  width: 850px;
-  height: 900px;
-  margin-left: 25px;
-  resize: none;
-  outline: none;
-  border: none;
-  font-size: 25px;
-`;
-const File = styled.div`
-  font-size: 20px;
-`;
-const FileInput = styled.input`
-  //border: 1px solid green;
-  margin-left: 10px;
-`;
-const Btns = styled.div`
-  margin-left: 350px;
-  margin-top: 50px;
-`;
-const BackButton = styled.button`
-  width: 90px;
-  height: 35px;
-  background-color: white;
-  border-radius: 30px;
-  margin-right: 10px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-const EnterButton = styled.button`
-  width: 90px;
-  height: 35px;
-  background-color: #474747;
-  color: white;
-  border-radius: 30px;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export default EditPost;
