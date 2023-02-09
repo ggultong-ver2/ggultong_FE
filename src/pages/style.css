@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
 }
-
 .main_recipe,
 .main_drink,
 .main_recycle {
@@ -11,12 +10,10 @@
   margin-left: 150px;
   padding: 20px 0;
 }
-
 .sub_container {
   width: 1500px;
   position: relative;
 }
-
 .main_category {
   width: 1200px;
   margin: 0 auto;
@@ -24,7 +21,6 @@
   left: 50%;
   transform: translate(-50%);
 }
-
 .main_category li {
   float: left;
   margin-left: 24px;
