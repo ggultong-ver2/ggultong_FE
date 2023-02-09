@@ -148,7 +148,7 @@ const Detail = () => {
             <Wrap>
               <div className="detail_title_wrap">
                 <div className="detail_title">{details?.title}</div>
-                {localStorage.getItem("nickname") === details.nickname ? (
+                {localStorage.getItem("loginId") === details.loginId ? (
                   <div className="toggle">
                     <div onClick={handleOpen} className="detail_toggle"></div>
                     {open ? (
