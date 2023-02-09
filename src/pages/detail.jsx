@@ -197,7 +197,6 @@ const Detail = () => {
             </div>
             <div className="comment_top">
               <div>전체 댓글 {details?.commentList.length} </div>
-              <div>게시글 신고</div>
             </div>
             <Commentarea>
               <Writecomment>
