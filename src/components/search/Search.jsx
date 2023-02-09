@@ -132,7 +132,7 @@ function Search() {
                                 {post.nickname}
                               </li>
                               <li className="search_post_comment">
-                                댓글&nbsp;{post.commentCounnt}
+                                댓글&nbsp;{post.commentCount}
                               </li>
                               <li className="search_post_like">
                                 좋아요&nbsp;{post.likePostSum}
