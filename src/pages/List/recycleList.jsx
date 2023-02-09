@@ -109,6 +109,7 @@ const RecycleList = () => {
 
         <Wrapall>
           <Wrap>
+
             <select
               name="drinkList"
               id="drinkList"
@@ -218,6 +219,7 @@ const RecycleList = () => {
                   );
                 })
               : null}
+
             <Paging currentPage={currentPage} count={count} setPage={setPage} />
           </Wrap>
         </Wrapall>

@@ -38,7 +38,7 @@ function Heroside() {
       <Slider {...settings}>
         <div className="slide1">
           <div className="slide1">
-            <div className="heroside_text">
+            <div className="heroside_text" onClick={()=>navigate('mealList/meal/detail/98')}>
               <h1>
                 쉽고 빠르게 <br /> 집에서 만드는 볶음면
               </h1>
@@ -58,7 +58,7 @@ function Heroside() {
         </div>
         <div className="slide3">
           <div className="slide3">
-            <div className="heroside_text">
+            <div className="heroside_text" onClick={()=>navigate('recycleList/recycle/detail/96')}>
               <h1>
                 자취생 필수! <br /> 식재료 올바른 보관법
               </h1>
@@ -72,7 +72,7 @@ function Heroside() {
         </div>
         <div className="slide4">
           <div className="slide4">
-            <div className="heroside_text">
+            <div className="heroside_text" onClick={()=>navigate('drinklist/drink/detail/97')}>
               <h1>
                 퇴근 후 먹으면 좋을 <br /> 와인 추천 10가지
               </h1>

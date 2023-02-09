@@ -5,7 +5,6 @@
 .headerwrap {
   width: 1200px;
   height: 72px;
-  /* background: slategrey; */
   display: flex;
   align-items: center;
   justify-content: space-between;

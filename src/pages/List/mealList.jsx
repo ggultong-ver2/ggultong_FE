@@ -109,6 +109,7 @@ const MealList = () => {
 
         <Wrapall>
           <Wrap>
+
             <select
               name="drinkList"
               id="drinkList"
@@ -221,6 +222,7 @@ const MealList = () => {
                   );
                 })
               : null}
+
             <Paging currentPage={currentPage} count={count} setPage={setPage} />
           </Wrap>
         </Wrapall>

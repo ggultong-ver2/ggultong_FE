@@ -135,6 +135,14 @@ function Search() {
                             <div className="search_post_time">
                               {post.createdAt.slice(0, 10)}
                             </div>
+                            <img
+                              className="search_image"
+                              src={
+                                post.imageFile === ""
+                                  ? "../images/default_image.png"
+                                  : post.imageFile
+                              }
+                            ></img>
                           </div>
                         </div>
                       ))
@@ -170,6 +178,14 @@ function Search() {
                             <div className="search_post_time">
                               {post.createdAt.slice(0, 10)}
                             </div>
+                            <img
+                              className="search_image"
+                              src={
+                                post.imageFile === ""
+                                  ? "../images/default_image.png"
+                                  : post.imageFile
+                              }
+                            ></img>
                           </div>
                         </div>
                       ))
@@ -206,6 +222,14 @@ function Search() {
                               {post.createdAt.slice(0, 10)}
                             </div>
                           </div>
+                          <img
+                            className="search_image"
+                            src={
+                              post.imageFile === ""
+                                ? "../images/default_image.png"
+                                : post.imageFile
+                            }
+                          ></img>
                         </div>
                       ))
                     : null}
