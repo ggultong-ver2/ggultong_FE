@@ -126,6 +126,7 @@ const EditPost = () => {
                 }}
               ></input>
             </div>
+            <Quill type="text" content={content} setContent={setContent} />
             <div className="thumbnail_wrap">
               <div className="post_file_wrap">
                 <label htmlFor="file">썸네일 첨부</label>
@@ -139,19 +140,12 @@ const EditPost = () => {
                     setFile(files);
                     onChangeImage();
                   }}
-                  // ref={imgRef}
+                  ref={imgRef}
                 />
+                <Thumbnail src={imageFile} />
                 <p>썸네일은 음식 월드컵에 이용됩니다.</p>
               </div>
-              <img
-                src={imageFile}
-                width="100px"
-                height="100px"
-                className="thumbmail"
-              ></img>
             </div>
-
-            <Quill type="text" content={content} setContent={setContent} />
           </Wrap>
         </Form>
       </Background>
@@ -178,6 +172,11 @@ const Form = styled.form`
 const Wrap = styled.div`
   //border: 1px solid red;
   height: 1200px;
+`;
+const Thumbnail = styled.img`
+  margin-top: 20px;
+  width: 300px;
+  height: 300px;
 `;
 
 export default EditPost;
