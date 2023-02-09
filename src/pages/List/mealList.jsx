@@ -114,6 +114,7 @@ const MealList = () => {
                     <div className="list_bottom">
                       <div className="list_bottom_left">
                         <Profile src={value.userProfile} />
+                        &nbsp;&nbsp;
                         {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                         {value && value?.commentCount} 좋아요&nbsp;
                         {value.likePostSum} 스크랩&nbsp; {value.scrapPostSum}
