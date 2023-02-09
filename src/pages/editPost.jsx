@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useParams, useNavigate } from "react-router";
@@ -11,6 +11,7 @@ import Quill from "../components/editorComponent/quill";
 const EditPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const imgRef = useRef();
   const post = useSelector((state) => state.details.details);
 
   const [title, setTitle] = useState("");
@@ -19,7 +20,6 @@ const EditPost = () => {
   const [content, setContent] = useState("");
   const { id } = useParams();
   const [imageFile, setImageFile] = useState("");
-
 
   const onEditPostHandler = (id) => {
     const formdata = new FormData();
@@ -59,42 +59,52 @@ const EditPost = () => {
     }
   }, [post]);
 
+  const onChangeImage = (e) => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    console.log(reader);
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImageFile(reader.result);
+    };
+  };
+
   return (
     <div>
       <Background>
-      <form
-        className="post_top_container"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onEditPostHandler(post);
-        }}
-      >
-        <div className="post_top_wrap">
-          <div className="post_header">
-            <div className="logo">
-              <a href="/">LOGO</a>
-            </div>
-            <div className="post_top">
-              <select
-                name="category"
-                id="category"
-                className="post_top_select"
-                onChange={(ev) => {
-                  const { value } = ev.target;
-                  setCategory(value);
-                }}
-              >
-                <option value="choose">게시판 선택</option>
-                <option value="drink">혼술</option>
-                <option value="meal">혼밥</option>
-                <option value="recycle">리사이꿀</option>
-              </select>
-              <button>저장</button>
+        <form
+          className="post_top_container"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onEditPostHandler(Number(id));
+          }}
+        >
+          <div className="post_top_wrap">
+            <div className="post_header">
+              <div className="logo">
+                <a href="/">LOGO</a>
+              </div>
+              <div className="post_top">
+                <select
+                  name="category"
+                  id="category"
+                  className="post_top_select"
+                  value={category}
+                  onChange={(ev) => {
+                    const { value } = ev.target;
+                    setCategory(value);
+                  }}
+                >
+                  <option value="choose">게시판 선택</option>
+                  <option value="drink">혼술</option>
+                  <option value="meal">혼밥</option>
+                  <option value="recycle">리사이꿀</option>
+                </select>
+                <button>저장</button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-
+        </form>
 
         <Form
           onSubmit={(e) => {
@@ -103,7 +113,6 @@ const EditPost = () => {
           }}
         >
           <Wrap>
-            
             <div className="edit_post_input_wrap">
               <input
                 type="text"
@@ -128,6 +137,7 @@ const EditPost = () => {
                   onChange={(ev) => {
                     const { files } = ev.target;
                     setFile(files);
+                    onChangeImage();
                   }}
                   // ref={imgRef}
                 />

@@ -82,6 +82,8 @@ function Search() {
     setSearchFilter(event.target.value);
   }
 
+  console.log(searchData);
+
   return (
     <>
       <div className="search_container">

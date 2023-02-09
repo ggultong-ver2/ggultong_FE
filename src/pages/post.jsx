@@ -6,8 +6,6 @@ import styled from "styled-components";
 import "./reset.css";
 import Swal from "sweetalert2";
 import Quill from "../components/editorComponent/quill";
-import fileinput from "../assets/images/fileinput.png";
-import { TiWarningOutline } from "react-icons/ti";
 import "./style.css";
 
 const Post = () => {
