@@ -176,15 +176,7 @@ const StTopBox = styled.div`
   flex-direction: column;
   font-family: "Pretendard";
 `;
-const StCenterBox = styled.div`
-  width: 1200px;
-  background-color: black;
-  height: 100vh;
-  border: 0;
-  margin: auto;
-  border-radius: 1px;
-  font-family: "Pretendard";
-`;
+
 const StBannerBox = styled.div`
   width: 1000px;
   height: 480px;
