@@ -94,12 +94,14 @@ const RecycleList = () => {
             </p>
             <li onClick={() => navigate("detail/39")}>
               <div className="post_card_wrap">
+                <div className="mask"></div>
                 <div className="postlist_top_recycle"></div>
                 <h3>자취러를 위한 재활용 꿀팁</h3>
               </div>
             </li>
             <li onClick={() => navigate("detail/94")}>
               <div className="post_card_wrap">
+                <div className="mask"></div>
                 <div className="postlist_top_recycle2"></div>
                 <h3>남은음식 보관법 / 활용법</h3>
               </div>
@@ -109,11 +111,10 @@ const RecycleList = () => {
 
         <Wrapall>
           <Wrap>
-
             <select
               name="drinkList"
               id="drinkList"
-              className=""
+              className="list_sort"
               onChange={handleChange}
             >
               <option value="recent">최신순</option>

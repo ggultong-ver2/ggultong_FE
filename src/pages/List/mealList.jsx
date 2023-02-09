@@ -90,12 +90,14 @@ const MealList = () => {
             </p>
             <li onClick={() => navigate("detail/38")}>
               <div className="post_card_wrap">
+                <div className="mask"></div>
                 <div className="postlist_top_meal"></div>
                 <h3>자취할 때 만들어 먹기 좋은 메뉴!</h3>
               </div>
             </li>
             <li onClick={() => navigate("detail/37")}>
               <div className="post_card_wrap">
+                <div className="mask"></div>
                 <div className="postlist_top_meal2"></div>
                 <h3>
                   집에서 간단히 만들어 먹기 좋은
@@ -109,11 +111,10 @@ const MealList = () => {
 
         <Wrapall>
           <Wrap>
-
             <select
               name="drinkList"
               id="drinkList"
-              className=""
+              className="list_sort"
               onChange={handleChange}
             >
               <option value="recent">최신순</option>

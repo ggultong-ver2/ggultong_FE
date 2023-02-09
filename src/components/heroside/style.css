@@ -55,6 +55,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .heroside_1 {
   background-image: url(../../../public/images/heroside_1.png);
@@ -99,6 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .heroside_3 {
   background-image: url(../../../public/images/heroside_3.png);
@@ -114,6 +116,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .heroside_4 {
   background-image: url(../../../public/images/heroside_4.png);
@@ -174,7 +177,4 @@
 .heroside_text p {
   font-size: 16px;
   line-height: 26px;
-}
-.heroside_text{
-  cursor: pointer;
 }
