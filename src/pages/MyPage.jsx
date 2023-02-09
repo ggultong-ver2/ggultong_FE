@@ -23,8 +23,6 @@ function MyPage() {
   const [db, setDb] = useState("");
   const [db2, setDb2] = useState("");
 
-  useEffect(() => {});
-
   const onChangeImage = (event) => {
     const file = event.target.files[0];
     setProfileImg(file);
@@ -97,10 +95,8 @@ function MyPage() {
         nickname,
       })
     ).then((res) => {
-      console.log("res===", res.payload.data.msg);
       if (res.payload.data.statusCode === 200) {
-        const data = res.payload?.data?.nickname;
-        console.log(data);
+        const data = res.payload?.data;
         // setDb(data);
         setDb(data);
         Swal.fire(
@@ -108,18 +104,14 @@ function MyPage() {
           "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
           "success"
         );
+        console.log("nick", data.nickname);
+        localStorage.setItem("nickname", data.nickname);
+        localStorage.setItem("profileImg", data.profileImg);
       } else {
         Swal.fire(res.payload.data.msg, "다시 확인해주세요", "error");
       }
-
-      // const data2 = res.payload.data.profileImg;
-
-      // setDb2((old) => [...old, data2]);
-      // localStorage.clear();
-      // navigate("/login");
     });
   };
-  console.log(db);
 
   return (
     <StContainer onSubmit={onSubmitChangeHandler}>
@@ -177,12 +169,8 @@ function MyPage() {
                   중복 확인
                 </StNickButton>
                 <StP>
-
                   현재 닉네임 :&nbsp;
-                  {localStorage.getItem("nickname") === db.nickname
-                    ? db.nickname
-
-                    : localStorage.getItem("nickname")}
+                  {localStorage.getItem("nickname")}
                 </StP>
               </MyNickBox>
               <MyEmailBox>

@@ -37,7 +37,7 @@ function GameList() {
       }
     }
   }, [MonthData]);
-
+  console.log(MonthData);
   return (
     <>
       <div className="top_cat_wrap">
@@ -98,9 +98,13 @@ function GameList() {
                 <StCardBox>
                   <StCardImg
                     onClick={() => {
-                      navigate(
-                        `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
-                      );
+                      if (rowdata.category === "기본값") {
+                        Swal.fire("아직 월드컵 진행 전입니다.", "", "warning");
+                      } else {
+                        navigate(
+                          `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                        );
+                      }
                     }}
                     src={rowdata.img1}
                   />
@@ -108,9 +112,13 @@ function GameList() {
                 <StCardBox2>
                   <StCardImg2
                     onClick={() => {
-                      navigate(
-                        `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id2}`
-                      );
+                      if (rowdata.category === "기본값") {
+                        Swal.fire("아직 진행 전입니다.", "", "warning");
+                      } else {
+                        navigate(
+                          `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                        );
+                      }
                     }}
                     src={rowdata.img2}
                   />
