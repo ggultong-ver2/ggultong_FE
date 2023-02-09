@@ -13,28 +13,24 @@ function Search() {
   const [scrapData, setScrapData] = useState([]);
   const params = useParams();
   const IP = process.env.REACT_APP_URL;
-  // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
-  const [postPerPage] = useState(10); // 한 페이지에 보여질 아이템
-  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
-  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
-  // const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
-
-  useEffect(() => {
-    setIndexOfLastPost(currentPage * postPerPage);
-    setIndexOfFirstPost(indexOfLastPost - postPerPage);
-  }, [currentPage, indexOfFirstPost, indexOfLastPost, postPerPage]);
+  const [searchFilter, setSearchFilter] = useState("recent");
 
   const setPage = (page) => {
     setCurrentPage(page);
   };
+
+  function handleChange(event) {
+    setSearchFilter(event.target.value);
+  }
 
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
         `${IP}/post/search/${currentPage}/recent?keyword=${params.keyword}`
       );
+      console.log(data);
       setSearchData(data);
       setCount(data[0].searchPostSum);
     }
@@ -76,11 +72,6 @@ function Search() {
         return;
     }
   };
-
-  const [searchFilter, setSearchFilter] = useState("recent");
-  function handleChange(event) {
-    setSearchFilter(event.target.value);
-  }
 
   console.log(searchData);
 

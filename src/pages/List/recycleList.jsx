@@ -16,6 +16,7 @@ const RecycleList = () => {
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [count, setCount] = useState(0); // 아이템 총 개수
+  const [listFilter, setListFilter] = useState("recent");
 
   useEffect(() => {
     dispatch(__getCategoryCount());
@@ -35,10 +36,14 @@ const RecycleList = () => {
   };
 
   useEffect(() => {
-    dispatch(__getCategoryPost({ id, currentPage }));
-  }, [dispatch, id, currentPage]);
+    dispatch(__getCategoryPost({ id, currentPage, listFilter }));
+  }, [dispatch, id, currentPage, listFilter]);
 
   const categoryPosts = useSelector((state) => state.details.categoryPosts);
+
+  function handleChange(event) {
+    setListFilter(event.target.value);
+  }
 
   return (
     <>
@@ -104,37 +109,117 @@ const RecycleList = () => {
 
         <Wrapall>
           <Wrap>
-            {categoryPosts.map((value, index) => {
-              return (
-                <Card
-                  key={index}
-                  onClick={() => navigate(`detail/${value.id}`)}
-                >
-                  <Textwrap>
-                    <StTitle>{value.title}</StTitle>
-                    <div className="list_bottom">
-                      <div className="list_bottom_left">
-                        <Profile src={value.userProfile} />
-                        &nbsp;&nbsp;
-                        {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
-                        {value && value?.commentCount} 좋아요&nbsp;
-                        {value.likePostSum} 스크랩&nbsp; {value.scrapPostSum}
-                      </div>
-                      <div className="list_bottom_right">
-                        {value.createdAt.slice(0, 10)}
-                      </div>
-                    </div>
-                  </Textwrap>
-                  <StFile
-                    src={
-                      value.imageFile === ""
-                        ? "../images/default_image.png"
-                        : value.imageFile
-                    }
-                  ></StFile>
-                </Card>
-              );
-            })}
+
+            <select
+              name="drinkList"
+              id="drinkList"
+              className=""
+              onChange={handleChange}
+            >
+              <option value="recent">최신순</option>
+              <option value="like">좋아요순</option>
+              <option value="scrap">스크랩순</option>
+            </select>
+            {listFilter === "recent"
+              ? categoryPosts.map((value, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      onClick={() => navigate(`detail/${value.id}`)}
+                    >
+                      <Textwrap>
+                        <StTitle>{value.title}</StTitle>
+                        <div className="list_bottom">
+                          <div className="list_bottom_left">
+                            <Profile src={value.userProfile} />
+                            {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                            {value && value?.commentCount} 좋아요&nbsp;
+                            {value.likePostSum} 스크랩&nbsp;{" "}
+                            {value.scrapPostSum}
+                          </div>
+                          <div className="list_bottom_right">
+                            {value.createdAt.slice(0, 10)}
+                          </div>
+                        </div>
+                      </Textwrap>
+                      <StFile
+                        src={
+                          value.imageFile === ""
+                            ? "../images/default_image.png"
+                            : value.imageFile
+                        }
+                      ></StFile>
+                    </Card>
+                  );
+                })
+              : null}
+            {listFilter === "like"
+              ? categoryPosts.map((value, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      onClick={() => navigate(`detail/${value.id}`)}
+                    >
+                      <Textwrap>
+                        <StTitle>{value.title}</StTitle>
+                        <div className="list_bottom">
+                          <div className="list_bottom_left">
+                            <Profile src={value.userProfile} />
+                            {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                            {value && value?.commentCount} 좋아요&nbsp;
+                            {value.likePostSum} 스크랩&nbsp;{" "}
+                            {value.scrapPostSum}
+                          </div>
+                          <div className="list_bottom_right">
+                            {value.createdAt.slice(0, 10)}
+                          </div>
+                        </div>
+                      </Textwrap>
+                      <StFile
+                        src={
+                          value.imageFile === ""
+                            ? "../images/default_image.png"
+                            : value.imageFile
+                        }
+                      ></StFile>
+                    </Card>
+                  );
+                })
+              : null}
+            {listFilter === "scrap"
+              ? categoryPosts.map((value, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      onClick={() => navigate(`detail/${value.id}`)}
+                    >
+                      <Textwrap>
+                        <StTitle>{value.title}</StTitle>
+                        <div className="list_bottom">
+                          <div className="list_bottom_left">
+                            <Profile src={value.userProfile} />
+                            {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                            {value && value?.commentCount} 좋아요&nbsp;
+                            {value.likePostSum} 스크랩&nbsp;{" "}
+                            {value.scrapPostSum}
+                          </div>
+                          <div className="list_bottom_right">
+                            {value.createdAt.slice(0, 10)}
+                          </div>
+                        </div>
+                      </Textwrap>
+                      <StFile
+                        src={
+                          value.imageFile === ""
+                            ? "../images/default_image.png"
+                            : value.imageFile
+                        }
+                      ></StFile>
+                    </Card>
+                  );
+                })
+              : null}
+
             <Paging currentPage={currentPage} count={count} setPage={setPage} />
           </Wrap>
         </Wrapall>

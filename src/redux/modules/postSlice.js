@@ -238,7 +238,8 @@ export const __getCategoryPost = createAsyncThunk(
     try {
       const { data } = await apis.getCategoryPost(
         payload.id,
-        payload.currentPage
+        payload.currentPage,
+        payload.listFilter
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
