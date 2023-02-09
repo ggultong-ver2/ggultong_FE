@@ -76,6 +76,9 @@ const DrinkList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
+            <p>
+              '혼술'은 혼술할 때 좋은 꿀팁이나 정보를 공유하는 게시판입니다.
+            </p>
             <li onClick={() => navigate("detail/12")}>
               <div className="post_card_wrap">
                 <div

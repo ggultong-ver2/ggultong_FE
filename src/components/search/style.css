@@ -104,6 +104,10 @@
   line-height: 22px;
   margin-top: 10px;
 }
+.search_post_category {
+  color: #424242;
+  font-size: 12px;
+}
 .search_post_wrap {
   display: flex;
   align-items: center;

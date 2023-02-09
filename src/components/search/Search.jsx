@@ -55,10 +55,12 @@ function Search() {
     }
   };
 
-  const [searchFilter,setSearchFilter] = useState("recent")
-  function handleChange(event){
+  const [searchFilter, setSearchFilter] = useState("recent");
+  function handleChange(event) {
     setSearchFilter(event.target.value);
   }
+
+  console.log(searchData);
 
   return (
     <>
@@ -78,78 +80,90 @@ function Search() {
               <div className="search_results">
                 <div className="search_top">{`'${params.keyword}'에 대한 총 ${count}개의 검색 결과가 있습니다.`}</div>
                 <div className="results_wrap">
-                  <select name="search" id="search" className="search_sort" onChange={handleChange}>
+                  <select
+                    name="search"
+                    id="search"
+                    className="search_sort"
+                    onChange={handleChange}
+                  >
                     <option value="recent">최신순</option>
                     <option value="like">좋아요순</option>
                     <option value="scrap">스크랩순</option>
                   </select>
 
-                  {searchFilter === "recent" ? searchData?.map((post) => (
-                    <div
-                      className="search_title"
-                      key={`search-${post.id}`}
-                      onClick={() => {
-                        pageMove(post.category, post.id);
-                      }}
-                    >
-                      <div className="search_post_title">{post.title}</div>
-                      <div className="search_post_wrap">
-                        <ul className="clearfix">
-                          <li>
-                            <StProfile src={post.userProfile}></StProfile>
-                          </li>
-                          <li className="search_post_nickname">
-                            {post.nickname}
-                          </li>
-                          <li className="search_post_comment">
-                            댓글&nbsp;{post.commentCounnt}
-                          </li>
-                          <li className="search_post_like">
-                            좋아요&nbsp;{post.likePostSum}
-                          </li>
-                          <li className="search_post_scrap">
-                            스크랩&nbsp;{post.scrapPostSum}
-                          </li>
-                        </ul>
-                        <div className="search_post_time">
-                          {post.createdAt.slice(0, 10)}
+                  {searchFilter === "recent"
+                    ? searchData?.map((post) => (
+                        <div
+                          className="search_title"
+                          key={`search-${post.id}`}
+                          onClick={() => {
+                            pageMove(post.category, post.id);
+                          }}
+                        >
+                          <div className="search_post_category">
+                            카테고리: ({post.categoryName})
+                          </div>
+                          <div className="search_post_title">{post.title}</div>
+                          <div className="search_post_wrap">
+                            <ul className="clearfix">
+                              <li>
+                                <StProfile src={post.userProfile}></StProfile>
+                              </li>
+                              <li className="search_post_nickname">
+                                {post.nickname}
+                              </li>
+                              <li className="search_post_comment">
+                                댓글&nbsp;{post.commentCounnt}
+                              </li>
+                              <li className="search_post_like">
+                                좋아요&nbsp;{post.likePostSum}
+                              </li>
+                              <li className="search_post_scrap">
+                                스크랩&nbsp;{post.scrapPostSum}
+                              </li>
+                            </ul>
+                            <div className="search_post_time">
+                              {post.createdAt.slice(0, 10)}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  )):null}
-                  {searchFilter === "like" ? searchData?.map((post) => (
-                    <div
-                      className="search_title"
-                      key={`search-${post.id}`}
-                      onClick={() => {
-                        pageMove(post.category, post.id);
-                      }}
-                    >
-                      <div className="search_post_title">{post.title}</div>
-                      <div className="search_post_wrap">
-                        <ul className="clearfix">
-                          <li>
-                            <StProfile src={post.userProfile}></StProfile>
-                          </li>
-                          <li className="search_post_nickname">
-                            {post.nickname}
-                          </li>
-                          <li className="search_post_comment">
-                            댓글&nbsp;{post.commentCounnt}
-                          </li>
-                          <li className="search_post_like">
-                            좋아요&nbsp;{post.likePostSum}
-                          </li>
-                          <li className="search_post_scrap">
-                            스크랩&nbsp;{post.scrapPostSum}
-                          </li>
-                        </ul>
-                        <div className="search_post_time">
-                          {post.createdAt.slice(0, 10)}
+                      ))
+                    : null}
+                  {searchFilter === "like"
+                    ? searchData?.map((post) => (
+                        <div
+                          className="search_title"
+                          key={`search-${post.id}`}
+                          onClick={() => {
+                            pageMove(post.category, post.id);
+                          }}
+                        >
+                          <div className="search_post_title">{post.title}</div>
+                          <div className="search_post_wrap">
+                            <ul className="clearfix">
+                              <li>
+                                <StProfile src={post.userProfile}></StProfile>
+                              </li>
+                              <li className="search_post_nickname">
+                                {post.nickname}
+                              </li>
+                              <li className="search_post_comment">
+                                댓글&nbsp;{post.commentCounnt}
+                              </li>
+                              <li className="search_post_like">
+                                좋아요&nbsp;{post.likePostSum}
+                              </li>
+                              <li className="search_post_scrap">
+                                스크랩&nbsp;{post.scrapPostSum}
+                              </li>
+                            </ul>
+                            <div className="search_post_time">
+                              {post.createdAt.slice(0, 10)}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  )):null}
+                      ))
+                    : null}
                 </div>
                 <Paging
                   currentPage={currentPage}

@@ -83,16 +83,20 @@ const RecycleList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
+            <p>
+              '리사이꿀'은 남은 음식 재활용할 때 좋은 꿀팁이나 정보를 공유하는
+              게시판입니다.
+            </p>
             <li onClick={() => navigate("detail/39")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_recycle"></div>
                 <h3>자취러를 위한 재활용 꿀팁</h3>
               </div>
             </li>
-            <li onClick={() => navigate("detail/40")}>
+            <li onClick={() => navigate("detail/94")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_recycle2"></div>
-                <h3>비닐봉지 보관법</h3>
+                <h3>남은음식 보관법 / 활용법</h3>
               </div>
             </li>
           </ul>
