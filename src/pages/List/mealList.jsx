@@ -133,7 +133,7 @@ const MealList = () => {
                         <div className="list_bottom">
                           <div className="list_bottom_left">
                             <Profile src={value.userProfile} />
-                            {value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
+                            &nbsp;{value?.nickname}&nbsp;&nbsp; 댓글&nbsp;
                             {value && value?.commentCount} 좋아요&nbsp;
                             {value.likePostSum} 스크랩&nbsp;{" "}
                             {value.scrapPostSum}
@@ -272,7 +272,7 @@ const Button2 = styled.button`
   margin-right: 15px;
   border-radius: 20px;
   background-color: transparent;
-  border: 1px solid black;
+  border: 2px solid black;
   color: black;
   font-weight: 500;
 `;
