@@ -36,6 +36,7 @@ function GameList() {
         setDisplays((old) => [...old, img1and2]);
       }
     }
+    return () => setDisplays([]);
   }, [MonthData]);
   console.log(MonthData);
   return (
