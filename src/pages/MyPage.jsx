@@ -14,13 +14,17 @@ import Toggle from "../components/Toggle/Toggle";
 function MyPage() {
   const imgRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [profileImg, setProfileImg] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [post, setPost] = useState([]);
   const [nickname, setNickname] = useInput();
   const [db, setDb] = useState("");
   const [db2, setDb2] = useState("");
-  const navigate = useNavigate();
+
+  useEffect(() => {});
+
   const onChangeImage = (event) => {
     const file = event.target.files[0];
     setProfileImg(file);
@@ -98,7 +102,7 @@ function MyPage() {
         const data = res.payload?.data?.nickname;
         console.log(data);
         // setDb(data);
-        setDb((old) => [...old, data]);
+        setDb(data);
         Swal.fire(
           res.payload.data.msg,
           "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
@@ -174,10 +178,9 @@ function MyPage() {
                 </StNickButton>
                 <StP>
                   현재 닉네임 :
-                  {/* {localStorage.getItem("nickname") === db.nickname
-                    ? db.nickname
-                    : localStorage.getItem("nickname")} */}
-                  {}
+                  {localStorage.getItem("nickname") === db
+                    ? db
+                    : localStorage.getItem("nickname")}
                 </StP>
               </MyNickBox>
               <MyEmailBox>
