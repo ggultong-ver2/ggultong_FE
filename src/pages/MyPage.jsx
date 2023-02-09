@@ -25,6 +25,7 @@ function MyPage() {
     const file = event.target.files[0];
     setProfileImg(file);
     const reader = new FileReader();
+    console.log(reader);
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgUrl(reader.result);
@@ -34,6 +35,7 @@ function MyPage() {
 
         imageUrl: reader.result,
       });
+      console.log(imgUrl);
     };
   };
 
@@ -94,8 +96,9 @@ function MyPage() {
       console.log("res===", res.payload.data.msg);
       if (res.payload.data.statusCode === 200) {
         const data = res.payload?.data?.nickname;
+        console.log(data);
         // setDb(data);
-        setDb((old) => old, data);
+        setDb((old) => [...old, data]);
         Swal.fire(
           res.payload.data.msg,
           "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
@@ -112,6 +115,7 @@ function MyPage() {
       // navigate("/login");
     });
   };
+  console.log(db);
 
   return (
     <StContainer onSubmit={onSubmitChangeHandler}>
@@ -170,9 +174,10 @@ function MyPage() {
                 </StNickButton>
                 <StP>
                   현재 닉네임 :
-                  {localStorage.getItem("nickname") === db.nickname
+                  {/* {localStorage.getItem("nickname") === db.nickname
                     ? db.nickname
-                    : localStorage.getItem("nickname")}
+                    : localStorage.getItem("nickname")} */}
+                  {}
                 </StP>
               </MyNickBox>
               <MyEmailBox>

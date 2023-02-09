@@ -15,6 +15,12 @@
   padding-left: 2px;
   overflow: hidden;
 }
+.postlist_top p {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  color: rgb(59, 59, 59);
+}
 .postlist_top li {
   width: 466px;
   height: 260px;
@@ -54,25 +60,26 @@
 .postlist_top_meal2 {
   width: 466px;
   height: 260px;
-  background-image: url(../../../public/images/meal_1.jpg);
+  background-image: url(../../../public/images/meal--2.jpg);
   background-size: cover;
 }
 .postlist_top_recycle {
   width: 466px;
   height: 260px;
-  background-image: url(../../../public/images/recycle_2.jpg);
+  background-image: url(../../../public/images/recycle--2.jpg);
   background-size: cover;
 }
+
 .postlist_top_recycle2 {
   width: 466px;
   height: 260px;
-  background-image: url(../../../public/images/recycle_1.jpg);
+  background-image: url(../../../public/images/recycle---2.jpg);
   background-size: cover;
 }
 .postlist_top h3 {
   position: absolute;
   bottom: 0;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 28px;
   line-height: 38px;
   padding: 24px 20px;

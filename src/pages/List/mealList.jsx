@@ -78,10 +78,13 @@ const MealList = () => {
         </Buttons>
         <div className="postlist_top">
           <ul className="clearfix">
+            <p>
+              '혼밥'은 혼밥할 때 좋은 꿀팁이나 정보를 공유하는 게시판입니다.
+            </p>
             <li onClick={() => navigate("detail/38")}>
               <div className="post_card_wrap">
                 <div className="postlist_top_meal"></div>
-                <h3>혼밥하는 사람들을 위한 음식 보관 꿀팁</h3>
+                <h3>자취할 때 만들어 먹기 좋은 메뉴!</h3>
               </div>
             </li>
             <li onClick={() => navigate("detail/37")}>
