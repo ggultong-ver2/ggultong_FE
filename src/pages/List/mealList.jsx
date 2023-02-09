@@ -272,7 +272,7 @@ const Button2 = styled.button`
   margin-right: 15px;
   border-radius: 20px;
   background-color: transparent;
-  border: 1px solid black;
+  border: 2px solid black;
   color: black;
   font-weight: 500;
 `;

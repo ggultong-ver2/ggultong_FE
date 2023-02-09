@@ -230,5 +230,6 @@
   background: #000;
   color: #ffd665;
   border-bottom: 0 none;
-  border: 1px solid #ffd665;
+  border: 2px solid #ffd665;
+  font-weight: bold;
 }
