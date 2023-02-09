@@ -9,6 +9,8 @@ import styled from "styled-components";
 function Search() {
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState([]);
+  const [likeData, setLikeData] = useState([]);
+  const [scrapData, setScrapData] = useState([]);
   const params = useParams();
   const IP = process.env.REACT_APP_URL;
   // const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
@@ -31,9 +33,29 @@ function Search() {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        `${IP}/post/search/${currentPage}?keyword=${params.keyword}`
+        `${IP}/post/search/${currentPage}/recent?keyword=${params.keyword}`
       );
       setSearchData(data);
+      setCount(data[0].searchPostSum);
+    }
+    fetchData();
+  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get(
+        `${IP}/post/search/${currentPage}/like?keyword=${params.keyword}`
+      );
+      setLikeData(data);
+      setCount(data[0].searchPostSum);
+    }
+    fetchData();
+  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get(
+        `${IP}/post/search/${currentPage}/scrap?keyword=${params.keyword}`
+      );
+      setScrapData(data);
       setCount(data[0].searchPostSum);
     }
     fetchData();
@@ -100,9 +122,6 @@ function Search() {
                             pageMove(post.category, post.id);
                           }}
                         >
-                          <div className="search_post_category">
-                            카테고리: ({post.categoryName})
-                          </div>
                           <div className="search_post_title">{post.title}</div>
                           <div className="search_post_wrap">
                             <ul className="clearfix">
@@ -130,7 +149,42 @@ function Search() {
                       ))
                     : null}
                   {searchFilter === "like"
-                    ? searchData?.map((post) => (
+                    ? likeData?.map((post) => (
+                        <div
+                          className="search_title"
+                          key={`search-${post.id}`}
+                          onClick={() => {
+                            pageMove(post.category, post.id);
+                          }}
+                        >
+                          <div className="search_post_title">{post.title}</div>
+                          <div className="search_post_wrap">
+                            <ul className="clearfix">
+                              <li>
+                                <StProfile src={post.userProfile}></StProfile>
+                              </li>
+                              <li className="search_post_nickname">
+                                {post.nickname}
+                              </li>
+                              <li className="search_post_comment">
+                                댓글&nbsp;{post.commentCounnt}
+                              </li>
+                              <li className="search_post_like">
+                                좋아요&nbsp;{post.likePostSum}
+                              </li>
+                              <li className="search_post_scrap">
+                                스크랩&nbsp;{post.scrapPostSum}
+                              </li>
+                            </ul>
+                            <div className="search_post_time">
+                              {post.createdAt.slice(0, 10)}
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    : null}
+                  {searchFilter === "scrap"
+                    ? scrapData?.map((post) => (
                         <div
                           className="search_title"
                           key={`search-${post.id}`}
