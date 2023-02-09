@@ -144,6 +144,14 @@ function Search() {
                             <div className="search_post_time">
                               {post.createdAt.slice(0, 10)}
                             </div>
+                            <img
+                              className="search_image"
+                              src={
+                                post.imageFile === ""
+                                  ? "../images/default_image.png"
+                                  : post.imageFile
+                              }
+                            ></img>
                           </div>
                         </div>
                       ))
@@ -167,7 +175,7 @@ function Search() {
                                 {post.nickname}
                               </li>
                               <li className="search_post_comment">
-                                댓글&nbsp;{post.commentCounnt}
+                                댓글&nbsp;{post.commentCount}
                               </li>
                               <li className="search_post_like">
                                 좋아요&nbsp;{post.likePostSum}
@@ -179,6 +187,14 @@ function Search() {
                             <div className="search_post_time">
                               {post.createdAt.slice(0, 10)}
                             </div>
+                            <img
+                              className="search_image"
+                              src={
+                                post.imageFile === ""
+                                  ? "../images/default_image.png"
+                                  : post.imageFile
+                              }
+                            ></img>
                           </div>
                         </div>
                       ))
@@ -202,7 +218,7 @@ function Search() {
                                 {post.nickname}
                               </li>
                               <li className="search_post_comment">
-                                댓글&nbsp;{post.commentCounnt}
+                                댓글&nbsp;{post.commentCount}
                               </li>
                               <li className="search_post_like">
                                 좋아요&nbsp;{post.likePostSum}
@@ -215,6 +231,14 @@ function Search() {
                               {post.createdAt.slice(0, 10)}
                             </div>
                           </div>
+                          <img
+                            className="search_image"
+                            src={
+                              post.imageFile === ""
+                                ? "../images/default_image.png"
+                                : post.imageFile
+                            }
+                          ></img>
                         </div>
                       ))
                     : null}

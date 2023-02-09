@@ -159,7 +159,7 @@ function MyPage() {
                   type="text"
                   id="nickname"
                   minLength={2}
-                  maxLength={8}
+                  maxLength={10}
                   value={nickname}
                   onChange={setNickname}
                 />
@@ -173,11 +173,10 @@ function MyPage() {
                   중복 확인
                 </StNickButton>
                 <StP>
-                  현재 닉네임 :
-                  {/* {localStorage.getItem("nickname") === db.nickname
+                  현재 닉네임 :&nbsp;
+                  {localStorage.getItem("nickname") === db.nickname
                     ? db.nickname
-                    : localStorage.getItem("nickname")} */}
-                  {}
+                    : localStorage.getItem("nickname")}
                 </StP>
               </MyNickBox>
               <MyEmailBox>
