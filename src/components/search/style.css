@@ -70,7 +70,7 @@
 }
 .search_title {
   cursor: pointer;
-  height: 110px;
+  height: 150px;
   margin: 0 auto;
   position: relative;
   margin-top: 40px;
@@ -78,6 +78,7 @@
 .search_title li {
   float: left;
   margin-right: 20px;
+  margin-top: 60px;
 }
 .search_post_title {
   font-size: 18px;
@@ -116,7 +117,9 @@
   font-size: 14px;
   line-height: 20px;
 }
-
+.search_post_time{
+  margin-top: 60px;
+}
 .search_post_like,
 .search_post_time,
 .search_post_comment,
@@ -126,12 +129,13 @@
 .search_post_wrap li:first-child {
   margin-right: 5px;
 }
-/* .search_image{
+.search_image{
   height: 92px;
   width: 92px;
   background-color: #d9d9d9;
   background-size: contain;
   position: absolute;
-  right: 73px;
-  margin-top: 40px;
-} */
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+}
