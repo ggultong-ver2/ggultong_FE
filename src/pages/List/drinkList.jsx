@@ -259,9 +259,8 @@ const Button1 = styled.button`
   margin-right: 15px;
   border-radius: 20px;
   background-color: transparent;
-  border: 1px solid black;
+  border: 2px solid black;
   color: black;
-  font-weight: 500;
 `;
 const Button2 = styled.button`
   cursor: pointer;
@@ -276,7 +275,6 @@ const Button2 = styled.button`
     border: 1px solid black;
     color: black;
   }
-  font-weight: 500;
 `;
 const Button3 = styled.button`
   cursor: pointer;
@@ -291,7 +289,6 @@ const Button3 = styled.button`
     border: 1px solid black;
     color: black;
   }
-  font-weight: 500;
 `;
 const Card = styled.div`
   border-bottom: 1px solid #e4e4e4;
