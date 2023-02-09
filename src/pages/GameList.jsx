@@ -37,7 +37,7 @@ function GameList() {
       }
     }
   }, [MonthData]);
-
+  console.log(MonthData);
   return (
     <>
       <div className="top_cat_wrap">
@@ -98,9 +98,13 @@ function GameList() {
                 <StCardBox>
                   <StCardImg
                     onClick={() => {
-                      navigate(
-                        `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
-                      );
+                      if (rowdata.category === "기본값") {
+                        Swal.fire("아직 월드컵 진행 전입니다.", "", "warning");
+                      } else {
+                        navigate(
+                          `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                        );
+                      }
                     }}
                     src={rowdata.img1}
                   />
@@ -108,9 +112,13 @@ function GameList() {
                 <StCardBox2>
                   <StCardImg2
                     onClick={() => {
-                      navigate(
-                        `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id2}`
-                      );
+                      if (rowdata.category === "기본값") {
+                        Swal.fire("아직 진행 전입니다.", "", "warning");
+                      } else {
+                        navigate(
+                          `/${rowdata.category}List/${rowdata.category}/detail/${rowdata.id}`
+                        );
+                      }
                     }}
                     src={rowdata.img2}
                   />
@@ -168,15 +176,7 @@ const StTopBox = styled.div`
   flex-direction: column;
   font-family: "Pretendard";
 `;
-const StCenterBox = styled.div`
-  width: 1200px;
-  background-color: black;
-  height: 100vh;
-  border: 0;
-  margin: auto;
-  border-radius: 1px;
-  font-family: "Pretendard";
-`;
+
 const StBannerBox = styled.div`
   width: 1000px;
   height: 480px;
