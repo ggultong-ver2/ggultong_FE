@@ -25,7 +25,7 @@ const Likes = () => {
       dispatch(__postLike(id));
     } else {
       Swal.fire("로그인 후 이용해주세요!", "", "warning");
-      navigate("/login")
+      navigate("/login");
     }
   };
 

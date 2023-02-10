@@ -195,11 +195,11 @@
   display: flex;
   justify-content: space-between;
 }
-.top_cat li{
+.top_cat li {
   float: left;
   margin-left: 30px;
 }
-.top_cat li button{
+.top_cat li button {
   font-size: 16px;
 }
 .top_cat li:first-child {

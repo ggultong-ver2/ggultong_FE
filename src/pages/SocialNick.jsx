@@ -20,6 +20,8 @@ function SocialNick() {
       if (res.data.statusCode === 200) {
         Swal.fire("회원가입 완료!", "꿀통에 오신것을 환영합니다!", "success");
         navigate("/");
+        localStorage.setItem("nickname", res.data.nickname);
+        localStorage.setItem("profileImg", res.data.profileImg);
       } else {
         Swal.fire(res.data.msg, "다시 시도 해주세요!", "error");
       }
