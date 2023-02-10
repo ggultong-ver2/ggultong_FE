@@ -27,7 +27,7 @@ function MyPage() {
     const file = event.target.files[0];
     setProfileImg(file);
     const reader = new FileReader();
-    console.log(reader);
+
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgUrl(reader.result);
@@ -37,7 +37,6 @@ function MyPage() {
 
         imageUrl: reader.result,
       });
-      console.log(imgUrl);
     };
   };
 
@@ -103,7 +102,7 @@ function MyPage() {
           "정보 수정이 완료되었습니다. 다시 로그인해주세요!",
           "success"
         );
-        console.log("nick", data.nickname);
+
         localStorage.setItem("nickname", data.nickname);
         localStorage.setItem("profileImg", data.profileImg);
       } else {

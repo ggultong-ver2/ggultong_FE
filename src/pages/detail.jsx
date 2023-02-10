@@ -119,7 +119,7 @@ const Detail = () => {
   };
 
   if (details.id) {
-    console.log("dd", details);
+    //("dd", details);
     return (
       <>
         <div className="top_cat_wrap">

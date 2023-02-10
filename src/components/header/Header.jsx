@@ -24,10 +24,6 @@ const Header = (id) => {
     setOpen(!open);
   };
 
-  // useEffect(() => {
-  //   dispatch(__getNotification());
-  // }, [dispatch]);
-
   const OnKeyPress = (e) => {
     if (e.key === "Enter") {
       onSubmit(); // Enter 입력이 되면 클릭 이벤트 실행

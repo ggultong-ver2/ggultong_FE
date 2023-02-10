@@ -18,7 +18,7 @@ function Main() {
       navigate("/post");
     } else {
       Swal.fire("로그인 후 이용해주세요!", "", "warning");
-      navigate("/login")
+      navigate("/login");
     }
   };
 
@@ -86,29 +86,28 @@ function Main() {
         </div>
       </div>
       <div className="random_wrap">
-            <div className="random_recipe_container">
-              <div className="random_recipe">
-                <div className="random text">
-                  <h3>
-                    오늘 뭐 먹지? <br /> 고민될 땐 꿀통이 골라줄게!
-                  </h3>
-                  <button
-                    onClick={() => {
-                      Swal.fire(
-                        "현재 구현중입니다",
-                        "조금만 더 기다려주세요~",
-                        "warning"
-                      );
-                    }}
-                  >
-                    도와줘요 꿀통대장
-                  </button>
-                </div>
-                <div className="random_image"></div>
-              </div>
+        <div className="random_recipe_container">
+          <div className="random_recipe">
+            <div className="random text">
+              <h3>
+                오늘 뭐 먹지? <br /> 고민될 땐 꿀통이 골라줄게!
+              </h3>
+              <button
+                onClick={() => {
+                  Swal.fire(
+                    "현재 구현중입니다",
+                    "조금만 더 기다려주세요~",
+                    "warning"
+                  );
+                }}
+              >
+                도와줘요 꿀통대장
+              </button>
             </div>
+            <div className="random_image"></div>
           </div>
-
+        </div>
+      </div>
     </>
   );
 }

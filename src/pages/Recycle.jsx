@@ -69,8 +69,10 @@ function Recycle() {
                   <div
                     className="list_slide"
                     key={`{recycle-rowData}`}
-                    onClick={() => navigate(`/recycleList/recycle/detail/${rowData.postId}`)}
-                    >
+                    onClick={() =>
+                      navigate(`/recycleList/recycle/detail/${rowData.postId}`)
+                    }
+                  >
                     <img
                       src={rowData.imageUrl}
                       alt="image"

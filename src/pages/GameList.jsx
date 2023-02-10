@@ -38,7 +38,7 @@ function GameList() {
     }
     return () => setDisplays([]);
   }, [MonthData]);
-  console.log(MonthData);
+
   return (
     <>
       <div className="top_cat_wrap">
