@@ -50,7 +50,7 @@ const Post = () => {
   const onChangeImage = (e) => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
-    console.log(reader);
+
     reader.readAsDataURL(file[0]);
     reader.onloadend = () => {
       setImageFile(reader.result);
@@ -109,7 +109,7 @@ const Post = () => {
                 setTitle(value);
                 const file = imgRef.current.files[0];
                 const reader = new FileReader();
-                console.log(reader);
+
                 reader.readAsDataURL(file);
                 reader.onloadend = () => {
                   setImageFile(reader.result);

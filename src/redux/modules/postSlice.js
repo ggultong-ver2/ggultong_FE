@@ -297,7 +297,7 @@ export const __patchPost = createAsyncThunk(
           },
         }
       );
-      console.log("data", data);
+
       return data;
     } catch (error) {}
   }

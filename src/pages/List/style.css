@@ -30,7 +30,7 @@
   cursor: pointer;
   overflow: hidden;
 }
-.post_card_wrap .mask{
+.post_card_wrap .mask {
   background: rgba(0, 0, 0, 0.3);
   position: absolute;
   width: 100%;
@@ -44,7 +44,7 @@
   transition: 300ms;
   transform: scale(1.05);
 }
-.post_card_wrap:hover .mask{
+.post_card_wrap:hover .mask {
   opacity: 0;
 }
 .postlist_top_image1 {

@@ -7,10 +7,9 @@ import { __getNotification } from "../../redux/modules/notificationSlice";
 import NotificationList from "../notification/NotificationList";
 import "./style.css";
 
-const Header= (id) => {
+const Header = (id) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
@@ -25,12 +24,12 @@ const Header= (id) => {
     setOpen(!open);
   };
 
-  const OnKeyPress = e => {
-    if (e.key === 'Enter') {
+  const OnKeyPress = (e) => {
+    if (e.key === "Enter") {
       onSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
     }
   };
-  if (window.location.pathname === '/post') return null;
+  if (window.location.pathname === "/post") return null;
   if (window.location.pathname === `/editpost/${id}`) return null;
   return (
     <div className="header_container">
@@ -109,6 +108,6 @@ const Header= (id) => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

@@ -62,7 +62,7 @@ const EditPost = () => {
   const onChangeImage = (e) => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
-    console.log(reader);
+    //(reader);
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImageFile(reader.result);

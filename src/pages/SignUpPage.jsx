@@ -77,7 +77,6 @@ const PostLoginPage = () => {
       password,
       nickname,
     }).then((res) => {
-      console.log("res:::::", res);
       if (res.data.statusCode === 200) {
         Swal.fire(res.data.msg, "", "success");
         navigate("/signcomplete");
@@ -94,9 +93,7 @@ const PostLoginPage = () => {
       email,
       emailCode,
     }).then((res) => {
-      console.log(isemail);
       if (res.data.statusCode === 200) {
-        console.log(isemail, emailCode);
         Swal.fire(res.data.msg, "가입을 완료해주세요!", "success");
       } else {
         Swal.fire(res.data.msg, "다시 확인해주세요!", "error");
@@ -121,8 +118,7 @@ const PostLoginPage = () => {
     }).then((res) => {
       setIsemail(res.data);
       setEmailP(res.data.msg);
-      console.log("emailP:", emailP);
-      console.log(res);
+
       if (res.data.statusCode === 200) {
         Swal.fire(
           res.data.msg,
@@ -213,7 +209,6 @@ const PostLoginPage = () => {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                console.log(e);
               }}
               onBlur={PWChk}
               placeholder="숫자, 영문, 특수문자 조합 최소 8자"
