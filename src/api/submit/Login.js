@@ -78,8 +78,8 @@ export const __socialNick = async (nickname) => {
       }
     );
 
-    localStorage.setItem("profileImg", data.profileImg);
-    localStorage.setItem("nickname", data.nickname);
+    // localStorage.setItem("profileImg", data.profileImg);
+    // localStorage.setItem("nickname", data.nickname);
 
     console.log("data: ", data);
     return data;
