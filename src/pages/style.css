@@ -672,3 +672,6 @@ input[type="file"]::file-selector-button {
 .post_input_wrap {
   margin-bottom: 20px;
 }
+.list_slider_title{
+  width: 280px;
+}
