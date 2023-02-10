@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "../../pages/reset.css";
-import { __getNotification } from "../../redux/modules/notificationSlice";
+// import { __getNotification } from "../../redux/modules/notificationSlice";
 import NotificationList from "../notification/NotificationList";
 import "./style.css";
+import { useEffect } from "react";
+import axios from "axios";
 
-const Header= (id) => {
+const Header = (id) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const [keyword, setKeyWord] = useState("");
   const onSubmit = async () => {
@@ -20,17 +21,19 @@ const Header= (id) => {
   const [open, setOpen] = useState(false);
 
   const getNotification = () => {
-    dispatch(__getNotification());
-
     setOpen(!open);
   };
 
-  const OnKeyPress = e => {
-    if (e.key === 'Enter') {
+  // useEffect(() => {
+  //   dispatch(__getNotification());
+  // }, [dispatch]);
+
+  const OnKeyPress = (e) => {
+    if (e.key === "Enter") {
       onSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
     }
   };
-  if (window.location.pathname === '/post') return null;
+  if (window.location.pathname === "/post") return null;
   if (window.location.pathname === `/editpost/${id}`) return null;
   return (
     <div className="header_container">
@@ -109,6 +112,6 @@ const Header= (id) => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

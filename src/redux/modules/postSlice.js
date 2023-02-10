@@ -331,17 +331,17 @@ export const __getMyScrap = createAsyncThunk(
 );
 
 // 알림 기능
-export const __getNotification = createAsyncThunk(
-  "getNotification",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await baseURL.get("/notifications");
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+// export const __getNotification = createAsyncThunk(
+//   "getNotification",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const data = await baseURL.get("/notifications");
+//       return thunkAPI.fulfillWithValue(data.data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
 
 export const postSlice = createSlice({
   name: "post",

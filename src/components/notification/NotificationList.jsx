@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
 import {
-  __getNotification,
+  // __getNotification,
   __readNotification,
   __deleteNotification,
   __deleteNotifications,
   __minusNotification,
 } from "../../redux/modules/notificationSlice";
 import "./style.css";
+import styled from "styled-components";
 
 function NotificationList({
   setShowNotification,
@@ -19,11 +20,30 @@ function NotificationList({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const IP = process.env.REACT_APP_URL;
+  const [notificationData, setNotificationData] = useState([]);
 
-  const notification = useSelector(
-    (state) => state?.notification?.notifications
-  );
+  // 알림 전체 불러오기
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await baseURL.get(`/notifications`, "", {
+        headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
+      });
+      // console.log(data);
+      setNotificationData(data);
+    }
+    fetchData();
+  }, []);
+  console.log("notificationData", notificationData);
 
+  // 알림
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const { data } = await baseURL.delete(`/notifications/delete/${payload}`);
+  //     console.log(data);
+  //   }
+  //   fetchData();
+  // }, []);
 
   const onclickReadNotification = (notificationId) => {
     readNotification(notificationId);
@@ -62,9 +82,6 @@ function NotificationList({
       });
   };
 
-  const [notificationData, setNotificationData] = useState([]);
-
-
   return (
     <div>
       <div>
@@ -77,9 +94,9 @@ function NotificationList({
             <div>
               <div>{`읽지 않은 알림 (${notificationData.length})`}</div>
               <div>
-                {notification?.map((notification) => {
+                {notificationData?.map((notification) => {
                   return (
-                    <div key={notification.id}>
+                    <Card key={notification.id}>
                       {!notification.status ? ( // 읽지 않은 알람
                         <div
                           className="notification_list"
@@ -89,15 +106,17 @@ function NotificationList({
                           }}
                         >
                           <div className="notification_content">
-                            <span>{notification?.content}</span>
-                            <div
+                            <span onClick={() => navigate()}>
+                              {notification?.content}
+                            </span>
+                            {/* <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 onclickDeleteNotification(notification.id);
                               }}
                             >
                               삭제
-                            </div>
+                            </button> */}
                           </div>
                         </div>
                       ) : (
@@ -120,26 +139,28 @@ function NotificationList({
                           </div>
                         </div>
                       )}
-                    </div>
+                    </Card>
                   );
                 })}
               </div>
             </div>
             <div
-            onClick={(e) => {
-              e.stopPropagation();
-              onclickDeleteNotifications();
-            }}
-          >
-            <div>전체 삭제</div>
-        </div>
+              onClick={(e) => {
+                e.stopPropagation();
+                onclickDeleteNotifications();
+              }}
+            >
+              <div>전체 삭제</div>
+            </div>
           </>
         )}
-
-        
       </div>
     </div>
   );
 }
+
+const Card = styled.div`
+  margin-top: 10px;
+`;
 
 export default NotificationList;

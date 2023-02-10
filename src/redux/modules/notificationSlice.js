@@ -2,6 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
 
+const initialState = {
+  notifications: [],
+  isLoading: false,
+  error: null,
+};
+
 export const __getNotification = createAsyncThunk(
   "getNotification",
   async (payload, thunkAPI) => {
@@ -17,11 +23,7 @@ export const __getNotification = createAsyncThunk(
 
 export const notification = createSlice({
   name: "notification",
-  initialState: {
-    notifications: [{ id: 0, content: {}, status: false, url: "" }],
-    isLoading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     __addNotification(state, action) {
       state.notifications.data.unshift(action.payload);
@@ -38,7 +40,7 @@ export const notification = createSlice({
       );
       state.notifications.data.splice(a, 1);
     },
-    __deleteNotification(state, action) {
+    __deleteNotifications(state, action) {
       state.notifications.data.splice(0, state.notifications.data.length);
     },
   },
@@ -50,6 +52,7 @@ export const notification = createSlice({
       state.isLoading = false;
       console.log("action.payload", action.payload);
       state.notifications = action.payload;
+      console.log(state);
     },
     [__getNotification.rejected]: (state, action) => {
       state.isLoading = false;
@@ -113,3 +116,4 @@ export const NreadNotificationSlice = createSlice({
 
 export const { __minusNotification, __plusNotification } =
   NreadNotificationSlice.actions;
+export default NreadNotificationSlice.reducer;
