@@ -117,7 +117,6 @@ const PostLoginPage = () => {
   );
 };
 const StContainer = styled.form`
-  height: 100vh;
   display: flex;
   justify-content: center;
   min-height: 95vh;
