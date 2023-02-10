@@ -31,16 +31,14 @@ const NaverLogin = ({ setGetToken, setUserInfo }) => {
             navigate("/");
           }
         });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
     try {
       getToken();
       ////토큰수정////
-    } catch (err) {
-    }
+    } catch (err) {}
   }, []);
 
   return <></>;

@@ -55,13 +55,11 @@ function KakaoLogin() {
         const data = await axios.get(
           `http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`
         );
-        console.log("data", data);
 
         localStorage.setItem("Access_Token", data.headers.authorization);
         localStorage.setItem("nickname", data.data.nickname);
         localStorage.setItem("profileImg", data.data.profileImg);
         localStorage.setItem("email", data.data.email);
-
         return data;
       };
       ////토큰수정////
@@ -73,7 +71,7 @@ function KakaoLogin() {
         }
       });
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   }, []);
 

@@ -30,7 +30,7 @@ function Search() {
       const { data } = await axios.get(
         `${IP}/post/search/${currentPage}/recent?keyword=${params.keyword}`
       );
-      console.log(data);
+      //(data);
       setSearchData(data);
       setCount(data[0].searchPostSum);
     }
@@ -73,7 +73,7 @@ function Search() {
     }
   };
 
-  console.log(searchData);
+  //(searchData);
 
   return (
     <>

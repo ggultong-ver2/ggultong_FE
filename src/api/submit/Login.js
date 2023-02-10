@@ -9,10 +9,8 @@ const IP = process.env.REACT_APP_URL;
 export const __pwchange = async (password) => {
   try {
     const data = await apis.changePw(password);
-    console.log("password:::", password);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
-      console.log("response", data.response);
     }
 
     return data;
@@ -23,10 +21,8 @@ export const __pwchange = async (password) => {
 export const __pwcheck = async (password) => {
   try {
     const data = await apis.checkPw(password);
-    console.log("password:::", password);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
-      console.log("response", data.response);
     }
 
     return data;
@@ -39,7 +35,7 @@ export const __idcheck = async (loginId) => {
     const data = await apis.checkUserName(loginId);
 
     if (data.data.status === 200) {
-      console.log("response", data.response);
+      //("response", data.response);
     }
 
     return data;
@@ -52,10 +48,9 @@ export const __idcheck = async (loginId) => {
 export const __nickCheck = async (nickname) => {
   try {
     const data = await apis.checkNickName(nickname);
-    console.log("nickname:::", nickname);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
-      console.log("res:::", data.response);
+      //("res:::", data.response);
     }
 
     return data;
@@ -78,13 +73,9 @@ export const __socialNick = async (nickname) => {
       }
     );
 
-    // localStorage.setItem("profileImg", data.profileImg);
-    // localStorage.setItem("nickname", data.nickname);
-
-    console.log("data: ", data);
     return data;
   } catch (err) {
-    console.log(err);
+    //(err);
   }
 };
 
@@ -94,7 +85,6 @@ export const __postSignup = async (post) => {
     const data = await apis.postSignup(post);
     return data;
   } catch (error) {
-    console.log("err :::", error);
     alert(error.response.data.statusMsg);
   }
 };
@@ -103,10 +93,8 @@ export const __postSignup = async (post) => {
 export const __deleteId = async (loginId) => {
   try {
     const data = await apis.deleteUser(loginId);
-    console.log("loginId:::", loginId);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
-      console.log("response", data.response);
     }
 
     return data;
@@ -133,8 +121,7 @@ export const __worldcupsend = async (worldcup) => {
 export const __emailcode = async (emailcode) => {
   try {
     const data = await apis.checkemailCode(emailcode);
-    console.log("emailcode:::", emailcode);
-    console.log("data: ", data);
+
     if (data.data.statusCode === 400) {
     }
 
@@ -146,10 +133,8 @@ export const __emailcode = async (emailcode) => {
 export const __Idfind = async (idfind) => {
   try {
     const data = await apis.idfind(idfind);
-    console.log("idfind:::", idfind);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
-      console.log("response", data.response);
     }
 
     return data;
@@ -160,10 +145,8 @@ export const __Idfind = async (idfind) => {
 export const __pwfind = async (pwfind) => {
   try {
     const data = await apis.pwfind(pwfind);
-    console.log("pwfind:::", pwfind);
-    console.log("data: ", data);
+
     if (data.data.status === 200) {
-      console.log("response", data.response);
     }
 
     return data;

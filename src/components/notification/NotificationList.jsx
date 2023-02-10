@@ -24,7 +24,6 @@ function NotificationList({
     (state) => state?.notification?.notifications
   );
 
-
   const onclickReadNotification = (notificationId) => {
     readNotification(notificationId);
     dispatch(__readNotification(notificationId));
@@ -63,7 +62,6 @@ function NotificationList({
   };
 
   const [notificationData, setNotificationData] = useState([]);
-
 
   return (
     <div>
@@ -126,17 +124,15 @@ function NotificationList({
               </div>
             </div>
             <div
-            onClick={(e) => {
-              e.stopPropagation();
-              onclickDeleteNotifications();
-            }}
-          >
-            <div>전체 삭제</div>
-        </div>
+              onClick={(e) => {
+                e.stopPropagation();
+                onclickDeleteNotifications();
+              }}
+            >
+              <div>전체 삭제</div>
+            </div>
           </>
         )}
-
-        
       </div>
     </div>
   );
