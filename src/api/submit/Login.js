@@ -75,6 +75,7 @@ export const __socialNick = async (nickname) => {
         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
       })
       .then(() => {
+        localStorage.setItem("profileImg", data.profileImg);
         localStorage.setItem("nickname", data.nickname);
       });
 
