@@ -1,10 +1,10 @@
 .toggleSwitch {
   display: block;
-  margin-left: 700px;
+  margin-left: 755px;
   width: 66px;
   height: 28px;
   display: block;
-  position: relative;
+  position: absolute;
   border-radius: 30px;
   background-color: #fff;
   box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);

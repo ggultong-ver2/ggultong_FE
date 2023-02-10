@@ -12,54 +12,13 @@ import {
 } from "../../redux/modules/notificationSlice";
 import "./style.css";
 
-function NotificationList({
-  setShowNotification,
-  notifications,
-  NreadNotifications,
-}) {
+function NotificationList({}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const notification = useSelector(
     (state) => state?.notification?.notifications
   );
-
-  const onclickReadNotification = (notificationId) => {
-    readNotification(notificationId);
-    dispatch(__readNotification(notificationId));
-
-    const a = notifications?.data?.findIndex((v) => v.id === notificationId);
-    if (!notifications?.data[a]?.status) {
-      dispatch(__minusNotification(1));
-    }
-  };
-
-  const onclickDeleteNotification = (notificationId) => {
-    __deleteNotification(notificationId);
-    dispatch(__deleteNotification(notificationId));
-
-    const a = notifications?.data?.findIndex((v) => v.id === notificationId);
-    if (!notifications?.data[a]?.status) {
-      dispatch(__minusNotification(1));
-    }
-  };
-
-  const onclickDeleteNotifications = () => {
-    __deleteNotifications();
-    dispatch(__deleteNotifications());
-    dispatch(__minusNotification(NreadNotifications.data.count));
-  };
-
-  const readNotification = async (notificationId) => {
-    await baseURL
-      .get(`notification/read/${notificationId}`, null)
-      .then((res) => {
-        // console.log(res)
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
 
   const [notificationData, setNotificationData] = useState([]);
 
@@ -82,7 +41,7 @@ function NotificationList({
                         <div
                           className="notification_list"
                           onClick={() => {
-                            onclickReadNotification(notification.id);
+                            // onclickReadNotification(notification.id);
                             navigate();
                           }}
                         >
@@ -91,7 +50,7 @@ function NotificationList({
                             <div
                               onClick={(e) => {
                                 e.stopPropagation();
-                                onclickDeleteNotification(notification.id);
+                                // onclickDeleteNotification(notification.id);
                               }}
                             >
                               삭제
@@ -110,7 +69,7 @@ function NotificationList({
                             <div
                               onClick={(e) => {
                                 e.stopPropagation();
-                                onclickDeleteNotification(notification.id);
+                                // onclickDeleteNotification(notification.id);
                               }}
                             >
                               삭제
@@ -126,7 +85,7 @@ function NotificationList({
             <div
               onClick={(e) => {
                 e.stopPropagation();
-                onclickDeleteNotifications();
+                // onclickDeleteNotifications();
               }}
             >
               <div>전체 삭제</div>

@@ -75,7 +75,7 @@ function Recipe() {
                       alt="image"
                       className="list_slide_image"
                     />
-                    <p>{rowData.title}</p>
+                    <p className="list_slider_title">{rowData.title}</p>
                   </div>
                 ))}
               </Slider>
