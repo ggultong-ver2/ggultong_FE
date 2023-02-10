@@ -70,14 +70,16 @@ export const __nickCheck = async (nickname) => {
 
 export const __socialNick = async (nickname) => {
   try {
-    const data = await axios
-      .patch(`${IP}/mypage/socialSetting/${nickname}`, "", {
+    const data = await axios.patch(
+      `${IP}/mypage/socialSetting/${nickname}`,
+      "",
+      {
         headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
-      })
-      .then(() => {
-        localStorage.setItem("profileImg", data.profileImg);
-        localStorage.setItem("nickname", data.nickname);
-      });
+      }
+    );
+
+    localStorage.setItem("profileImg", data.profileImg);
+    localStorage.setItem("nickname", data.nickname);
 
     console.log("data: ", data);
     return data;
