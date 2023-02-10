@@ -55,11 +55,11 @@ function KakaoLogin() {
         const data = await axios.get(
           `http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`
         );
-        console.log("data::", data.data.data);
-        localStorage.setItem("id", data.data.data.jwtToken);
-        localStorage.setItem("username", data.data.data.username);
-        localStorage.setItem("profileUrl", data.data.data.profileUrl);
         console.log("data", data);
+
+        localStorage.setItem("Access_Token", data.data.Access_Token);
+        localStorage.setItem("nickname", data.data.nickname);
+        localStorage.setItem("profileImg", data.data.profileImg);
         return data;
       };
       ////토큰수정////
