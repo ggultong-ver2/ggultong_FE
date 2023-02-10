@@ -57,9 +57,11 @@ function KakaoLogin() {
         );
         console.log("data", data);
 
-        localStorage.setItem("Access_Token", data.data.Access_Token);
+        localStorage.setItem("Access_Token", data.headers.authorization);
         localStorage.setItem("nickname", data.data.nickname);
         localStorage.setItem("profileImg", data.data.profileImg);
+        localStorage.setItem("email", data.data.email);
+
         return data;
       };
       ////토큰수정////
