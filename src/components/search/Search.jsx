@@ -27,32 +27,15 @@ function Search() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axios.get(
-        `${IP}/post/search/${currentPage}/recent?keyword=${params.keyword}`
-      );
-      //(data);
-      setSearchData(data);
-      setCount(data[0].searchPostSum);
-    }
-    fetchData();
-  }, []);
-  useEffect(() => {
-    async function fetchData() {
-      const { data } = await axios.get(
-        `${IP}/post/search/${currentPage}/like?keyword=${params.keyword}`
-      );
-      setLikeData(data);
-      setCount(data[0].searchPostSum);
-    }
-    fetchData();
-  }, []);
-  useEffect(() => {
-    async function fetchData() {
-      const { data } = await axios.get(
-        `${IP}/post/search/${currentPage}/scrap?keyword=${params.keyword}`
-      );
-      setScrapData(data);
-      setCount(data[0].searchPostSum);
+      const [searchDataResponse, likeDataResponse, scrapDataResponse] = await Promise.all([
+        axios.get(`${IP}/post/search/${currentPage}/recent?keyword=${params.keyword}`),
+        axios.get(`${IP}/post/search/${currentPage}/like?keyword=${params.keyword}`),
+        axios.get(`${IP}/post/search/${currentPage}/scrap?keyword=${params.keyword}`)
+      ]);
+      setSearchData(searchDataResponse.data);
+      setLikeData(likeDataResponse.data);
+      setScrapData(scrapDataResponse.data);
+      setCount(searchDataResponse.data[0].searchPostSum);
     }
     fetchData();
   }, []);
