@@ -13,11 +13,7 @@ import {
 import "./style.css";
 import styled from "styled-components";
 
-function NotificationList({
-  setShowNotification,
-  notifications,
-  NreadNotifications,
-}) {
+function NotificationList({}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const IP = process.env.REACT_APP_URL;
@@ -45,42 +41,42 @@ function NotificationList({
   //   fetchData();
   // }, []);
 
-  const onclickReadNotification = (notificationId) => {
-    readNotification(notificationId);
-    dispatch(__readNotification(notificationId));
+  // const onclickReadNotification = (notificationId) => {
+  //   readNotification(notificationId);
+  //   dispatch(__readNotification(notificationId));
 
-    const a = notifications?.data?.findIndex((v) => v.id === notificationId);
-    if (!notifications?.data[a]?.status) {
-      dispatch(__minusNotification(1));
-    }
-  };
+  //   const a = notifications?.data?.findIndex((v) => v.id === notificationId);
+  //   if (!notifications?.data[a]?.status) {
+  //     dispatch(__minusNotification(1));
+  //   }
+  // };
 
-  const onclickDeleteNotification = (notificationId) => {
-    __deleteNotification(notificationId);
-    dispatch(__deleteNotification(notificationId));
+  // const onclickDeleteNotification = (notificationId) => {
+  //   __deleteNotification(notificationId);
+  //   dispatch(__deleteNotification(notificationId));
 
-    const a = notifications?.data?.findIndex((v) => v.id === notificationId);
-    if (!notifications?.data[a]?.status) {
-      dispatch(__minusNotification(1));
-    }
-  };
+  //   const a = notifications?.data?.findIndex((v) => v.id === notificationId);
+  //   if (!notifications?.data[a]?.status) {
+  //     dispatch(__minusNotification(1));
+  //   }
+  // };
 
-  const onclickDeleteNotifications = () => {
-    __deleteNotifications();
-    dispatch(__deleteNotifications());
-    dispatch(__minusNotification(NreadNotifications.data.count));
-  };
+  // const onclickDeleteNotifications = () => {
+  //   __deleteNotifications();
+  //   dispatch(__deleteNotifications());
+  //   dispatch(__minusNotification(NreadNotifications.data.count));
+  // };
 
-  const readNotification = async (notificationId) => {
-    await baseURL
-      .get(`notification/read/${notificationId}`, null)
-      .then((res) => {
-        // console.log(res)
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
+  // const readNotification = async (notificationId) => {
+  //   await baseURL
+  //     .get(`notification/read/${notificationId}`, null)
+  //     .then((res) => {
+  //       // console.log(res)
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err);
+  //     });
+  // };
 
   return (
     <div>
@@ -101,7 +97,7 @@ function NotificationList({
                         <div
                           className="notification_list"
                           onClick={() => {
-                            onclickReadNotification(notification.id);
+                            // onclickReadNotification(notification.id);
                             navigate();
                           }}
                         >
@@ -112,7 +108,7 @@ function NotificationList({
                             {/* <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                onclickDeleteNotification(notification.id);
+                                // onclickDeleteNotification(notification.id);
                               }}
                             >
                               삭제
@@ -131,7 +127,7 @@ function NotificationList({
                             <div
                               onClick={(e) => {
                                 e.stopPropagation();
-                                onclickDeleteNotification(notification.id);
+                                // onclickDeleteNotification(notification.id);
                               }}
                             >
                               삭제
@@ -147,7 +143,7 @@ function NotificationList({
             <div
               onClick={(e) => {
                 e.stopPropagation();
-                onclickDeleteNotifications();
+                // onclickDeleteNotifications();
               }}
             >
               <div>전체 삭제</div>

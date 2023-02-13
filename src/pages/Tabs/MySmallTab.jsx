@@ -250,8 +250,8 @@ const Desc = styled.div`
 
 const Card = styled.div`
   position: relative;
+  margin: 0 auto;
   border-bottom: 1px solid #e4e4e4;
-  margin-left: 30px;
   width: 800px;
   height: 160px;
   &:hover {

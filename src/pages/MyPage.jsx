@@ -185,24 +185,26 @@ function MyPage() {
               알림 <Toggle />
             </SettingItm>
             <SettingItm>
+              <StSettingTitle>비밀번호 재설정</StSettingTitle>
+              <StP2>⚠️ 소셜로그인 계정은 비밀번호 재설정이 불가합니다.</StP2>
               <StButton
                 onClick={(e) => {
                   e.preventDefault();
                   window.location.assign("/myconfirm");
                 }}
               >
-                비밀번호 재설정
+                변경하기
               </StButton>
-              <StP2>⚠️ 소셜로그인 계정은 비밀번호 재설정이 불가합니다.</StP2>
             </SettingItm>
             <SettingItm2>
+              <StSettingTitle2>회원탈퇴</StSettingTitle2>
               <StDeleteButton
                 onClick={(e) => {
                   e.preventDefault();
                   onDeleteLoginId();
                 }}
               >
-                회원탈퇴
+                탈퇴하기
               </StDeleteButton>
             </SettingItm2>
           </AllBox2>
@@ -314,7 +316,8 @@ const SettingBox = styled.div`
 const SettingItm = styled.div`
   display: flex;
   align-items: center;
-  width: 860px;
+  justify-content: space-between;
+  width: 900px;
   height: 60px;
   padding-left: 30px;
   font-weight: 500;
@@ -327,7 +330,8 @@ const SettingItm = styled.div`
 const SettingItm2 = styled.div`
   display: flex;
   align-items: center;
-  width: 860px;
+  justify-content: space-between;
+  width: 900px;
   height: 60px;
   font-weight: 500;
   font-family: "Pretendard";
@@ -395,19 +399,21 @@ const StEmailInput = styled.input`
 `;
 
 const StButton = styled.button`
-  background-color: white;
-  font-weight: 500;
-  margin-left: -7px;
-  width: 110px;
+  background-color: #cbcbcb;
+  color: white;
+  margin-right: 30px;
+  width: 100px;
   margin-top: 13px;
   font-size: 16px;
   height: 40px;
-  border: 0;
+  border: 0 none;
+  border-radius: 30px;
   cursor: pointer;
   font-family: "Pretendard";
 
   &:hover {
-    color: #9d9d9d;
+    color: black;
+    background-color: #ffd665;
   }
 `;
 
@@ -421,7 +427,6 @@ const StProfileButton = styled.button`
   border-radius: 30px;
   background-color: #cbcbcb;
   cursor: pointer;
-  font-family: "Pretendard";
 
   &:hover {
     font-weight: 500;
@@ -431,21 +436,23 @@ const StProfileButton = styled.button`
 `;
 
 const StDeleteButton = styled.div`
-  font-weight: 500;
-  width: 120px;
-  height: 50px;
+  background-color: #cbcbcb;
+  color: white;
+  width: 100px;
+  height: 40px;
+  margin-right: 30px;
+
   font-size: 16px;
-  height: 50px;
-  padding-right: 10px;
   border: 0;
+  border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-family: "Pretendard";
 
   &:hover {
-    color: #9d9d9d;
+    background-color: #ffd665;
+    color: #000;
   }
 `;
 const StNickButton = styled.button`
@@ -460,7 +467,6 @@ const StNickButton = styled.button`
   &:hover {
     background-color: #dcdcdc;
   }
-  font-family: "Pretendard";
 `;
 
 const AppStyle = styled.div`
@@ -488,12 +494,25 @@ const StP = styled.div`
   margin-top: 10px;
 `;
 const StP2 = styled.div`
-  letter-spacing: 0.1em;
+  letter-spacing: -0.009em;
   color: #9d9d9d;
   width: 500px;
+  font-size: 12px;
   margin-top: 15px;
-  margin-left: 20px;
+  margin-left: -100px;
   font-weight: 500;
 `;
-
+const StSettingTitle = styled.div`
+  width: 110px;
+  margin-top: 33px;
+  font-size: 16px;
+  height: 40px;
+`;
+const StSettingTitle2 = styled.div`
+  width: 110px;
+  margin-top: 33px;
+  font-size: 16px;
+  height: 40px;
+  margin-left: 30px;
+`;
 export default MyPage;
