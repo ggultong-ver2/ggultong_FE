@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./style.css";
-import { baseURL } from "../../lib/axios";
 import axios from "axios";
 import Paging from "../pagination/paging";
 import styled from "styled-components";

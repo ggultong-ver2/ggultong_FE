@@ -96,7 +96,6 @@ function MyPage() {
     ).then((res) => {
       if (res.payload.data.statusCode === 200) {
         const data = res.payload?.data;
-        // setDb(data);
         setDb(data);
         Swal.fire(
           res.payload.data.msg,
