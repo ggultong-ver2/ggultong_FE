@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "../../pages/reset.css";
-import { __getNotification } from "../../redux/modules/notificationSlice";
+// import { __getNotification } from "../../redux/modules/notificationSlice";
 import NotificationList from "../notification/NotificationList";
 import "./style.css";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Header = (id) => {
   const navigate = useNavigate();
@@ -19,8 +21,6 @@ const Header = (id) => {
   const [open, setOpen] = useState(false);
 
   const getNotification = () => {
-    dispatch(__getNotification());
-
     setOpen(!open);
   };
 
