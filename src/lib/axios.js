@@ -138,4 +138,9 @@ export const apis = {
       headers: { Access_Token: `${localStorage.getItem("Access_Token")}` },
     });
   },
+
+  // 알림관련
+  deleteNotification: (notificationsId) => {
+    return baseURL.delete(`/notifications/delete/${notificationsId}`);
+  },
 };

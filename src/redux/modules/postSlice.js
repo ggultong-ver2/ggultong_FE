@@ -607,10 +607,10 @@ export const postSlice = createSlice({
     },
 
     [__deleteComment.pending]: (state) => {
-      state.isLoadig = true;
+      state.isLoading = true;
     },
     [__deleteComment.fulfilled]: (state, action) => {
-      state.isLoadig = false;
+      state.isLoading = false;
       const newComment = state.details.commentList.filter(
         (commentList) => commentList.id !== action.payload.commentId
       );

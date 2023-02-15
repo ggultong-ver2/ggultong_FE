@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseURL } from "../../lib/axios";
 import axios from "axios";
 import {
   // __getNotification,
-  __readNotification,
   __deleteNotification,
-  __deleteNotifications,
-  __minusNotification,
 } from "../../redux/modules/notificationSlice";
 import "./style.css";
 import styled from "styled-components";
@@ -16,8 +13,8 @@ import styled from "styled-components";
 function NotificationList({}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const IP = process.env.REACT_APP_URL;
   const [notificationData, setNotificationData] = useState([]);
+  const { id } = useParams;
 
   // 알림 전체 불러오기
   useEffect(() => {
@@ -31,6 +28,11 @@ function NotificationList({}) {
     fetchData();
   }, []);
   console.log("notificationData", notificationData);
+
+  const onClickDeleteNotification = (id) => {
+    console.log(id);
+    dispatch(__deleteNotification(id));
+  };
 
   // 알림
   // useEffect(() => {
@@ -83,58 +85,26 @@ function NotificationList({}) {
       <div>
         {notificationData.length === 0 ? (
           <div>
-            <div>알림은 현재 준비 중입니다!🥺</div>
+            <div>로그인 후 이용해주세요!🥺</div>
           </div>
         ) : (
           <>
             <div>
               <div>{`읽지 않은 알림 (${notificationData.length})`}</div>
               <div>
-                {notificationData?.map((notification) => {
+                {notificationData?.map((notification, index) => {
                   return (
-                    <Card key={notification.id}>
-                      {!notification.status ? ( // 읽지 않은 알람
-                        <div
-                          className="notification_list"
-                          onClick={() => {
-                            // onclickReadNotification(notification.id);
-                            navigate();
-                          }}
-                        >
-                          <div className="notification_content">
-                            <span onClick={() => navigate()}>
-                              {notification?.content}
-                            </span>
-                            {/* <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // onclickDeleteNotification(notification.id);
-                              }}
-                            >
-                              삭제
-                            </button> */}
-                          </div>
-                        </div>
-                      ) : (
-                        // 읽은 알람
-                        <div
-                          onClick={() => {
-                            navigate();
-                          }}
-                        >
-                          <div>
-                            <span>{notification.content.content}</span>
-                            <div
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // onclickDeleteNotification(notification.id);
-                              }}
-                            >
-                              삭제
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                    <Card
+                      key={index}
+                      onClick={() => {
+                        onClickDeleteNotification(notification.id);
+                      }}
+                    >
+                      <div className="notification_content">
+                        <span onClick={() => navigate(notification.url)}>
+                          {notification?.content}
+                        </span>
+                      </div>
                     </Card>
                   );
                 })}
@@ -157,6 +127,7 @@ function NotificationList({}) {
 
 const Card = styled.div`
   margin-top: 10px;
+  cursor: pointer;
 `;
 
 export default NotificationList;
