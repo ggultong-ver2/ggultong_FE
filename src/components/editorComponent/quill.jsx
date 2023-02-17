@@ -55,9 +55,6 @@ const Quill = ({ content, setContent, value }) => {
           image: imageHandler,
         },
       },
-      // ImageResize: {
-      //   modules: ["Resize"],
-      // },
     };
   }, []);
 
@@ -84,7 +81,6 @@ const Quill = ({ content, setContent, value }) => {
         theme="snow"
         modules={modules}
         formats={formats}
-        // value={value || ""}
         onChange={(content) => setContent(content)}
         value={content}
         ref={quillRef}
