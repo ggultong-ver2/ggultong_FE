@@ -424,7 +424,6 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__deletePost.fulfilled]: (state, action) => {
-      // 미들웨어를 통해 받은 action값이 무엇인지 항상 확인한다
       state.isLoading = false;
       const newList = current(state.categoryPosts).filter(
         (post) => Number(post.id) !== Number(action.payload)
