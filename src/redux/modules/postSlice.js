@@ -430,9 +430,7 @@ export const postSlice = createSlice({
         (post) => Number(post.id) !== Number(action.payload)
       );
       state.categoryPosts = newList;
-      // state.categoryPosts = state.categoryPosts.filter(
-      //   (post) => post.id !== action.payload
-      // );
+
       state.details = {
         title: "",
         content: "",
