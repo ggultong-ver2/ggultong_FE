@@ -8,7 +8,6 @@ import {
   notificationSlice,
   __deleteNotification,
 } from "../modules/notificationSlice";
-// import { __getNotification } from "../modules/notificationSlice";
 
 const store = configureStore({
   reducer: {

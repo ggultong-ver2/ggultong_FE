@@ -15,19 +15,6 @@ const initialState = {
   error: null,
 };
 
-// export const __getNotification = createAsyncThunk(
-//   "getNotification",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const data = await baseURL.get("/notifications");
-//       console.log(data.data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
-
 export const __deleteNotification = createAsyncThunk(
   "deleteNotification",
   async (payload, thunkAPI) => {
