@@ -85,5 +85,6 @@
 | BE·Spring | 이재용 | 🔗 [이재용::yongYong0225](https://github.com/yongYong0225) 
 | BE·Spring | 이상정 | 🔗 [이상정::WooLeeHappy](https://github.com/WooLeeHappy) 
 | BE·Spring | 방승섭 | 🔗 [방승섭::bangseungsup](https://github.com/bangseungsup) 
-
 | UI/UX | 박세의 | DESIGNER 
+
+
